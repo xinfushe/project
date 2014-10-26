@@ -126,7 +126,7 @@ void TLD::processImage(const Mat &img)
         getCPUTick(&procInit);
         medianFlowTracker->track(prevImg, currImg, prevBB);
         getCPUTick(&procFinal);
-        PRINT_TIMING("TrackTime", procInit, procFinal, ", ");
+//         PRINT_TIMING("TrackTime", procInit, procFinal, ", ");
     }
 
     if(detectorEnabled && (!alternating || medianFlowTracker->trackerBB == NULL))
@@ -134,7 +134,7 @@ void TLD::processImage(const Mat &img)
         getCPUTick(&procInit);
         detectorCascade->detect(grey_frame);
         getCPUTick(&procFinal);
-        PRINT_TIMING("DetecTime", procInit, procFinal, ", ");
+//         PRINT_TIMING("DetecTime", procInit, procFinal, ", ");
     }
 
 

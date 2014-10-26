@@ -39,7 +39,9 @@ void imAcqInit(ImAcq *imAcq)
 {
     if(imAcq->method == IMACQ_CAM)
     {
-        imAcq->capture = cvCaptureFromCAM(imAcq->camNo);
+//         imAcq->capture = cvCaptureFromCAM(imAcq->camNo);
+        imAcq->capture = cvCaptureFromCAM(1);
+//         printf("opening the cam%d\n\n\n",imAcq->camNo);
 
         if(imAcq->capture == NULL)
         {

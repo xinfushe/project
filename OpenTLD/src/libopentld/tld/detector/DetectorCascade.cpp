@@ -345,7 +345,7 @@ void DetectorCascade::detect(const Mat &img)
     }
     std::cout << numWindows << " - " << j << " - " << k << " ";
     getCPUTick(&procFinal);
-    PRINT_TIMING("ClsfyTime", procInit, procFinal, ", ");
+//     PRINT_TIMING("ClsfyTime", procInit, procFinal, ", ");
 
     //Cluster
     clustering->clusterConfidentIndices();

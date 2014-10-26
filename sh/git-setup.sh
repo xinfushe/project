@@ -5,6 +5,6 @@ git config --global color.status auto
 git config --global color.branch auto
 
 git config --global credential.helper cache
-git config --global credential.helper 'cache --timeout=3600'
+git config --global credential.helper 'cache --timeout=1'
 
 git config --list

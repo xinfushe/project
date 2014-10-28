@@ -259,7 +259,8 @@ void Main::doWork()
             if(tld->currBB != NULL)
             {
                 CvScalar rectangleColor = (confident) ? blue : yellow;
-                cvRectangle(img, tld->currBB->tl(), tld->currBB->br(), rectangleColor, 8, 8, 0);
+                //2014.10.28
+                cvRectangle(img, CvPoint(tld->currBB->tl()), CvPoint(tld->currBB->br()), rectangleColor, 8, 8, 0);
                 
                 currRect = *(tld->currBB);
                 double sharpness = contrast_measure(imgt(currRect));//TODO
@@ -382,7 +383,8 @@ void Main::doWork()
                 for(size_t i = 0; i < tld->detectorCascade->detectionResult->fgList->size(); i++)
                 {
                     Rect r = tld->detectorCascade->detectionResult->fgList->at(i);
-                    cvRectangle(img, r.tl(), r.br(), white, 1);
+                    //2014.10.28
+                    cvRectangle(img, CvPoint(r.tl()), CvPoint(r.br()), white, 1);
                 }
 
             }

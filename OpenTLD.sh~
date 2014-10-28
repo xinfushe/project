@@ -5,7 +5,7 @@ cd build
 mkdir release
 mkdir debug
 
-cmake -E chdir ./release cmake -G "Eclipse CDT4 - Unix Makefiles" -D CMAKE_BUILD_TYPE=release -D BUILD_QOPENTLD=ON -D USE_SYSTEM_LIBS=OFF ../../OpenTLD
+#cmake -E chdir ./release cmake -G "Eclipse CDT4 - Unix Makefiles" -D CMAKE_BUILD_TYPE=release -D BUILD_QOPENTLD=ON -D USE_SYSTEM_LIBS=OFF ../../OpenTLD
 
 cmake -E chdir ./debug cmake -G "Eclipse CDT4 - Unix Makefiles" -DCMAKE_BUILD_TYPE=debug -D BUILD_QOPENTLD=ON -D USE_SYSTEM_LIBS=OFF ../../OpenTLD
 

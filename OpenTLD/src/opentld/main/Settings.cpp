@@ -36,7 +36,7 @@ Settings::Settings() :
     m_nnClassifierEnabled(true),
     m_loadModel(false),
     m_trackerEnabled(true),
-    m_selectManually(false),
+    m_selectManually(true),
     m_learningEnabled(true),
     m_showOutput(true),
     m_showNotConfident(true),

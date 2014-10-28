@@ -28,6 +28,7 @@
 #include "ImAcq.h"
 #include "Gui.h"
 #include "ConfigDialog.h"
+#include <iostream>
 
 using tld::Config;
 using tld::Gui;
@@ -35,7 +36,6 @@ using tld::Settings;
 
 int main(int argc, char **argv)
 {
-
     Main *main = new Main();
     ImAcq *imAcq = imAcqAlloc();
     Gui *gui = new Gui();

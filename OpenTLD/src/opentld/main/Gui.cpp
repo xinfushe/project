@@ -36,7 +36,8 @@ namespace tld
 {
 
 Gui::Gui() :
-    m_window_name("tld")
+	//10/28
+    m_window_name("OpenCL GPU Accelerated Camera Smart Autofocusing on Intel Platform")
 {
 }
 
@@ -48,6 +49,8 @@ void Gui::init()
 {
     cvNamedWindow(m_window_name.c_str(), CV_WINDOW_AUTOSIZE);
     cvMoveWindow(m_window_name.c_str(), 100, 100);
+//10/26
+    //cvResizeWindow(m_window_name.c_str(), 1366, 768);
 }
 
 void Gui::showImage(IplImage *image)

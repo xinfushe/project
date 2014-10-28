@@ -40,6 +40,8 @@
 #include "opencv2/objdetect/objdetect.hpp"
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
+//Modified 2014/10/27
+#include "opencv2/ocl/ocl.hpp"
 #define CLEAR(x) memset(&(x), 0, sizeof(x))
 using namespace tld;
 using namespace cv;

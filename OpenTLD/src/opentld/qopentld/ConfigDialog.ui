@@ -202,7 +202,11 @@
            <item row="8" column="0" colspan="2">
             <widget class="QCheckBox" name="checkBox_selectManually">
              <property name="text">
+             //2014.10.29
               <string>Select Manually</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
              </property>
             </widget>
            </item>

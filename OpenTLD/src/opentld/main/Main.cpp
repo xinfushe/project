@@ -41,6 +41,10 @@
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
 #define CLEAR(x) memset(&(x), 0, sizeof(x))
+
+//2014.10.29
+#define CUDA_ENABLED
+
 using namespace tld;
 using namespace cv;
 

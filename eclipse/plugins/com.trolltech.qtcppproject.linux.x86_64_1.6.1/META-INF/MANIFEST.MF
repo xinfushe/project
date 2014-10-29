@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Qt Project Fragment (Linux,x86_64)
+Bundle-SymbolicName: com.trolltech.qtcppproject.linux.x86_64;singleton:=true
+Bundle-Version: 1.6.1
+Bundle-Vendor: Nokia Corporation
+Bundle-Localization: plugin
+Bundle-ClassPath: bin/
+Export-Package: com.trolltech.qtcppproject.pages.embedded
+Bundle-NativeCode: lib/libqtcppqrceditor.so;lib/libqtcppproparser.so;osname=linux;processor=x86_64
+Eclipse-PlatformFilter: (& (osgi.ws=gtk) (osgi.os=linux) (osgi.arch=x86_64))
+Require-Bundle: org.eclipse.ui,
+ com.trolltech.qtcpp,
+ org.eclipse.core.runtime
+

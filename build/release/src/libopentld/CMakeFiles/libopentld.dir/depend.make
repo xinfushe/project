@@ -396,6 +396,7 @@ src/libopentld/CMakeFiles/libopentld.dir/tld/MedianFlowTracker.cpp.o: /usr/local
 src/libopentld/CMakeFiles/libopentld.dir/tld/MedianFlowTracker.cpp.o: /usr/local/include/opencv2/objdetect/objdetect.hpp
 src/libopentld/CMakeFiles/libopentld.dir/tld/MedianFlowTracker.cpp.o: /usr/local/include/opencv2/video/tracking.hpp
 
+src/libopentld/CMakeFiles/libopentld.dir/tld/TLD.cpp.o: /home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/./detector/ocl/OclDetectorCascade.h
 src/libopentld/CMakeFiles/libopentld.dir/tld/TLD.cpp.o: /home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/Clustering.h
 src/libopentld/CMakeFiles/libopentld.dir/tld/TLD.cpp.o: /home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/DetectionResult.h
 src/libopentld/CMakeFiles/libopentld.dir/tld/TLD.cpp.o: /home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/IDetectorCascade.h
@@ -413,17 +414,11 @@ src/libopentld/CMakeFiles/libopentld.dir/tld/TLD.cpp.o: /home/slilylsu/Desktop/p
 src/libopentld/CMakeFiles/libopentld.dir/tld/TLD.cpp.o: /home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/detector/NNClassifier.h
 src/libopentld/CMakeFiles/libopentld.dir/tld/TLD.cpp.o: /home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/detector/NormalizedPatch.h
 src/libopentld/CMakeFiles/libopentld.dir/tld/TLD.cpp.o: /home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/detector/VarianceFilter.h
-src/libopentld/CMakeFiles/libopentld.dir/tld/TLD.cpp.o: /home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/detector/cuda/CUDA.h
-src/libopentld/CMakeFiles/libopentld.dir/tld/TLD.cpp.o: /home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/detector/cuda/CuDetectorCascade.h
-src/libopentld/CMakeFiles/libopentld.dir/tld/TLD.cpp.o: /home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/detector/cuda/CuEnsembleClassifier.h
-src/libopentld/CMakeFiles/libopentld.dir/tld/TLD.cpp.o: /home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/detector/cuda/CuVarianceFilter.h
 src/libopentld/CMakeFiles/libopentld.dir/tld/TLD.cpp.o: /usr/local/include/opencv/cv.h
 src/libopentld/CMakeFiles/libopentld.dir/tld/TLD.cpp.o: /usr/local/include/opencv2/calib3d/calib3d.hpp
 src/libopentld/CMakeFiles/libopentld.dir/tld/TLD.cpp.o: /usr/local/include/opencv2/core/core.hpp
 src/libopentld/CMakeFiles/libopentld.dir/tld/TLD.cpp.o: /usr/local/include/opencv2/core/core_c.h
-src/libopentld/CMakeFiles/libopentld.dir/tld/TLD.cpp.o: /usr/local/include/opencv2/core/cuda_devptrs.hpp
 src/libopentld/CMakeFiles/libopentld.dir/tld/TLD.cpp.o: /usr/local/include/opencv2/core/eigen.hpp
-src/libopentld/CMakeFiles/libopentld.dir/tld/TLD.cpp.o: /usr/local/include/opencv2/core/gpumat.hpp
 src/libopentld/CMakeFiles/libopentld.dir/tld/TLD.cpp.o: /usr/local/include/opencv2/core/internal.hpp
 src/libopentld/CMakeFiles/libopentld.dir/tld/TLD.cpp.o: /usr/local/include/opencv2/core/mat.hpp
 src/libopentld/CMakeFiles/libopentld.dir/tld/TLD.cpp.o: /usr/local/include/opencv2/core/operations.hpp
@@ -462,7 +457,6 @@ src/libopentld/CMakeFiles/libopentld.dir/tld/TLD.cpp.o: /usr/local/include/openc
 src/libopentld/CMakeFiles/libopentld.dir/tld/TLD.cpp.o: /usr/local/include/opencv2/flann/sampling.h
 src/libopentld/CMakeFiles/libopentld.dir/tld/TLD.cpp.o: /usr/local/include/opencv2/flann/saving.h
 src/libopentld/CMakeFiles/libopentld.dir/tld/TLD.cpp.o: /usr/local/include/opencv2/flann/timer.h
-src/libopentld/CMakeFiles/libopentld.dir/tld/TLD.cpp.o: /usr/local/include/opencv2/gpu/gpu.hpp
 src/libopentld/CMakeFiles/libopentld.dir/tld/TLD.cpp.o: /usr/local/include/opencv2/imgproc/imgproc.hpp
 src/libopentld/CMakeFiles/libopentld.dir/tld/TLD.cpp.o: /usr/local/include/opencv2/imgproc/imgproc_c.h
 src/libopentld/CMakeFiles/libopentld.dir/tld/TLD.cpp.o: /usr/local/include/opencv2/imgproc/types_c.h

@@ -30,11 +30,15 @@
 #include "INNClassifier.h"
 #include "TLDUtil.h"
 #include "Timing.h"
-//2014.10.29
+//
 #include "opencv2/ocl/ocl.hpp"
+//
+#define OCL_ENABLED
 
-#ifdef CUDA_ENABLED
-#include "CuDetectorCascade.h"
+//#ifdef CUDA_ENABLED
+#ifdef OCL_ENABLED
+#include "./detector/ocl/OclDetectorCascade.h"
+//#include "CuDetectorCascade.h"
 #else
 #include "DetectorCascade.h"
 #endif
@@ -59,9 +63,10 @@ TLD::TLD()
 
     //2014.10.29
     //ocl::OclCascadeClassifier* cascade = new ocl::OclCascadeClassifier();
-#ifdef CUDA_ENABLED
-    detectorCascade = new cuda::CuDetectorCascade();
-    //detectorCascade = new ocl::OclCascadeClassifier();
+//#ifdef CUDA_ENABLED
+#ifdef OCL_ENABLED
+    //detectorCascade = new cuda::CuDetectorCascade();
+    detectorCascade = new OclDetectorCascade();
 #else
     detectorCascade = new DetectorCascade();
 #endif

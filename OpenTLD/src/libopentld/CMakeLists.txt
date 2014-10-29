@@ -4,6 +4,7 @@ include_directories(imacq
 	mftracker
 	tld
 	tld/detector
+	#tld/detector/ocl
 	tld/detector/cuda
 	tld/detector/cuda/npp
 	../3rdparty/cvblobs
@@ -27,6 +28,10 @@ set(SRC_FILES
 	tld/detector/ForegroundDetector.cpp
 	tld/detector/NNClassifier.cpp
 	tld/detector/VarianceFilter.cpp
+	#
+	tld/detector/ocl/OclDetectorCascade.cpp
+	tld/detector/ocl/OclDetectorCascade.h
+	#
 	imacq/ImAcq.h
 	mftracker/BB.h
 	mftracker/BBPredict.h

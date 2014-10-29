@@ -397,6 +397,7 @@ src/libopentld/CMakeFiles/libopentld.dir/tld/MedianFlowTracker.cpp.o
  /usr/local/include/opencv2/objdetect/objdetect.hpp
  /usr/local/include/opencv2/video/tracking.hpp
 src/libopentld/CMakeFiles/libopentld.dir/tld/TLD.cpp.o
+ /home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/./detector/ocl/OclDetectorCascade.h
  /home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/Clustering.h
  /home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/DetectionResult.h
  /home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/IDetectorCascade.h
@@ -414,17 +415,11 @@ src/libopentld/CMakeFiles/libopentld.dir/tld/TLD.cpp.o
  /home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/detector/NNClassifier.h
  /home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/detector/NormalizedPatch.h
  /home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/detector/VarianceFilter.h
- /home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/detector/cuda/CUDA.h
- /home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/detector/cuda/CuDetectorCascade.h
- /home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/detector/cuda/CuEnsembleClassifier.h
- /home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/detector/cuda/CuVarianceFilter.h
  /usr/local/include/opencv/cv.h
  /usr/local/include/opencv2/calib3d/calib3d.hpp
  /usr/local/include/opencv2/core/core.hpp
  /usr/local/include/opencv2/core/core_c.h
- /usr/local/include/opencv2/core/cuda_devptrs.hpp
  /usr/local/include/opencv2/core/eigen.hpp
- /usr/local/include/opencv2/core/gpumat.hpp
  /usr/local/include/opencv2/core/internal.hpp
  /usr/local/include/opencv2/core/mat.hpp
  /usr/local/include/opencv2/core/operations.hpp
@@ -463,7 +458,6 @@ src/libopentld/CMakeFiles/libopentld.dir/tld/TLD.cpp.o
  /usr/local/include/opencv2/flann/sampling.h
  /usr/local/include/opencv2/flann/saving.h
  /usr/local/include/opencv2/flann/timer.h
- /usr/local/include/opencv2/gpu/gpu.hpp
  /usr/local/include/opencv2/imgproc/imgproc.hpp
  /usr/local/include/opencv2/imgproc/imgproc_c.h
  /usr/local/include/opencv2/imgproc/types_c.h

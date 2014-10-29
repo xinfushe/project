@@ -15,6 +15,7 @@ FILE(REMOVE_RECURSE
   "CMakeFiles/libopentld.dir/tld/detector/ForegroundDetector.cpp.o"
   "CMakeFiles/libopentld.dir/tld/detector/NNClassifier.cpp.o"
   "CMakeFiles/libopentld.dir/tld/detector/VarianceFilter.cpp.o"
+  "CMakeFiles/libopentld.dir/tld/detector/ocl/OclDetectorCascade.cpp.o"
   "../../lib/libopentld.pdb"
   "../../lib/libopentld.a"
 )

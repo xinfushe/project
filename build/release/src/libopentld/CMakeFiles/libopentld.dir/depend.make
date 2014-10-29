@@ -467,7 +467,10 @@ src/libopentld/CMakeFiles/libopentld.dir/tld/TLD.cpp.o: /usr/local/include/openc
 src/libopentld/CMakeFiles/libopentld.dir/tld/TLD.cpp.o: /usr/local/include/opencv2/imgproc/imgproc_c.h
 src/libopentld/CMakeFiles/libopentld.dir/tld/TLD.cpp.o: /usr/local/include/opencv2/imgproc/types_c.h
 src/libopentld/CMakeFiles/libopentld.dir/tld/TLD.cpp.o: /usr/local/include/opencv2/legacy/compat.hpp
+src/libopentld/CMakeFiles/libopentld.dir/tld/TLD.cpp.o: /usr/local/include/opencv2/ml/ml.hpp
 src/libopentld/CMakeFiles/libopentld.dir/tld/TLD.cpp.o: /usr/local/include/opencv2/objdetect/objdetect.hpp
+src/libopentld/CMakeFiles/libopentld.dir/tld/TLD.cpp.o: /usr/local/include/opencv2/ocl/matrix_operations.hpp
+src/libopentld/CMakeFiles/libopentld.dir/tld/TLD.cpp.o: /usr/local/include/opencv2/ocl/ocl.hpp
 src/libopentld/CMakeFiles/libopentld.dir/tld/TLD.cpp.o: /usr/local/include/opencv2/video/tracking.hpp
 
 src/libopentld/CMakeFiles/libopentld.dir/tld/TLDUtil.cpp.o: /home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/Clustering.h

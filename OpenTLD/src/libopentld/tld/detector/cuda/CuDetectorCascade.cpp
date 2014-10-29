@@ -24,6 +24,8 @@
 #include "TLDUtil.h"
 #include "Timing.h"
 
+#include "CUDA.h"
+
 using namespace cv;
 
 extern void createIndexArray(int *idxArr, int numWindows);

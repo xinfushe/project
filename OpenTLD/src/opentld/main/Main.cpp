@@ -43,7 +43,7 @@
 #define CLEAR(x) memset(&(x), 0, sizeof(x))
 
 //2014.10.29
-#define CUDA_ENABLED
+//#define CUDA_ENABLED
 
 using namespace tld;
 using namespace cv;

@@ -468,7 +468,10 @@ src/libopentld/CMakeFiles/libopentld.dir/tld/TLD.cpp.o
  /usr/local/include/opencv2/imgproc/imgproc_c.h
  /usr/local/include/opencv2/imgproc/types_c.h
  /usr/local/include/opencv2/legacy/compat.hpp
+ /usr/local/include/opencv2/ml/ml.hpp
  /usr/local/include/opencv2/objdetect/objdetect.hpp
+ /usr/local/include/opencv2/ocl/matrix_operations.hpp
+ /usr/local/include/opencv2/ocl/ocl.hpp
  /usr/local/include/opencv2/video/tracking.hpp
 src/libopentld/CMakeFiles/libopentld.dir/tld/TLDUtil.cpp.o
  /home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/Clustering.h

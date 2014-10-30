@@ -16,8 +16,8 @@
 namespace tld
 {
 
-//namespace ocl
-//{
+namespace ocl
+{
 
 class OclDetectorCascade : public IDetectorCascade
 {
@@ -35,7 +35,7 @@ public:
     virtual void detect(const cv::Mat &img);
 };
 
-//} /* namespace ocl */
+} /* namespace ocl */
 
 } /* namespace tld */
 #endif /* OCLDETECTORCASCADE_H_ */

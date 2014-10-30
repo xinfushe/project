@@ -13,8 +13,8 @@ using namespace cv;
 namespace tld
 {
 
-//namespace ocl
-//{
+namespace ocl
+{
 
 OclDetectorCascade::OclDetectorCascade()
 {
@@ -333,6 +333,6 @@ void OclDetectorCascade::detect(const Mat &img)
     detectionResult->containsValidData = true;
 }
 
-//} /* namespace ocl */
+} /* namespace ocl */
 
 } /* namespace tld */

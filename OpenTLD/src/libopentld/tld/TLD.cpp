@@ -37,7 +37,7 @@
 
 //#ifdef CUDA_ENABLED
 #ifdef OCL_ENABLED
-#include "./detector/ocl/OclDetectorCascade.h"
+#include "OclDetectorCascade.h"
 //#include "CuDetectorCascade.h"
 #else
 #include "DetectorCascade.h"
@@ -66,7 +66,7 @@ TLD::TLD()
 //#ifdef CUDA_ENABLED
 #ifdef OCL_ENABLED
     //detectorCascade = new cuda::CuDetectorCascade();
-    detectorCascade = new OclDetectorCascade();
+    detectorCascade = new ocl::OclDetectorCascade();
 #else
     detectorCascade = new DetectorCascade();
 #endif

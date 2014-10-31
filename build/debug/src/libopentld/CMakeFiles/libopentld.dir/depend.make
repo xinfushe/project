@@ -908,6 +908,9 @@ src/libopentld/CMakeFiles/libopentld.dir/tld/detector/ocl/OclDetectorCascade.cpp
 src/libopentld/CMakeFiles/libopentld.dir/tld/detector/ocl/OclDetectorCascade.cpp.o: /usr/local/include/opencv2/imgproc/imgproc_c.h
 src/libopentld/CMakeFiles/libopentld.dir/tld/detector/ocl/OclDetectorCascade.cpp.o: /usr/local/include/opencv2/imgproc/types_c.h
 src/libopentld/CMakeFiles/libopentld.dir/tld/detector/ocl/OclDetectorCascade.cpp.o: /usr/local/include/opencv2/legacy/compat.hpp
+src/libopentld/CMakeFiles/libopentld.dir/tld/detector/ocl/OclDetectorCascade.cpp.o: /usr/local/include/opencv2/ml/ml.hpp
 src/libopentld/CMakeFiles/libopentld.dir/tld/detector/ocl/OclDetectorCascade.cpp.o: /usr/local/include/opencv2/objdetect/objdetect.hpp
+src/libopentld/CMakeFiles/libopentld.dir/tld/detector/ocl/OclDetectorCascade.cpp.o: /usr/local/include/opencv2/ocl/matrix_operations.hpp
+src/libopentld/CMakeFiles/libopentld.dir/tld/detector/ocl/OclDetectorCascade.cpp.o: /usr/local/include/opencv2/ocl/ocl.hpp
 src/libopentld/CMakeFiles/libopentld.dir/tld/detector/ocl/OclDetectorCascade.cpp.o: /usr/local/include/opencv2/video/tracking.hpp
 

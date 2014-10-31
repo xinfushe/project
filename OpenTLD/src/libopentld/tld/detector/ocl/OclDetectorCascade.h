@@ -11,6 +11,8 @@
 #include "Clustering.h"
 #include "NNClassifier.h"
 
+#include "opencv2/ocl/ocl.hpp"
+
 
 
 namespace tld

@@ -44,6 +44,7 @@
 
 //2014.10.29
 //#define CUDA_ENABLED
+//#define OCL_ENABLED
 
 using namespace tld;
 using namespace cv;
@@ -123,7 +124,8 @@ void Main::doWork()
 
     tld->detectorCascade->setImgSize(grey.cols, grey.rows, grey.step);
 
-#ifdef CUDA_ENABLED
+//#ifdef CUDA_ENABLED
+#ifdef OCL_ENABLED
     tld->learningEnabled = false;
     selectManually = false;
 
@@ -155,6 +157,16 @@ void Main::doWork()
         initialBB[1] = box.y;
         initialBB[2] = box.width;
         initialBB[3] = box.height;
+
+        //initialize if width or height is zero (improper input)
+        if(initialBB[2] == 0)
+        {
+        	initialBB[2] = 10;
+        }
+        if(initialBB[3] == 0)
+        {
+        	initialBB[3] = 10;
+        }
     }
 
     FILE *resultsFile = NULL;
@@ -182,6 +194,7 @@ void Main::doWork()
         skipProcessingOnce = true;
         reuseFrameOnce = true;
     }
+
     //Focus init
     const char* dev_name = "/dev/video1";
     int fh = open(dev_name, O_RDWR /* required */ | O_NONBLOCK, 0);
@@ -191,6 +204,7 @@ void Main::doWork()
     int bestfocus=0,initsize,lastsize,focusCount=0,focusChange = 5,initfocus = 0,errorcount=0,focusend=200;
     bool init = false,changing = false;
     setFocus(fh,focus);
+
     while(imAcqHasMoreFrames(imAcq))
     {
         tick_t procInit, procFinal;

@@ -33,7 +33,7 @@
 //
 #include "opencv2/ocl/ocl.hpp"
 //
-#define OCL_ENABLED
+//#define OCL_ENABLED
 
 //#ifdef CUDA_ENABLED
 #ifdef OCL_ENABLED

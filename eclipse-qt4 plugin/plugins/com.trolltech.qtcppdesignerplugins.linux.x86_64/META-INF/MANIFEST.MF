@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Qt Designerplugins Fragment (Linux, x86_64)
+Bundle-SymbolicName: com.trolltech.qtcppdesignerplugins.linux.x86_64
+Bundle-Version: 1.6.1
+Bundle-Vendor: Nokia Corporation
+Fragment-Host: com.trolltech.qtcppdesigner;bundle-version="1.6.1"
+Eclipse-PlatformFilter: (& (osgi.ws=gtk) (osgi.os=linux) (osgi.arch=x86_64))

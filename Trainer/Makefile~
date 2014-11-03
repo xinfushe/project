@@ -1,0 +1,3 @@
+all:
+	g++ Trainer2.cpp `pkg-config --cflags --libs opencv` -o TrainApple
+

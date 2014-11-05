@@ -5,7 +5,6 @@
 -I/home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/../libopentld/mftracker
 -I/home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/../libopentld/tld
 -I/home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/../libopentld/tld/detector
--I/home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/../libopentld/tld/detector/cuda
 -I/home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/../3rdparty/cvblobs
 -I/usr/local/include/opencv
 -I/usr/local/include

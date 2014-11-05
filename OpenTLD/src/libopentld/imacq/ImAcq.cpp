@@ -30,7 +30,7 @@ ImAcq *imAcqAlloc()
     imAcq->method = IMACQ_CAM;
     imAcq->currentFrame = 1;
     imAcq->lastFrame = 0;
-    imAcq->camNo = 0;
+    imAcq->camNo = 1;
     imAcq->fps = 24;
     return imAcq;
 }

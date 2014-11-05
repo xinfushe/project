@@ -35,8 +35,6 @@ SET(CMAKE_C_TARGET_INCLUDE_PATH
   "/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/mftracker"
   "/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld"
   "/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/detector"
-  "/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/detector/cuda"
-  "/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/detector/cuda/npp"
   "/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/../3rdparty/cvblobs"
   )
 SET(CMAKE_CXX_TARGET_INCLUDE_PATH ${CMAKE_C_TARGET_INCLUDE_PATH})

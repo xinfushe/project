@@ -32,7 +32,6 @@ SET(CMAKE_C_TARGET_INCLUDE_PATH
   "/home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/../libopentld/mftracker"
   "/home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/../libopentld/tld"
   "/home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/../libopentld/tld/detector"
-  "/home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/../libopentld/tld/detector/cuda"
   "/home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/../3rdparty/cvblobs"
   "/home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/../3rdparty/libconfig"
   "/home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/qopentld"

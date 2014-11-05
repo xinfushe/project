@@ -275,8 +275,6 @@
 <pathentry include="/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/mftracker" kind="inc" path="" system="true"/>
 <pathentry include="/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld" kind="inc" path="" system="true"/>
 <pathentry include="/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/detector" kind="inc" path="" system="true"/>
-<pathentry include="/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/detector/cuda" kind="inc" path="" system="true"/>
-<pathentry include="/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/detector/cuda/npp" kind="inc" path="" system="true"/>
 <pathentry include="/home/slilylsu/Desktop/project-repo/OpenTLD/src/3rdparty/cvblobs" kind="inc" path="" system="true"/>
 <pathentry include="/home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/main" kind="inc" path="" system="true"/>
 <pathentry include="/home/slilylsu/Desktop/project-repo/OpenTLD/src/3rdparty/libconfig" kind="inc" path="" system="true"/>

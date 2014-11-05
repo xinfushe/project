@@ -225,9 +225,9 @@ src/opentld/preinstall:
 # Target rules for target src/opentld/CMakeFiles/main.dir
 
 # All Build rule for target.
-src/opentld/CMakeFiles/main.dir/all: src/3rdparty/libconfig/CMakeFiles/config++.dir/all
 src/opentld/CMakeFiles/main.dir/all: src/3rdparty/cvblobs/CMakeFiles/cvblobs.dir/all
 src/opentld/CMakeFiles/main.dir/all: src/libopentld/CMakeFiles/libopentld.dir/all
+src/opentld/CMakeFiles/main.dir/all: src/3rdparty/libconfig/CMakeFiles/config++.dir/all
 	$(MAKE) -f src/opentld/CMakeFiles/main.dir/build.make src/opentld/CMakeFiles/main.dir/depend
 	$(MAKE) -f src/opentld/CMakeFiles/main.dir/build.make src/opentld/CMakeFiles/main.dir/build
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/slilylsu/Desktop/project-repo/build_control/debug/CMakeFiles  29 30 31 32 33
@@ -262,9 +262,9 @@ clean: src/opentld/CMakeFiles/main.dir/clean
 # Target rules for target src/opentld/CMakeFiles/opentld.dir
 
 # All Build rule for target.
-src/opentld/CMakeFiles/opentld.dir/all: src/3rdparty/libconfig/CMakeFiles/config++.dir/all
 src/opentld/CMakeFiles/opentld.dir/all: src/3rdparty/cvblobs/CMakeFiles/cvblobs.dir/all
 src/opentld/CMakeFiles/opentld.dir/all: src/libopentld/CMakeFiles/libopentld.dir/all
+src/opentld/CMakeFiles/opentld.dir/all: src/3rdparty/libconfig/CMakeFiles/config++.dir/all
 src/opentld/CMakeFiles/opentld.dir/all: src/opentld/CMakeFiles/main.dir/all
 	$(MAKE) -f src/opentld/CMakeFiles/opentld.dir/build.make src/opentld/CMakeFiles/opentld.dir/depend
 	$(MAKE) -f src/opentld/CMakeFiles/opentld.dir/build.make src/opentld/CMakeFiles/opentld.dir/build
@@ -300,9 +300,9 @@ clean: src/opentld/CMakeFiles/opentld.dir/clean
 # Target rules for target src/opentld/CMakeFiles/qopentld.dir
 
 # All Build rule for target.
-src/opentld/CMakeFiles/qopentld.dir/all: src/3rdparty/libconfig/CMakeFiles/config++.dir/all
 src/opentld/CMakeFiles/qopentld.dir/all: src/3rdparty/cvblobs/CMakeFiles/cvblobs.dir/all
 src/opentld/CMakeFiles/qopentld.dir/all: src/libopentld/CMakeFiles/libopentld.dir/all
+src/opentld/CMakeFiles/qopentld.dir/all: src/3rdparty/libconfig/CMakeFiles/config++.dir/all
 src/opentld/CMakeFiles/qopentld.dir/all: src/opentld/CMakeFiles/main.dir/all
 	$(MAKE) -f src/opentld/CMakeFiles/qopentld.dir/build.make src/opentld/CMakeFiles/qopentld.dir/depend
 	$(MAKE) -f src/opentld/CMakeFiles/qopentld.dir/build.make src/opentld/CMakeFiles/qopentld.dir/build

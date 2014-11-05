@@ -114,18 +114,12 @@ void Main::doWork()
 {
 	Trajectory trajectory;
     IplImage *img = imAcqGetImg(imAcq);
-    Mat grey(img->height, img->width, CV_8UC1);
-    cvtColor(cv::Mat(img), grey, CV_BGR2GRAY);
+    //
+    cv::ocl::oclMat grey(img->height, img->width, CV_8UC1);
+    cv::ocl::cvtColor(cv::ocl::oclMat(img), grey, CV_BGR2GRAY);
 
     tld->detectorCascade->setImgSize(grey.cols, grey.rows, grey.step);
 
-#ifdef CUDA_ENABLED
-    tld->learningEnabled = false;
-    selectManually = false;
-
-    if(tld->learningEnabled || selectManually)
-        std::cerr << "Sorry. Learning and manual object selection is not supported with CUDA implementation yet!!!" << std::endl;
-#endif
 
 	if(showTrajectory)
 	{
@@ -203,7 +197,8 @@ void Main::doWork()
                 break;
             }
 
-            cvtColor(cv::Mat(img), grey, CV_BGR2GRAY);
+            //
+            cv::ocl::cvtColor(cv::ocl::oclMat(img), grey, CV_BGR2GRAY);
         }
 
         if(!skipProcessingOnce)
@@ -259,7 +254,7 @@ void Main::doWork()
             if(tld->currBB != NULL)
             {
                 CvScalar rectangleColor = (confident) ? blue : yellow;
-                cvRectangle(img, tld->currBB->tl(), tld->currBB->br(), rectangleColor, 8, 8, 0);
+                cvRectangle(img, CvPoint(tld->currBB->tl()), CvPoint(tld->currBB->br()), rectangleColor, 8, 8, 0);
                 
                 currRect = *(tld->currBB);
                 double sharpness = contrast_measure(imgt(currRect));//TODO
@@ -382,7 +377,7 @@ void Main::doWork()
                 for(size_t i = 0; i < tld->detectorCascade->detectionResult->fgList->size(); i++)
                 {
                     Rect r = tld->detectorCascade->detectionResult->fgList->at(i);
-                    cvRectangle(img, r.tl(), r.br(), white, 1);
+                    cvRectangle(img, CvPoint(r.tl()), CvPoint(r.br()), white, 1);
                 }
 
             }

@@ -1,0 +1,118 @@
+From 96eb1d34ddd19ffb102c3a9b3c98e1035934de0d Mon Sep 17 00:00:00 2001
+From: Xiuli Pan <xiuli.pan@intel.com>
+Date: Mon, 30 Jun 2014 15:07:33 +0800
+Subject: [PATCH 3/3] autofocus2
+
+---
+ src/opentld/main/Main.cpp | 55 +++++++++++++++++++++++++++++++++++++++--------
+ 1 file changed, 46 insertions(+), 9 deletions(-)
+
+diff --git a/src/opentld/main/Main.cpp b/src/opentld/main/Main.cpp
+index 29a27b3..94fae22 100644
+--- a/src/opentld/main/Main.cpp
++++ b/src/opentld/main/Main.cpp
+@@ -37,6 +37,9 @@
+ #include <errno.h>
+ #include <fcntl.h> 
+ #include <linux/videodev2.h>
++#include "opencv2/objdetect/objdetect.hpp"
++#include "opencv2/highgui/highgui.hpp"
++#include "opencv2/imgproc/imgproc.hpp"
+ #define CLEAR(x) memset(&(x), 0, sizeof(x))
+ using namespace tld;
+ using namespace cv;
+@@ -101,8 +104,10 @@ static void setFocus(int fh,int focus)
+ }
+ static int getFocus(int currsize,int lastsize,int bestfocus)
+ {
+-    if(bestfocus < 20) return currsize-lastsize;
+-    else return (float)currsize/(float)lastsize*bestfocus;
++    int res;
++    if(bestfocus < 20) res = currsize-lastsize;
++    else res = (float)currsize/(float)lastsize*bestfocus;
++    return res < 80 ? res : 80;
+     
+ }
+ void Main::doWork()
+@@ -179,7 +184,7 @@ void Main::doWork()
+     disableAutoFocus(fh);
+     int focus = 0;
+     double bestsharpness=0,lastsharpness=0;
+-    int bestfocus=0,initsize,lastsize,focusCount=0,focusChange = 0,initfocus = 0,errorcount=0,focusend=80;
++    int bestfocus=0,initsize,lastsize,focusCount=0,focusChange = 5,initfocus = 0,errorcount=0,focusend=200;
+     bool init = false,changing = false;
+     setFocus(fh,focus);
+     while(imAcqHasMoreFrames(imAcq))
+@@ -271,9 +276,13 @@ void Main::doWork()
+                         }
+                         lastsharpness = sharpness;
+                     }
+-                    focus+=2;
++                    focusCount++;
++                    if(focusCount % 3 == 0){
++                    focus+=focusChange;
++                    focusCount = 0;
++                    }
+ 
+-                    if(focus > focusend){
++                    if(focus == focusend || sharpness < bestsharpness -4){
+                         init = true;
+                         focus = bestfocus;
+                         initfocus = bestfocus;
+@@ -300,14 +309,16 @@ void Main::doWork()
+                             if(currRect.height >initsize){
+ //                                 focus = initfocus + (currRect.height-initsize)/10;
+ //                                 focusend=focus +(currRect.height-initsize)/2;
+-                              focus = getFocus(currRect.height,initsize,focus)-20;
+-                              focusend = focus + 20;
++//                               focus = getFocus(currRect.height,initsize,focus)-20;
++//                               focusend = getFocus(currRect.height,initsize,focus)+20;
+ //                                 printf("XXXXXXXXx!focusend is %d\n",focusend);
++                                focusChange = 5;
++                                focusend = 200;
+                             }
+                             else
+                             {
+-                                focusend = focus;
+-                                focus = 0;
++                                focusChange = -5;
++                                focusend = 0;
+                             }
+ 
+                         }
+@@ -470,6 +481,32 @@ void Main::doWork()
+                     focus = 0;
+                     tld->selectObject(grey, &r);
+                 }
++                if(key == 'f')
++                {
++                    CvRect box;
++                    const char* cascadeName = "haarcascade_frontalface_alt.xml";
++                    CascadeClassifier  cascade;
++                    vector<Rect> faces;
++                    if( !cascade.load( cascadeName )  )
++                    {
++                        printf("ERROR: Could not load classifier cascade: %s\n",cascadeName);
++                    }
++                    
++                    cascade.detectMultiScale(grey, faces, 1.1,
++                             3, 0 | CV_HAAR_SCALE_IMAGE,
++                             Size(30, 30), Size(0, 0));
++                    if(!faces.empty())
++                    {
++                        Rect r = faces[0];
++                        currRect=r;
++                        initsize = r.height;
++                        init = false;
++                        bestsharpness = 0;
++                        lastsharpness = 0;
++                        focus = 0;
++                        tld->selectObject(grey, &r);
++                    }
++                }
+             }
+ 
+             if(saveDir != NULL)
+-- 
+1.8.3.2
+

@@ -417,29 +417,6 @@ src/libopentld/CMakeFiles/libopentld.dir/tld/detector/VarianceFilter.cpp.o.provi
 
 src/libopentld/CMakeFiles/libopentld.dir/tld/detector/VarianceFilter.cpp.o.provides.build: src/libopentld/CMakeFiles/libopentld.dir/tld/detector/VarianceFilter.cpp.o
 
-src/libopentld/CMakeFiles/libopentld.dir/tld/detector/ocl/OclDetectorCascade.cpp.o: src/libopentld/CMakeFiles/libopentld.dir/flags.make
-src/libopentld/CMakeFiles/libopentld.dir/tld/detector/ocl/OclDetectorCascade.cpp.o: /home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/detector/ocl/OclDetectorCascade.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/slilylsu/Desktop/project-repo/build/release/CMakeFiles $(CMAKE_PROGRESS_17)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/libopentld/CMakeFiles/libopentld.dir/tld/detector/ocl/OclDetectorCascade.cpp.o"
-	cd /home/slilylsu/Desktop/project-repo/build/release/src/libopentld && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/libopentld.dir/tld/detector/ocl/OclDetectorCascade.cpp.o -c /home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/detector/ocl/OclDetectorCascade.cpp
-
-src/libopentld/CMakeFiles/libopentld.dir/tld/detector/ocl/OclDetectorCascade.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libopentld.dir/tld/detector/ocl/OclDetectorCascade.cpp.i"
-	cd /home/slilylsu/Desktop/project-repo/build/release/src/libopentld && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/detector/ocl/OclDetectorCascade.cpp > CMakeFiles/libopentld.dir/tld/detector/ocl/OclDetectorCascade.cpp.i
-
-src/libopentld/CMakeFiles/libopentld.dir/tld/detector/ocl/OclDetectorCascade.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/libopentld.dir/tld/detector/ocl/OclDetectorCascade.cpp.s"
-	cd /home/slilylsu/Desktop/project-repo/build/release/src/libopentld && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/detector/ocl/OclDetectorCascade.cpp -o CMakeFiles/libopentld.dir/tld/detector/ocl/OclDetectorCascade.cpp.s
-
-src/libopentld/CMakeFiles/libopentld.dir/tld/detector/ocl/OclDetectorCascade.cpp.o.requires:
-.PHONY : src/libopentld/CMakeFiles/libopentld.dir/tld/detector/ocl/OclDetectorCascade.cpp.o.requires
-
-src/libopentld/CMakeFiles/libopentld.dir/tld/detector/ocl/OclDetectorCascade.cpp.o.provides: src/libopentld/CMakeFiles/libopentld.dir/tld/detector/ocl/OclDetectorCascade.cpp.o.requires
-	$(MAKE) -f src/libopentld/CMakeFiles/libopentld.dir/build.make src/libopentld/CMakeFiles/libopentld.dir/tld/detector/ocl/OclDetectorCascade.cpp.o.provides.build
-.PHONY : src/libopentld/CMakeFiles/libopentld.dir/tld/detector/ocl/OclDetectorCascade.cpp.o.provides
-
-src/libopentld/CMakeFiles/libopentld.dir/tld/detector/ocl/OclDetectorCascade.cpp.o.provides.build: src/libopentld/CMakeFiles/libopentld.dir/tld/detector/ocl/OclDetectorCascade.cpp.o
-
 # Object files for target libopentld
 libopentld_OBJECTS = \
 "CMakeFiles/libopentld.dir/imacq/ImAcq.cpp.o" \
@@ -457,8 +434,7 @@ libopentld_OBJECTS = \
 "CMakeFiles/libopentld.dir/tld/detector/EnsembleClassifier.cpp.o" \
 "CMakeFiles/libopentld.dir/tld/detector/ForegroundDetector.cpp.o" \
 "CMakeFiles/libopentld.dir/tld/detector/NNClassifier.cpp.o" \
-"CMakeFiles/libopentld.dir/tld/detector/VarianceFilter.cpp.o" \
-"CMakeFiles/libopentld.dir/tld/detector/ocl/OclDetectorCascade.cpp.o"
+"CMakeFiles/libopentld.dir/tld/detector/VarianceFilter.cpp.o"
 
 # External object files for target libopentld
 libopentld_EXTERNAL_OBJECTS =
@@ -479,7 +455,6 @@ lib/libopentld.a: src/libopentld/CMakeFiles/libopentld.dir/tld/detector/Ensemble
 lib/libopentld.a: src/libopentld/CMakeFiles/libopentld.dir/tld/detector/ForegroundDetector.cpp.o
 lib/libopentld.a: src/libopentld/CMakeFiles/libopentld.dir/tld/detector/NNClassifier.cpp.o
 lib/libopentld.a: src/libopentld/CMakeFiles/libopentld.dir/tld/detector/VarianceFilter.cpp.o
-lib/libopentld.a: src/libopentld/CMakeFiles/libopentld.dir/tld/detector/ocl/OclDetectorCascade.cpp.o
 lib/libopentld.a: src/libopentld/CMakeFiles/libopentld.dir/build.make
 lib/libopentld.a: src/libopentld/CMakeFiles/libopentld.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX static library ../../lib/libopentld.a"
@@ -506,7 +481,6 @@ src/libopentld/CMakeFiles/libopentld.dir/requires: src/libopentld/CMakeFiles/lib
 src/libopentld/CMakeFiles/libopentld.dir/requires: src/libopentld/CMakeFiles/libopentld.dir/tld/detector/ForegroundDetector.cpp.o.requires
 src/libopentld/CMakeFiles/libopentld.dir/requires: src/libopentld/CMakeFiles/libopentld.dir/tld/detector/NNClassifier.cpp.o.requires
 src/libopentld/CMakeFiles/libopentld.dir/requires: src/libopentld/CMakeFiles/libopentld.dir/tld/detector/VarianceFilter.cpp.o.requires
-src/libopentld/CMakeFiles/libopentld.dir/requires: src/libopentld/CMakeFiles/libopentld.dir/tld/detector/ocl/OclDetectorCascade.cpp.o.requires
 .PHONY : src/libopentld/CMakeFiles/libopentld.dir/requires
 
 src/libopentld/CMakeFiles/libopentld.dir/clean:

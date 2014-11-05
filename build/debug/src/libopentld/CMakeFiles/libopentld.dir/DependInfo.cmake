@@ -20,7 +20,6 @@ SET(CMAKE_DEPENDS_CHECK_CXX
   "/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/detector/ForegroundDetector.cpp" "/home/slilylsu/Desktop/project-repo/build/debug/src/libopentld/CMakeFiles/libopentld.dir/tld/detector/ForegroundDetector.cpp.o"
   "/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/detector/NNClassifier.cpp" "/home/slilylsu/Desktop/project-repo/build/debug/src/libopentld/CMakeFiles/libopentld.dir/tld/detector/NNClassifier.cpp.o"
   "/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/detector/VarianceFilter.cpp" "/home/slilylsu/Desktop/project-repo/build/debug/src/libopentld/CMakeFiles/libopentld.dir/tld/detector/VarianceFilter.cpp.o"
-  "/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/detector/ocl/OclDetectorCascade.cpp" "/home/slilylsu/Desktop/project-repo/build/debug/src/libopentld/CMakeFiles/libopentld.dir/tld/detector/ocl/OclDetectorCascade.cpp.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -36,7 +35,8 @@ SET(CMAKE_C_TARGET_INCLUDE_PATH
   "/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/mftracker"
   "/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld"
   "/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/detector"
-  "/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/detector/ocl"
+  "/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/detector/cuda"
+  "/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/detector/cuda/npp"
   "/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/../3rdparty/cvblobs"
   )
 SET(CMAKE_CXX_TARGET_INCLUDE_PATH ${CMAKE_C_TARGET_INCLUDE_PATH})

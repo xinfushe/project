@@ -537,30 +537,6 @@ tld/detector/VarianceFilter.cpp.s:
 	cd /home/slilylsu/Desktop/project-repo/build/debug && $(MAKE) -f src/libopentld/CMakeFiles/libopentld.dir/build.make src/libopentld/CMakeFiles/libopentld.dir/tld/detector/VarianceFilter.cpp.s
 .PHONY : tld/detector/VarianceFilter.cpp.s
 
-tld/detector/ocl/OclDetectorCascade.o: tld/detector/ocl/OclDetectorCascade.cpp.o
-.PHONY : tld/detector/ocl/OclDetectorCascade.o
-
-# target to build an object file
-tld/detector/ocl/OclDetectorCascade.cpp.o:
-	cd /home/slilylsu/Desktop/project-repo/build/debug && $(MAKE) -f src/libopentld/CMakeFiles/libopentld.dir/build.make src/libopentld/CMakeFiles/libopentld.dir/tld/detector/ocl/OclDetectorCascade.cpp.o
-.PHONY : tld/detector/ocl/OclDetectorCascade.cpp.o
-
-tld/detector/ocl/OclDetectorCascade.i: tld/detector/ocl/OclDetectorCascade.cpp.i
-.PHONY : tld/detector/ocl/OclDetectorCascade.i
-
-# target to preprocess a source file
-tld/detector/ocl/OclDetectorCascade.cpp.i:
-	cd /home/slilylsu/Desktop/project-repo/build/debug && $(MAKE) -f src/libopentld/CMakeFiles/libopentld.dir/build.make src/libopentld/CMakeFiles/libopentld.dir/tld/detector/ocl/OclDetectorCascade.cpp.i
-.PHONY : tld/detector/ocl/OclDetectorCascade.cpp.i
-
-tld/detector/ocl/OclDetectorCascade.s: tld/detector/ocl/OclDetectorCascade.cpp.s
-.PHONY : tld/detector/ocl/OclDetectorCascade.s
-
-# target to generate assembly for a file
-tld/detector/ocl/OclDetectorCascade.cpp.s:
-	cd /home/slilylsu/Desktop/project-repo/build/debug && $(MAKE) -f src/libopentld/CMakeFiles/libopentld.dir/build.make src/libopentld/CMakeFiles/libopentld.dir/tld/detector/ocl/OclDetectorCascade.cpp.s
-.PHONY : tld/detector/ocl/OclDetectorCascade.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -622,9 +598,6 @@ help:
 	@echo "... tld/detector/VarianceFilter.o"
 	@echo "... tld/detector/VarianceFilter.i"
 	@echo "... tld/detector/VarianceFilter.s"
-	@echo "... tld/detector/ocl/OclDetectorCascade.o"
-	@echo "... tld/detector/ocl/OclDetectorCascade.i"
-	@echo "... tld/detector/ocl/OclDetectorCascade.s"
 .PHONY : help
 
 

@@ -429,19 +429,9 @@
 			<location>/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/detector/VarianceFilter.cpp</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] libopentld/Source Files/OclDetectorCascade.cpp</name>
-			<type>1</type>
-			<location>/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/detector/ocl/OclDetectorCascade.cpp</location>
-		</link>
-		<link>
 			<name>[Targets]/[lib] libopentld/Header Files</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[lib] libopentld/Header Files/OclDetectorCascade.h</name>
-			<type>1</type>
-			<location>/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/detector/ocl/OclDetectorCascade.h</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] libopentld/Header Files/ImAcq.h</name>

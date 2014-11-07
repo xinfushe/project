@@ -36,7 +36,7 @@ namespace tld
 {
 
 Gui::Gui() :
-    m_window_name("tld")
+    m_window_name("OpenTLD with OpenCL acceleration")
 {
 }
 
@@ -44,10 +44,12 @@ Gui::~Gui()
 {
 }
 
-void Gui::init()
+void Gui::init(ImAcq* imAcq)
 {
-    cvNamedWindow(m_window_name.c_str(), CV_WINDOW_AUTOSIZE);
-    cvMoveWindow(m_window_name.c_str(), 100, 100);
+    cvNamedWindow(m_window_name.c_str(), 0/*CV_WINDOW_AUTOSIZE*/);
+    cvMoveWindow(m_window_name.c_str(), 0, 0);
+    cvResizeWindow(m_window_name.c_str(),imAcq->width, imAcq->height);
+
 }
 
 void Gui::showImage(IplImage *image)

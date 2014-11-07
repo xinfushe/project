@@ -416,6 +416,9 @@ int Config::configure(Main *main)
     imAcq->currentFrame = m_settings.m_startFrame;
     imAcq->camNo = m_settings.m_camNo;
     imAcq->fps = m_settings.m_fps;
+    //
+    imAcq->width = m_settings.m_width;
+    imAcq->height = m_settings.m_height;
 
     // main
     main->tld->trackerEnabled = m_settings.m_trackerEnabled;

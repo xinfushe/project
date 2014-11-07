@@ -57,8 +57,12 @@ Settings::Settings() :
     m_thetaP(0.65),
     m_thetaN(0.5),
     m_minSize(25),
-    m_camNo(0),
-    m_fps(24),
+    //
+    m_camNo(1),
+    m_fps(30),
+    //
+    m_width(1280),
+    m_height(720),
     m_seed(0),
     m_threshold(0.7),
     m_proportionalShift(0.1),

@@ -114,8 +114,9 @@ void Main::doWork()
 {
 	Trajectory trajectory;
     IplImage *img = imAcqGetImg(imAcq);
+    //
     Mat grey(img->height, img->width, CV_8UC1);
-    cvtColor(cv::Mat(img), grey, CV_BGR2GRAY);
+    cvtColor(Mat(img), grey, CV_BGR2GRAY);
 
     tld->detectorCascade->setImgSize(grey.cols, grey.rows, grey.step);
 
@@ -196,7 +197,7 @@ void Main::doWork()
                 break;
             }
 
-            cvtColor(cv::Mat(img), grey, CV_BGR2GRAY);
+            cvtColor(Mat(img), grey, CV_BGR2GRAY);
         }
 
         if(!skipProcessingOnce)

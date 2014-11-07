@@ -30,18 +30,37 @@ ImAcq *imAcqAlloc()
     imAcq->method = IMACQ_CAM;
     imAcq->currentFrame = 1;
     imAcq->lastFrame = 0;
-    imAcq->camNo = 0;
-    imAcq->fps = 24;
+    imAcq->camNo = 1;
+    imAcq->fps = 30;
+    //
+    imAcq->width = 640;
+    imAcq->height = 480;
     return imAcq;
+}
+
+void imAcqSetResolution (ImAcq *imAcq)
+{
+	cvSetCaptureProperty(imAcq->capture, CV_CAP_PROP_FRAME_WIDTH, imAcq->width);
+	cvSetCaptureProperty(imAcq->capture, CV_CAP_PROP_FRAME_HEIGHT, imAcq->height);
+}
+
+void imAcqGetResolution (ImAcq *imAcq)
+{
+	printf("Capture Resolution: %d x %d \n", cvGetCaptureProperty(imAcq->capture, CV_CAP_PROP_FRAME_WIDTH), cvGetCaptureProperty(imAcq->capture, CV_CAP_PROP_FRAME_HEIGHT));
 }
 
 void imAcqInit(ImAcq *imAcq)
 {
     if(imAcq->method == IMACQ_CAM)
     {
+
 //         imAcq->capture = cvCaptureFromCAM(imAcq->camNo);
-        imAcq->capture = cvCaptureFromCAM(1);
+    	imAcq->capture = cvCaptureFromCAM(imAcq->camNo);
 //         printf("opening the cam%d\n\n\n",imAcq->camNo);
+
+    	//
+    	imAcqSetResolution(imAcq);
+    	imAcqGetResolution(imAcq);
 
         if(imAcq->capture == NULL)
         {

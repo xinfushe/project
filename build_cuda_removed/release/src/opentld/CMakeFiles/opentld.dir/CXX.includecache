@@ -6,6 +6,10 @@
 
 #IncludeRegexTransform: 
 
+/home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/libopentld/imacq/ImAcq.h
+opencv/highgui.h
+-
+
 /home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/../3rdparty/libconfig/libconfig.h++
 stdio.h
 -
@@ -115,6 +119,8 @@ string
 -
 opencv/highgui.h
 -
+../../libopentld/imacq/ImAcq.h
+/home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/libopentld/imacq/ImAcq.h
 
 /home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/main/Main.h
 TLD.h
@@ -123,6 +129,10 @@ ImAcq.h
 /home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/main/ImAcq.h
 Gui.h
 /home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/main/Gui.h
+opencv2/ocl/ocl.hpp
+/home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/main/opencv2/ocl/ocl.hpp
+opencv2/ocl/matrix_operations.hpp
+/home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/main/opencv2/ocl/matrix_operations.hpp
 
 /home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/main/Settings.h
 vector
@@ -776,6 +786,18 @@ math.h
 string.h
 -
 
+/usr/local/include/opencv2/ml/ml.hpp
+opencv2/core/core.hpp
+/usr/local/include/opencv2/ml/opencv2/core/core.hpp
+limits.h
+-
+map
+-
+string
+-
+iostream
+-
+
 /usr/local/include/opencv2/objdetect/objdetect.hpp
 opencv2/core/core.hpp
 /usr/local/include/opencv2/objdetect/opencv2/core/core.hpp
@@ -783,6 +805,28 @@ map
 -
 deque
 -
+
+/usr/local/include/opencv2/ocl/matrix_operations.hpp
+opencv2/ocl/ocl.hpp
+/usr/local/include/opencv2/ocl/opencv2/ocl/ocl.hpp
+
+/usr/local/include/opencv2/ocl/ocl.hpp
+memory
+-
+vector
+-
+opencv2/core/core.hpp
+/usr/local/include/opencv2/ocl/opencv2/core/core.hpp
+opencv2/imgproc/imgproc.hpp
+/usr/local/include/opencv2/ocl/opencv2/imgproc/imgproc.hpp
+opencv2/objdetect/objdetect.hpp
+/usr/local/include/opencv2/ocl/opencv2/objdetect/objdetect.hpp
+opencv2/features2d/features2d.hpp
+/usr/local/include/opencv2/ocl/opencv2/features2d/features2d.hpp
+opencv2/ml/ml.hpp
+/usr/local/include/opencv2/ocl/opencv2/ml/ml.hpp
+opencv2/ocl/matrix_operations.hpp
+/usr/local/include/opencv2/ocl/opencv2/ocl/matrix_operations.hpp
 
 /usr/local/include/opencv2/video/tracking.hpp
 opencv2/core/core.hpp

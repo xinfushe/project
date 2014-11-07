@@ -31,8 +31,8 @@
 #include "ImAcq.h"
 #include "Gui.h"
 //
-#include "opencv2/ocl/ocl.hpp"
-#include "opencv2/ocl/matrix_operations.hpp"
+#include <opencv2/ocl/ocl.hpp>
+#include <opencv2/ocl/matrix_operations.hpp>
 
 
 enum Retval

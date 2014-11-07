@@ -54,7 +54,7 @@ int main(int argc, char **argv)
 
     if(main->showOutput)
     {
-        gui->init();
+        gui->init(imAcq);
     }
 
     main->doWork();

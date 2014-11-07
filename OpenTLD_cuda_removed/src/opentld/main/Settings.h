@@ -73,6 +73,9 @@ public:
     int m_minSize; //!< minimum size of scanWindows
     int m_camNo; //!< Which camera to use
     float m_fps; //!< Frames per second
+    //
+    int m_width;
+    int m_height;
     float m_threshold; //!< threshold for determining positive results
     float m_proportionalShift; //!< proportional shift
     std::string  m_imagePath; //!< path to the images or the video if m_method is IMACQ_VID or IMACQ_IMGS

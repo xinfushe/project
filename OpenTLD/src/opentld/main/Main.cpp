@@ -44,13 +44,13 @@
 using namespace tld;
 using namespace cv;
 
-double contrast_measure(const Mat&img)
+double contrast_measure(const cv::ocl::oclMat& img)
 {
-    Mat dx,dy;
-    cv::Sobel(img,dx,CV_32F,1,0,3);
-    cv::Sobel(img,dy,CV_32F,0,1,3);
-    cv::magnitude(dx,dy,dx);
-    return sum(dx)[0]/(img.cols*img.rows);
+    cv::ocl::oclMat dx,dy;
+    cv::ocl::Sobel(img,dx,CV_32F,1,0,3);
+    cv::ocl::Sobel(img,dy,CV_32F,0,1,3);
+    cv::ocl::magnitude(dx,dy,dx);
+    return cv::ocl::sum(dx)[0]/(img.cols*img.rows);
 }
 static int xioctl(int fh, int request, void *arg)
 {
@@ -114,7 +114,7 @@ void Main::doWork()
 {
 	Trajectory trajectory;
     IplImage *img = imAcqGetImg(imAcq);
-    //
+
     cv::ocl::oclMat grey(img->height, img->width, CV_8UC1);
     cv::ocl::cvtColor(cv::ocl::oclMat(img), grey, CV_BGR2GRAY);
 
@@ -181,15 +181,21 @@ void Main::doWork()
     int bestfocus=0,initsize,lastsize,focusCount=0,focusChange = 5,initfocus = 0,errorcount=0,focusend=200;
     bool init = false,changing = false;
     setFocus(fh,focus);
+
     while(imAcqHasMoreFrames(imAcq))
     {
         tick_t procInit, procFinal;
         double tic = cvGetTickCount();
 
+        //
+        img = imAcqGetImg(imAcq);
+        cv::ocl::oclMat oclimg = cv::ocl::oclMat(img);
+        //
 
         if(!reuseFrameOnce)
         {
-            img = imAcqGetImg(imAcq);
+            //img = imAcqGetImg(imAcq);
+            //cv::ocl::oclMat oclimg = cv::ocl::oclMat(img);
 
             if(img == NULL)
             {
@@ -198,7 +204,7 @@ void Main::doWork()
             }
 
             //
-            cv::ocl::cvtColor(cv::ocl::oclMat(img), grey, CV_BGR2GRAY);
+            cv::ocl::cvtColor(oclimg, grey, CV_BGR2GRAY);
         }
 
         if(!skipProcessingOnce)
@@ -249,7 +255,7 @@ void Main::doWork()
             CvScalar blue = CV_RGB(0, 0, 255);  
             CvScalar black = CV_RGB(0, 0, 0);
             CvScalar white = CV_RGB(255, 255, 255);
-            Mat imgt = img;
+            //Mat imgt = img;
             Rect currRect;
             if(tld->currBB != NULL)
             {
@@ -257,7 +263,8 @@ void Main::doWork()
                 cvRectangle(img, CvPoint(tld->currBB->tl()), CvPoint(tld->currBB->br()), rectangleColor, 8, 8, 0);
                 
                 currRect = *(tld->currBB);
-                double sharpness = contrast_measure(imgt(currRect));//TODO
+                //
+                double sharpness = contrast_measure(oclimg(currRect));//TODO
                 printf("sharpness is %lf\n",sharpness);
                 if(!init)
                 {

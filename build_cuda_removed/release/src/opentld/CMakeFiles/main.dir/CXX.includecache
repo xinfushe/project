@@ -6,6 +6,10 @@
 
 #IncludeRegexTransform: 
 
+/home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/libopentld/imacq/ImAcq.h
+opencv/highgui.h
+-
+
 /home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/libopentld/tld/Clustering.h
 vector
 -
@@ -78,58 +82,6 @@ string
 opencv/highgui.h
 -
 
-/home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/../libopentld/tld/Clustering.h
-vector
--
-opencv/cv.h
--
-DetectionResult.h
-/home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/../libopentld/tld/DetectionResult.h
-
-/home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/../libopentld/tld/DetectionResult.h
-vector
--
-opencv/cv.h
--
-
-/home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/../libopentld/tld/IDetectorCascade.h
-DetectionResult.h
-/home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/../libopentld/tld/DetectionResult.h
-IVarianceFilter.h
-/home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/../libopentld/tld/IVarianceFilter.h
-IEnsembleClassifier.h
-/home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/../libopentld/tld/IEnsembleClassifier.h
-INNClassifier.h
-/home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/../libopentld/tld/INNClassifier.h
-Clustering.h
-/home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/../libopentld/tld/Clustering.h
-
-/home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/../libopentld/tld/IEnsembleClassifier.h
-opencv/cv.h
--
-
-/home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/../libopentld/tld/INNClassifier.h
-vector
--
-opencv/cv.h
--
-NormalizedPatch.h
-/home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/../libopentld/tld/NormalizedPatch.h
-DetectionResult.h
-/home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/../libopentld/tld/DetectionResult.h
-
-/home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/../libopentld/tld/IVarianceFilter.h
-opencv/cv.h
--
-IntegralImage.h
-/home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/../libopentld/tld/IntegralImage.h
-DetectionResult.h
-/home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/../libopentld/tld/DetectionResult.h
-
-/home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/../libopentld/tld/MedianFlowTracker.h
-opencv/cv.h
--
-
 /home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/../libopentld/tld/TLD.h
 opencv/cv.h
 -
@@ -154,12 +106,6 @@ opencv/cv.h
 
 /home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/../libopentld/tld/detector/NormalizedPatch.h
 
-/home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/main/Config.cpp
-Config.h
-/home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/main/Config.h
-Main.h
-/home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/main/Main.h
-
 /home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/main/Config.h
 iostream
 -
@@ -176,19 +122,13 @@ Main.h
 getopt.h
 -
 
-/home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/main/Gui.cpp
-Gui.h
-/home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/main/Gui.h
-Main.h
-/home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/main/Main.h
-string
--
-
 /home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/main/Gui.h
 string
 -
 opencv/highgui.h
 -
+../../libopentld/imacq/ImAcq.h
+/home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/libopentld/imacq/ImAcq.h
 
 /home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/main/Main.cpp
 Main.h
@@ -231,22 +171,16 @@ ImAcq.h
 /home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/main/ImAcq.h
 Gui.h
 /home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/main/Gui.h
-
-/home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/main/Settings.cpp
-Settings.h
-/home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/main/Settings.h
+opencv2/ocl/ocl.hpp
+/home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/main/opencv2/ocl/ocl.hpp
+opencv2/ocl/matrix_operations.hpp
+/home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/main/opencv2/ocl/matrix_operations.hpp
 
 /home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/main/Settings.h
 vector
 -
 ImAcq.h
 /home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/main/ImAcq.h
-
-/home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/main/Trajectory.cpp
-Trajectory.h
-/home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/main/Trajectory.h
-cstdio
--
 
 /home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/main/Trajectory.h
 vector
@@ -900,6 +834,18 @@ math.h
 string.h
 -
 
+/usr/local/include/opencv2/ml/ml.hpp
+opencv2/core/core.hpp
+/usr/local/include/opencv2/ml/opencv2/core/core.hpp
+limits.h
+-
+map
+-
+string
+-
+iostream
+-
+
 /usr/local/include/opencv2/objdetect/objdetect.hpp
 opencv2/core/core.hpp
 /usr/local/include/opencv2/objdetect/opencv2/core/core.hpp
@@ -907,6 +853,28 @@ map
 -
 deque
 -
+
+/usr/local/include/opencv2/ocl/matrix_operations.hpp
+opencv2/ocl/ocl.hpp
+/usr/local/include/opencv2/ocl/opencv2/ocl/ocl.hpp
+
+/usr/local/include/opencv2/ocl/ocl.hpp
+memory
+-
+vector
+-
+opencv2/core/core.hpp
+/usr/local/include/opencv2/ocl/opencv2/core/core.hpp
+opencv2/imgproc/imgproc.hpp
+/usr/local/include/opencv2/ocl/opencv2/imgproc/imgproc.hpp
+opencv2/objdetect/objdetect.hpp
+/usr/local/include/opencv2/ocl/opencv2/objdetect/objdetect.hpp
+opencv2/features2d/features2d.hpp
+/usr/local/include/opencv2/ocl/opencv2/features2d/features2d.hpp
+opencv2/ml/ml.hpp
+/usr/local/include/opencv2/ocl/opencv2/ml/ml.hpp
+opencv2/ocl/matrix_operations.hpp
+/usr/local/include/opencv2/ocl/opencv2/ocl/matrix_operations.hpp
 
 /usr/local/include/opencv2/video/tracking.hpp
 opencv2/core/core.hpp

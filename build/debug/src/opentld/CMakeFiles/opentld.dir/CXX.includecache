@@ -6,6 +6,10 @@
 
 #IncludeRegexTransform: 
 
+/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/imacq/ImAcq.h
+opencv/highgui.h
+-
+
 /home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/../3rdparty/libconfig/libconfig.h++
 stdio.h
 -
@@ -115,6 +119,8 @@ string
 -
 opencv/highgui.h
 -
+../../libopentld/imacq/ImAcq.h
+/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/imacq/ImAcq.h
 
 /home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/main/Main.h
 TLD.h
@@ -124,9 +130,9 @@ ImAcq.h
 Gui.h
 /home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/main/Gui.h
 opencv2/ocl/ocl.hpp
-/home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/main/opencv2/ocl/ocl.hpp
+-
 opencv2/ocl/matrix_operations.hpp
-/home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/main/opencv2/ocl/matrix_operations.hpp
+-
 
 /home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/main/Settings.h
 vector

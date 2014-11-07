@@ -269,6 +269,7 @@ public:
 
         checkBox_selectManually = new QCheckBox(scrollAreaWidgetContents_general);
         checkBox_selectManually->setObjectName(QString::fromUtf8("checkBox_selectManually"));
+        checkBox_selectManually->setChecked(true);
 
         gridLayout_3->addWidget(checkBox_selectManually, 8, 0, 1, 2);
 

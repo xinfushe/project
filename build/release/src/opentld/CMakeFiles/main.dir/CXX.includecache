@@ -6,6 +6,10 @@
 
 #IncludeRegexTransform: 
 
+/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/imacq/ImAcq.h
+opencv/highgui.h
+-
+
 /home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/Clustering.h
 vector
 -
@@ -189,6 +193,8 @@ string
 -
 opencv/highgui.h
 -
+../../libopentld/imacq/ImAcq.h
+/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/imacq/ImAcq.h
 
 /home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/main/Main.cpp
 Main.h
@@ -232,25 +238,15 @@ ImAcq.h
 Gui.h
 /home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/main/Gui.h
 opencv2/ocl/ocl.hpp
-/home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/main/opencv2/ocl/ocl.hpp
+-
 opencv2/ocl/matrix_operations.hpp
-/home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/main/opencv2/ocl/matrix_operations.hpp
-
-/home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/main/Settings.cpp
-Settings.h
-/home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/main/Settings.h
+-
 
 /home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/main/Settings.h
 vector
 -
 ImAcq.h
 /home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/main/ImAcq.h
-
-/home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/main/Trajectory.cpp
-Trajectory.h
-/home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/main/Trajectory.h
-cstdio
--
 
 /home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/main/Trajectory.h
 vector

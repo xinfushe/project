@@ -24,6 +24,9 @@
 
 #include <opencv/highgui.h>
 
+//
+#include "../../libopentld/imacq/ImAcq.h"
+
 namespace tld
 {
 
@@ -32,7 +35,7 @@ class Gui
 public:
     Gui();
     ~Gui();
-    void init();
+    void init(ImAcq* imAcq);
     void showImage(IplImage *image);
     char getKey();
     std::string windowName();

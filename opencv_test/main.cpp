@@ -1,31 +1,48 @@
-#include <opencv2/core/core.hpp>
-#include <opencv2/highgui/highgui.hpp>
-//#include <opencv2/ocl/ocl.hpp>
+//#include <WINDOWS.H>
+#include "opencv/cv.h"
+#include "opencv/highgui.h"
+#include <stdio.h>
+#include <stdlib.h>
 #include <iostream>
+#include <iomanip>
+CvFont font;
+IplImage* frame = 0;
+CvCapture* capture;
 
-using namespace cv;
 using namespace std;
 
-int main (int argc, char** argv)
+int main()
 {
-	if (argc != 2)
-	{
-		cout << "Usage: display_image ImageToLoadAndDisplay" << endl;
-		return -1;
-	}
+    CvCapture* capture=cvCaptureFromCAM(1);
+    cvNamedWindow("Cam Feed",CV_WINDOW_NORMAL);
 
-	Mat image;
-	image = imread (argv[1], CV_LOAD_IMAGE_COLOR);
+    while(1)
+    {
+        //Getting the present frame
+        //frame=cvQueryFrame(capture);
 
-	if(!image.data)
-	{
-		cout << "Could not find or load image" << endl;
-		return -1;
-	}
+    	capture = cvCaptureFromCAM(1);
 
-	namedWindow( "Display window", CV_WINDOW_AUTOSIZE );// Create a window for display.
-	imshow( "Display window", image );                   // Show our image inside it.
+        //cvSetCaptureProperty( capture, CV_CAP_PROP_FRAME_WIDTH, 1920);
 
-	waitKey(0);                                          // Wait for a keystroke in the window
-	return 0;
+        //cvSetCaptureProperty( capture, CV_CAP_PROP_FRAME_HEIGHT, 1080 );
+
+        //cvSetCaptureProperty(capture, CV_CAP_PROP_FPS, 24 );
+
+        //frame = cvQueryFrame(capture);
+        //printf("camera: %f x %f\n", cvGetCaptureProperty(capture, CV_CAP_PROP_FRAME_WIDTH),cvGetCaptureProperty(capture, CV_CAP_PROP_FRAME_HEIGHT));
+        //BattleMenu();
+
+        //cvResizeWindow("Cam Feed", 1024, 768);
+
+        //cvMoveWindow("Cam Feed", 400, 130);
+        //cvWaitKey(1);
+        //cvShowImage("Cam Feed",frame);
+    }
+
+    /* free memory */
+    cvDestroyWindow( "Cam Feed" );
+    cvReleaseCapture( &capture );
+
+    return 0;
 }

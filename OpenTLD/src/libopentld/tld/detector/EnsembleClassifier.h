@@ -33,6 +33,11 @@
 
 #include <opencv/cv.h>
 
+//
+#include <opencv2/ocl/ocl.hpp>
+#include <opencv2/ocl/matrix_operations.hpp>
+//
+
 namespace tld
 {
 
@@ -52,7 +57,7 @@ public:
     void initFeatureOffsets();
     void initPosteriors();
     void release();
-    void nextIteration(const cv::Mat &img);
+    void nextIteration(const cv::ocl::oclMat &img);
     void classifyWindow(int windowIdx);
     void updatePosterior(int treeIdx, int idx, int positive, int amount);
     void learn(int *boundary, int positive, int *featureVector);

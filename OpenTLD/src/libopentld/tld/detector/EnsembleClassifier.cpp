@@ -142,7 +142,7 @@ void EnsembleClassifier::initPosteriors()
     }
 }
 
-void EnsembleClassifier::nextIteration(const Mat &img)
+void EnsembleClassifier::nextIteration(const cv::ocl::oclMat &img)
 {
     if(!enabled) return;
 

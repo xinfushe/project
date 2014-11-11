@@ -33,6 +33,11 @@
 #include "NormalizedPatch.h"
 #include "DetectionResult.h"
 
+//
+#include <opencv2/ocl/ocl.hpp>
+#include <opencv2/ocl/matrix_operations.hpp>
+//
+
 namespace tld
 {
 
@@ -49,7 +54,7 @@ public:
     std::vector<NormalizedPatch>* truePositives;
 
     virtual void release() = 0;
-    virtual float classifyBB(const cv::Mat &img, cv::Rect *bb) = 0;
+    virtual float classifyBB(const cv::ocl::oclMat &img, cv::Rect *bb) = 0;
     virtual void learn(std::vector<NormalizedPatch> patches) = 0;
 };
 

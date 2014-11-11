@@ -31,6 +31,11 @@
 
 #include <opencv/cv.h>
 
+//
+#include <opencv2/ocl/ocl.hpp>
+#include <opencv2/ocl/matrix_operations.hpp>
+//
+
 namespace tld
 {
 
@@ -93,13 +98,13 @@ int tldIsInside(int *bb1, int *bb2);
 void tldRectToPoints(CvRect rect, CvPoint *p1, CvPoint *p2);
 void tldBoundingBoxToPoints(int *bb, CvPoint *p1, CvPoint *p2);
 
-void tldNormalizeImg(const cv::Mat &img, float *result, int size);
+void tldNormalizeImg(const cv::ocl::oclMat &img, float *result, int size);
 
-void tldExtractNormalizedPatch(const cv::Mat &img, int x, int y, int w, int h, float *output);
-void tldExtractNormalizedPatchBB(const cv::Mat &img, int *boundary, float *output);
-void tldExtractNormalizedPatchRect(const cv::Mat &img, cv::Rect *rect, float *output);
-void tldExtractSubImage(const cv::Mat &img, cv::Mat &subImage, int *boundary);
-void tldExtractSubImage(const cv::Mat &img, cv::Mat &subImage, int x, int y, int w, int h);
+void tldExtractNormalizedPatch(const cv::ocl::oclMat &img, int x, int y, int w, int h, float *output);
+void tldExtractNormalizedPatchBB(const cv::ocl::oclMat &img, int *boundary, float *output);
+void tldExtractNormalizedPatchRect(const cv::ocl::oclMat &img, cv::Rect *rect, float *output);
+void tldExtractSubImage(const cv::ocl::oclMat &img, cv::ocl::oclMat &subImage, int *boundary);
+void tldExtractSubImage(const cv::ocl::oclMat &img, cv::ocl::oclMat &subImage, int x, int y, int w, int h);
 
 float tldCalcMean(float *value, int n);
 float tldCalcVariance(float *value, int n);

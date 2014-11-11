@@ -35,6 +35,11 @@
 #include "IntegralImage.h"
 #include "DetectionResult.h"
 
+//
+#include <opencv2/ocl/ocl.hpp>
+#include <opencv2/ocl/matrix_operations.hpp>
+//
+
 namespace tld
 {
 
@@ -48,7 +53,7 @@ public:
     virtual ~VarianceFilter();
 
     void release();
-    void nextIteration(const cv::Mat &img);
+    void nextIteration(const cv::ocl::oclMat &img);
     bool filter(int idx);
     float calcVariance(int *off);
 };

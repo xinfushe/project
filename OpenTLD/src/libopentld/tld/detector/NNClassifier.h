@@ -49,10 +49,10 @@ public:
 
     void release();
     float classifyPatch(NormalizedPatch *patch);
-    float classifyBB(const cv::Mat &img, cv::Rect *bb);
-    float classifyWindow(const cv::Mat &img, int windowIdx);
+    float classifyBB(const cv::ocl::oclMat &img, cv::Rect *bb);
+    float classifyWindow(const cv::ocl::oclMat &img, int windowIdx);
     void learn(std::vector<NormalizedPatch> patches);
-    bool filter(const cv::Mat &img, int windowIdx);
+    bool filter(const cv::ocl::oclMat &img, int windowIdx);
 };
 
 } /* namespace tld */

@@ -68,11 +68,17 @@ DetectorCascade::~DetectorCascade()
 {
     release();
 
+
     //delete foregroundDetector;
+    // Add NULL here
     delete varianceFilter;
+    //varianceFilter =NULL;
     delete ensembleClassifier;
+    //ensembleClassifier = NULL;
     delete nnClassifier;
+    //nnClassifier = NULL;
     delete detectionResult;
+    //detectionResult = NULL;
 }
 
 void DetectorCascade::init()
@@ -265,7 +271,7 @@ void DetectorCascade::initWindowOffsets()
     }
 }
 
-void DetectorCascade::detect(const Mat &img)
+void DetectorCascade::detect(const cv::ocl::oclMat &img)
 {
     //For every bounding box, the output is confidence, pattern, variance
 

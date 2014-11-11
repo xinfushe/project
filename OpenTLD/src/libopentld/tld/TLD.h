@@ -32,6 +32,11 @@
 #include "MedianFlowTracker.h"
 #include "IDetectorCascade.h"
 
+//
+#include <opencv2/ocl/ocl.hpp>
+#include <opencv2/ocl/matrix_operations.hpp>
+//
+
 namespace tld
 {
 
@@ -52,8 +57,8 @@ public:
     INNClassifier *nnClassifier;
     bool valid;
     bool wasValid;
-    cv::Mat prevImg;
-    cv::Mat currImg;
+    cv::ocl::oclMat prevImg;
+    cv::ocl::oclMat currImg;
     cv::Rect *prevBB;
     cv::Rect *currBB;
     float currConf;
@@ -62,8 +67,8 @@ public:
     TLD();
     virtual ~TLD();
     void release();
-    void selectObject(const cv::Mat &img, cv::Rect *bb);
-    void processImage(const cv::Mat &img);
+    void selectObject(const cv::ocl::oclMat &img, cv::Rect *bb);
+    void processImage(const cv::ocl::oclMat &img);
     void writeToFile(const char *path);
     void readFromFile(const char *path);
 };

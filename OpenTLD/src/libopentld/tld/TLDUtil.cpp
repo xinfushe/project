@@ -47,12 +47,12 @@ void tldBoundingBoxToPoints(int *bb, CvPoint *p1, CvPoint *p2)
 
 
 //Returns mean-normalized patch, image must be greyscale
-void tldNormalizeImg(const cv::ocl::oclMat &img, float *output)
+void tldNormalizeImg(const cv::Mat &img, float *output)
 {
     int size = TLD_PATCH_SIZE;
 
-    cv::ocl::oclMat result;
-    cv::ocl::resize(img, result, cvSize(size, size)); //Default is bilinear
+    cv::Mat result;
+    cv::resize(img, result, cvSize(size, size)); //Default is bilinear
 
     float mean = 0;
 
@@ -84,32 +84,32 @@ CvRect tldBoundaryToRect(int *boundary)
     return Rect(boundary[0], boundary[1], boundary[2], boundary[3]);
 }
 
-void tldExtractSubImage(const cv::ocl::oclMat &img, cv::ocl::oclMat &subImage, CvRect rect)
+void tldExtractSubImage(const cv::Mat &img, cv::Mat &subImage, CvRect rect)
 {
     subImage = img(rect).clone();
 }
 
-void tldExtractSubImage(const cv::ocl::oclMat &img, cv::ocl::oclMat &subImage, int *boundary)
+void tldExtractSubImage(const cv::Mat &img, cv::Mat &subImage, int *boundary)
 {
     tldExtractSubImage(img, subImage, tldBoundaryToRect(boundary));
 }
 
-void tldExtractNormalizedPatch(const cv::ocl::oclMat &img, int x, int y, int w, int h, float *output)
+void tldExtractNormalizedPatch(const cv::Mat &img, int x, int y, int w, int h, float *output)
 {
-    cv::ocl::oclMat subImage;
+    cv::Mat subImage;
     tldExtractSubImage(img, subImage, cvRect(x, y, w, h));
     tldNormalizeImg(subImage, output);
 }
 
 //TODO: Rename
-void tldExtractNormalizedPatchBB(const cv::ocl::oclMat &img, int *boundary, float *output)
+void tldExtractNormalizedPatchBB(const cv::Mat &img, int *boundary, float *output)
 {
     int x, y, w, h;
     tldExtractDimsFromArray(boundary, &x, &y, &w, &h);
     tldExtractNormalizedPatch(img, x, y, w, h, output);
 }
 
-void tldExtractNormalizedPatchRect(const cv::ocl::oclMat &img, Rect *rect, float *output)
+void tldExtractNormalizedPatchRect(const cv::Mat &img, Rect *rect, float *output)
 {
     tldExtractNormalizedPatch(img, rect->x, rect->y, rect->width, rect->height, output);
 }

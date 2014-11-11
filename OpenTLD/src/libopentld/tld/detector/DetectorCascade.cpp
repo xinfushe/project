@@ -271,7 +271,7 @@ void DetectorCascade::initWindowOffsets()
     }
 }
 
-void DetectorCascade::detect(const cv::ocl::oclMat &img)
+void DetectorCascade::detect(const Mat &img)
 {
     //For every bounding box, the output is confidence, pattern, variance
 

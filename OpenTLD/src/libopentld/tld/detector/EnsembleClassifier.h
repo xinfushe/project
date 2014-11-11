@@ -57,7 +57,7 @@ public:
     void initFeatureOffsets();
     void initPosteriors();
     void release();
-    void nextIteration(const cv::ocl::oclMat &img);
+    void nextIteration(const cv::Mat &img);
     void classifyWindow(int windowIdx);
     void updatePosterior(int treeIdx, int idx, int positive, int amount);
     void learn(int *boundary, int positive, int *featureVector);

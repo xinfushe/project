@@ -44,13 +44,13 @@
 using namespace tld;
 using namespace cv;
 
-double contrast_measure(const cv::ocl::oclMat& img)
+double contrast_measure(const Mat& img)
 {
-    cv::ocl::oclMat dx,dy;
-    cv::ocl::Sobel(img,dx,CV_32F,1,0,3);
-    cv::ocl::Sobel(img,dy,CV_32F,0,1,3);
-    cv::ocl::magnitude(dx,dy,dx);
-    return cv::ocl::sum(dx)[0]/(img.cols*img.rows);
+    Mat dx,dy;
+    Sobel(img,dx,CV_32F,1,0,3);
+    Sobel(img,dy,CV_32F,0,1,3);
+    magnitude(dx,dy,dx);
+    return sum(dx)[0]/(img.cols*img.rows);
 }
 static int xioctl(int fh, int request, void *arg)
 {
@@ -118,10 +118,10 @@ void Main::doWork()
     //
     //Mat img_m = img;
     //cv::ocl::oclMat img_oclm(img_m);
-    cv::ocl::oclMat img_oclm(img);
-    cv::ocl::oclMat grey_oclm(img->height, img->width, CV_8UC1);
-    cv::ocl::cvtColor(img_oclm, grey_oclm, CV_BGR2GRAY);
-    Mat grey = Mat(grey_oclm);
+    //cv::ocl::oclMat img_oclm(img);
+    Mat grey(img->height, img->width, CV_8UC1);
+    cvtColor(cv::Mat(img), grey, CV_BGR2GRAY);
+    //Mat grey = Mat(grey_oclm);
 
 
     tld->detectorCascade->setImgSize(grey.cols, grey.rows, grey.step);
@@ -175,7 +175,7 @@ void Main::doWork()
         printf("Starting at %d %d %d %d\n", bb.x, bb.y, bb.width, bb.height);
 
         //
-        tld->selectObject(grey_oclm, &bb);
+        tld->selectObject(grey, &bb);
         skipProcessingOnce = true;
         reuseFrameOnce = true;
     }
@@ -214,7 +214,7 @@ void Main::doWork()
             }
 
             //
-            cv::ocl::cvtColor(img_oclm, grey_oclm, CV_BGR2GRAY);
+            cvtColor(cv::Mat(img), grey, CV_BGR2GRAY);
         }
 
         if(!skipProcessingOnce)
@@ -222,7 +222,7 @@ void Main::doWork()
         	//
         	//cv::ocl::oclMat oclimg = cv::ocl::oclMat(img);
             getCPUTick(&procInit);
-            //tld->processImage(img_oclm);//
+            tld->processImage(img);//
             getCPUTick(&procFinal);
 //             PRINT_TIMING("FrameProcTime", procInit, procFinal, "\n");
         }
@@ -498,7 +498,7 @@ void Main::doWork()
                     lastsharpness = 0;
                     focus = 0;
                     //
-                    tld->selectObject(grey_oclm, &r);
+                    tld->selectObject(grey, &r);
                 }
                 if(key == 'f')
                 {
@@ -524,7 +524,7 @@ void Main::doWork()
                         lastsharpness = 0;
                         focus = 0;
                         //
-                        tld->selectObject(grey_oclm, &r);
+                        tld->selectObject(grey, &r);
 
                     }
                 }

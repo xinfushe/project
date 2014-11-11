@@ -86,7 +86,7 @@ void TLD::storeCurrentData()
     wasValid = valid;
 }
 
-void TLD::selectObject(const cv::ocl::oclMat &img, Rect *bb)
+void TLD::selectObject(const Mat &img, Rect *bb)
 {
     //Delete old object
     detectorCascade->release();
@@ -106,12 +106,12 @@ void TLD::selectObject(const cv::ocl::oclMat &img, Rect *bb)
 
 }
 
-void TLD::processImage(const cv::ocl::oclMat &img)
+void TLD::processImage(const Mat &img)
 {
     tick_t procInit, procFinal;
     storeCurrentData();
-    cv::ocl::oclMat grey_frame;
-    cv::ocl::cvtColor(img, grey_frame, CV_RGB2GRAY);
+    Mat grey_frame;
+    cvtColor(img, grey_frame, CV_RGB2GRAY);
     currImg = grey_frame; // Store new image , right after storeCurrentData();
 
     if(trackerEnabled)

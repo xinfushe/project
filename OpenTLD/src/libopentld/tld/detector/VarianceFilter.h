@@ -53,7 +53,7 @@ public:
     virtual ~VarianceFilter();
 
     void release();
-    void nextIteration(const cv::ocl::oclMat &img);
+    void nextIteration(const cv::Mat &img);
     bool filter(int idx);
     float calcVariance(int *off);
 };

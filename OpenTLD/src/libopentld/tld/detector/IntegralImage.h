@@ -56,7 +56,7 @@ public:
         delete[] data;
     }
 
-    void calcIntImg(const cv::ocl::oclMat &img, bool squared = false)
+    void calcIntImg(const cv::Mat &img, bool squared = false)
     {
         const unsigned char *input = (const unsigned char *)(img.data);
         T *output = data;

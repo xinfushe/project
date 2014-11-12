@@ -69,7 +69,7 @@ float VarianceFilter::calcVariance(int *off)
     return mX2 - mX * mX;
 }
 
-void VarianceFilter::nextIteration(const Mat &img)
+void VarianceFilter::nextIteration(const cv::Mat &img)
 {
     if(!enabled) return;
 

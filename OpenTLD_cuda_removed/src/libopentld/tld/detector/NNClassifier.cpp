@@ -47,9 +47,10 @@ NNClassifier::NNClassifier()
 NNClassifier::~NNClassifier()
 {
     release();
-
     delete truePositives;
+    //truePositives = NULL;
     delete falsePositives;
+    //falsePositives = NULL;
 }
 
 void NNClassifier::release()
@@ -123,7 +124,7 @@ float NNClassifier::classifyPatch(NormalizedPatch *patch)
     return distance;
 }
 
-float NNClassifier::classifyBB(const Mat &img, Rect *bb)
+float NNClassifier::classifyBB(const cv::Mat &img, Rect *bb)
 {
     NormalizedPatch patch;
 
@@ -132,7 +133,7 @@ float NNClassifier::classifyBB(const Mat &img, Rect *bb)
 
 }
 
-float NNClassifier::classifyWindow(const Mat &img, int windowIdx)
+float NNClassifier::classifyWindow(const cv::Mat &img, int windowIdx)
 {
     NormalizedPatch patch;
 
@@ -142,7 +143,7 @@ float NNClassifier::classifyWindow(const Mat &img, int windowIdx)
     return classifyPatch(&patch);
 }
 
-bool NNClassifier::filter(const Mat &img, int windowIdx)
+bool NNClassifier::filter(const cv::Mat &img, int windowIdx)
 {
     if(!enabled) return true;
 

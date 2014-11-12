@@ -24,6 +24,8 @@
 #include <opencv/cv.h>
 #include <opencv/highgui.h>
 
+#include <iostream>
+
 ImAcq *imAcqAlloc()
 {
     ImAcq *imAcq = (ImAcq *)malloc(sizeof(ImAcq));
@@ -46,7 +48,8 @@ void imAcqSetResolution (ImAcq *imAcq)
 
 void imAcqGetResolution (ImAcq *imAcq)
 {
-	printf("Capture Resolution: %d x %d \n", cvGetCaptureProperty(imAcq->capture, CV_CAP_PROP_FRAME_WIDTH), cvGetCaptureProperty(imAcq->capture, CV_CAP_PROP_FRAME_HEIGHT));
+	std::cout << "Capture Resolution: " << cvGetCaptureProperty(imAcq->capture, CV_CAP_PROP_FRAME_WIDTH) <<
+			"x" << cvGetCaptureProperty(imAcq->capture, CV_CAP_PROP_FRAME_HEIGHT) << std::endl;
 }
 
 void imAcqInit(ImAcq *imAcq)

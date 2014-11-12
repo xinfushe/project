@@ -164,6 +164,16 @@ vector
 ImAcq.h
 /home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/main/ImAcq.h
 
+/home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/qopentld/ConfigDialog.cpp
+ConfigDialog.h
+/home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/qopentld/ConfigDialog.h
+ui_ConfigDialog.h
+/home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/qopentld/ui_ConfigDialog.h
+iostream
+-
+Settings.h
+-
+
 /home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/qopentld/ConfigDialog.h
 QtGui/QApplication
 -
@@ -173,6 +183,14 @@ QDialog
 -
 ui_ConfigDialog.h
 /home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/qopentld/ui_ConfigDialog.h
+
+/home/slilylsu/Desktop/project-repo/build/release/src/opentld/qopentld/moc_ConfigDialog.cxx
+../../../../../OpenTLD/src/opentld/qopentld/ConfigDialog.h
+/home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/qopentld/ConfigDialog.h
+
+/home/slilylsu/Desktop/project-repo/build/release/src/opentld/qrc_rcs.cxx
+QtCore/qglobal.h
+-
 
 /usr/include/qt4/Qt3Support/q3cstring.h
 QtCore/qbytearray.h

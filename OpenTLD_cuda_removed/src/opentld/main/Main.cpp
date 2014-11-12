@@ -40,16 +40,21 @@
 #include "opencv2/objdetect/objdetect.hpp"
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
+
+//
+#include "./GraphUtils.cpp"
+//
+
 #define CLEAR(x) memset(&(x), 0, sizeof(x))
 using namespace tld;
 using namespace cv;
 
-double contrast_measure(const Mat&img)
+double contrast_measure(const Mat& img)
 {
     Mat dx,dy;
-    cv::Sobel(img,dx,CV_32F,1,0,3);
-    cv::Sobel(img,dy,CV_32F,0,1,3);
-    cv::magnitude(dx,dy,dx);
+    Sobel(img,dx,CV_32F,1,0,3);
+    Sobel(img,dy,CV_32F,0,1,3);
+    magnitude(dx,dy,dx);
     return sum(dx)[0]/(img.cols*img.rows);
 }
 static int xioctl(int fh, int request, void *arg)
@@ -114,9 +119,21 @@ void Main::doWork()
 {
 	Trajectory trajectory;
     IplImage *img = imAcqGetImg(imAcq);
+
     //
+    int fps_size = 166;
+    float fps_array[166] = {0.0};
+    IplImage* data;
+    //
+
+    //
+    //Mat img_m = img;
+    //cv::ocl::oclMat img_oclm(img_m);
+    //cv::ocl::oclMat img_oclm(img);
     Mat grey(img->height, img->width, CV_8UC1);
-    cvtColor(Mat(img), grey, CV_BGR2GRAY);
+    cvtColor(cv::Mat(img), grey, CV_BGR2GRAY);
+    //Mat grey = Mat(grey_oclm);
+
 
     tld->detectorCascade->setImgSize(grey.cols, grey.rows, grey.step);
 
@@ -168,6 +185,7 @@ void Main::doWork()
 
         printf("Starting at %d %d %d %d\n", bb.x, bb.y, bb.width, bb.height);
 
+        //
         tld->selectObject(grey, &bb);
         skipProcessingOnce = true;
         reuseFrameOnce = true;
@@ -181,15 +199,24 @@ void Main::doWork()
     int bestfocus=0,initsize,lastsize,focusCount=0,focusChange = 5,initfocus = 0,errorcount=0,focusend=200;
     bool init = false,changing = false;
     setFocus(fh,focus);
+
     while(imAcqHasMoreFrames(imAcq))
     {
         tick_t procInit, procFinal;
         double tic = cvGetTickCount();
 
+        //
+        img = imAcqGetImg(imAcq);
+        // modify at 10.09 delete the following two lines
+        //img_m = img;
+        //img_oclm.upload(img_m);
+
+        //cv::ocl::cvtColor(img_oclm, grey_oclm, CV_BGR2GRAY);
 
         if(!reuseFrameOnce)
         {
-            img = imAcqGetImg(imAcq);
+            //img = imAcqGetImg(imAcq);
+            //cv::ocl::oclMat oclimg = cv::ocl::oclMat(img);
 
             if(img == NULL)
             {
@@ -197,11 +224,14 @@ void Main::doWork()
                 break;
             }
 
-            cvtColor(Mat(img), grey, CV_BGR2GRAY);
+            //
+            cvtColor(cv::Mat(img), grey, CV_BGR2GRAY);
         }
 
         if(!skipProcessingOnce)
         {
+        	//
+        	//cv::ocl::oclMat oclimg = cv::ocl::oclMat(img);
             getCPUTick(&procInit);
             tld->processImage(img);//
             getCPUTick(&procFinal);
@@ -230,6 +260,15 @@ void Main::doWork()
 
         float fps = 1 / toc;
 
+        //
+        for(int i = 0; i < fps_size - 1; i ++)
+        {
+        	fps_array[i] = fps_array[i+1];
+        	fps_array[fps_size - 1] = fps;
+        }
+        data = drawFloatGraph(fps_array, fps_size, 0, 0.0, 30.0);
+        //
+
         int confident = (tld->currConf >= threshold) ? 1 : 0;
 
         if(showOutput || saveDir != NULL)
@@ -243,7 +282,9 @@ void Main::doWork()
                 strcpy(learningString, "Learning");
             }
 
+            //
             sprintf(string, "#%d,Posterior %.2f; fps: %.2f, #numwindows:%d, %s", imAcq->currentFrame - 1, tld->currConf, fps, tld->detectorCascade->numWindows, learningString);
+
             CvScalar yellow = CV_RGB(255, 255, 0);
             CvScalar blue = CV_RGB(0, 0, 255);  
             CvScalar black = CV_RGB(0, 0, 0);
@@ -256,7 +297,10 @@ void Main::doWork()
                 cvRectangle(img, CvPoint(tld->currBB->tl()), CvPoint(tld->currBB->br()), rectangleColor, 8, 8, 0);
                 
                 currRect = *(tld->currBB);
-                double sharpness = contrast_measure(imgt(currRect));//TODO
+                //
+                //cv::ocl::oclMat oclimg = cv::ocl::oclMat(img);
+                //Should there be a space between imgt and currRect?
+                double sharpness = contrast_measure(cv::ocl::oclMat(imgt) (currRect));//TODO
                 printf("sharpness is %lf\n",sharpness);
                 if(!init)
                 {
@@ -384,7 +428,9 @@ void Main::doWork()
 
             if(showOutput)
             {
-                gui->showImage(img);
+            	//
+                gui->showImage(img, data);
+                //
                 char key = gui->getKey();
 
                 if(key == 'q') break;
@@ -473,6 +519,7 @@ void Main::doWork()
                     bestsharpness = 0;
                     lastsharpness = 0;
                     focus = 0;
+                    //
                     tld->selectObject(grey, &r);
                 }
                 if(key == 'f')
@@ -498,7 +545,9 @@ void Main::doWork()
                         bestsharpness = 0;
                         lastsharpness = 0;
                         focus = 0;
+                        //
                         tld->selectObject(grey, &r);
+
                     }
                 }
             }
@@ -506,8 +555,8 @@ void Main::doWork()
             if(saveDir != NULL)
             {
                 char fileName[256];
+                //
                 sprintf(fileName, "%s/%.5d.png", saveDir, imAcq->currentFrame - 1);
-
                 cvSaveImage(fileName, img);
             }
         }

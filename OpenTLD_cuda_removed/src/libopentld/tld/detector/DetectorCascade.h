@@ -37,6 +37,11 @@
 #include "Clustering.h"
 #include "NNClassifier.h"
 
+//
+#include <opencv2/ocl/ocl.hpp>
+#include <opencv2/ocl/matrix_operations.hpp>
+//
+
 
 namespace tld
 {

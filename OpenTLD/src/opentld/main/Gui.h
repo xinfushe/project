@@ -26,6 +26,8 @@
 
 //
 #include "../../libopentld/imacq/ImAcq.h"
+//#include "./GraphUtils.h"
+//#include "./GraphUtils.cpp"
 
 namespace tld
 {
@@ -36,12 +38,15 @@ public:
     Gui();
     ~Gui();
     void init(ImAcq* imAcq);
-    void showImage(IplImage *image);
+    void showImage(IplImage *image, IplImage *data);
     char getKey();
     std::string windowName();
 
 private:
     std::string m_window_name;
+    //
+    std::string data_window_name;
+    //
 };
 
 /**

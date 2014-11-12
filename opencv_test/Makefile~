@@ -1,7 +1,0 @@
-all: opencv_test
-
-opencv_test:
-	g++ main.cpp `pkg-config --cflags --libs opencv` -o opencv_test
-
-clean:
-	rm opencv_test

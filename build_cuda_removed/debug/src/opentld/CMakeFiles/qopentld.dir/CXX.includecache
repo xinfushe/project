@@ -47,6 +47,10 @@ INNClassifier.h
 /home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/../libopentld/tld/INNClassifier.h
 Clustering.h
 /home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/../libopentld/tld/Clustering.h
+opencv2/ocl/ocl.hpp
+-
+opencv2/ocl/matrix_operations.hpp
+-
 
 /home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/../libopentld/tld/IEnsembleClassifier.h
 opencv/cv.h
@@ -61,6 +65,10 @@ NormalizedPatch.h
 /home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/../libopentld/tld/NormalizedPatch.h
 DetectionResult.h
 /home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/../libopentld/tld/DetectionResult.h
+opencv2/ocl/ocl.hpp
+-
+opencv2/ocl/matrix_operations.hpp
+-
 
 /home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/../libopentld/tld/IVarianceFilter.h
 opencv/cv.h
@@ -73,6 +81,10 @@ DetectionResult.h
 /home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/../libopentld/tld/MedianFlowTracker.h
 opencv/cv.h
 -
+opencv2/ocl/ocl.hpp
+-
+opencv2/ocl/matrix_operations.hpp
+-
 
 /home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/../libopentld/tld/TLD.h
 opencv/cv.h
@@ -81,9 +93,17 @@ MedianFlowTracker.h
 /home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/../libopentld/tld/MedianFlowTracker.h
 IDetectorCascade.h
 /home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/../libopentld/tld/IDetectorCascade.h
+opencv2/ocl/ocl.hpp
+-
+opencv2/ocl/matrix_operations.hpp
+-
 
 /home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/../libopentld/tld/detector/IntegralImage.h
 opencv/cv.h
+-
+opencv2/ocl/ocl.hpp
+-
+opencv2/ocl/matrix_operations.hpp
 -
 
 /home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/../libopentld/tld/detector/NormalizedPatch.h
@@ -134,9 +154,9 @@ ImAcq.h
 Gui.h
 /home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/main/Gui.h
 opencv2/ocl/ocl.hpp
-/home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/main/opencv2/ocl/ocl.hpp
+-
 opencv2/ocl/matrix_operations.hpp
-/home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/main/opencv2/ocl/matrix_operations.hpp
+-
 
 /home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/main/Settings.h
 vector

@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/slilylsu/Desktop/project-repo/Beignet-0.9.3-Source/backend/src/./backend/gen_defs.hpp
+stdint.h
+-
+
+/home/slilylsu/Desktop/project-repo/Beignet-0.9.3-Source/backend/src/backend/gen/gen_mesa_disasm.c
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+getopt.h
+-
+unistd.h
+-
+stdarg.h
+-
+stdint.h
+-
+assert.h
+-
+backend/gen_defs.hpp
+/home/slilylsu/Desktop/project-repo/Beignet-0.9.3-Source/backend/src/backend/gen/backend/gen_defs.hpp
+src/cl_device_data.h
+/home/slilylsu/Desktop/project-repo/Beignet-0.9.3-Source/backend/src/backend/gen/src/cl_device_data.h
+
+/home/slilylsu/Desktop/project-repo/Beignet-0.9.3-Source/src/cl_device_data.h
+

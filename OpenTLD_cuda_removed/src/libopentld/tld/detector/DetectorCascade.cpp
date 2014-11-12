@@ -68,11 +68,17 @@ DetectorCascade::~DetectorCascade()
 {
     release();
 
+
     //delete foregroundDetector;
+    // Add NULL here
     delete varianceFilter;
+    //varianceFilter =NULL;
     delete ensembleClassifier;
+    //ensembleClassifier = NULL;
     delete nnClassifier;
+    //nnClassifier = NULL;
     delete detectionResult;
+    //detectionResult = NULL;
 }
 
 void DetectorCascade::init()

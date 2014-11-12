@@ -40,6 +40,11 @@
 #include "opencv2/objdetect/objdetect.hpp"
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
+
+//
+#include "./GraphUtils.cpp"
+//
+
 #define CLEAR(x) memset(&(x), 0, sizeof(x))
 using namespace tld;
 using namespace cv;
@@ -114,6 +119,12 @@ void Main::doWork()
 {
 	Trajectory trajectory;
     IplImage *img = imAcqGetImg(imAcq);
+
+    //
+    int fps_size = 166;
+    float fps_array[166] = {0.0};
+    IplImage* data;
+    //
 
     //
     //Mat img_m = img;
@@ -248,6 +259,15 @@ void Main::doWork()
         toc = toc / 1000000;
 
         float fps = 1 / toc;
+
+        //
+        for(int i = 0; i < fps_size - 1; i ++)
+        {
+        	fps_array[i] = fps_array[i+1];
+        	fps_array[fps_size - 1] = fps;
+        }
+        data = drawFloatGraph(fps_array, fps_size, 0, 0.0, 30.0);
+        //
 
         int confident = (tld->currConf >= threshold) ? 1 : 0;
 
@@ -408,7 +428,9 @@ void Main::doWork()
 
             if(showOutput)
             {
-                gui->showImage(img);
+            	//
+                gui->showImage(img, data);
+                //
                 char key = gui->getKey();
 
                 if(key == 'q') break;

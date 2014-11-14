@@ -1,7 +1,0 @@
-all: clean ocl_test
-
-ocl_test:
-	g++ main.cpp `pkg-config --cflags --libs opencv` -o ocl_test
-
-clean:
-	rm ocl_test

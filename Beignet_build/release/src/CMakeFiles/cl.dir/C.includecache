@@ -1063,6 +1063,8 @@ KHR/khrplatform.h
 -
 windows.h
 -
+mir_toolkit/mir_client_library.h
+-
 X11/Xlib.h
 -
 X11/Xutil.h

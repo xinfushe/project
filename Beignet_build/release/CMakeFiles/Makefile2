@@ -534,8 +534,8 @@ benchmark/preinstall:
 # Target rules for target benchmark/CMakeFiles/benchmark_run.dir
 
 # All Build rule for target.
-benchmark/CMakeFiles/benchmark_run.dir/all: benchmark/CMakeFiles/benchmarks.dir/all
 benchmark/CMakeFiles/benchmark_run.dir/all: src/CMakeFiles/cl.dir/all
+benchmark/CMakeFiles/benchmark_run.dir/all: benchmark/CMakeFiles/benchmarks.dir/all
 	$(MAKE) -f benchmark/CMakeFiles/benchmark_run.dir/build.make benchmark/CMakeFiles/benchmark_run.dir/depend
 	$(MAKE) -f benchmark/CMakeFiles/benchmark_run.dir/build.make benchmark/CMakeFiles/benchmark_run.dir/build
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/slilylsu/Desktop/project-repo/Beignet_build/release/CMakeFiles 

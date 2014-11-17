@@ -121,27 +121,28 @@ void Main::doWork()
     IplImage *img = imAcqGetImg(imAcq);
 
     //Create the matrices
-    Mat img_mat;
-    cv::ocl::oclMat img_oclmat;
-    Mat grey_mat;
-    cv::ocl::oclMat grey_oclmat;
+    Mat color;
+    cv::ocl::oclMat color_ocl;
+    Mat grey;
+    cv::ocl::oclMat grey_ocl;
 
     //Initialize the matirces
-    img_mat = Mat(img);
-    img_oclmat.upload(img_mat);
-    grey_mat = Mat(img->height, img->width, CV_8UC1);
-    cvtColor(img_mat, grey_mat, CV_BGR2GRAY);
+    color = Mat(img);
+    color_ocl.upload(color);
+    grey = Mat(img->height, img->width, CV_8UC1);
+    cvtColor(color , grey, CV_BGR2GRAY);
+    grey_ocl.upload(grey);
 
     //
-    int fps_size = 166;
-    float fps_array[166] = {0.0};
+    const int fps_size = 166;
+    float fps_array[fps_size] = {0.0};
     IplImage* data;
     //
 
-
+/* original code
     Mat grey(img->height, img->width, CV_8UC1);
     cvtColor(cv::Mat(img), grey, CV_BGR2GRAY);
-
+*/
 
 
     tld->detectorCascade->setImgSize(grey.cols, grey.rows, grey.step);
@@ -199,6 +200,7 @@ void Main::doWork()
         skipProcessingOnce = true;
         reuseFrameOnce = true;
     }
+
     //Focus init
     const char* dev_name = "/dev/video1";
     int fh = open(dev_name, O_RDWR /* required */ | O_NONBLOCK, 0);

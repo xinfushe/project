@@ -49,13 +49,13 @@
 using namespace tld;
 using namespace cv;
 
-double contrast_measure(const Mat& img)
+double contrast_measure(const ocl::oclMat& img)
 {
-    Mat dx,dy;
+    ocl::oclMat dx,dy;
     Sobel(img,dx,CV_32F,1,0,3);
     Sobel(img,dy,CV_32F,0,1,3);
-    magnitude(dx,dy,dx);
-    return sum(dx)[0]/(img.cols*img.rows);
+    ocl::magnitude(dx,dy,dx);
+    return ocl::sum(dx)[0]/(img.cols*img.rows);
 }
 static int xioctl(int fh, int request, void *arg)
 {
@@ -118,20 +118,25 @@ static int getFocus(int currsize,int lastsize,int bestfocus)
 void Main::doWork()
 {
 	Trajectory trajectory;
-    IplImage *img = imAcqGetImg(imAcq);
+    IplImage *img;
+    img = imAcqGetImg(imAcq);
 
-    //
+
+    Mat img_mat;
+    img_mat = Mat(img);
+/*
+    //Mat grey_mat;
+    //grey_mat = img_mat;
+
+    ocl::oclMat grey_mat(img_mat);
+     */
+
     int fps_size = 166;
     float fps_array[166] = {0.0};
     IplImage* data;
-    //
 
-    //
-    //Mat img_m = img;
-    //cv::ocl::oclMat img_oclm(img_m);
-    //cv::ocl::oclMat img_oclm(img);
-    Mat grey(img->height, img->width, CV_8UC1);
-    cvtColor(cv::Mat(img), grey, CV_BGR2GRAY);
+    ocl::oclMat grey(img->height, img->width, CV_8UC1); // Change from mat to oclmat.
+    cvtColor(cv::ocl::oclMat(img_mat), grey, CV_BGR2GRAY);// Change from cv img to cv ocl img_mat
     //Mat grey = Mat(grey_oclm);
 
 
@@ -190,6 +195,7 @@ void Main::doWork()
         skipProcessingOnce = true;
         reuseFrameOnce = true;
     }
+
     //Focus init
     const char* dev_name = "/dev/video1";
     int fh = open(dev_name, O_RDWR /* required */ | O_NONBLOCK, 0);
@@ -207,6 +213,7 @@ void Main::doWork()
 
         //
         img = imAcqGetImg(imAcq);
+        ocl::oclMat img_process(img);
         // modify at 10.09 delete the following two lines
         //img_m = img;
         //img_oclm.upload(img_m);
@@ -225,7 +232,7 @@ void Main::doWork()
             }
 
             //
-            cvtColor(cv::Mat(img), grey, CV_BGR2GRAY);
+            cvtColor(cv::ocl::oclMat(img_mat), grey, CV_BGR2GRAY); // Same change as line139.
         }
 
         if(!skipProcessingOnce)
@@ -233,7 +240,7 @@ void Main::doWork()
         	//
         	//cv::ocl::oclMat oclimg = cv::ocl::oclMat(img);
             getCPUTick(&procInit);
-            tld->processImage(img);//
+            tld->processImage(img_process);// Note here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             getCPUTick(&procFinal);
 //             PRINT_TIMING("FrameProcTime", procInit, procFinal, "\n");
         }
@@ -290,6 +297,7 @@ void Main::doWork()
             CvScalar black = CV_RGB(0, 0, 0);
             CvScalar white = CV_RGB(255, 255, 255);
             Mat imgt = img;
+            ocl::oclMat img_sh(imgt);
             Rect currRect;
             if(tld->currBB != NULL)
             {
@@ -300,7 +308,7 @@ void Main::doWork()
                 //
                 //cv::ocl::oclMat oclimg = cv::ocl::oclMat(img);
                 //Should there be a space between imgt and currRect?
-                double sharpness = contrast_measure(cv::ocl::oclMat(imgt) (currRect));//TODO
+                double sharpness = contrast_measure(img_sh (currRect));//TODO
                 printf("sharpness is %lf\n",sharpness);
                 if(!init)
                 {

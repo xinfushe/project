@@ -58,6 +58,80 @@ void gpu_init(void)
 	error = clGetDeviceIDs(platform_id, device_type, num_entries, &device_id, &num_devices);
 	assert(error == CL_SUCCESS);
 
+	//Print device information
+	//Device Name
+	char* device_name;
+	size_t device_name_size = 0;
+	clGetDeviceInfo(device_id, CL_DEVICE_NAME, 0, NULL, &device_name_size);
+	device_name = new char[device_name_size];
+	clGetDeviceInfo(device_id, CL_DEVICE_NAME, device_name_size, device_name, NULL);
+	printf("Device Name: %s\n", device_name);
+	delete[] device_name;
+	//Device Vendor
+	char* device_vendor;
+	size_t device_vendor_size = 0;
+	clGetDeviceInfo(device_id, CL_DEVICE_VENDOR, 0, NULL, &device_vendor_size);
+	device_vendor = new char[device_vendor_size];
+	clGetDeviceInfo(device_id, CL_DEVICE_VENDOR, device_vendor_size, device_vendor, NULL);
+	printf("Device Vendor: %s\n", device_vendor);
+	delete[] device_vendor;
+	//Device Version
+	char* device_version;
+	size_t device_version_size = 0;
+	clGetDeviceInfo(device_id, CL_DEVICE_VERSION, 0, NULL, &device_version_size);
+	device_version = new char[device_version_size];
+	clGetDeviceInfo(device_id, CL_DEVICE_VERSION, device_version_size, device_version, NULL);
+	printf("Device Version: %s\n", device_version);
+	delete[] device_version;
+	//Device Profile
+	char* device_profile;
+	size_t device_profile_size = 0;
+	clGetDeviceInfo(device_id, CL_DEVICE_PROFILE, 0, NULL, &device_profile_size);
+	device_profile = new char[device_profile_size];
+	clGetDeviceInfo(device_id, CL_DEVICE_PROFILE, device_profile_size, device_profile, NULL);
+	printf("Device Profile: %s\n", device_profile);
+	delete[] device_profile;
+	//Device Extensions
+	char* device_extensions;
+	size_t device_extensions_size = 0;
+	clGetDeviceInfo(device_id, CL_DEVICE_EXTENSIONS, 0, NULL, &device_extensions_size);
+	device_extensions = new char[device_extensions_size];
+	clGetDeviceInfo(device_id, CL_DEVICE_EXTENSIONS, device_extensions_size, device_extensions, NULL);
+	printf("Device Extensions: %s\n", device_extensions);
+	delete[] device_extensions;
+	//Device Platform
+//	char* device_platform;
+//	cl_ulong device_platform_size = 0;
+//	clGetDeviceInfo(device_id, CL_DEVICE_PLATFORM, 0, NULL, &device_platform_size);
+//	device_platform = new char[device_platform_size];
+//	clGetDeviceInfo(device_id, CL_DEVICE_PLATFORM, device_platform_size, device_platform, NULL);
+//	printf("Device Platform: %s\n", device_platform);
+//	delete[] device_platform;
+
+
+	//Print computing abilities
+	//Maximum Clock Frequency
+	cl_ulong max_clock_frequency = 0;
+	clGetDeviceInfo(device_id, CL_DEVICE_MAX_CLOCK_FREQUENCY, sizeof(max_clock_frequency), &max_clock_frequency, NULL);
+	printf("Maximum Clock Frequency: %lu MHz\n", max_clock_frequency);
+	//Maximum Computing Units
+	cl_uint max_compute_units = 0;
+	clGetDeviceInfo(device_id, CL_DEVICE_MAX_COMPUTE_UNITS, sizeof(max_compute_units), &max_compute_units, NULL);
+	printf("Maximum Computing Units: %u\n", max_compute_units);
+	//Maximum Work Items Per Group
+	size_t max_work_group_size = 0;
+	clGetDeviceInfo(device_id, CL_DEVICE_MAX_WORK_GROUP_SIZE, sizeof(max_work_group_size), &max_work_group_size, NULL);
+	printf("Maximum Work Items Per Group: %u\n", max_work_group_size);
+	//Global Memory Size
+	cl_ulong global_mem_size = 0;
+	clGetDeviceInfo(device_id, CL_DEVICE_GLOBAL_MEM_SIZE, sizeof(global_mem_size), &global_mem_size, NULL);
+	printf("Global Memory Size: %lu MB\n", global_mem_size / (1024 * 1024));
+	//Local Memory Size
+	cl_ulong local_mem_size = 0;
+	clGetDeviceInfo(device_id, CL_DEVICE_LOCAL_MEM_SIZE, sizeof(local_mem_size), &local_mem_size, NULL);
+	printf("Local Memory Size: %lu KB\n", local_mem_size / 1024);
+
+
 	context = clCreateContext(NULL, 1, &device_id, NULL, NULL, &error);
 	assert(error == CL_SUCCESS);
 
@@ -73,7 +147,8 @@ void vector_add_gpu(float* const src_a_h,
 	double freq = cvGetTickFrequency()*1000.0; //kHz
 	double tic = 0.0;
 	double toc = 0.0;
-	double time = 0.0;
+	double time_io = 0.0;
+	double time_calc = 0.0;
 
 	//
 	tic = cvGetTickCount();
@@ -87,7 +162,9 @@ void vector_add_gpu(float* const src_a_h,
 	cl_mem res_d = clCreateBuffer(context, CL_MEM_WRITE_ONLY, mem_size, NULL, &error);
 	assert(error == CL_SUCCESS);
 	toc = cvGetTickCount();
-	time += toc - tic;
+	time_io += toc - tic;
+
+
 
 	// Creates the program
 	const char* path = "./kernels/vector_add_kernel.cl";
@@ -127,7 +204,7 @@ void vector_add_gpu(float* const src_a_h,
 	// Second call to get the log
 	clGetProgramBuildInfo(program, device_id, CL_PROGRAM_BUILD_LOG, log_size + 1, build_log, NULL);
 	build_log[log_size] = '\0';
-	cout << build_log << endl;
+	//cout << build_log << endl;
 	delete[] build_log;
 
 	// 'Extracting' the kernel
@@ -146,12 +223,9 @@ void vector_add_gpu(float* const src_a_h,
 	//Note: the size of size_t is 4 here instead of 8
 	error = clSetKernelArg(vector_add_gpu_kernel, 3, sizeof(size), (void *)&size);
 	assert(error == CL_SUCCESS);
-	toc = cvGetTickCount();
-	time += toc - tic;
 
-	tic = cvGetTickCount();
 	// Launching kernel
-	const size_t local_worksize = 512;	// Number of work-items per work-group
+	const size_t local_worksize = 1024;	// Number of work-items per work-group
 	// The smallest multiple of local_ws bigger than size
 	const size_t global_worksize = ((size / local_worksize) + 1) * local_worksize;
 	cl_uint work_dim = 1;
@@ -162,26 +236,26 @@ void vector_add_gpu(float* const src_a_h,
 	error = clEnqueueNDRangeKernel(queue, vector_add_gpu_kernel, work_dim, NULL, &global_worksize, &local_worksize, num_events_in_wait_list, NULL, NULL);
 	assert(error == CL_SUCCESS);
 	toc = cvGetTickCount();
-	time += toc - tic;
+	time_calc += toc - tic;
 
 	// Reading back
-	float* check = new float[size];
-	clEnqueueReadBuffer(queue, res_d, CL_TRUE, 0, mem_size, check, num_events_in_wait_list, NULL, NULL);
-
-	// Checking with the CPU results;
-	vector_add_cpu(src_a_h, src_b_h, res_h, size);
-	for (int i = 0; i < size; i++)
-		assert(check[i] == res_h[i]);
-	cout << "\nCongratulations, it's working!" << endl;
-	delete[] check;
+//	float* check = new float[size];
+//	clEnqueueReadBuffer(queue, res_d, CL_TRUE, 0, mem_size, check, num_events_in_wait_list, NULL, NULL);
+//
+//	// Checking with the CPU results;
+//	vector_add_cpu(src_a_h, src_b_h, res_h, size);
+//	for (int i = 0; i < size; i++)
+//		assert(check[i] == res_h[i]);
+//	cout << "Congratulations, it's working!" << endl;
+//	delete[] check;
 
 	tic = cvGetTickCount();
 	clEnqueueReadBuffer(queue, res_d, CL_TRUE, 0, mem_size, res_h, num_events_in_wait_list, NULL, NULL);
 	toc = cvGetTickCount();
-	time += toc - tic;
+	time_io += toc - tic;
 
-	time /= freq;
-	cout << "GPU sub Time is " << time << " ms" << endl;
+	cout << "GPU IO Time: " << time_io/(double)freq << " ms" << endl;
+	cout << "GPU Calculation Time: " << time_calc/(double)freq << " ms" << endl;
 
 	//Release
 	clReleaseMemObject(src_a_d);

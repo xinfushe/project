@@ -59,7 +59,7 @@ public:
     virtual void propagateMembers();
     virtual void release();
     virtual void cleanPreviousData();
-    virtual void detect(const cv::Mat &img);
+    virtual void detect(const cv::ocl::oclMat &img);
 };
 
 } /* namespace tld */

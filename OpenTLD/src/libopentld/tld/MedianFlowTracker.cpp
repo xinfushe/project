@@ -51,7 +51,7 @@ void MedianFlowTracker::cleanPreviousData()
     trackerBB = NULL;
 }
 
-void MedianFlowTracker::track(const cv::Mat &prevMat, const cv::Mat &currMat, Rect *prevBB)
+void MedianFlowTracker::track(const cv::ocl::oclMat &prevMat, const cv::ocl::oclMat &currMat, Rect *prevBB)
 {
     if(prevBB != NULL)
     {

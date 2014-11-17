@@ -106,12 +106,12 @@ void TLD::selectObject(const Mat &img, Rect *bb)
 
 }
 
-void TLD::processImage(const Mat &img)
+void TLD::processImage(const ocl::oclMat &img)
 {
     tick_t procInit, procFinal;
     storeCurrentData();
-    Mat grey_frame;
-    cvtColor(img, grey_frame, CV_RGB2GRAY);
+    ocl::oclMat grey_frame;
+    ocl::cvtColor(img, grey_frame, CV_RGB2GRAY);
     currImg = grey_frame; // Store new image , right after storeCurrentData();
 
     if(trackerEnabled)

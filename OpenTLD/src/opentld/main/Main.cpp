@@ -49,13 +49,13 @@
 using namespace tld;
 using namespace cv;
 
-double contrast_measure(const ocl::oclMat& img)
+double contrast_measure(const Mat& img)
 {
-    ocl::oclMat dx,dy;
+    Mat dx,dy;
     Sobel(img,dx,CV_32F,1,0,3);
     Sobel(img,dy,CV_32F,0,1,3);
-    ocl::magnitude(dx,dy,dx);
-    return ocl::sum(dx)[0]/(img.cols*img.rows);
+    magnitude(dx,dy,dx);
+    return sum(dx)[0]/(img.cols*img.rows);
 }
 static int xioctl(int fh, int request, void *arg)
 {
@@ -118,26 +118,30 @@ static int getFocus(int currsize,int lastsize,int bestfocus)
 void Main::doWork()
 {
 	Trajectory trajectory;
-    IplImage *img;
-    img = imAcqGetImg(imAcq);
+    IplImage *img = imAcqGetImg(imAcq);
 
-
+    //Create the matrices
     Mat img_mat;
+    cv::ocl::oclMat img_oclmat;
+    Mat grey_mat;
+    cv::ocl::oclMat grey_oclmat;
+
+    //Initialize the matirces
     img_mat = Mat(img);
-/*
-    //Mat grey_mat;
-    //grey_mat = img_mat;
+    img_oclmat.upload(img_mat);
+    grey_mat = Mat(img->height, img->width, CV_8UC1);
+    cvtColor(img_mat, grey_mat, CV_BGR2GRAY);
 
-    ocl::oclMat grey_mat(img_mat);
-     */
-
+    //
     int fps_size = 166;
     float fps_array[166] = {0.0};
     IplImage* data;
+    //
 
-    ocl::oclMat grey(img->height, img->width, CV_8UC1); // Change from mat to oclmat.
-    cvtColor(cv::ocl::oclMat(img_mat), grey, CV_BGR2GRAY);// Change from cv img to cv ocl img_mat
-    //Mat grey = Mat(grey_oclm);
+
+    Mat grey(img->height, img->width, CV_8UC1);
+    cvtColor(cv::Mat(img), grey, CV_BGR2GRAY);
+
 
 
     tld->detectorCascade->setImgSize(grey.cols, grey.rows, grey.step);
@@ -195,7 +199,6 @@ void Main::doWork()
         skipProcessingOnce = true;
         reuseFrameOnce = true;
     }
-
     //Focus init
     const char* dev_name = "/dev/video1";
     int fh = open(dev_name, O_RDWR /* required */ | O_NONBLOCK, 0);
@@ -211,19 +214,12 @@ void Main::doWork()
         tick_t procInit, procFinal;
         double tic = cvGetTickCount();
 
-        //
         img = imAcqGetImg(imAcq);
-        ocl::oclMat img_process(img);
-        // modify at 10.09 delete the following two lines
-        //img_m = img;
-        //img_oclm.upload(img_m);
 
-        //cv::ocl::cvtColor(img_oclm, grey_oclm, CV_BGR2GRAY);
 
         if(!reuseFrameOnce)
         {
-            //img = imAcqGetImg(imAcq);
-            //cv::ocl::oclMat oclimg = cv::ocl::oclMat(img);
+
 
             if(img == NULL)
             {
@@ -232,15 +228,14 @@ void Main::doWork()
             }
 
             //
-            cvtColor(cv::ocl::oclMat(img_mat), grey, CV_BGR2GRAY); // Same change as line139.
+            cvtColor(cv::Mat(img), grey, CV_BGR2GRAY);
         }
 
         if(!skipProcessingOnce)
         {
-        	//
-        	//cv::ocl::oclMat oclimg = cv::ocl::oclMat(img);
+
             getCPUTick(&procInit);
-            tld->processImage(img_process);// Note here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            tld->processImage(img);
             getCPUTick(&procFinal);
 //             PRINT_TIMING("FrameProcTime", procInit, procFinal, "\n");
         }
@@ -297,7 +292,6 @@ void Main::doWork()
             CvScalar black = CV_RGB(0, 0, 0);
             CvScalar white = CV_RGB(255, 255, 255);
             Mat imgt = img;
-            ocl::oclMat img_sh(imgt);
             Rect currRect;
             if(tld->currBB != NULL)
             {
@@ -308,7 +302,7 @@ void Main::doWork()
                 //
                 //cv::ocl::oclMat oclimg = cv::ocl::oclMat(img);
                 //Should there be a space between imgt and currRect?
-                double sharpness = contrast_measure(img_sh (currRect));//TODO
+                double sharpness = contrast_measure(cv::ocl::oclMat(imgt) (currRect));//TODO
                 printf("sharpness is %lf\n",sharpness);
                 if(!init)
                 {

@@ -94,7 +94,7 @@ public:
     virtual void propagateMembers() = 0;
     virtual void release() = 0;						
     virtual void cleanPreviousData() = 0;			
-    virtual void detect(const cv::ocl::oclMat &img) = 0;
+    virtual void detect(const cv::Mat &img) = 0;
     virtual void setImgSize(int w, int h, int step) { imgWidth = w; imgHeight = h; imgWidthStep = step; }
 };
 

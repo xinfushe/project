@@ -218,6 +218,13 @@ void Main::doWork()
 
         img = imAcqGetImg(imAcq);
 
+        //update the image matrices
+        color = Mat(img);
+        color_ocl.upload(color);
+        cvtColor(color, grey, CV_BGR2GRAY);
+        grey_ocl.upload(grey);
+        //
+
 
         if(!reuseFrameOnce)
         {
@@ -301,10 +308,8 @@ void Main::doWork()
                 cvRectangle(img, CvPoint(tld->currBB->tl()), CvPoint(tld->currBB->br()), rectangleColor, 8, 8, 0);
                 
                 currRect = *(tld->currBB);
-                //
-                //cv::ocl::oclMat oclimg = cv::ocl::oclMat(img);
-                //Should there be a space between imgt and currRect?
-                double sharpness = contrast_measure(cv::ocl::oclMat(imgt) (currRect));//TODO
+
+                double sharpness = contrast_measure(imgt (currRect));//TODO
                 printf("sharpness is %lf\n",sharpness);
                 if(!init)
                 {

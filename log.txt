@@ -1,0 +1,183 @@
+-- The C compiler identification is GNU 4.8.2
+-- The CXX compiler identification is GNU 4.8.2
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Looking for Q_WS_X11
+-- Looking for Q_WS_X11 - found
+-- Looking for Q_WS_WIN
+-- Looking for Q_WS_WIN - not found
+-- Looking for Q_WS_QWS
+-- Looking for Q_WS_QWS - not found
+-- Looking for Q_WS_MAC
+-- Looking for Q_WS_MAC - not found
+-- Found Qt4: /usr/bin/qmake (found version "4.8.6") 
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/slilylsu/Desktop/project-repo/OpenTLD/release
+Scanning dependencies of target config++
+[  4%] Scanning dependencies of target cvblobs
+Building C object src/3rdparty/libconfig/CMakeFiles/config++.dir/libconfig.c.o
+Building C object src/3rdparty/libconfig/CMakeFiles/config++.dir/grammar.c.o
+[  7%] Building CXX object src/3rdparty/cvblobs/CMakeFiles/cvblobs.dir/blob.cpp.o
+/home/slilylsu/Desktop/project-repo/OpenTLD/src/3rdparty/libconfig/libconfig.c: In function ‘__config_locale_override’:
+/home/slilylsu/Desktop/project-repo/OpenTLD/src/3rdparty/libconfig/libconfig.c:100:2: warning: #warning "No way to modify calling thread's locale!" [-Wcpp]
+ #warning "No way to modify calling thread's locale!"
+  ^
+/home/slilylsu/Desktop/project-repo/OpenTLD/src/3rdparty/libconfig/libconfig.c: In function ‘__config_locale_restore’:
+/home/slilylsu/Desktop/project-repo/OpenTLD/src/3rdparty/libconfig/libconfig.c:121:2: warning: #warning "No way to modify calling thread's locale!" [-Wcpp]
+ #warning "No way to modify calling thread's locale!"
+  ^
+Scanning dependencies of target libopentld
+[  9%] Building CXX object src/libopentld/CMakeFiles/libopentld.dir/imacq/ImAcq.cpp.o
+[ 12%] Building CXX object src/3rdparty/libconfig/CMakeFiles/config++.dir/libconfigcpp.cc.o
+[ 14%] Building C object src/3rdparty/libconfig/CMakeFiles/config++.dir/scanctx.c.o
+[ 17%] Building C object src/3rdparty/libconfig/CMakeFiles/config++.dir/scanner.c.o
+[ 19%] Building C object src/3rdparty/libconfig/CMakeFiles/config++.dir/strbuf.c.o
+[ 21%] Building CXX object src/libopentld/CMakeFiles/libopentld.dir/mftracker/BB.cpp.o
+[ 24%] Building CXX object src/3rdparty/cvblobs/CMakeFiles/cvblobs.dir/BlobContour.cpp.o
+[ 24%] Built target config++
+[ 26%] Building CXX object src/3rdparty/cvblobs/CMakeFiles/cvblobs.dir/BlobOperators.cpp.o
+[ 29%] Building CXX object src/libopentld/CMakeFiles/libopentld.dir/mftracker/BBPredict.cpp.o
+[ 31%] Building CXX object src/3rdparty/cvblobs/CMakeFiles/cvblobs.dir/BlobProperties.cpp.o
+[ 34%] Building CXX object src/3rdparty/cvblobs/CMakeFiles/cvblobs.dir/BlobResult.cpp.o
+[ 36%] Building CXX object src/libopentld/CMakeFiles/libopentld.dir/mftracker/FBTrack.cpp.o
+[ 39%] Building CXX object src/3rdparty/cvblobs/CMakeFiles/cvblobs.dir/ComponentLabeling.cpp.o
+[ 41%] Building CXX object src/libopentld/CMakeFiles/libopentld.dir/mftracker/Lk.cpp.o
+/home/slilylsu/Desktop/project-repo/OpenTLD/src/3rdparty/cvblobs/BlobResult.cpp: In member function ‘void CBlobResult::PrintBlobs(char*) const’:
+/home/slilylsu/Desktop/project-repo/OpenTLD/src/3rdparty/cvblobs/BlobResult.cpp:939:112: warning: format ‘%f’ expects a matching ‘double’ argument [-Wformat=]
+      i, area[i], perimetre[i], externPerimeter[i], perimetreConvex[i], exterior[i], compacitat[i], longitud[i] );
+                                                                                                                ^
+[ 43%] Building CXX object src/libopentld/CMakeFiles/libopentld.dir/mftracker/Median.cpp.o
+[ 46%] Building CXX object src/libopentld/CMakeFiles/libopentld.dir/tld/Clustering.cpp.o
+[ 48%] Building CXX object src/libopentld/CMakeFiles/libopentld.dir/tld/DetectionResult.cpp.o
+[ 51%] Building CXX object src/libopentld/CMakeFiles/libopentld.dir/tld/detector/DetectorCascade.cpp.o
+Linking CXX static library ../../../lib/libcvblobs.a
+[ 51%] Built target cvblobs
+[ 53%] Building CXX object src/libopentld/CMakeFiles/libopentld.dir/tld/MedianFlowTracker.cpp.o
+[ 56%] Building CXX object src/libopentld/CMakeFiles/libopentld.dir/tld/TLD.cpp.o
+[ 58%] Building CXX object src/libopentld/CMakeFiles/libopentld.dir/tld/TLDUtil.cpp.o
+[ 60%] Building CXX object src/libopentld/CMakeFiles/libopentld.dir/tld/detector/EnsembleClassifier.cpp.o
+/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/detector/EnsembleClassifier.cpp:43:0: warning: "sub2idx" redefined [enabled by default]
+ #define sub2idx(x,y,widthstep) ((int) (floor((x)+0.5) + floor((y)+0.5)*(widthstep)))
+ ^
+In file included from /home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/detector/DetectorCascade.h:32:0,
+                 from /home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/detector/EnsembleClassifier.cpp:26:
+/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/IDetectorCascade.h:45:0: note: this is the location of the previous definition
+ #define sub2idx(x,y,imgWidthStep) ((int) (floor((x)+0.5) + floor((y)+0.5)*(imgWidthStep)))
+ ^
+[ 63%] Building CXX object src/libopentld/CMakeFiles/libopentld.dir/tld/detector/ForegroundDetector.cpp.o
+/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/TLD.cpp: In member function ‘void tld::TLD::writeToFile(const char*)’:
+/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/TLD.cpp:404:74: warning: format ‘%d’ expects argument of type ‘int’, but argument 3 has type ‘std::vector<tld::NormalizedPatch>::size_type {aka long unsigned int}’ [-Wformat=]
+     fprintf(file, "%d #Positive Sample Size\n", nn->truePositives->size());
+                                                                          ^
+/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/TLD.cpp:423:75: warning: format ‘%d’ expects argument of type ‘int’, but argument 3 has type ‘std::vector<tld::NormalizedPatch>::size_type {aka long unsigned int}’ [-Wformat=]
+     fprintf(file, "%d #Negative Sample Size\n", nn->falsePositives->size());
+                                                                           ^
+/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/TLD.cpp:472:53: warning: format ‘%d’ expects argument of type ‘int’, but argument 3 has type ‘std::vector<tld::TldExportEntry>::size_type {aka long unsigned int}’ [-Wformat=]
+         fprintf(file, "%d #numLeaves\n", list.size());
+                                                     ^
+/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/TLD.cpp: In member function ‘void tld::TLD::readFromFile(const char*)’:
+/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/TLD.cpp:502:34: warning: ignoring return value of ‘char* fgets(char*, int, FILE*)’, declared with attribute warn_unused_result [-Wunused-result]
+     fgets(str_buf, MAX_LEN, file); /*Skip line*/
+                                  ^
+/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/TLD.cpp:504:54: warning: ignoring return value of ‘int fscanf(FILE*, const char*, ...)’, declared with attribute warn_unused_result [-Wunused-result]
+     fscanf(file, "%d \n", &detectorCascade->objWidth);
+                                                      ^
+/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/TLD.cpp:505:34: warning: ignoring return value of ‘char* fgets(char*, int, FILE*)’, declared with attribute warn_unused_result [-Wunused-result]
+     fgets(str_buf, MAX_LEN, file); /*Skip rest of line*/
+                                  ^
+/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/TLD.cpp:506:55: warning: ignoring return value of ‘int fscanf(FILE*, const char*, ...)’, declared with attribute warn_unused_result [-Wunused-result]
+     fscanf(file, "%d \n", &detectorCascade->objHeight);
+                                                       ^
+/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/TLD.cpp:507:34: warning: ignoring return value of ‘char* fgets(char*, int, FILE*)’, declared with attribute warn_unused_result [-Wunused-result]
+     fgets(str_buf, MAX_LEN, file); /*Skip rest of line*/
+                                  ^
+/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/TLD.cpp:509:68: warning: ignoring return value of ‘int fscanf(FILE*, const char*, ...)’, declared with attribute warn_unused_result [-Wunused-result]
+     fscanf(file, "%f \n", &detectorCascade->varianceFilter->minVar);
+                                                                    ^
+/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/TLD.cpp:510:34: warning: ignoring return value of ‘char* fgets(char*, int, FILE*)’, declared with attribute warn_unused_result [-Wunused-result]
+     fgets(str_buf, MAX_LEN, file); /*Skip rest of line*/
+                                  ^
+/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/TLD.cpp:513:47: warning: ignoring return value of ‘int fscanf(FILE*, const char*, ...)’, declared with attribute warn_unused_result [-Wunused-result]
+     fscanf(file, "%d \n", &numPositivePatches);
+                                               ^
+/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/TLD.cpp:514:34: warning: ignoring return value of ‘char* fgets(char*, int, FILE*)’, declared with attribute warn_unused_result [-Wunused-result]
+     fgets(str_buf, MAX_LEN, file); /*Skip line*/
+                                  ^
+/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/TLD.cpp:524:42: warning: ignoring return value of ‘char* fgets(char*, int, FILE*)’, declared with attribute warn_unused_result [-Wunused-result]
+             fgets(str_buf, MAX_LEN, file); /*Read sample*/
+                                          ^
+/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/TLD.cpp:545:47: warning: ignoring return value of ‘int fscanf(FILE*, const char*, ...)’, declared with attribute warn_unused_result [-Wunused-result]
+     fscanf(file, "%d \n", &numNegativePatches);
+                                               ^
+/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/TLD.cpp:546:34: warning: ignoring return value of ‘char* fgets(char*, int, FILE*)’, declared with attribute warn_unused_result [-Wunused-result]
+     fgets(str_buf, MAX_LEN, file); /*Skip line*/
+                                  ^
+/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/TLD.cpp:556:42: warning: ignoring return value of ‘char* fgets(char*, int, FILE*)’, declared with attribute warn_unused_result [-Wunused-result]
+             fgets(str_buf, MAX_LEN, file); /*Read sample*/
+                                          ^
+/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/TLD.cpp:576:41: warning: ignoring return value of ‘int fscanf(FILE*, const char*, ...)’, declared with attribute warn_unused_result [-Wunused-result]
+     fscanf(file, "%d \n", &ec->numTrees);
+                                         ^
+/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/TLD.cpp:578:34: warning: ignoring return value of ‘char* fgets(char*, int, FILE*)’, declared with attribute warn_unused_result [-Wunused-result]
+     fgets(str_buf, MAX_LEN, file); /*Skip rest of line*/
+                                  ^
+/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/TLD.cpp:580:44: warning: ignoring return value of ‘int fscanf(FILE*, const char*, ...)’, declared with attribute warn_unused_result [-Wunused-result]
+     fscanf(file, "%d \n", &ec->numFeatures);
+                                            ^
+/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/TLD.cpp:582:34: warning: ignoring return value of ‘char* fgets(char*, int, FILE*)’, declared with attribute warn_unused_result [-Wunused-result]
+     fgets(str_buf, MAX_LEN, file); /*Skip rest of line*/
+                                  ^
+/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/TLD.cpp:591:38: warning: ignoring return value of ‘char* fgets(char*, int, FILE*)’, declared with attribute warn_unused_result [-Wunused-result]
+         fgets(str_buf, MAX_LEN, file); /*Skip line*/
+                                      ^
+/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/TLD.cpp:596:96: warning: ignoring return value of ‘int fscanf(FILE*, const char*, ...)’, declared with attribute warn_unused_result [-Wunused-result]
+             fscanf(file, "%f %f %f %f", &features[0], &features[1], &features[2], &features[3]);
+                                                                                                ^
+/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/TLD.cpp:597:42: warning: ignoring return value of ‘char* fgets(char*, int, FILE*)’, declared with attribute warn_unused_result [-Wunused-result]
+             fgets(str_buf, MAX_LEN, file); /*Skip rest of line*/
+                                          ^
+/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/TLD.cpp:602:42: warning: ignoring return value of ‘int fscanf(FILE*, const char*, ...)’, declared with attribute warn_unused_result [-Wunused-result]
+         fscanf(file, "%d \n", &numLeaves);
+                                          ^
+/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/TLD.cpp:603:38: warning: ignoring return value of ‘char* fgets(char*, int, FILE*)’, declared with attribute warn_unused_result [-Wunused-result]
+         fgets(str_buf, MAX_LEN, file); /*Skip rest of line*/
+                                      ^
+/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/TLD.cpp:608:74: warning: ignoring return value of ‘int fscanf(FILE*, const char*, ...)’, declared with attribute warn_unused_result [-Wunused-result]
+             fscanf(file, "%d %d %d \n", &entry.index, &entry.P, &entry.N);
+                                                                          ^
+[ 65%] Building CXX object src/libopentld/CMakeFiles/libopentld.dir/tld/detector/NNClassifier.cpp.o
+[ 68%] Building CXX object src/libopentld/CMakeFiles/libopentld.dir/tld/detector/VarianceFilter.cpp.o
+Linking CXX static library ../../lib/libopentld.a
+[ 68%] Built target libopentld
+Scanning dependencies of target main
+[ 75%] [ 75%] [ 78%] Building CXX object src/opentld/CMakeFiles/main.dir/main/Config.cpp.o
+Building CXX object src/opentld/CMakeFiles/main.dir/main/Gui.cpp.o
+Building CXX object src/opentld/CMakeFiles/main.dir/main/Main.cpp.o
+Building CXX object src/opentld/CMakeFiles/main.dir/main/Settings.cpp.o
+/home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/main/Gui.cpp:131:55: warning: multi-character character constant [-Wmultichar]
+         if(((key == '\n') || (key == '\r') || (key == '\r\n')) && (bb->x != -1) && (bb->y != -1))
+                                                       ^
+[ 80%] Building CXX object src/opentld/CMakeFiles/main.dir/main/Trajectory.cpp.o
+Linking CXX static library ../../lib/libmain.a
+[ 80%] Built target main
+[ 85%] [ 87%] Generating ui_ConfigDialog.h
+Generating qrc_rcs.cxx
+Generating qopentld/moc_ConfigDialog.cxx
+Scanning dependencies of target opentld
+[ 90%] Building CXX object src/opentld/CMakeFiles/opentld.dir/OpenTLD.cpp.o
+Scanning dependencies of target qopentld
+[ 97%] Building CXX object src/opentld/CMakeFiles/qopentld.dir/qopentld/ConfigDialog.cpp.o
+Building CXX object src/opentld/CMakeFiles/qopentld.dir/qrc_rcs.cxx.o
+Building CXX object src/opentld/CMakeFiles/qopentld.dir/QOpenTLD.cpp.o
+[100%] Building CXX object src/opentld/CMakeFiles/qopentld.dir/qopentld/moc_ConfigDialog.cxx.o
+Linking CXX executable ../../bin/opentld
+[100%] Built target opentld
+Linking CXX executable ../../bin/qopentld
+[100%] Built target qopentld

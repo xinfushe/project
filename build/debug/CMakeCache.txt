@@ -215,6 +215,9 @@ OpenTLD_BINARY_DIR:STATIC=/home/slilylsu/Desktop/project-repo/build/debug
 //Value Computed by CMake
 OpenTLD_SOURCE_DIR:STATIC=/home/slilylsu/Desktop/project-repo/OpenTLD
 
+//pkg-config executable
+PKG_CONFIG_EXECUTABLE:FILEPATH=/usr/bin/pkg-config
+
 //Path to a program.
 ProcessorCount_cmd_getconf:FILEPATH=/usr/bin/getconf
 
@@ -979,6 +982,8 @@ CMAKE_UNAME:INTERNAL=/bin/uname
 CMAKE_USE_RELATIVE_PATHS-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
+//Details about finding PkgConfig
+FIND_PACKAGE_MESSAGE_DETAILS_PkgConfig:INTERNAL=[/usr/bin/pkg-config][v0.26()]
 //Details about finding Qt4
 FIND_PACKAGE_MESSAGE_DETAILS_Qt4:INTERNAL=[/usr/bin/qmake-qt4][/usr/lib/x86_64-linux-gnu/qt4/bin/moc][/usr/lib/x86_64-linux-gnu/qt4/bin/rcc][/usr/lib/x86_64-linux-gnu/qt4/bin/uic][/usr/include/qt4][/usr/lib/x86_64-linux-gnu][/usr/lib/x86_64-linux-gnu/libQtCore.so][v4.8.6()]
 //ADVANCED property for variable: OpenCV_3RDPARTY_LIB_DIR_DBG
@@ -991,6 +996,42 @@ OpenCV_CONFIG_PATH-ADVANCED:INTERNAL=1
 OpenCV_LIB_DIR_DBG-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: OpenCV_LIB_DIR_OPT
 OpenCV_LIB_DIR_OPT-ADVANCED:INTERNAL=1
+PC_OPENCV_CFLAGS:INTERNAL=-I/usr/local/include/opencv;-I/usr/local/include
+PC_OPENCV_CFLAGS_I:INTERNAL=
+PC_OPENCV_CFLAGS_OTHER:INTERNAL=
+PC_OPENCV_FOUND:INTERNAL=1
+PC_OPENCV_INCLUDEDIR:INTERNAL=
+PC_OPENCV_INCLUDE_DIRS:INTERNAL=/usr/local/include/opencv;/usr/local/include
+PC_OPENCV_LDFLAGS:INTERNAL=/usr/local/lib/libopencv_calib3d.so;/usr/local/lib/libopencv_contrib.so;/usr/local/lib/libopencv_core.so;/usr/local/lib/libopencv_features2d.so;/usr/local/lib/libopencv_flann.so;/usr/local/lib/libopencv_gpu.so;/usr/local/lib/libopencv_highgui.so;/usr/local/lib/libopencv_imgproc.so;/usr/local/lib/libopencv_legacy.so;/usr/local/lib/libopencv_ml.so;/usr/local/lib/libopencv_nonfree.so;/usr/local/lib/libopencv_objdetect.so;/usr/local/lib/libopencv_ocl.so;/usr/local/lib/libopencv_photo.so;/usr/local/lib/libopencv_stitching.so;/usr/local/lib/libopencv_superres.so;/usr/local/lib/libopencv_ts.a;/usr/local/lib/libopencv_video.so;/usr/local/lib/libopencv_videostab.so;-lrt;-lpthread;-lm;-ldl
+PC_OPENCV_LDFLAGS_OTHER:INTERNAL=/usr/local/lib/libopencv_calib3d.so;/usr/local/lib/libopencv_contrib.so;/usr/local/lib/libopencv_core.so;/usr/local/lib/libopencv_features2d.so;/usr/local/lib/libopencv_flann.so;/usr/local/lib/libopencv_gpu.so;/usr/local/lib/libopencv_highgui.so;/usr/local/lib/libopencv_imgproc.so;/usr/local/lib/libopencv_legacy.so;/usr/local/lib/libopencv_ml.so;/usr/local/lib/libopencv_nonfree.so;/usr/local/lib/libopencv_objdetect.so;/usr/local/lib/libopencv_ocl.so;/usr/local/lib/libopencv_photo.so;/usr/local/lib/libopencv_stitching.so;/usr/local/lib/libopencv_superres.so;/usr/local/lib/libopencv_ts.a;/usr/local/lib/libopencv_video.so;/usr/local/lib/libopencv_videostab.so
+PC_OPENCV_LIBDIR:INTERNAL=
+PC_OPENCV_LIBRARIES:INTERNAL=rt;pthread;m;dl
+PC_OPENCV_LIBRARY_DIRS:INTERNAL=
+PC_OPENCV_LIBS:INTERNAL=
+PC_OPENCV_LIBS_L:INTERNAL=
+PC_OPENCV_LIBS_OTHER:INTERNAL=
+PC_OPENCV_LIBS_PATHS:INTERNAL=
+PC_OPENCV_PREFIX:INTERNAL=/usr/local
+PC_OPENCV_STATIC_CFLAGS:INTERNAL=-I/usr/local/include/opencv;-I/usr/local/include
+PC_OPENCV_STATIC_CFLAGS_I:INTERNAL=
+PC_OPENCV_STATIC_CFLAGS_OTHER:INTERNAL=
+PC_OPENCV_STATIC_INCLUDE_DIRS:INTERNAL=/usr/local/include/opencv;/usr/local/include
+PC_OPENCV_STATIC_LDFLAGS:INTERNAL=/usr/local/lib/libopencv_calib3d.so;/usr/local/lib/libopencv_contrib.so;/usr/local/lib/libopencv_core.so;/usr/local/lib/libopencv_features2d.so;/usr/local/lib/libopencv_flann.so;/usr/local/lib/libopencv_gpu.so;/usr/local/lib/libopencv_highgui.so;/usr/local/lib/libopencv_imgproc.so;/usr/local/lib/libopencv_legacy.so;/usr/local/lib/libopencv_ml.so;/usr/local/lib/libopencv_nonfree.so;/usr/local/lib/libopencv_objdetect.so;/usr/local/lib/libopencv_ocl.so;/usr/local/lib/libopencv_photo.so;/usr/local/lib/libopencv_stitching.so;/usr/local/lib/libopencv_superres.so;/usr/local/lib/libopencv_ts.a;/usr/local/lib/libopencv_video.so;/usr/local/lib/libopencv_videostab.so;-lrt;-lpthread;-lm;-ldl
+PC_OPENCV_STATIC_LDFLAGS_OTHER:INTERNAL=/usr/local/lib/libopencv_calib3d.so;/usr/local/lib/libopencv_contrib.so;/usr/local/lib/libopencv_core.so;/usr/local/lib/libopencv_features2d.so;/usr/local/lib/libopencv_flann.so;/usr/local/lib/libopencv_gpu.so;/usr/local/lib/libopencv_highgui.so;/usr/local/lib/libopencv_imgproc.so;/usr/local/lib/libopencv_legacy.so;/usr/local/lib/libopencv_ml.so;/usr/local/lib/libopencv_nonfree.so;/usr/local/lib/libopencv_objdetect.so;/usr/local/lib/libopencv_ocl.so;/usr/local/lib/libopencv_photo.so;/usr/local/lib/libopencv_stitching.so;/usr/local/lib/libopencv_superres.so;/usr/local/lib/libopencv_ts.a;/usr/local/lib/libopencv_video.so;/usr/local/lib/libopencv_videostab.so
+PC_OPENCV_STATIC_LIBDIR:INTERNAL=
+PC_OPENCV_STATIC_LIBRARIES:INTERNAL=rt;pthread;m;dl
+PC_OPENCV_STATIC_LIBRARY_DIRS:INTERNAL=
+PC_OPENCV_STATIC_LIBS:INTERNAL=
+PC_OPENCV_STATIC_LIBS_L:INTERNAL=
+PC_OPENCV_STATIC_LIBS_OTHER:INTERNAL=
+PC_OPENCV_STATIC_LIBS_PATHS:INTERNAL=
+PC_OPENCV_VERSION:INTERNAL=2.4.9
+PC_OPENCV_opencv_INCLUDEDIR:INTERNAL=
+PC_OPENCV_opencv_LIBDIR:INTERNAL=
+PC_OPENCV_opencv_PREFIX:INTERNAL=
+PC_OPENCV_opencv_VERSION:INTERNAL=
+//ADVANCED property for variable: PKG_CONFIG_EXECUTABLE
+PKG_CONFIG_EXECUTABLE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: ProcessorCount_cmd_getconf
 ProcessorCount_cmd_getconf-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: ProcessorCount_cmd_sysctl
@@ -1405,4 +1446,5 @@ Q_WS_QWS:INTERNAL=
 Q_WS_WIN:INTERNAL=
 //Have symbol Q_WS_X11
 Q_WS_X11:INTERNAL=1
+__pkg_config_checked_PC_OPENCV:INTERNAL=1
 

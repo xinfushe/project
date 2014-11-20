@@ -190,6 +190,8 @@ src/opentld/CMakeFiles/qopentld.dir/QOpenTLD.cpp.o: /usr/include/qt4/QtGui/qwidg
 src/opentld/CMakeFiles/qopentld.dir/QOpenTLD.cpp.o: /usr/include/qt4/QtGui/qwindowdefs.h
 src/opentld/CMakeFiles/qopentld.dir/QOpenTLD.cpp.o: /usr/include/qt4/QtGui/qwindowdefs_win.h
 src/opentld/CMakeFiles/qopentld.dir/QOpenTLD.cpp.o: /usr/include/qt4/QtGui/qwmatrix.h
+src/opentld/CMakeFiles/qopentld.dir/QOpenTLD.cpp.o: /usr/local/include/CL/cl.h
+src/opentld/CMakeFiles/qopentld.dir/QOpenTLD.cpp.o: /usr/local/include/CL/cl_platform.h
 src/opentld/CMakeFiles/qopentld.dir/QOpenTLD.cpp.o: /usr/local/include/opencv/cv.h
 src/opentld/CMakeFiles/qopentld.dir/QOpenTLD.cpp.o: /usr/local/include/opencv/highgui.h
 src/opentld/CMakeFiles/qopentld.dir/QOpenTLD.cpp.o: /usr/local/include/opencv2/calib3d/calib3d.hpp

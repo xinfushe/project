@@ -55,6 +55,7 @@ SET(CMAKE_MAKEFILE_DEPENDS
   "/usr/share/cmake-2.8/Modules/Compiler/GNU.cmake"
   "/usr/share/cmake-2.8/Modules/FindPackageHandleStandardArgs.cmake"
   "/usr/share/cmake-2.8/Modules/FindPackageMessage.cmake"
+  "/usr/share/cmake-2.8/Modules/FindPkgConfig.cmake"
   "/usr/share/cmake-2.8/Modules/FindQt4.cmake"
   "/usr/share/cmake-2.8/Modules/MacroAddFileDependencies.cmake"
   "/usr/share/cmake-2.8/Modules/MultiArchCross.cmake"

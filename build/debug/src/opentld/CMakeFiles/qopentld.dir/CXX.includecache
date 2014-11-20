@@ -153,6 +153,8 @@ ImAcq.h
 /home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/main/ImAcq.h
 Gui.h
 /home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/main/Gui.h
+CL/cl.h
+-
 opencv2/ocl/ocl.hpp
 -
 opencv2/ocl/matrix_operations.hpp
@@ -164,16 +166,6 @@ vector
 ImAcq.h
 /home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/main/ImAcq.h
 
-/home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/qopentld/ConfigDialog.cpp
-ConfigDialog.h
-/home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/qopentld/ConfigDialog.h
-ui_ConfigDialog.h
-/home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/qopentld/ui_ConfigDialog.h
-iostream
--
-Settings.h
--
-
 /home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/qopentld/ConfigDialog.h
 QtGui/QApplication
 -
@@ -183,14 +175,6 @@ QDialog
 -
 ui_ConfigDialog.h
 /home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/qopentld/ui_ConfigDialog.h
-
-/home/slilylsu/Desktop/project-repo/build/debug/src/opentld/qopentld/moc_ConfigDialog.cxx
-../../../../../OpenTLD/src/opentld/qopentld/ConfigDialog.h
-/home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/qopentld/ConfigDialog.h
-
-/home/slilylsu/Desktop/project-repo/build/debug/src/opentld/qrc_rcs.cxx
-QtCore/qglobal.h
--
 
 /usr/include/qt4/Qt3Support/q3cstring.h
 QtCore/qbytearray.h
@@ -1474,6 +1458,36 @@ QtCore/qglobal.h
 
 /usr/include/qt4/QtGui/qwmatrix.h
 QtGui/qmatrix.h
+-
+
+/usr/local/include/CL/cl.h
+OpenCL/cl_platform.h
+-
+CL/cl_platform.h
+-
+
+/usr/local/include/CL/cl_platform.h
+AvailabilityMacros.h
+-
+stdint.h
+-
+stddef.h
+-
+altivec.h
+-
+intrin.h
+-
+xmmintrin.h
+-
+intrin.h
+-
+emmintrin.h
+-
+mmintrin.h
+-
+intrin.h
+-
+immintrin.h
 -
 
 /usr/local/include/opencv/cv.h

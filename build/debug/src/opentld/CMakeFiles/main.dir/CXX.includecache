@@ -207,12 +207,18 @@ opencv2/highgui/highgui.hpp
 /home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/main/opencv2/highgui/highgui.hpp
 opencv2/imgproc/imgproc.hpp
 /home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/main/opencv2/imgproc/imgproc.hpp
-CL/cl.h
--
-ocl.cpp
-/home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/main/ocl.cpp
 ./GraphUtils.cpp
 /home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/main/./GraphUtils.cpp
+iostream
+-
+cassert
+-
+stdio.h
+-
+CL/cl.h
+-
+opencv/cv.h
+-
 
 /home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/main/Main.h
 TLD.h
@@ -221,6 +227,8 @@ ImAcq.h
 /home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/main/ImAcq.h
 Gui.h
 /home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/main/Gui.h
+CL/cl.h
+-
 opencv2/ocl/ocl.hpp
 -
 opencv2/ocl/matrix_operations.hpp
@@ -236,16 +244,6 @@ ImAcq.h
 vector
 -
 opencv/cv.h
--
-
-/home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/main/ocl.cpp
-iostream
--
-cassert
--
-stdio.h
--
-CL/cl.h
 -
 
 /usr/local/include/CL/cl.h

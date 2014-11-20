@@ -191,6 +191,8 @@ src/opentld/CMakeFiles/qopentld.dir/QOpenTLD.cpp.o
  /usr/include/qt4/QtGui/qwindowdefs.h
  /usr/include/qt4/QtGui/qwindowdefs_win.h
  /usr/include/qt4/QtGui/qwmatrix.h
+ /usr/local/include/CL/cl.h
+ /usr/local/include/CL/cl_platform.h
  /usr/local/include/opencv/cv.h
  /usr/local/include/opencv/highgui.h
  /usr/local/include/opencv2/calib3d/calib3d.hpp

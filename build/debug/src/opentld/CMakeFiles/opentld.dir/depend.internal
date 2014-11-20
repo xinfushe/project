@@ -20,6 +20,8 @@ src/opentld/CMakeFiles/opentld.dir/OpenTLD.cpp.o
  /home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/main/Gui.h
  /home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/main/Main.h
  /home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/main/Settings.h
+ /usr/local/include/CL/cl.h
+ /usr/local/include/CL/cl_platform.h
  /usr/local/include/opencv/cv.h
  /usr/local/include/opencv/highgui.h
  /usr/local/include/opencv2/calib3d/calib3d.hpp

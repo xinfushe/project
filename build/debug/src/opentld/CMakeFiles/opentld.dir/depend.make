@@ -19,6 +19,8 @@ src/opentld/CMakeFiles/opentld.dir/OpenTLD.cpp.o: /home/slilylsu/Desktop/project
 src/opentld/CMakeFiles/opentld.dir/OpenTLD.cpp.o: /home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/main/Gui.h
 src/opentld/CMakeFiles/opentld.dir/OpenTLD.cpp.o: /home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/main/Main.h
 src/opentld/CMakeFiles/opentld.dir/OpenTLD.cpp.o: /home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/main/Settings.h
+src/opentld/CMakeFiles/opentld.dir/OpenTLD.cpp.o: /usr/local/include/CL/cl.h
+src/opentld/CMakeFiles/opentld.dir/OpenTLD.cpp.o: /usr/local/include/CL/cl_platform.h
 src/opentld/CMakeFiles/opentld.dir/OpenTLD.cpp.o: /usr/local/include/opencv/cv.h
 src/opentld/CMakeFiles/opentld.dir/OpenTLD.cpp.o: /usr/local/include/opencv/highgui.h
 src/opentld/CMakeFiles/opentld.dir/OpenTLD.cpp.o: /usr/local/include/opencv2/calib3d/calib3d.hpp

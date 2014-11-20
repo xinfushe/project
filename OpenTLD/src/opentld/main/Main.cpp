@@ -40,20 +40,22 @@
 #include "opencv2/objdetect/objdetect.hpp"
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
+
+//
+#include "ocl.cpp"
+#include "./GraphUtils.cpp"
+//
+
 #define CLEAR(x) memset(&(x), 0, sizeof(x))
-
-//2014.10.29
-//#define CUDA_ENABLED
-
 using namespace tld;
 using namespace cv;
 
-double contrast_measure(const Mat&img)
+double contrast_measure(const Mat& img)
 {
     Mat dx,dy;
-    cv::Sobel(img,dx,CV_32F,1,0,3);
-    cv::Sobel(img,dy,CV_32F,0,1,3);
-    cv::magnitude(dx,dy,dx);
+    Sobel(img,dx,CV_32F,1,0,3);
+    Sobel(img,dy,CV_32F,0,1,3);
+    magnitude(dx,dy,dx);
     return sum(dx)[0]/(img.cols*img.rows);
 }
 static int xioctl(int fh, int request, void *arg)
@@ -116,20 +118,77 @@ static int getFocus(int currsize,int lastsize,int bestfocus)
 }
 void Main::doWork()
 {
+
+	//OpenCL test
+	 //Initializing host memory
+		const size_t size = 12345678;
+		float* src_a_h = new float[size];
+		float* src_b_h = new float[size];
+		float* res_h = new float[size];
+		float* res_cpu = new float[size];
+
+		for (unsigned int i = 0; i < size; i++) {
+			src_a_h[i] = src_b_h[i] = 0.0f*i;
+		}
+
+		double freq = cvGetTickFrequency()*1000.0; //kHz
+		cout << "CPU Frequency: " << cvGetTickFrequency() << " MHz" << endl;
+		double tic = 0.0;
+		double toc = 0.0;
+		double time = 0.0;
+
+		gpu_init();
+		tic = cvGetTickCount();
+		vector_add_gpu(src_a_h, src_b_h, res_h, size);
+		toc = cvGetTickCount();
+		time = (toc - tic) / freq;
+		cout << "GPU Total Time: " << time << " ms" << endl;
+		gpu_release();
+
+
+		tic = cvGetTickCount();
+		vector_add_cpu(src_a_h, src_b_h, res_cpu, size);
+		toc = cvGetTickCount();
+		time = (toc - tic) / freq;
+		cout << "CPU Time: " << time << " ms" << endl;
+
+		//Release memory
+		delete[] src_a_h;
+		delete[] src_b_h;
+		delete[] res_h;
+		delete[] res_cpu;
+
+	//end OpenCL test
 	Trajectory trajectory;
     IplImage *img = imAcqGetImg(imAcq);
+
+    //Create the matrices
+    Mat color;
+    cv::ocl::oclMat color_ocl;
+    Mat grey;
+    cv::ocl::oclMat grey_ocl;
+
+    //Initialize the matirces
+    color = Mat(img);
+    color_ocl.upload(color);
+    grey = Mat(img->height, img->width, CV_8UC1);
+    cvtColor(color , grey, CV_BGR2GRAY);
+    grey_ocl.upload(grey);
+
+    //
+    const int fps_size = 166;
+    float fps_array[fps_size] = {0.0};
+    IplImage* data;
+    //
+
+/* original code
     Mat grey(img->height, img->width, CV_8UC1);
     cvtColor(cv::Mat(img), grey, CV_BGR2GRAY);
+*/
+
 
     tld->detectorCascade->setImgSize(grey.cols, grey.rows, grey.step);
 
-#ifdef CUDA_ENABLED
-    tld->learningEnabled = false;
-    selectManually = false;
-
-    if(tld->learningEnabled || selectManually)
-        std::cerr << "Sorry. Learning and manual object selection is not supported with CUDA implementation yet!!!" << std::endl;
-#endif
 
 	if(showTrajectory)
 	{
@@ -178,28 +237,44 @@ void Main::doWork()
 
         printf("Starting at %d %d %d %d\n", bb.x, bb.y, bb.width, bb.height);
 
+        //
         tld->selectObject(grey, &bb);
         skipProcessingOnce = true;
         reuseFrameOnce = true;
     }
+
     //Focus init
     const char* dev_name = "/dev/video1";
     int fh = open(dev_name, O_RDWR /* required */ | O_NONBLOCK, 0);
     disableAutoFocus(fh);
     int focus = 0;
+
     double bestsharpness=0,lastsharpness=0;
     int bestfocus=0,initsize,lastsize,focusCount=0,focusChange = 5,initfocus = 0,errorcount=0,focusend=200;
     bool init = false,changing = false;
     setFocus(fh,focus);
+
     while(imAcqHasMoreFrames(imAcq))
     {
         tick_t procInit, procFinal;
         double tic = cvGetTickCount();
 
+        img = imAcqGetImg(imAcq);
+
+        //update the image matrices
+        color = Mat(img);
+        color_ocl.upload(color);
+        cvtColor(color, grey, CV_BGR2GRAY);
+        grey_ocl.upload(grey);
+        //Alternative
+        //
+        cv::ocl::cvtColor(color_ocl, grey_ocl, CV_BGR2GRAY);
+        //
+
 
         if(!reuseFrameOnce)
         {
-            img = imAcqGetImg(imAcq);
+
 
             if(img == NULL)
             {
@@ -207,13 +282,15 @@ void Main::doWork()
                 break;
             }
 
+            //
             cvtColor(cv::Mat(img), grey, CV_BGR2GRAY);
         }
 
         if(!skipProcessingOnce)
         {
+
             getCPUTick(&procInit);
-            tld->processImage(img);//
+            tld->processImage(img);
             getCPUTick(&procFinal);
 //             PRINT_TIMING("FrameProcTime", procInit, procFinal, "\n");
         }
@@ -240,6 +317,15 @@ void Main::doWork()
 
         float fps = 1 / toc;
 
+        //
+        for(int i = 0; i < fps_size - 1; i ++)
+        {
+        	fps_array[i] = fps_array[i+1];
+        	fps_array[fps_size - 1] = fps;
+        }
+        data = drawFloatGraph(fps_array, fps_size, 0, 0.0, 30.0);
+        //
+
         int confident = (tld->currConf >= threshold) ? 1 : 0;
 
         if(showOutput || saveDir != NULL)
@@ -253,7 +339,9 @@ void Main::doWork()
                 strcpy(learningString, "Learning");
             }
 
+            //
             sprintf(string, "#%d,Posterior %.2f; fps: %.2f, #numwindows:%d, %s", imAcq->currentFrame - 1, tld->currConf, fps, tld->detectorCascade->numWindows, learningString);
+
             CvScalar yellow = CV_RGB(255, 255, 0);
             CvScalar blue = CV_RGB(0, 0, 255);  
             CvScalar black = CV_RGB(0, 0, 0);
@@ -263,11 +351,11 @@ void Main::doWork()
             if(tld->currBB != NULL)
             {
                 CvScalar rectangleColor = (confident) ? blue : yellow;
-                //2014.10.28
                 cvRectangle(img, CvPoint(tld->currBB->tl()), CvPoint(tld->currBB->br()), rectangleColor, 8, 8, 0);
                 
                 currRect = *(tld->currBB);
-                double sharpness = contrast_measure(imgt(currRect));//TODO
+
+                double sharpness = contrast_measure(imgt (currRect));//TODO
                 printf("sharpness is %lf\n",sharpness);
                 if(!init)
                 {
@@ -387,7 +475,6 @@ void Main::doWork()
                 for(size_t i = 0; i < tld->detectorCascade->detectionResult->fgList->size(); i++)
                 {
                     Rect r = tld->detectorCascade->detectionResult->fgList->at(i);
-                    //2014.10.28
                     cvRectangle(img, CvPoint(r.tl()), CvPoint(r.br()), white, 1);
                 }
 
@@ -396,7 +483,9 @@ void Main::doWork()
 
             if(showOutput)
             {
-                gui->showImage(img);
+            	//
+                gui->showImage(img, data);
+                //
                 char key = gui->getKey();
 
                 if(key == 'q') break;
@@ -485,12 +574,13 @@ void Main::doWork()
                     bestsharpness = 0;
                     lastsharpness = 0;
                     focus = 0;
+                    //
                     tld->selectObject(grey, &r);
                 }
                 if(key == 'f')
                 {
                     CvRect box;
-                    const char* cascadeName = "haarcascade_frontalface_alt.xml";
+                    const char* cascadeName = "/haarcascade_frontalface_alt.xml";
                     CascadeClassifier  cascade;
                     vector<Rect> faces;
                     if( !cascade.load( cascadeName )  )
@@ -510,7 +600,9 @@ void Main::doWork()
                         bestsharpness = 0;
                         lastsharpness = 0;
                         focus = 0;
+                        //
                         tld->selectObject(grey, &r);
+
                     }
                 }
             }
@@ -518,8 +610,8 @@ void Main::doWork()
             if(saveDir != NULL)
             {
                 char fileName[256];
+                //
                 sprintf(fileName, "%s/%.5d.png", saveDir, imAcq->currentFrame - 1);
-
                 cvSaveImage(fileName, img);
             }
         }

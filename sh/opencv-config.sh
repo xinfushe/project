@@ -13,3 +13,5 @@ PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig
 export PKG_CONFIG_PATH
 
 sudo source /etc/bash.bashrc
+
+`pkg-config --cflags --libs opencv`

@@ -1,6 +1,0 @@
-/home/slilylsu/Desktop/project-repo/build/release/src/3rdparty/libconfig/CMakeFiles/config++.dir
-/home/slilylsu/Desktop/project-repo/build/release/src/3rdparty/cvblobs/CMakeFiles/cvblobs.dir
-/home/slilylsu/Desktop/project-repo/build/release/src/libopentld/CMakeFiles/libopentld.dir
-/home/slilylsu/Desktop/project-repo/build/release/src/opentld/CMakeFiles/main.dir
-/home/slilylsu/Desktop/project-repo/build/release/src/opentld/CMakeFiles/opentld.dir
-/home/slilylsu/Desktop/project-repo/build/release/src/opentld/CMakeFiles/qopentld.dir

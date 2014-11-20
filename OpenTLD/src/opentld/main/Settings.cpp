@@ -36,7 +36,7 @@ Settings::Settings() :
     m_nnClassifierEnabled(true),
     m_loadModel(false),
     m_trackerEnabled(true),
-    m_selectManually(true),
+    m_selectManually(false),
     m_learningEnabled(true),
     m_showOutput(true),
     m_showNotConfident(true),
@@ -57,8 +57,12 @@ Settings::Settings() :
     m_thetaP(0.65),
     m_thetaN(0.5),
     m_minSize(25),
-    m_camNo(0),
-    m_fps(24),
+    //
+    m_camNo(1),
+    m_fps(30),
+    //
+    m_width(800),
+    m_height(450),
     m_seed(0),
     m_threshold(0.7),
     m_proportionalShift(0.1),

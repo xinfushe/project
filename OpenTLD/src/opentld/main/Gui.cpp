@@ -30,13 +30,18 @@
 
 #include <string>
 
+
 using std::string;
 
 namespace tld
 {
 
 Gui::Gui() :
-    m_window_name("tld")
+    m_window_name("OpenTLD with OpenCL acceleration"),
+	//
+	data_window_name("Data"),
+	//
+	test_window_name("test window")
 {
 }
 
@@ -44,15 +49,31 @@ Gui::~Gui()
 {
 }
 
-void Gui::init()
+void Gui::init(ImAcq* imAcq)
 {
-    cvNamedWindow(m_window_name.c_str(), CV_WINDOW_AUTOSIZE);
-    cvMoveWindow(m_window_name.c_str(), 100, 100);
+    cvNamedWindow(m_window_name.c_str(), 0/*CV_WINDOW_AUTOSIZE*/);
+    cvMoveWindow(m_window_name.c_str(), 0, 0);
+    cvResizeWindow(m_window_name.c_str(),imAcq->width, imAcq->height);
+    //
+    cvNamedWindow(data_window_name.c_str(), CV_WINDOW_AUTOSIZE);
+    cvMoveWindow(data_window_name.c_str(), 0, 0);
+    //cvResizeWindow(m_window_name.c_str(),imAcq->width, imAcq->height);
+    cvNamedWindow(test_window_name.c_str(), CV_WINDOW_AUTOSIZE);
+    const char* button_name = "test";
+    CvButtonCallback on_change;
+    cvCreateButton(button_name, on_change);
+    //
 }
 
-void Gui::showImage(IplImage *image)
+void Gui::showImage(IplImage *image, IplImage *data)
 {
     cvShowImage(m_window_name.c_str(), image);
+    /*
+    float a[8] = {1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0};
+    showFloatGraph("123", a, 8);
+    */
+    cvShowImage(data_window_name.c_str(), data);
+
 }
 
 char Gui::getKey()

@@ -26,7 +26,8 @@ add_library(main
     main/Gui.h
     main/Main.h
 	main/Settings.h
-	main/Trajectory.h	
+	main/Trajectory.h
+	main/ocl.cpp
 	)
 
 target_link_libraries(main libopentld cvblobs config++ ${OpenCV_LIBS})
@@ -36,7 +37,7 @@ target_link_libraries(main libopentld cvblobs config++ ${OpenCV_LIBS})
 add_executable(opentld
     OpenTLD.cpp)
 
-target_link_libraries(opentld main libopentld cvblobs config++ ${OpenCV_LIBS})
+target_link_libraries(opentld main libopentld cvblobs config++ ${OpenCV_LIBS} /usr/local/lib/beignet/libcl.so)
 
 install(TARGETS opentld DESTINATION bin)
 
@@ -51,19 +52,32 @@ install(TARGETS opentld DESTINATION bin)
 # qopentld
 if(BUILD_QOPENTLD)
 	#
-	find_package(PkgConfig REQUIRED)
-	pkg_check_modules(PC_OPENCV opencv REQUIRED)
+	#find_package(PkgConfig REQUIRED)
+	#pkg_check_modules(PC_OPENCV opencv REQUIRED)
+	#if(OPENCV_FOUND)
+	#endif(OPENCV_FOUND)
+	
 	#pkg_config(gtk+-2.0 includedir libdir linkflags cflags)
-	#INCLUDE_DIRECTORIES(${includedir}) #-I
+	#include_directories(OPENCV_INCLUDE_DIRS) #-I
 	#LINK_DIRECTORIES(${libdir}) #-L 
 	#TARGET_LINK_LIBRARIES(helloworld ${linkflags}) #-l 
 	#ADD_DEFINITIONS(${cflags}) #-D
+	#<XPREFIX>_FOUND          ... set to 1 if module(s) exist
+	#<XPREFIX>_LIBRARIES      ... only the libraries (w/o the '-l')
+	#<XPREFIX>_LIBRARY_DIRS   ... the paths of the libraries (w/o the '-L')
+	#<XPREFIX>_LDFLAGS        ... all required linker flags
+	#<XPREFIX>_LDFLAGS_OTHER  ... all other linker flags
+	#<XPREFIX>_INCLUDE_DIRS   ... the '-I' preprocessor flags (w/o the '-I')
+	#<XPREFIX>_CFLAGS         ... all required cflags
+	#<XPREFIX>_CFLAGS_OTHER   ... the other compiler flags
 	#
     include_directories(qopentld
+    	#OPENCV_INCLUDE_DIRS
         ${CMAKE_CURRENT_BINARY_DIR})
+    #link_directories(OPENCV_LIBRARY_DIRS)
 
     include(${QT_USE_FILE})
-    add_definitions(${QT_DEFINITIONS})
+    add_definitions(${QT_DEFINITIONS} )
 
     set(QOPENTLD_SOURCES QOpenTLD.cpp qopentld/ConfigDialog.cpp)
     set(QOPENTLD_HEADERS qopentld/ConfigDialog.h)
@@ -73,11 +87,12 @@ if(BUILD_QOPENTLD)
     QT4_ADD_RESOURCES(QOPENTLD_RCS_CPP ${QOPENTLD_RCS})
     QT4_WRAP_CPP(QOPENTLD_HEADERS_MOC ${QOPENTLD_HEADERS})
     QT4_WRAP_UI(QOPENTLD_FORMS_HEADERS ${QOPENTLD_FORMS})
+    
     set(QOPENTLD_SOURCES ${QOPENTLD_SOURCES} ${QOPENTLD_RCS_CPP} ${QOPENTLD_HEADERS_MOC} ${QOPENTLD_FORMS_HEADERS})
 
     add_executable(qopentld ${QOPENTLD_SOURCES})
-    target_link_libraries(qopentld main libopentld cvblobs config++ ${OpenCV_LIBS} ${QT_LIBRARIES} )
-
+    target_link_libraries(qopentld main libopentld cvblobs config++ ${OpenCV_LIBS} ${QT_LIBRARIES} /usr/local/lib/beignet/libcl.so /usr/lib/x86_64-linux-gnu/libQt5Gui.so)
+    
     install(TARGETS qopentld DESTINATION bin)
 endif(BUILD_QOPENTLD)
 

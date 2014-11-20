@@ -47,6 +47,7 @@ private:
     //
     std::string data_window_name;
     //
+    std::string test_window_name;
 };
 
 /**

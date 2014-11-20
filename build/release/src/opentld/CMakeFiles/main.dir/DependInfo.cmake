@@ -9,6 +9,7 @@ SET(CMAKE_DEPENDS_CHECK_CXX
   "/home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/main/Main.cpp" "/home/slilylsu/Desktop/project-repo/build/release/src/opentld/CMakeFiles/main.dir/main/Main.cpp.o"
   "/home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/main/Settings.cpp" "/home/slilylsu/Desktop/project-repo/build/release/src/opentld/CMakeFiles/main.dir/main/Settings.cpp.o"
   "/home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/main/Trajectory.cpp" "/home/slilylsu/Desktop/project-repo/build/release/src/opentld/CMakeFiles/main.dir/main/Trajectory.cpp.o"
+  "/home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/main/ocl.cpp" "/home/slilylsu/Desktop/project-repo/build/release/src/opentld/CMakeFiles/main.dir/main/ocl.cpp.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")
 

@@ -198,6 +198,8 @@ bin/qopentld: /usr/local/lib/libopencv_contrib.so.2.4.9
 bin/qopentld: /usr/local/lib/libopencv_calib3d.so.2.4.9
 bin/qopentld: /usr/lib/x86_64-linux-gnu/libQtGui.so
 bin/qopentld: /usr/lib/x86_64-linux-gnu/libQtCore.so
+bin/qopentld: /usr/local/lib/beignet/libcl.so
+bin/qopentld: /usr/lib/x86_64-linux-gnu/libQt5Gui.so
 bin/qopentld: /usr/local/lib/libopencv_nonfree.so.2.4.9
 bin/qopentld: /usr/local/lib/libopencv_ocl.so.2.4.9
 bin/qopentld: /usr/local/lib/libopencv_gpu.so.2.4.9

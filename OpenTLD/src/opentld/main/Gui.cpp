@@ -39,8 +39,9 @@ namespace tld
 Gui::Gui() :
     m_window_name("OpenTLD with OpenCL acceleration"),
 	//
-	data_window_name("Data")
+	data_window_name("Data"),
 	//
+	test_window_name("test window")
 {
 }
 
@@ -51,12 +52,16 @@ Gui::~Gui()
 void Gui::init(ImAcq* imAcq)
 {
     cvNamedWindow(m_window_name.c_str(), 0/*CV_WINDOW_AUTOSIZE*/);
-    cvMoveWindow(m_window_name.c_str(), 100, 100);
+    cvMoveWindow(m_window_name.c_str(), 0, 0);
     cvResizeWindow(m_window_name.c_str(),imAcq->width, imAcq->height);
     //
-    cvNamedWindow(data_window_name.c_str(), 0/*CV_WINDOW_AUTOSIZE*/);
-    cvMoveWindow(data_window_name.c_str(), 900, 100);
+    cvNamedWindow(data_window_name.c_str(), CV_WINDOW_AUTOSIZE);
+    cvMoveWindow(data_window_name.c_str(), 0, 0);
     //cvResizeWindow(m_window_name.c_str(),imAcq->width, imAcq->height);
+    cvNamedWindow(test_window_name.c_str(), CV_WINDOW_AUTOSIZE);
+    const char* button_name = "test";
+    CvButtonCallback on_change;
+    cvCreateButton(button_name, on_change);
     //
 }
 
@@ -68,6 +73,7 @@ void Gui::showImage(IplImage *image, IplImage *data)
     showFloatGraph("123", a, 8);
     */
     cvShowImage(data_window_name.c_str(), data);
+
 }
 
 char Gui::getKey()

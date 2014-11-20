@@ -349,6 +349,30 @@ main/Trajectory.cpp.s:
 	cd /home/slilylsu/Desktop/project-repo/build/debug && $(MAKE) -f src/opentld/CMakeFiles/main.dir/build.make src/opentld/CMakeFiles/main.dir/main/Trajectory.cpp.s
 .PHONY : main/Trajectory.cpp.s
 
+main/ocl.o: main/ocl.cpp.o
+.PHONY : main/ocl.o
+
+# target to build an object file
+main/ocl.cpp.o:
+	cd /home/slilylsu/Desktop/project-repo/build/debug && $(MAKE) -f src/opentld/CMakeFiles/main.dir/build.make src/opentld/CMakeFiles/main.dir/main/ocl.cpp.o
+.PHONY : main/ocl.cpp.o
+
+main/ocl.i: main/ocl.cpp.i
+.PHONY : main/ocl.i
+
+# target to preprocess a source file
+main/ocl.cpp.i:
+	cd /home/slilylsu/Desktop/project-repo/build/debug && $(MAKE) -f src/opentld/CMakeFiles/main.dir/build.make src/opentld/CMakeFiles/main.dir/main/ocl.cpp.i
+.PHONY : main/ocl.cpp.i
+
+main/ocl.s: main/ocl.cpp.s
+.PHONY : main/ocl.s
+
+# target to generate assembly for a file
+main/ocl.cpp.s:
+	cd /home/slilylsu/Desktop/project-repo/build/debug && $(MAKE) -f src/opentld/CMakeFiles/main.dir/build.make src/opentld/CMakeFiles/main.dir/main/ocl.cpp.s
+.PHONY : main/ocl.cpp.s
+
 qopentld/ConfigDialog.o: qopentld/ConfigDialog.cpp.o
 .PHONY : qopentld/ConfigDialog.o
 
@@ -457,6 +481,9 @@ help:
 	@echo "... main/Trajectory.o"
 	@echo "... main/Trajectory.i"
 	@echo "... main/Trajectory.s"
+	@echo "... main/ocl.o"
+	@echo "... main/ocl.i"
+	@echo "... main/ocl.s"
 	@echo "... qopentld/ConfigDialog.o"
 	@echo "... qopentld/ConfigDialog.i"
 	@echo "... qopentld/ConfigDialog.s"

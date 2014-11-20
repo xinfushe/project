@@ -4,6 +4,7 @@ FILE(REMOVE_RECURSE
   "CMakeFiles/main.dir/main/Main.cpp.o"
   "CMakeFiles/main.dir/main/Settings.cpp.o"
   "CMakeFiles/main.dir/main/Trajectory.cpp.o"
+  "CMakeFiles/main.dir/main/ocl.cpp.o"
   "../../lib/libmain.pdb"
   "../../lib/libmain.a"
 )

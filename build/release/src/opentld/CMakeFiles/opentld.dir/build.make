@@ -104,6 +104,7 @@ bin/opentld: /usr/local/lib/libopencv_features2d.so.2.4.9
 bin/opentld: /usr/local/lib/libopencv_core.so.2.4.9
 bin/opentld: /usr/local/lib/libopencv_contrib.so.2.4.9
 bin/opentld: /usr/local/lib/libopencv_calib3d.so.2.4.9
+bin/opentld: /usr/local/lib/beignet/libcl.so
 bin/opentld: /usr/local/lib/libopencv_nonfree.so.2.4.9
 bin/opentld: /usr/local/lib/libopencv_ocl.so.2.4.9
 bin/opentld: /usr/local/lib/libopencv_gpu.so.2.4.9

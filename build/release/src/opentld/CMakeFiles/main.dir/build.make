@@ -164,13 +164,37 @@ src/opentld/CMakeFiles/main.dir/main/Trajectory.cpp.o.provides: src/opentld/CMak
 
 src/opentld/CMakeFiles/main.dir/main/Trajectory.cpp.o.provides.build: src/opentld/CMakeFiles/main.dir/main/Trajectory.cpp.o
 
+src/opentld/CMakeFiles/main.dir/main/ocl.cpp.o: src/opentld/CMakeFiles/main.dir/flags.make
+src/opentld/CMakeFiles/main.dir/main/ocl.cpp.o: /home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/main/ocl.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/slilylsu/Desktop/project-repo/build/release/CMakeFiles $(CMAKE_PROGRESS_6)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/opentld/CMakeFiles/main.dir/main/ocl.cpp.o"
+	cd /home/slilylsu/Desktop/project-repo/build/release/src/opentld && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/main.dir/main/ocl.cpp.o -c /home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/main/ocl.cpp
+
+src/opentld/CMakeFiles/main.dir/main/ocl.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/main/ocl.cpp.i"
+	cd /home/slilylsu/Desktop/project-repo/build/release/src/opentld && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/main/ocl.cpp > CMakeFiles/main.dir/main/ocl.cpp.i
+
+src/opentld/CMakeFiles/main.dir/main/ocl.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/main/ocl.cpp.s"
+	cd /home/slilylsu/Desktop/project-repo/build/release/src/opentld && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/main/ocl.cpp -o CMakeFiles/main.dir/main/ocl.cpp.s
+
+src/opentld/CMakeFiles/main.dir/main/ocl.cpp.o.requires:
+.PHONY : src/opentld/CMakeFiles/main.dir/main/ocl.cpp.o.requires
+
+src/opentld/CMakeFiles/main.dir/main/ocl.cpp.o.provides: src/opentld/CMakeFiles/main.dir/main/ocl.cpp.o.requires
+	$(MAKE) -f src/opentld/CMakeFiles/main.dir/build.make src/opentld/CMakeFiles/main.dir/main/ocl.cpp.o.provides.build
+.PHONY : src/opentld/CMakeFiles/main.dir/main/ocl.cpp.o.provides
+
+src/opentld/CMakeFiles/main.dir/main/ocl.cpp.o.provides.build: src/opentld/CMakeFiles/main.dir/main/ocl.cpp.o
+
 # Object files for target main
 main_OBJECTS = \
 "CMakeFiles/main.dir/main/Config.cpp.o" \
 "CMakeFiles/main.dir/main/Gui.cpp.o" \
 "CMakeFiles/main.dir/main/Main.cpp.o" \
 "CMakeFiles/main.dir/main/Settings.cpp.o" \
-"CMakeFiles/main.dir/main/Trajectory.cpp.o"
+"CMakeFiles/main.dir/main/Trajectory.cpp.o" \
+"CMakeFiles/main.dir/main/ocl.cpp.o"
 
 # External object files for target main
 main_EXTERNAL_OBJECTS =
@@ -180,6 +204,7 @@ lib/libmain.a: src/opentld/CMakeFiles/main.dir/main/Gui.cpp.o
 lib/libmain.a: src/opentld/CMakeFiles/main.dir/main/Main.cpp.o
 lib/libmain.a: src/opentld/CMakeFiles/main.dir/main/Settings.cpp.o
 lib/libmain.a: src/opentld/CMakeFiles/main.dir/main/Trajectory.cpp.o
+lib/libmain.a: src/opentld/CMakeFiles/main.dir/main/ocl.cpp.o
 lib/libmain.a: src/opentld/CMakeFiles/main.dir/build.make
 lib/libmain.a: src/opentld/CMakeFiles/main.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX static library ../../lib/libmain.a"
@@ -195,6 +220,7 @@ src/opentld/CMakeFiles/main.dir/requires: src/opentld/CMakeFiles/main.dir/main/G
 src/opentld/CMakeFiles/main.dir/requires: src/opentld/CMakeFiles/main.dir/main/Main.cpp.o.requires
 src/opentld/CMakeFiles/main.dir/requires: src/opentld/CMakeFiles/main.dir/main/Settings.cpp.o.requires
 src/opentld/CMakeFiles/main.dir/requires: src/opentld/CMakeFiles/main.dir/main/Trajectory.cpp.o.requires
+src/opentld/CMakeFiles/main.dir/requires: src/opentld/CMakeFiles/main.dir/main/ocl.cpp.o.requires
 .PHONY : src/opentld/CMakeFiles/main.dir/requires
 
 src/opentld/CMakeFiles/main.dir/clean:

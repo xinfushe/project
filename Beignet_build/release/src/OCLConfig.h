@@ -1,6 +1,0 @@
-// the configured options and settings for LIBCL
-#define LIBCL_DRIVER_VERSION_MAJOR 0
-#define LIBCL_DRIVER_VERSION_MINOR 9
-#define LIBCL_DRIVER_VERSION_PATCH 3
-#define LIBCL_C_VERSION_MAJOR 1
-#define LIBCL_C_VERSION_MINOR 2

@@ -170,6 +170,9 @@ src/opentld/CMakeFiles/main.dir/main/Main.cpp.o: /home/slilylsu/Desktop/project-
 src/opentld/CMakeFiles/main.dir/main/Main.cpp.o: /home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/main/Main.h
 src/opentld/CMakeFiles/main.dir/main/Main.cpp.o: /home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/main/Settings.h
 src/opentld/CMakeFiles/main.dir/main/Main.cpp.o: /home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/main/Trajectory.h
+src/opentld/CMakeFiles/main.dir/main/Main.cpp.o: /home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/main/ocl.cpp
+src/opentld/CMakeFiles/main.dir/main/Main.cpp.o: /usr/local/include/CL/cl.h
+src/opentld/CMakeFiles/main.dir/main/Main.cpp.o: /usr/local/include/CL/cl_platform.h
 src/opentld/CMakeFiles/main.dir/main/Main.cpp.o: /usr/local/include/opencv/cv.h
 src/opentld/CMakeFiles/main.dir/main/Main.cpp.o: /usr/local/include/opencv/cxcore.h
 src/opentld/CMakeFiles/main.dir/main/Main.cpp.o: /usr/local/include/opencv/highgui.h

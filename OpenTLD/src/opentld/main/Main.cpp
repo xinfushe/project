@@ -42,6 +42,8 @@
 #include "opencv2/imgproc/imgproc.hpp"
 
 //
+#include <CL/cl.h>
+#include "ocl.cpp"
 #include "./GraphUtils.cpp"
 //
 
@@ -117,6 +119,9 @@ static int getFocus(int currsize,int lastsize,int bestfocus)
 }
 void Main::doWork()
 {
+	//OpenCL initialize
+
+	//end OpenCL initialize
 	Trajectory trajectory;
     IplImage *img = imAcqGetImg(imAcq);
 
@@ -206,6 +211,7 @@ void Main::doWork()
     int fh = open(dev_name, O_RDWR /* required */ | O_NONBLOCK, 0);
     disableAutoFocus(fh);
     int focus = 0;
+
     double bestsharpness=0,lastsharpness=0;
     int bestfocus=0,initsize,lastsize,focusCount=0,focusChange = 5,initfocus = 0,errorcount=0,focusend=200;
     bool init = false,changing = false;
@@ -223,6 +229,9 @@ void Main::doWork()
         color_ocl.upload(color);
         cvtColor(color, grey, CV_BGR2GRAY);
         grey_ocl.upload(grey);
+        //Alternative
+        //
+        cv::ocl::cvtColor(color_ocl, grey_ocl, CV_BGR2GRAY);
         //
 
 

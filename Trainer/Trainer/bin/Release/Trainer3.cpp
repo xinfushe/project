@@ -1,14 +1,11 @@
 //the directory to look for images in
-const char *POS_IMAGES_DIR = "./pos/";
-const char *POS_IMAGES_FOLDER = "pos/";
+const char *POS_IMAGES_DIR = "./pospre/";
+const char *POS_IMAGES_FOLDER = "pospre/";
 //the file extention we use
 const char *IMAGES_FORMAT = "*.jpg";
 //the log file name
-const char *LOG_FILE_NAME = "./pos.txt";
+const char *LOG_FILE_NAME = "./pos.dat";
 //name of the app window
-const char *APP_NAME = "Personal Trainer - Image Trainer with OpenCV";
-const char *WINDOW_NAME = "Personal Trainer";
-const char *CAPTURE_CTA = "CLICK INSIDE TO TRAIN";
 
     #include <iostream>
     #include <fstream>
@@ -16,11 +13,15 @@ const char *CAPTURE_CTA = "CLICK INSIDE TO TRAIN";
     #include <stdlib.h>
     #include <string>
     #include <vector>
-    #include <stdio.h>  
+    //#include <stdio.h>  
     #include <cv.h>  
     #include <cxcore.h>  
     #include <highgui.h>
     #include <string>  
+
+    #pragma comment(lib, "cv.lib")  
+    #pragma comment(lib, "cxcore.lib")  
+    #pragma comment(lib, "highgui.lib")  
 
 //include the opencv library
 #include "opencv2/opencv.hpp"
@@ -34,13 +35,14 @@ using namespace cv;
 //the index of the current image
 int currentIndex = -1;
 int currentLogIndex = 0;
+    std::string filename2;
+    std::string filename1;
+    std::stringstream sstream;
+    std::stringstream sstream_in;
 string currentImageFile;
 //we'll hold the directory data here
 vector<string> posLabels;
 //a rectangle to masure the mouse movement
-Rect mouseBox;
-bool drawing_box = false;
-bool train_box_on = false;
 //the matrix we'll use to display the images
 Mat currentImage;
 Mat sourceMat;
@@ -60,7 +62,6 @@ template <typename T> T fromString(string t){
     return out;
 }
 //=================================
-
 //forward decleration
 void loadNext();
 
@@ -109,8 +110,8 @@ void listDir(const char *destination, vector<string> &labels ) {
 int getLastSavedLogIndex() {
 
     ifstream file;
-    string filename = LOG_FILE_NAME;
-    file.open(filename.c_str());
+    string filename1 = LOG_FILE_NAME;
+    file.open(filename1.c_str());
 
     int index = 0;
     string line;
@@ -129,94 +130,38 @@ int getLastSavedLogIndex() {
 // pos/img1.jpg  1  140 100 45 45
 void saveCurrentImage() {
 //construct a string based on the current file name, index and the mouse box rect
-  string out = toString(POS_IMAGES_FOLDER) + currentImageFile +"  " + toString(1 )+ "  " + toString(mouseBox.x) + " " + toString(mouseBox.y) + " " + toString(mouseBox.x+mouseBox.width) + " " + toString(mouseBox.y+mouseBox.height);
+  string out = toString(POS_IMAGES_FOLDER) + currentImageFile +"  " + toString(1 )+ "  " + toString(0) + " " + toString(0) + " " + toString(50) + " " + toString(50);
   ofstream myfile;
   myfile.open (LOG_FILE_NAME, fstream::in | fstream::out | fstream::app);
   myfile << out + "\n";
   myfile.close();
+        sstream_in<<"pospre/apple"<<currentIndex<<".jpg";
+        sstream_in>>filename1;
+        sstream_in.clear();
+        IplImage *src = cvLoadImage(filename1.c_str());
+        IplImage *desc;  
+        CvSize sz;  
+        if(src)  
+        {  
+            sz.width = 50;  
+            sz.height = 50;  
+            desc = cvCreateImage(sz,src->depth,src->nChannels);  
+            cvResize(src,desc,CV_INTER_CUBIC);  
+            std::cout << desc->height << std::endl <<desc->width << std::endl;
+            sstream<<"pos/apple"<<currentIndex<<".jpg";
+            sstream>>filename2;
+            sstream.clear();
+            cvSaveImage(filename2.c_str(),desc);
+
+            cvWaitKey(0);  
+
+      
+            cvReleaseImage(&src);  
+            cvReleaseImage(&desc);  
+
+         }
 }
 
-
-//highlight the selected area and display the cta on top
-void highlight( Mat img, Rect mouseRect){
-    rectangle(img, mouseRect, CV_RGB(255,255,0), 2, CV_AA);
-    putText(img, CAPTURE_CTA, Point( mouseRect.x, mouseRect.y - 10 ),
-    CV_FONT_HERSHEY_TRIPLEX, 0.35, cvScalar(255,255,255), 0, CV_AA);
-}
-
-
-//handle the mouse events
-void onMouse(int event, int x, int y, int, void*) {
-
-    switch( event ){
-        //draw the rectangle if the mouse was clicked befor the move
-		case CV_EVENT_MOUSEMOVE:
-			if( drawing_box ){
-				mouseBox.width = x-mouseBox.x;
-				mouseBox.height = y-mouseBox.y;
-			}
-			break;
-
-        //on mouse down:
-        //either define a new rectangle
-        //or save the current one
-		case CV_EVENT_LBUTTONDOWN:
-		     if (train_box_on) {
-                //check if the click was inside the train box
-                if ( x >= mouseBox.x && x <= mouseBox.x + mouseBox.width ) {
-                    if ( y >= mouseBox.y && y <= mouseBox.y + mouseBox.height  ) {
-//                            snap the pictuer and load the next image
-                            saveCurrentImage();
-//                            and load the next one
-                            loadNext();
-                    }
-                }
-            }
-            //if clicked out side the current rectangle,
-            //start drawing a new one instead
-            drawing_box = true;
-			mouseBox = Rect( x, y, 0, 0 );
-//			reset the current image to the original
-            sourceMat.copyTo(currentImage);
-			break;
-
-        //on mouse up
-        //finish the rect and draw it on the image
-		case CV_EVENT_LBUTTONUP:
-			drawing_box = false;
-			if( mouseBox.width < 0 ){
-				mouseBox.x += mouseBox.width;
-				mouseBox.width *= -1;
-			}
-			if( mouseBox.height < 0 ){
-				mouseBox.y += mouseBox.height;
-				mouseBox.height *= -1;
-			}
-
-//            if we have a valid rect lets draw it on the image
-            if (mouseBox.width > 0 && mouseBox.height > 0 ) {
-                train_box_on = true;
-                highlight( currentImage, mouseBox );
-            } else {
-                //or set the mouse rect to invald
-                mouseBox  = Rect(-1,-1,-1,-1);
-                train_box_on = false;
-            }
-			imshow(WINDOW_NAME, currentImage);
-			break;
-	}
-
-}
-
-//load an image and set it as the current one
-void loadImage(String filename) {
-    sourceMat = imread(filename, 1);
-    sourceMat.copyTo(currentImage);
-    //display the image in our app window
-    imshow(WINDOW_NAME, currentImage);
-    //and set the mouse callbacks
-    setMouseCallback(WINDOW_NAME, onMouse, 0);
-}
 
 //load the next item on the list
 //or shutdown the app if the training is completed
@@ -228,21 +173,17 @@ void loadNext() {
         //up the indexes
         currentLogIndex++;
         currentIndex++;
-        cout << "loading image " <<  currentIndex + 1  << " of " << len << endl;
         stringstream  stream(posLabels.at(currentIndex));
         stream >> currentImageFile;
-        loadImage(POS_IMAGES_DIR + currentImageFile);
     } else if ( currentIndex > len ) {
         //done with training, lets shutdown.
-        cvDestroyWindow( WINDOW_NAME );
-        cout << "--> Training completed " << currentIndex + 1 << " of " << len << endl;
     }
 }
 
 
 int main(int argc, char *argv[]) {
-    //print the app name
-    cout <<  APP_NAME << endl;
+    int i;
+    for(i=0;i<50;i++) {
     //list the files in our pos images dir
     listDir(POS_IMAGES_DIR, posLabels);
 
@@ -252,10 +193,7 @@ int main(int argc, char *argv[]) {
 
     //load the next - first item
     loadNext();
-
-    while (true) {
-        int key = waitKey(200);
-        if (key == 27) break;
+    saveCurrentImage();
     }
 
     return 0;

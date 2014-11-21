@@ -1,0 +1,57 @@
+//the directory to look for images in
+const char *POS_IMAGES_DIR = "./pos/";
+const char *POS_IMAGES_FOLDER = "pos/";
+//the file extention we use
+const char *IMAGES_FORMAT = "*.jpg";
+//the log file name
+const char *LOG_FILE_NAME = "./pos.txt";
+    #include <stdio.h>  
+    #include <cv.h>  
+    #include <cxcore.h>  
+    #include <highgui.h>
+    #include <string>  
+    #include <vector>
+    #include <iostream>
+    #include <fstream>
+    #include <vector>
+      
+    #pragma comment(lib, "cv.lib")  
+    #pragma comment(lib, "cxcore.lib")  
+    #pragma comment(lib, "highgui.lib")  
+
+    int i=1;
+    std::string filename2;
+    std::stringstream sstream;
+    int main(int argc,char **argv)  
+    {  
+        IplImage *src = cvLoadImage("apple.jpg");  
+        IplImage *desc;  
+        CvSize sz;  
+        double scale = 0.5;  
+        if(src)  
+        {  
+            sz.width = 50;  
+            sz.height = 50;  
+            desc = cvCreateImage(sz,src->depth,src->nChannels);  
+            cvResize(src,desc,CV_INTER_CUBIC);  
+            std::cout << desc->height << std::endl <<desc->width << std::endl;
+            sstream<<"apple"<<i<<".jpg";
+            sstream>>filename2;
+            sstream.clear();
+            cvSaveImage(filename2.c_str(),desc);
+            cvNamedWindow("src",CV_WINDOW_AUTOSIZE);  
+            cvNamedWindow("desc",CV_WINDOW_AUTOSIZE);  
+            cvShowImage("src",src);  
+            cvShowImage("desc",desc);  
+            cvWaitKey(0);  
+
+      
+            cvReleaseImage(&src);  
+            cvReleaseImage(&desc);  
+            cvDestroyWindow("src");  
+            cvDestroyWindow("desc");  
+
+            return 0;  
+        }  
+        return -1;  
+    }  

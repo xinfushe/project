@@ -1,4 +1,4 @@
 all:
-	g++ getapple.cpp `pkg-config --cflags --libs opencv` -o getapple
+	g++ Trainer3.cpp `pkg-config --cflags --libs opencv` -o Trainer3
 
 

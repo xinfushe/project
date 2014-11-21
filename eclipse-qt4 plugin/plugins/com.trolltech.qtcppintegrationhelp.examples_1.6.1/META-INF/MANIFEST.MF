@@ -1,7 +1,0 @@
-Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-Name: Qt Integrationhelp Examples
-Bundle-SymbolicName: com.trolltech.qtcppintegrationhelp.examples
-Bundle-Version: 1.6.1
-Bundle-Vendor: Nokia Corporation
-Fragment-Host: com.trolltech.qtcppintegrationhelp;bundle-version="1.6.1"

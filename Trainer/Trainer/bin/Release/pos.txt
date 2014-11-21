@@ -1,0 +1,3 @@
+pos/apple139.jpg  1  0 0 50 50
+pos/apple18.jpg  1  0 0 50 50
+pos/apple66.jpg  1  0 0 50 50

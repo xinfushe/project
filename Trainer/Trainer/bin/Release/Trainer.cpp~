@@ -10,12 +10,17 @@ const char *APP_NAME = "Personal Trainer - Image Trainer with OpenCV";
 const char *WINDOW_NAME = "Personal Trainer";
 const char *CAPTURE_CTA = "CLICK INSIDE TO TRAIN";
 
-#include <iostream>
-#include <fstream>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string>
-#include <vector>
+    #include <iostream>
+    #include <fstream>
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <string>
+    #include <vector>
+    #include <stdio.h>  
+    #include <cv.h>  
+    #include <cxcore.h>  
+    #include <highgui.h>
+    #include <string>  
 
 //include the opencv library
 #include "opencv2/opencv.hpp"
@@ -124,7 +129,7 @@ int getLastSavedLogIndex() {
 // pos/img1.jpg  1  140 100 45 45
 void saveCurrentImage() {
 //construct a string based on the current file name, index and the mouse box rect
-  string out = toString(POS_IMAGES_FOLDER) + currentImageFile +"  " + toString(currentLogIndex + 1 )+ "  " + toString(mouseBox.x) + " " + toString(mouseBox.y) + " " + toString(mouseBox.x+mouseBox.width) + " " + toString(mouseBox.y+mouseBox.height);
+  string out = toString(POS_IMAGES_FOLDER) + currentImageFile +"  " + toString(1 )+ "  " + toString(mouseBox.x) + " " + toString(mouseBox.y) + " " + toString(mouseBox.x+mouseBox.width) + " " + toString(mouseBox.y+mouseBox.height);
   ofstream myfile;
   myfile.open (LOG_FILE_NAME, fstream::in | fstream::out | fstream::app);
   myfile << out + "\n";

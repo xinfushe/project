@@ -57,7 +57,7 @@ Config::Config() :
     m_methodSet(false),
     m_startFrameSet(false),
     m_lastFrameSet(false),
-    m_trajectorySet(false),
+    m_trajectorySet(true),
     m_showDetectionsSet(false),
     m_showForegroundSet(false),
     m_thetaSet(false),

@@ -273,7 +273,7 @@ void Main::doWork()
         grey_ocl.upload(grey);
         //Alternative
         //
-        cv::ocl::cvtColor(color_ocl, grey_ocl, CV_BGR2GRAY);
+        //cv::ocl::cvtColor(color_ocl, grey_ocl, CV_BGR2GRAY);
         //
 
 
@@ -297,7 +297,7 @@ void Main::doWork()
             getCPUTick(&procInit);
             tld->processImage(img);
             getCPUTick(&procFinal);
-//             PRINT_TIMING("FrameProcTime", procInit, procFinal, "\n");
+            PRINT_TIMING("FrameProcTime", procInit, procFinal, "\n");
         }
         else
         {
@@ -366,7 +366,7 @@ void Main::doWork()
                 {
                     if(lastsharpness < sharpness)
                     {   
-                        printf("sharpness is %lf,lastsharpness is %lf,focus is %d,bestfocus is %d\n",sharpness,lastsharpness,focus,bestfocus);
+                        //printf("sharpness is %lf,lastsharpness is %lf,focus is %d,bestfocus is %d\n",sharpness,lastsharpness,focus,bestfocus);
                         if(sharpness > bestsharpness)
                         {
                             bestsharpness = sharpness;

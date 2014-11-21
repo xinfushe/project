@@ -89,6 +89,14 @@ void Trackbar1Handler (int pos, void* userdata)
 	gui_key = 'p';
 }
 
+void Button4Handler(int state, void* userdata)
+{
+	if (state == 0)
+	{
+		*(char*) userdata = 'd';
+	}
+}
+
 static string window_name_1;
 static CvFont font_1;
 static IplImage *img0_1;
@@ -233,6 +241,9 @@ void Gui::init(ImAcq* imAcq)
 
     const char* button3 = "Select Point to Detect";
     cvCreateButton(button3, Button3Handler,&gui_key,CV_PUSH_BUTTON,1);
+
+    const char* button4 = "Apple Detect";
+    cvCreateButton(button4, Button4Handler,&gui_key,CV_PUSH_BUTTON,1);
 }
 
 void GetImageSize(IplImage* img)

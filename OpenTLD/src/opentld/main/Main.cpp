@@ -611,7 +611,7 @@ void Main::doWork()
                 if(key == 'f')
                 {
                     CvRect box;
-                    const char* cascadeName = "/haarcascade_frontalface_alt.xml";
+                    const char* cascadeName = "/home/slilylsu/Desktop/project-repo/haarcascade_frontalface_alt.xml";
                     CascadeClassifier  cascade;
                     vector<Rect> faces;
                     if( !cascade.load( cascadeName )  )
@@ -636,6 +636,35 @@ void Main::doWork()
 
                     }
                 }
+                if(key == 'd')
+                {
+                    CvRect box;
+                    const char* cascadeName = "/home/slilylsu/Desktop/project-repo/haarcascade_frontalface_alt.xml";
+                    CascadeClassifier  cascade;
+                    vector<Rect> faces;
+                    if( !cascade.load( cascadeName )  )
+                    {
+                        printf("ERROR: Could not load classifier cascade: %s\n",cascadeName);
+                    }
+
+                    cascade.detectMultiScale(grey, faces, 1.1,
+                             3, 0 | CV_HAAR_SCALE_IMAGE,
+                             Size(30, 30), Size(0, 0));
+                    if(!faces.empty())
+                    {
+                        Rect r = faces[0];
+                        currRect=r;
+                        initsize = r.height;
+                        init = false;
+                        bestsharpness = 0;
+                        lastsharpness = 0;
+                        focus = 0;
+                        //
+                        tld->selectObject(grey, &r);
+
+                    }
+                }
+
             }
 
             if(saveDir != NULL)

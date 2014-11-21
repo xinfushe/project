@@ -1,6 +1,0 @@
-all:
-	g++ Trainer.cpp `pkg-config --cflags --libs opencv` -o TrainApple
-	./TrainApple
-	./opencv_creatsamples -vec pos.vec -info info.dat -num 10 -w 32 -h 32
-	./opencv_harrtraining -data data -vec pos.vec -bg bg.dat -nneg 100 -npos 10 -w 32 -h 32 -nstages 14
-	./opencv_performance -data data.xml -info info.dat -ni

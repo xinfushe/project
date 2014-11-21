@@ -32,6 +32,9 @@
 namespace tld
 {
 
+void GetImageSize(IplImage* img);
+
+
 class Gui
 {
 public:
@@ -40,14 +43,23 @@ public:
     void init(ImAcq* imAcq);
     void showImage(IplImage *image, IplImage *data);
     char getKey();
+    int getFocus(void);
+    //void Button1Handler(int state, void* userdata);
+    //void Button2Handler(int state, void* userdata);
+    //void Button3Handler(int state, void* userdata);
+    //void Trackbar1Handler (int pos, void* userdata);
     std::string windowName();
+
 
 private:
     std::string m_window_name;
     //
     std::string data_window_name;
     //
-    std::string test_window_name;
+    //const char* test_window_name;
+
+    //char gui_key;
+    //int gui_focus;
 };
 
 /**
@@ -58,6 +70,7 @@ private:
  * @return PROGRAM_EXIT if 'q' or 'Q' pressed, SUCCESS if everything went right
  */
 int getBBFromUser(IplImage *img, CvRect &rect, Gui *gui);
+int getPointFromUser(IplImage *img, CvRect &rect, Gui *gui);
 
 }
 

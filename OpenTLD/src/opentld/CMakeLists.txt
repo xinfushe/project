@@ -91,7 +91,7 @@ if(BUILD_QOPENTLD)
     set(QOPENTLD_SOURCES ${QOPENTLD_SOURCES} ${QOPENTLD_RCS_CPP} ${QOPENTLD_HEADERS_MOC} ${QOPENTLD_FORMS_HEADERS})
 
     add_executable(qopentld ${QOPENTLD_SOURCES})
-    target_link_libraries(qopentld main libopentld cvblobs config++ ${OpenCV_LIBS} ${QT_LIBRARIES} /usr/local/lib/beignet/libcl.so /usr/lib/x86_64-linux-gnu/libQt5Gui.so)
+    target_link_libraries(qopentld main libopentld cvblobs config++ ${OpenCV_LIBS} ${QT_LIBRARIES} /usr/local/lib/beignet/libcl.so)
     
     install(TARGETS qopentld DESTINATION bin)
 endif(BUILD_QOPENTLD)

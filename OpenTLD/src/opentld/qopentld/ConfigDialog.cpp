@@ -57,6 +57,7 @@ void ConfigDialog::changeEvent(QEvent *e)
 {
     QDialog::changeEvent(e);
 
+
     switch(e->type())
     {
     case QEvent::LanguageChange:

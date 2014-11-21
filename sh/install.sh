@@ -1,4 +1,6 @@
 #!/bin/sh
+sudo apt-get autoclean
+sudo apt-get autoremove
 
 sudo apt-get install gksu vim cmake g++ build-essential valgrind
 #beignet

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-sudo apt-get install gksu vim cmake g++ build-essential
+sudo apt-get install gksu vim cmake g++ build-essential valgrind
 #beignet
 sudo apt-get install libdrm-dev libxext6 libxext-dev libxfixes-dev libgl1-mesa-dev-lts-trusty libegl1-mesa-dev libedit-dev ocl-icd-dev ocl-icd-libopencl1
 #opencv

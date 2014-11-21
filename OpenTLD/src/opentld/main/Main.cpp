@@ -119,6 +119,7 @@ static int getFocus(int currsize,int lastsize,int bestfocus)
 void Main::doWork()
 {
 
+	/*
 	//OpenCL test
 	 //Initializing host memory
 		const size_t size = 12345678;
@@ -158,9 +159,13 @@ void Main::doWork()
 		delete[] res_h;
 		delete[] res_cpu;
 
+		*/
 	//end OpenCL test
 	Trajectory trajectory;
     IplImage *img = imAcqGetImg(imAcq);
+
+    //Get the image size
+    GetImageSize(img);
 
     //Create the matrices
     Mat color;
@@ -489,6 +494,32 @@ void Main::doWork()
                 char key = gui->getKey();
 
                 if(key == 'q') break;
+                if(key == 'p')
+                {
+                	//std::cout << "Focus is " << focus << "!!!!!!!!!!!!!!!!!!" << std::endl;
+                	focus = gui->getFocus();
+                	setFocus(fh,focus);
+                }
+
+                if(key == 'o')
+                {
+                    CvRect box;
+
+                    if(getPointFromUser(img, box, gui) == PROGRAM_EXIT)
+                    {
+                        break;
+                    }
+
+                    Rect r = Rect(box);
+                    currRect=r;
+                    initsize = r.height;
+                    init = false;
+                    bestsharpness = 0;
+                    lastsharpness = 0;
+                    focus = 0;
+                    //
+                    tld->selectObject(grey, &r);
+                }
 
                 /*
                 if(key == 'b')

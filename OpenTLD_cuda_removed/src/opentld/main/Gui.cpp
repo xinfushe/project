@@ -50,12 +50,12 @@ Gui::~Gui()
 
 void Gui::init(ImAcq* imAcq)
 {
-    cvNamedWindow(m_window_name.c_str(), 0/*CV_WINDOW_AUTOSIZE*/);
+    cvNamedWindow(m_window_name.c_str(), CV_WINDOW_AUTOSIZE);
     cvMoveWindow(m_window_name.c_str(), 0, 0);
     cvResizeWindow(m_window_name.c_str(),imAcq->width, imAcq->height);
     //
-    cvNamedWindow(data_window_name.c_str(), 0/*CV_WINDOW_AUTOSIZE*/);
-    cvMoveWindow(data_window_name.c_str(), 0, 0);
+    cvNamedWindow(data_window_name.c_str(), CV_WINDOW_AUTOSIZE);
+    cvMoveWindow(data_window_name.c_str(), 900, 0);
     //cvResizeWindow(m_window_name.c_str(),imAcq->width, imAcq->height);
     //
 }

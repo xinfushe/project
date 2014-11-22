@@ -118,7 +118,11 @@ static int getFocus(int currsize,int lastsize,int bestfocus)
 }
 void Main::doWork()
 {
-
+//	double freq = cvGetTickFrequency()*1000.0;
+//	double tic = cvGetTickCount();
+//	double toc = cvGetTickCount();
+//	double time = (toc - tic) / freq;
+//	std::cout << "GPU Total Time: " << time << " ms" << std::endl;
 	/*
 	//OpenCL test
 	 //Initializing host memory
@@ -167,6 +171,8 @@ void Main::doWork()
     //Get the image size
     GetImageSize(img);
 
+    //Initialize OpenCL
+//    ocl::getOpenCLDevices()
     //Create the matrices
     Mat color;
     cv::ocl::oclMat color_ocl;
@@ -264,11 +270,18 @@ void Main::doWork()
         tick_t procInit, procFinal;
         double tic = cvGetTickCount();
 
+        double freq = cvGetTickFrequency()*1000.0;
+
+
         img = imAcqGetImg(imAcq);
 
         //update the image matrices
         color = Mat(img);
+        double t1 = cvGetTickCount();
         color_ocl.upload(color);
+        double t2 = cvGetTickCount();
+        double time = (t2 - t1) / freq;
+        std::cout << "Color Upload Time: " << time << " ms" << std::endl;
         cvtColor(color, grey, CV_BGR2GRAY);
         grey_ocl.upload(grey);
         //Alternative
@@ -296,6 +309,7 @@ void Main::doWork()
 
             getCPUTick(&procInit);
             tld->processImage(img);
+            //tld->processImage(img, color, grey, color_ocl, grey_ocl);
             getCPUTick(&procFinal);
             PRINT_TIMING("FrameProcTime", procInit, procFinal, "\n");
         }
@@ -612,16 +626,20 @@ void Main::doWork()
                 {
                     CvRect box;
                     const char* cascadeName = "/home/slilylsu/Desktop/project-repo/haarcascade_frontalface_alt.xml";
-                    CascadeClassifier  cascade;
+                    //CascadeClassifier  cascade;
+                    ocl::OclCascadeClassifier cascade;
                     vector<Rect> faces;
                     if( !cascade.load( cascadeName )  )
                     {
                         printf("ERROR: Could not load classifier cascade: %s\n",cascadeName);
                     }
                     
-                    cascade.detectMultiScale(grey, faces, 1.1,
-                             3, 0 | CV_HAAR_SCALE_IMAGE,
-                             Size(30, 30), Size(0, 0));
+//                    cascade.detectMultiScale(grey, faces, 1.1,
+//                             3, 0 | CV_HAAR_SCALE_IMAGE,
+//                             Size(30, 30), Size(0, 0));
+                    cascade.detectMultiScale(grey_ocl, faces, 1.1,
+                                                 3, 0 | CV_HAAR_SCALE_IMAGE,
+                                                 Size(30, 30), Size(0, 0));
                     if(!faces.empty())
                     {
                         Rect r = faces[0];
@@ -638,31 +656,35 @@ void Main::doWork()
                 }
                 if(key == 'd')
                 {
-                    CvRect box;
-                    const char* cascadeName = "/home/slilylsu/Desktop/project-repo/haarcascade_frontalface_alt.xml";
-                    CascadeClassifier  cascade;
-                    vector<Rect> faces;
-                    if( !cascade.load( cascadeName )  )
-                    {
-                        printf("ERROR: Could not load classifier cascade: %s\n",cascadeName);
-                    }
+                	CvRect box;
+                	const char* cascadeName = "/home/slilylsu/Desktop/project-repo/orange.xml";
+                	//CascadeClassifier  cascade;
+                	ocl::OclCascadeClassifier cascade;
+                	vector<Rect> faces;
+                	if( !cascade.load( cascadeName )  )
+                	{
+                		printf("ERROR: Could not load classifier cascade: %s\n",cascadeName);
+                	}
 
-                    cascade.detectMultiScale(grey, faces, 1.1,
-                             3, 0 | CV_HAAR_SCALE_IMAGE,
-                             Size(30, 30), Size(0, 0));
-                    if(!faces.empty())
-                    {
-                        Rect r = faces[0];
-                        currRect=r;
-                        initsize = r.height;
-                        init = false;
-                        bestsharpness = 0;
-                        lastsharpness = 0;
-                        focus = 0;
-                        //
-                        tld->selectObject(grey, &r);
+//                    cascade.detectMultiScale(grey, faces, 1.1,
+//                             3, 0 | CV_HAAR_SCALE_IMAGE,
+//                             Size(30, 30), Size(0, 0));
+                	cascade.detectMultiScale(grey_ocl, faces, 1.1,
+                                             3, 0 | CV_HAAR_SCALE_IMAGE,
+                                             Size(30, 30), Size(0, 0));
+                	if(!faces.empty())
+                	{
+                		Rect r = faces[0];
+                		currRect=r;
+                		initsize = r.height;
+                		init = false;
+                		bestsharpness = 0;
+                		lastsharpness = 0;
+                		focus = 0;
+                		//
+                		tld->selectObject(grey, &r);
 
-                    }
+                	}
                 }
 
             }

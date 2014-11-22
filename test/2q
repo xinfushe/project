@@ -1,0 +1,14 @@
+#include <iostream>
+
+void f(int &a)
+{
+    a = 10;
+}
+
+int main()
+{
+    int a = 0;
+    f(a);
+    std::cout << a << std::endl;
+    return 0;
+}

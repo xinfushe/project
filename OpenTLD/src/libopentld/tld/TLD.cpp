@@ -107,12 +107,14 @@ void TLD::selectObject(const Mat &img, Rect *bb)
 }
 
 void TLD::processImage(const Mat &img)
+//void TLD::processImage(const Mat &img, const Mat &color, const Mat &grey, const cv::ocl::oclMat &color_ocl, const cv::ocl::oclMat &grey_ocl)
 {
     tick_t procInit, procFinal;
     storeCurrentData();
     Mat grey_frame;
     cvtColor(img, grey_frame, CV_RGB2GRAY);
     currImg = grey_frame; // Store new image , right after storeCurrentData();
+    //currImg = grey;
 
     if(trackerEnabled)
     {
@@ -126,6 +128,7 @@ void TLD::processImage(const Mat &img)
     {
         getCPUTick(&procInit);
         detectorCascade->detect(grey_frame);
+        //detectorCascade->detect(grey);
         getCPUTick(&procFinal);
         PRINT_TIMING("DetecTime", procInit, procFinal, ", ");
     }

@@ -289,8 +289,14 @@ void DetectorCascade::detect(const Mat &img)
     tick_t procInit, procFinal;
     //Prepare components
     //foregroundDetector->nextIteration(img); //Calculates foreground (DISABLED)
+
+    getCPUTick(&procInit);
     _varianceFilter->nextIteration(img); //Calculates integral images
+
     _ensembleClassifier->nextIteration(img);
+    getCPUTick(&procFinal);
+    PRINT_TIMING("Next Iteration Time: ", procInit, procFinal, ", ");
+
     getCPUTick(&procInit);
 
     int j = 0, k = 0;
@@ -351,10 +357,13 @@ void DetectorCascade::detect(const Mat &img)
     }
     std::cout << numWindows << " - " << j << " - " << k << " ";
     getCPUTick(&procFinal);
-//     PRINT_TIMING("ClsfyTime", procInit, procFinal, ", ");
+    PRINT_TIMING("Classify Time", procInit, procFinal, ", ");
 
     //Cluster
+    getCPUTick(&procInit);
     clustering->clusterConfidentIndices();
+    getCPUTick(&procFinal);
+    PRINT_TIMING("Cluster Time", procInit, procFinal, ", ");
 
     detectionResult->containsValidData = true;
 }

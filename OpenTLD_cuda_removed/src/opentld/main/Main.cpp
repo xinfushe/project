@@ -203,7 +203,7 @@ void Main::doWork()
     while(imAcqHasMoreFrames(imAcq))
     {
         tick_t procInit, procFinal;
-        double tic = cvGetTickCount();
+        //double tic = cvGetTickCount();
 
         //
         img = imAcqGetImg(imAcq);
@@ -228,19 +228,23 @@ void Main::doWork()
             cvtColor(cv::Mat(img), grey, CV_BGR2GRAY);
         }
 
+        double tic = cvGetTickCount();
         if(!skipProcessingOnce)
         {
         	//
         	//cv::ocl::oclMat oclimg = cv::ocl::oclMat(img);
-            getCPUTick(&procInit);
+            //getCPUTick(&procInit);
             tld->processImage(img);//
-            getCPUTick(&procFinal);
-//             PRINT_TIMING("FrameProcTime", procInit, procFinal, "\n");
+            //getCPUTick(&procFinal);
+            //PRINT_TIMING("FrameProcTime", procInit, procFinal, "\n");
         }
         else
         {
             skipProcessingOnce = false;
         }
+        double toc = (cvGetTickCount() - tic) / cvGetTickFrequency();
+
+        toc = toc / 1000000;
 
         if(printResults != NULL)
         {
@@ -254,9 +258,10 @@ void Main::doWork()
             }
         }
 
-        double toc = (cvGetTickCount() - tic) / cvGetTickFrequency();
+        // double toc = (cvGetTickCount() - tic) / cvGetTickFrequency();
 
-        toc = toc / 1000000;
+        // toc = toc / 1000000;
+        std::cout << "toc is " << toc*1000.0 << std::endl;
 
         float fps = 1 / toc;
 
@@ -266,7 +271,7 @@ void Main::doWork()
         	fps_array[i] = fps_array[i+1];
         	fps_array[fps_size - 1] = fps;
         }
-        data = drawFloatGraph(fps_array, fps_size, 0, 0.0, 30.0);
+        data = drawFloatGraph(fps_array, fps_size, 0, 0.0, 50.0);
         //
 
         int confident = (tld->currConf >= threshold) ? 1 : 0;
@@ -300,7 +305,12 @@ void Main::doWork()
                 //
                 //cv::ocl::oclMat oclimg = cv::ocl::oclMat(img);
                 //Should there be a space between imgt and currRect?
+                getCPUTick(&procInit);
                 double sharpness = contrast_measure(cv::ocl::oclMat(imgt) (currRect));//TODO
+                
+            
+            getCPUTick(&procFinal);
+            PRINT_TIMING("FocusTime", procInit, procFinal, "\n");
                 printf("sharpness is %lf\n",sharpness);
                 if(!init)
                 {

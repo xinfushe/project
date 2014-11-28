@@ -40,6 +40,7 @@
 #include "opencv2/objdetect/objdetect.hpp"
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
+#include "opencv2/features2d/features2d.hpp"
 
 //
 #include "ocl.cpp"
@@ -50,14 +51,24 @@
 using namespace tld;
 using namespace cv;
 
-double contrast_measure(const Mat& img)
+//double contrast_measure(const Mat& img)
+//{
+//    Mat dx,dy;
+//    Sobel(img,dx,CV_32F,1,0,3);
+//    Sobel(img,dy,CV_32F,0,1,3);
+//    magnitude(dx,dy,dx);
+//    return sum(dx)[0]/(img.cols*img.rows);
+//}
+
+double contrast_measure(const ocl::oclMat& img)
 {
-    Mat dx,dy;
-    Sobel(img,dx,CV_32F,1,0,3);
-    Sobel(img,dy,CV_32F,0,1,3);
-    magnitude(dx,dy,dx);
-    return sum(dx)[0]/(img.cols*img.rows);
+    ocl::oclMat dx,dy;
+    ocl::Sobel(img,dx,CV_32F,1,0,3);
+    ocl::Sobel(img,dy,CV_32F,0,1,3);
+    ocl::magnitude(dx,dy,dx);
+    return ocl::sum(dx)[0]/(img.cols*img.rows);
 }
+
 static int xioctl(int fh, int request, void *arg)
 {
         int r;
@@ -261,33 +272,39 @@ void Main::doWork()
     int focus = 0;
 
     double bestsharpness=0,lastsharpness=0;
-    int bestfocus=0,initsize,lastsize,focusCount=0,focusChange = 5,initfocus = 0,errorcount=0,focusend=200;
+    int bestfocus=0,initsize,lastsize,focusCount=0,focusChange = 1,initfocus = 0,errorcount=0,focusend=200;
     bool init = false,changing = false;
     setFocus(fh,focus);
 
     while(imAcqHasMoreFrames(imAcq))
     {
+
         tick_t procInit, procFinal;
-        double tic = cvGetTickCount();
+        getCPUTick(&procInit);
+//        double tic = cvGetTickCount();
 
         double freq = cvGetTickFrequency()*1000.0;
 
-
+        getCPUTick(&procInit);
         img = imAcqGetImg(imAcq);
+        getCPUTick(&procFinal);
+        PRINT_TIMING("Update Time", procInit, procFinal, "\n");
 
         //update the image matrices
+
         color = Mat(img);
-        double t1 = cvGetTickCount();
         color_ocl.upload(color);
-        double t2 = cvGetTickCount();
-        double time = (t2 - t1) / freq;
-        std::cout << "Color Upload Time: " << time << " ms" << std::endl;
         cvtColor(color, grey, CV_BGR2GRAY);
+
+
         grey_ocl.upload(grey);
+
+
         //Alternative
         //
         //cv::ocl::cvtColor(color_ocl, grey_ocl, CV_BGR2GRAY);
         //
+
 
 
         if(!reuseFrameOnce)
@@ -304,19 +321,24 @@ void Main::doWork()
             cvtColor(cv::Mat(img), grey, CV_BGR2GRAY);
         }
 
+
+        double tic = cvGetTickCount();
         if(!skipProcessingOnce)
         {
 
-            getCPUTick(&procInit);
+            //getCPUTick(&procInit);
             tld->processImage(img);
             //tld->processImage(img, color, grey, color_ocl, grey_ocl);
-            getCPUTick(&procFinal);
-            PRINT_TIMING("FrameProcTime", procInit, procFinal, "\n");
+            //getCPUTick(&procFinal);
+            //PRINT_TIMING("FrameProcTime", procInit, procFinal, "\n");
+
         }
         else
         {
             skipProcessingOnce = false;
         }
+        double toc = (cvGetTickCount() - tic) / cvGetTickFrequency();
+        toc = toc / 1000000;
 
         if(printResults != NULL)
         {
@@ -330,9 +352,13 @@ void Main::doWork()
             }
         }
 
-        double toc = (cvGetTickCount() - tic) / cvGetTickFrequency();
+//        double toc = (cvGetTickCount() - tic) / cvGetTickFrequency();
+//
+//        toc = toc / 1000000;
 
-        toc = toc / 1000000;
+
+
+        cout << "toc is " << toc*1000.0 << endl;
 
         float fps = 1 / toc;
 
@@ -342,7 +368,7 @@ void Main::doWork()
         	fps_array[i] = fps_array[i+1];
         	fps_array[fps_size - 1] = fps;
         }
-        data = drawFloatGraph(fps_array, fps_size, 0, 0.0, 30.0);
+        data = drawFloatGraph(fps_array, fps_size, 0, 0.0, 50.0);
         //
 
         int confident = (tld->currConf >= threshold) ? 1 : 0;
@@ -365,7 +391,7 @@ void Main::doWork()
             CvScalar blue = CV_RGB(0, 0, 255);  
             CvScalar black = CV_RGB(0, 0, 0);
             CvScalar white = CV_RGB(255, 255, 255);
-            Mat imgt = img;
+            //Mat imgt = img;
             Rect currRect;
             if(tld->currBB != NULL)
             {
@@ -374,7 +400,12 @@ void Main::doWork()
                 
                 currRect = *(tld->currBB);
 
-                double sharpness = contrast_measure(imgt (currRect));//TODO
+                double t1 = cvGetTickCount();
+                //double sharpness = contrast_measure(imgt (currRect));//TODO
+                double sharpness = contrast_measure(color_ocl (currRect));
+                double t2 = cvGetTickCount();
+                double time = (t2 - t1) / freq;
+                std::cout << "Contrast Measure Time: " << time << " ms" << std::endl;
                 printf("sharpness is %lf\n",sharpness);
                 if(!init)
                 {
@@ -485,8 +516,8 @@ void Main::doWork()
 			}
             CvFont font;
             cvInitFont(&font, CV_FONT_HERSHEY_SIMPLEX, .5, .5, 0, 1, 8);
-            cvRectangle(img, cvPoint(0, 0), cvPoint(img->width, 50), black, CV_FILLED, 8, 0);
-            cvPutText(img, string, cvPoint(25, 25), &font, white);
+            //cvRectangle(img, cvPoint(0, 0), cvPoint(img->width, 50), black, CV_FILLED, 8, 0);
+            //cvPutText(img, string, cvPoint(25, 25), &font, white);
 
             if(showForeground)
             {
@@ -657,8 +688,8 @@ void Main::doWork()
                 if(key == 'd')
                 {
                 	CvRect box;
-                	const char* cascadeName = "/home/slilylsu/Desktop/project-repo/orange.xml";
-                	//CascadeClassifier  cascade;
+                	const char* cascadeName = "/home/slilylsu/Desktop/project-repo/apple_23_1sha.xml";
+                	//CascadeClassifier  cascade;q
                 	ocl::OclCascadeClassifier cascade;
                 	vector<Rect> faces;
                 	if( !cascade.load( cascadeName )  )
@@ -670,7 +701,7 @@ void Main::doWork()
 //                             3, 0 | CV_HAAR_SCALE_IMAGE,
 //                             Size(30, 30), Size(0, 0));
                 	cascade.detectMultiScale(grey_ocl, faces, 1.1,
-                                             3, 0 | CV_HAAR_SCALE_IMAGE,
+                                             3,0,
                                              Size(30, 30), Size(0, 0));
                 	if(!faces.empty())
                 	{

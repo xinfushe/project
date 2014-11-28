@@ -289,8 +289,11 @@ void DetectorCascade::detect(const Mat &img)
     tick_t procInit, procFinal;
     //Prepare components
     //foregroundDetector->nextIteration(img); //Calculates foreground (DISABLED)
+    getCPUTick(&procInit);
     _varianceFilter->nextIteration(img); //Calculates integral images
     _ensembleClassifier->nextIteration(img);
+    getCPUTick(&procFinal);
+    PRINT_TIMING("ClsfyTime", procInit, procFinal, ", ");
     getCPUTick(&procInit);
 
     int j = 0, k = 0;

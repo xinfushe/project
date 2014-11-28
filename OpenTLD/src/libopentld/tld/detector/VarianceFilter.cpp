@@ -29,6 +29,9 @@
 #include "IntegralImage.h"
 #include "DetectorCascade.h"
 
+//
+#include "Timing.h"
+
 using namespace cv;
 
 namespace tld
@@ -75,11 +78,32 @@ void VarianceFilter::nextIteration(const cv::Mat &img)
 
     release();
 
-    integralImg = new IntegralImage<int>(img.size());
-    integralImg->calcIntImg(img);
+//    integralImg = new IntegralImage<int>(img.size());
+//    //tick_t procInit, procFinal;
+//    //getCPUTick(&procInit);
+//    integralImg->calcIntImg(img);
+//    integralImg_squared = new IntegralImage<long long>(img.size());
+//    integralImg_squared->calcIntImg(img, true);
+//    //getCPUTick(&procFinal);
+//    //PRINT_TIMING("Variance Calculation Time: ", procInit, procFinal, ", ");
+    tick_t procInit, procFinal;
+    getCPUTick(&procInit);
+    Mat img_integral, img_integral_squared;
+    ocl::oclMat img_ocl, img_integral_ocl, img_integral_squared_ocl;
+    img_ocl.upload(img);
+    ocl::integral(img_ocl,img_integral_ocl, img_integral_squared_ocl);
+    img_integral_ocl.download(img_integral);
+    img_integral_squared_ocl.download(img_integral_squared);
 
+    integralImg = new IntegralImage<int>(img.size());
     integralImg_squared = new IntegralImage<long long>(img.size());
-    integralImg_squared->calcIntImg(img, true);
+    for(int i = 0; i < img.rows * img.cols; i ++)
+    {
+    	integralImg->data[i] = (int)img_integral.data[i];
+    	integralImg_squared->data[i] = (long long)img_integral_squared.data[i];
+    }
+    getCPUTick(&procFinal);
+    PRINT_TIMING("Variance Calculation Ocl Time: ", procInit, procFinal, ", ");
 }
 
 bool VarianceFilter::filter(int i)

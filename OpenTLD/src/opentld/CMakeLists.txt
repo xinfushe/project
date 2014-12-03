@@ -34,12 +34,12 @@ target_link_libraries(main libopentld cvblobs config++ ${OpenCV_LIBS})
 
 #-------------------------------------------------------------------------------
 # opentld
-add_executable(opentld
+add_executable(opentld_ocl
     OpenTLD.cpp)
 
-target_link_libraries(opentld main libopentld cvblobs config++ ${OpenCV_LIBS} /usr/local/lib/beignet/libcl.so)
+target_link_libraries(opentld_ocl main libopentld cvblobs config++ ${OpenCV_LIBS} /usr/local/lib/beignet/libcl.so)
 
-install(TARGETS opentld DESTINATION bin)
+install(TARGETS opentld_ocl DESTINATION bin)
 
 
 
@@ -90,9 +90,9 @@ if(BUILD_QOPENTLD)
     
     set(QOPENTLD_SOURCES ${QOPENTLD_SOURCES} ${QOPENTLD_RCS_CPP} ${QOPENTLD_HEADERS_MOC} ${QOPENTLD_FORMS_HEADERS})
 
-    add_executable(qopentld ${QOPENTLD_SOURCES})
-    target_link_libraries(qopentld main libopentld cvblobs config++ ${OpenCV_LIBS} ${QT_LIBRARIES} /usr/local/lib/beignet/libcl.so)
+    add_executable(qopentld_ocl ${QOPENTLD_SOURCES})
+    target_link_libraries(qopentld_ocl main libopentld cvblobs config++ ${OpenCV_LIBS} ${QT_LIBRARIES} /usr/local/lib/beignet/libcl.so)
     
-    install(TARGETS qopentld DESTINATION bin)
+    install(TARGETS qopentld_ocl DESTINATION bin)
 endif(BUILD_QOPENTLD)
 

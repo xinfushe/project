@@ -44,6 +44,8 @@ public:
     void showImage(IplImage *image, IplImage *data);
     char getKey();
     int getFocus(void);
+    int getExposure(void);
+    bool getManualExposure(void);
     //void Button1Handler(int state, void* userdata);
     //void Button2Handler(int state, void* userdata);
     //void Button3Handler(int state, void* userdata);

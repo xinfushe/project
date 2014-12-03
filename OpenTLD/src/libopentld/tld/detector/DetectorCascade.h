@@ -60,6 +60,7 @@ public:
     virtual void release();
     virtual void cleanPreviousData();
     virtual void detect(const cv::Mat &img);
+    virtual void detect(const cv::Mat &img, const cv::ocl::oclMat &img_ocl);
 };
 
 } /* namespace tld */

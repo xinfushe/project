@@ -303,6 +303,103 @@ void DetectorCascade::detect(const Mat &img)
     #pragma omp parallel for
 
     for(int i = 0; i < numWindows; i++)
+    {
+        /*
+         * Foreground detection disabled
+         *
+        int *window = &windows[TLD_WINDOW_SIZE * i];
+
+        if(foregroundDetector->isActive())
+        {
+            bool isInside = false;
+
+            for(size_t j = 0; j < detectionResult->fgList->size(); j++)
+            {
+
+                int bgBox[4];
+                tldRectToArray(detectionResult->fgList->at(j), bgBox);
+
+                if(tldIsInside(window, bgBox))  //TODO: This is inefficient and should be replaced by a quadtree
+                {
+                    isInside = true;
+                }
+            }
+
+            if(!isInside)
+            {
+                detectionResult->posteriors[i] = 0;
+                continue;
+            }
+        }
+        */
+
+        if(!_varianceFilter->filter(i))
+        {
+            detectionResult->posteriors[i] = 0;
+            continue;
+        }
+        j++;
+
+        if(!_ensembleClassifier->filter(i))
+        {
+            continue;
+        }
+        k++;
+
+        if(!_nnClassifier->filter(img, i))
+        {
+            continue;
+        }
+
+        detectionResult->confidentIndices->push_back(i);
+
+
+    }
+    std::cout << numWindows << " - " << j << " - " << k << " ";
+    getCPUTick(&procFinal);
+    PRINT_TIMING("Classify Time", procInit, procFinal, ", ");
+
+    //Cluster
+    getCPUTick(&procInit);
+    clustering->clusterConfidentIndices();
+    getCPUTick(&procFinal);
+    PRINT_TIMING("Cluster Time", procInit, procFinal, ", ");
+
+    detectionResult->containsValidData = true;
+}
+
+void DetectorCascade::detect(const Mat &img, const ocl::oclMat &img_ocl)
+{
+    //For every bounding box, the output is confidence, pattern, variance
+
+    VarianceFilter * _varianceFilter = dynamic_cast<VarianceFilter *>(varianceFilter);
+    EnsembleClassifier * _ensembleClassifier = dynamic_cast<EnsembleClassifier *>(ensembleClassifier);
+    NNClassifier * _nnClassifier = dynamic_cast<NNClassifier *>(nnClassifier);
+
+    detectionResult->reset();
+
+    if(!initialised)
+    {
+        return;
+    }
+
+    tick_t procInit, procFinal;
+    //Prepare components
+    //foregroundDetector->nextIteration(img); //Calculates foreground (DISABLED)
+
+    getCPUTick(&procInit);
+    _varianceFilter->nextIteration(img, img_ocl); //Calculates integral images
+
+    _ensembleClassifier->nextIteration(img);
+    getCPUTick(&procFinal);
+    PRINT_TIMING("Next Iteration Time: ", procInit, procFinal, ", ");
+
+    getCPUTick(&procInit);
+
+    int j = 0, k = 0;
+    #pragma omp parallel for
+
+    for(int i = 0; i < numWindows; i++)
     {        
         /*
          * Foreground detection disabled

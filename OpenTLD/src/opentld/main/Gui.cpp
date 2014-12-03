@@ -37,6 +37,9 @@ using std::string;
 char gui_key;
 int gui_focus;
 bool gui_manualfocus;
+int gui_exposure;
+bool gui_manualexposure;
+bool gui_manualexposure_prev;
 static int image_size [2] = {0, 0};
 
 namespace tld
@@ -57,6 +60,7 @@ Gui::~Gui()
 {
 }
 
+//Face Detection
 void Button1Handler(int state, void* userdata)
 {
 	if (state == 0)
@@ -65,24 +69,8 @@ void Button1Handler(int state, void* userdata)
 	}
 }
 
+//Apple Detection
 void Button2Handler(int state, void* userdata)
-{
-	if (state == 0)
-	{
-		*(char*) userdata = 'r';
-	}
-}
-
-void Button3Handler(int state, void* userdata)
-{
-	if (state == 0)
-	{
-		*(char*) userdata = 'o';
-	}
-}
-
-
-void Button4Handler(int state, void* userdata)
 {
 	if (state == 0)
 	{
@@ -90,6 +78,25 @@ void Button4Handler(int state, void* userdata)
 	}
 }
 
+//Select Object to Detect
+void Button3Handler(int state, void* userdata)
+{
+	if (state == 0)
+	{
+		*(char*) userdata = 'r';
+	}
+}
+
+//Select Point to Detect
+void Button4Handler(int state, void* userdata)
+{
+	if (state == 0)
+	{
+		*(char*) userdata = 'o';
+	}
+}
+
+//Focus
 void Trackbar1Handler (int pos, void* userdata)
 {
 	const double max = 100.0;
@@ -104,6 +111,7 @@ void Trackbar1Handler (int pos, void* userdata)
 
 }
 
+//Manual Focus
 void Button5Handler(int state, void* userdata)
 {
 	if (state == 0)
@@ -113,6 +121,56 @@ void Button5Handler(int state, void* userdata)
 	else
 	{
 		*(bool*) userdata = true;
+	}
+	if(state == 0)
+	{
+		gui_key = 'p';
+	}
+}
+
+//Exposure
+void Trackbar2Handler (int pos, void* userdata)
+{
+	const double max = 2000.0;
+	const double min = 0.0;
+
+	*(int*) userdata = (int)(((double) pos/ 1000.0) * (max - min) + min);
+
+	if(gui_manualexposure == true)
+	{
+		gui_key = 'u';
+	}
+
+}
+
+//Manual Exposure
+void Button6Handler(int state, void* userdata)
+{
+
+	if(state == 0 && gui_manualexposure_prev == true)
+	{
+		gui_key = 'u';
+	}
+	gui_manualexposure_prev = state;
+
+	if (state == 0)
+	{
+		*(bool*) userdata = false;
+	}
+	else
+	{
+		*(bool*) userdata = true;
+	}
+
+
+}
+
+//Reset
+void Button7Handler(int state, void* userdata)
+{
+	if (state == 0)
+	{
+		*(char*) userdata = 'y';
 	}
 }
 
@@ -229,15 +287,29 @@ int getPointFromUser(IplImage *img, CvRect &rect, Gui *gui)
 
 int Gui::getFocus(void)
 {
-	std::cout << gui_focus << std::endl;
+	//std::cout << gui_focus << std::endl;
 	return gui_focus;
+}
+
+int Gui::getExposure(void)
+{
+	//std::cout << gui_exposure << std::endl;
+	return gui_exposure;
+}
+
+bool Gui::getManualExposure(void)
+{
+	return gui_manualexposure;
 }
 
 void Gui::init(ImAcq* imAcq)
 {
 	gui_key = '0';
-	gui_focus = 10;
+	gui_focus = 0;
 	gui_manualfocus = false;
+	gui_exposure = 500;
+	gui_manualexposure = false;
+	gui_manualexposure_prev = true;
 
     cvNamedWindow(m_window_name.c_str(), CV_WINDOW_AUTOSIZE);
     cvMoveWindow(m_window_name.c_str(), 0, 0);
@@ -254,20 +326,29 @@ void Gui::init(ImAcq* imAcq)
     const char* button1 = "Face Detection";
     cvCreateButton(button1, Button1Handler, &gui_key, CV_PUSH_BUTTON, 1);
 
-    const char* button2 = "Select Object To Detect";
-    cvCreateButton(button2, Button2Handler, &gui_key, CV_PUSH_BUTTON, 1);
+    const char* button2 = "Apple Detection";
+    cvCreateButton(button2, Button2Handler,&gui_key,CV_PUSH_BUTTON,1);
 
-    const char* button3 = "Select Point to Detect";
-    cvCreateButton(button3, Button3Handler,&gui_key,CV_PUSH_BUTTON,1);
+    const char* button3 = "Select Object To Detect";
+    cvCreateButton(button3, Button3Handler, &gui_key, CV_PUSH_BUTTON, 1);
 
-    const char* button4 = "Apple Detect";
+    const char* button4 = "Select Point to Detect";
     cvCreateButton(button4, Button4Handler,&gui_key,CV_PUSH_BUTTON,1);
 
-    int value = 500;
-    cvCreateTrackbar2( "Focus", NULL, &value, 1000,  Trackbar1Handler, &gui_focus);
+    int focus_value = 500;
+    cvCreateTrackbar2("Focus", NULL, &focus_value, 1000,  Trackbar1Handler, &gui_focus);
 
     const char* button5 = "Manual Focus";
     cvCreateButton(button5, Button5Handler, &gui_manualfocus, CV_CHECKBOX, 0);
+
+    int exposure_value = 500;
+    cvCreateTrackbar2("Exposure", NULL, &exposure_value, 1000,  Trackbar2Handler, &gui_exposure);
+
+    const char* button6 = "Manual Exposure";
+    cvCreateButton(button6, Button6Handler, &gui_manualexposure, CV_CHECKBOX, 0);
+
+    const char* button7 = "Reset";
+    cvCreateButton(button7, Button7Handler, &gui_key, CV_PUSH_BUTTON, 1);
 
 }
 

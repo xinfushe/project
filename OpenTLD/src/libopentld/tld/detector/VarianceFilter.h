@@ -54,6 +54,7 @@ public:
 
     void release();
     void nextIteration(const cv::Mat &img);
+    void nextIteration(const cv::Mat &img, const cv::ocl::oclMat &img_ocl);
     bool filter(int idx);
     float calcVariance(int *off);
 };

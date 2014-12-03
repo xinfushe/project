@@ -119,6 +119,79 @@ static void setFocus(int fh,int focus)
     }
     else printf("Set focus to %d successfully\n",focus);
 }
+
+void disableAutoExposure(int fh, bool &auto_exposure)
+{
+    struct v4l2_ext_controls ext_ctrls;
+    struct v4l2_ext_control ext_ctrl;
+    CLEAR(ext_ctrls);
+    CLEAR(ext_ctrl);
+    ext_ctrl.id = V4L2_CID_EXPOSURE_AUTO;
+    ext_ctrl.value = 1;
+    ext_ctrls.ctrl_class = V4L2_CTRL_ID2CLASS(ext_ctrl.id);
+    ext_ctrls.count = 1;
+    ext_ctrls.controls = &ext_ctrl;
+    if (-1 == xioctl (fh,VIDIOC_S_EXT_CTRLS, &ext_ctrls))
+    {
+    	perror ("VIDIOC_S_EXT_CTRLS");
+        printf("Failed disable auto exposure \n");
+        auto_exposure = true;
+        exit (EXIT_FAILURE);
+    }
+    else
+    {
+    	printf("Disable auto exposure successfully\n");
+    	auto_exposure = false;
+    }
+}
+
+void enableAutoExposure(int fh, bool &auto_exposure)
+{
+    struct v4l2_ext_controls ext_ctrls;
+    struct v4l2_ext_control ext_ctrl;
+    CLEAR(ext_ctrls);
+    CLEAR(ext_ctrl);
+    ext_ctrl.id = V4L2_CID_EXPOSURE_AUTO;
+    ext_ctrl.value = 0;
+    ext_ctrls.ctrl_class = V4L2_CTRL_ID2CLASS(ext_ctrl.id);
+    ext_ctrls.count = 1;
+    ext_ctrls.controls = &ext_ctrl;
+    if (-1 == xioctl (fh,VIDIOC_S_EXT_CTRLS, &ext_ctrls))
+    {
+    	perror ("VIDIOC_S_EXT_CTRLS");
+        printf("Failed enable auto exposure \n");
+        auto_exposure = false;
+        exit (EXIT_FAILURE);
+    }
+    else
+    {
+    	printf("Enable auto exposure successfully\n");
+    	auto_exposure = true;
+    }
+}
+
+static void setExposure(int fh, int exposure)
+{
+    struct v4l2_ext_controls ext_ctrls;
+    struct v4l2_ext_control ext_ctrl;
+    CLEAR(ext_ctrls);
+    CLEAR(ext_ctrl);
+
+    ext_ctrl.id = V4L2_CID_EXPOSURE_ABSOLUTE;
+    ext_ctrl.value = exposure;
+    ext_ctrls.ctrl_class = V4L2_CTRL_ID2CLASS(ext_ctrl.id);
+    ext_ctrls.count = 1;
+    ext_ctrls.controls = &ext_ctrl;
+    if (-1 == xioctl (fh,VIDIOC_S_EXT_CTRLS, &ext_ctrls))
+    {
+        perror ("VIDIOC_S_EXT_CTRLS");
+        printf("Failed set V4L2_CID_EXPOSURE_ABSOLUTE \n");
+        exit (EXIT_FAILURE);
+    }
+    else printf("Set exposure to %d successfully\n",exposure);
+}
+
+
 static int getFocus(int currsize,int lastsize,int bestfocus)
 {
     int res;
@@ -129,53 +202,7 @@ static int getFocus(int currsize,int lastsize,int bestfocus)
 }
 void Main::doWork()
 {
-//	double freq = cvGetTickFrequency()*1000.0;
-//	double tic = cvGetTickCount();
-//	double toc = cvGetTickCount();
-//	double time = (toc - tic) / freq;
-//	std::cout << "GPU Total Time: " << time << " ms" << std::endl;
-	/*
-	//OpenCL test
-	 //Initializing host memory
-		const size_t size = 12345678;
-		float* src_a_h = new float[size];
-		float* src_b_h = new float[size];
-		float* res_h = new float[size];
-		float* res_cpu = new float[size];
 
-		for (unsigned int i = 0; i < size; i++) {
-			src_a_h[i] = src_b_h[i] = 0.0f*i;
-		}
-
-		double freq = cvGetTickFrequency()*1000.0; //kHz
-		cout << "CPU Frequency: " << cvGetTickFrequency() << " MHz" << endl;
-		double tic = 0.0;
-		double toc = 0.0;
-		double time = 0.0;
-
-		gpu_init();
-		tic = cvGetTickCount();
-		vector_add_gpu(src_a_h, src_b_h, res_h, size);
-		toc = cvGetTickCount();
-		time = (toc - tic) / freq;
-		cout << "GPU Total Time: " << time << " ms" << endl;
-		gpu_release();
-
-
-		tic = cvGetTickCount();
-		vector_add_cpu(src_a_h, src_b_h, res_cpu, size);
-		toc = cvGetTickCount();
-		time = (toc - tic) / freq;
-		cout << "CPU Time: " << time << " ms" << endl;
-
-		//Release memory
-		delete[] src_a_h;
-		delete[] src_b_h;
-		delete[] res_h;
-		delete[] res_cpu;
-
-		*/
-	//end OpenCL test
 	Trajectory trajectory;
     IplImage *img = imAcqGetImg(imAcq);
 
@@ -276,6 +303,13 @@ void Main::doWork()
     bool init = false,changing = false;
     setFocus(fh,focus);
 
+
+    //Exposure init
+    bool auto_exposure = true;
+    //disableAutoExposure(fh, auto_exposure);
+    int exposure = 500;
+    //setExposure(fh, exposure);
+
     while(imAcqHasMoreFrames(imAcq))
     {
 
@@ -291,15 +325,16 @@ void Main::doWork()
 
         //update the image matrices
 
-        Mat temp = Mat(img, true);
+        //Mat temp = Mat(img, true);
         //color = Mat(img->height, img->width, CV_8UC1, (unsigned char*)img->imageData);
-        temp.convertTo(color, CV_8UC1);
+        //temp.convertTo(color, CV_8UC1);
+        color = Mat(img, false);
         color_ocl.upload(color);
-        cvtColor(color, grey, CV_BGR2GRAY);
+        //cvtColor(color, grey, CV_BGR2GRAY);
+        ocl::cvtColor(color_ocl, grey_ocl, CV_BGR2GRAY);
 
-
-        grey_ocl.upload(grey);
-
+        //grey_ocl.upload(grey);
+        grey_ocl.download(grey);
 
         //Alternative
         //
@@ -329,7 +364,7 @@ void Main::doWork()
 
             //getCPUTick(&procInit);
             //tld->processImage(img);
-        	tld->processImage(color);
+        	tld->processImage(color, color_ocl, grey, grey_ocl);
             //tld->processImage(img, color, grey, color_ocl, grey_ocl);
             //getCPUTick(&procFinal);
             //PRINT_TIMING("FrameProcTime", procInit, procFinal, "\n");
@@ -474,6 +509,9 @@ void Main::doWork()
                         focusCount=0;
                     }                    
                 }
+
+
+                //setExposure(fh, exposure);
 //                 {
 // //                    if(abs(currRect.height-lastsize) > 5)
 // //                    {
@@ -549,6 +587,32 @@ void Main::doWork()
                 	//std::cout << "Focus is " << focus << "!!!!!!!!!!!!!!!!!!" << std::endl;
                 	focus = gui->getFocus();
                 	setFocus(fh,focus);
+                }
+
+                if(key == 'u')
+                {
+                	//If manual adjust exposure enabled
+                	if(gui->getManualExposure() == true)
+                	{
+                		if(auto_exposure == true)
+                		{
+                			disableAutoExposure(fh, auto_exposure);
+                		}
+                		else
+                		{
+
+                		}
+                		setExposure(fh, gui->getExposure());
+                	}
+                	else
+                	{
+                		enableAutoExposure(fh, auto_exposure);
+                	}
+                }
+
+                if(key == 'y')
+                {
+                	tld->selectObject(grey, NULL);
                 }
 
                 if(key == 'o')

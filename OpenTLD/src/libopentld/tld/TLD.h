@@ -69,6 +69,7 @@ public:
     void release();
     void selectObject(const cv::Mat &img, cv::Rect *bb);
     void processImage(const cv::Mat &img);
+    void processImage(const cv::Mat &img, const cv::ocl::oclMat &img_ocl,const cv::Mat &grey, const cv::ocl::oclMat &grey_ocl);
     //void processImage(const cv::Mat &img,
     //		const cv::Mat &color,
     //		const cv::Mat &grey,

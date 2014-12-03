@@ -191,7 +191,7 @@ void Main::doWork()
     cv::ocl::oclMat grey_ocl;
 
     //Initialize the matirces
-    color = Mat(img);
+    color = Mat(img, true);
     color_ocl.upload(color);
     grey = Mat(img->height, img->width, CV_8UC1);
     cvtColor(color , grey, CV_BGR2GRAY);
@@ -272,7 +272,7 @@ void Main::doWork()
     int focus = 0;
 
     double bestsharpness=0,lastsharpness=0;
-    int bestfocus=0,initsize,lastsize,focusCount=0,focusChange = 1,initfocus = 0,errorcount=0,focusend=200;
+    int bestfocus=0,initsize,lastsize,focusCount=0,focusChange = 5,initfocus = 0,errorcount=0,focusend=200;
     bool init = false,changing = false;
     setFocus(fh,focus);
 
@@ -280,7 +280,6 @@ void Main::doWork()
     {
 
         tick_t procInit, procFinal;
-        getCPUTick(&procInit);
 //        double tic = cvGetTickCount();
 
         double freq = cvGetTickFrequency()*1000.0;
@@ -292,7 +291,9 @@ void Main::doWork()
 
         //update the image matrices
 
-        color = Mat(img);
+        Mat temp = Mat(img, true);
+        //color = Mat(img->height, img->width, CV_8UC1, (unsigned char*)img->imageData);
+        temp.convertTo(color, CV_8UC1);
         color_ocl.upload(color);
         cvtColor(color, grey, CV_BGR2GRAY);
 
@@ -327,7 +328,8 @@ void Main::doWork()
         {
 
             //getCPUTick(&procInit);
-            tld->processImage(img);
+            //tld->processImage(img);
+        	tld->processImage(color);
             //tld->processImage(img, color, grey, color_ocl, grey_ocl);
             //getCPUTick(&procFinal);
             //PRINT_TIMING("FrameProcTime", procInit, procFinal, "\n");
@@ -396,20 +398,23 @@ void Main::doWork()
             if(tld->currBB != NULL)
             {
                 CvScalar rectangleColor = (confident) ? blue : yellow;
-                cvRectangle(img, CvPoint(tld->currBB->tl()), CvPoint(tld->currBB->br()), rectangleColor, 8, 8, 0);
+                //define the rectangle of the detected object
+                cvRectangle(img, CvPoint(tld->currBB->tl()), CvPoint(tld->currBB->br()), rectangleColor, 4, 8, 0);
                 
                 currRect = *(tld->currBB);
 
-                double t1 = cvGetTickCount();
+                getCPUTick(&procInit);
                 //double sharpness = contrast_measure(imgt (currRect));//TODO
                 double sharpness = contrast_measure(color_ocl (currRect));
-                double t2 = cvGetTickCount();
-                double time = (t2 - t1) / freq;
-                std::cout << "Contrast Measure Time: " << time << " ms" << std::endl;
+                getCPUTick(&procFinal);
+                PRINT_TIMING("Contrast Measure Time", procInit, procFinal, ",");
+
                 printf("sharpness is %lf\n",sharpness);
+                //if init == false
                 if(!init)
                 {
-                    if(lastsharpness < sharpness)
+//                    if(lastsharpness < sharpness)
+                	if(sharpness > lastsharpness)
                     {   
                         //printf("sharpness is %lf,lastsharpness is %lf,focus is %d,bestfocus is %d\n",sharpness,lastsharpness,focus,bestfocus);
                         if(sharpness > bestsharpness)
@@ -516,8 +521,8 @@ void Main::doWork()
 			}
             CvFont font;
             cvInitFont(&font, CV_FONT_HERSHEY_SIMPLEX, .5, .5, 0, 1, 8);
-            //cvRectangle(img, cvPoint(0, 0), cvPoint(img->width, 50), black, CV_FILLED, 8, 0);
-            //cvPutText(img, string, cvPoint(25, 25), &font, white);
+            cvRectangle(img, cvPoint(0, 0), cvPoint(img->width, 50), black, CV_FILLED, 8, 0);
+            cvPutText(img, string, cvPoint(25, 25), &font, white);
 
             if(showForeground)
             {
@@ -688,7 +693,7 @@ void Main::doWork()
                 if(key == 'd')
                 {
                 	CvRect box;
-                	const char* cascadeName = "/home/slilylsu/Desktop/project-repo/apple_23_1sha.xml";
+                	const char* cascadeName = "/home/slilylsu/Desktop/project-repo/apple_23_1.xml";
                 	//CascadeClassifier  cascade;q
                 	ocl::OclCascadeClassifier cascade;
                 	vector<Rect> faces;

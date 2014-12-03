@@ -36,6 +36,7 @@ using std::string;
 
 char gui_key;
 int gui_focus;
+bool gui_manualfocus;
 static int image_size [2] = {0, 0};
 
 namespace tld
@@ -80,20 +81,38 @@ void Button3Handler(int state, void* userdata)
 	}
 }
 
-void Trackbar1Handler (int pos, void* userdata)
-{
-	const double max = 100.0;
-	const double min = -10.0;
-
-	*(int*) userdata = (int)(((double) pos/ 1000.0) * (max - min) + min);
-	gui_key = 'p';
-}
 
 void Button4Handler(int state, void* userdata)
 {
 	if (state == 0)
 	{
 		*(char*) userdata = 'd';
+	}
+}
+
+void Trackbar1Handler (int pos, void* userdata)
+{
+	const double max = 100.0;
+	const double min = -10.0;
+
+	*(int*) userdata = (int)(((double) pos/ 1000.0) * (max - min) + min);
+
+	if(gui_manualfocus == true)
+	{
+		gui_key = 'p';
+	}
+
+}
+
+void Button5Handler(int state, void* userdata)
+{
+	if (state == 0)
+	{
+		*(bool*) userdata = false;
+	}
+	else
+	{
+		*(bool*) userdata = true;
 	}
 }
 
@@ -218,6 +237,8 @@ void Gui::init(ImAcq* imAcq)
 {
 	gui_key = '0';
 	gui_focus = 10;
+	gui_manualfocus = false;
+
     cvNamedWindow(m_window_name.c_str(), CV_WINDOW_AUTOSIZE);
     cvMoveWindow(m_window_name.c_str(), 0, 0);
     //cvResizeWindow(m_window_name.c_str(),1800, 450);
@@ -236,14 +257,18 @@ void Gui::init(ImAcq* imAcq)
     const char* button2 = "Select Object To Detect";
     cvCreateButton(button2, Button2Handler, &gui_key, CV_PUSH_BUTTON, 1);
 
-    int value = 500;
-    cvCreateTrackbar2( "Focus", NULL, &value, 1000,  Trackbar1Handler, &gui_focus);
-
     const char* button3 = "Select Point to Detect";
     cvCreateButton(button3, Button3Handler,&gui_key,CV_PUSH_BUTTON,1);
 
     const char* button4 = "Apple Detect";
     cvCreateButton(button4, Button4Handler,&gui_key,CV_PUSH_BUTTON,1);
+
+    int value = 500;
+    cvCreateTrackbar2( "Focus", NULL, &value, 1000,  Trackbar1Handler, &gui_focus);
+
+    const char* button5 = "Manual Focus";
+    cvCreateButton(button5, Button5Handler, &gui_manualfocus, CV_CHECKBOX, 0);
+
 }
 
 void GetImageSize(IplImage* img)

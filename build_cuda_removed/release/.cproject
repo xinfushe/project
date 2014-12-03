@@ -1,0 +1,1404 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?fileVersion 4.0.0?>
+
+<cproject>
+<storageModule moduleId="org.eclipse.cdt.core.settings">
+<cconfiguration id="org.eclipse.cdt.core.default.config.1">
+<storageModule buildSystemId="org.eclipse.cdt.core.defaultConfigDataProvider" id="org.eclipse.cdt.core.default.config.1" moduleId="org.eclipse.cdt.core.settings" name="Configuration">
+<externalSettings/>
+<extensions>
+<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
+<extension id="org.eclipse.cdt.core.GNU_ELF" point="org.eclipse.cdt.core.BinaryParser">
+<attribute key="addr2line" value="addr2line"/>
+<attribute key="c++filt" value="c++filt"/>
+</extension>
+</extensions>
+</storageModule>
+<storageModule moduleId="org.eclipse.cdt.core.language.mapping">
+<project-mappings/>
+</storageModule>
+<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+<storageModule moduleId="org.eclipse.cdt.core.pathentry">
+<pathentry kind="src" path="[Source directory]"/>
+<pathentry excluding="[Source directory]/|**/CMakeFiles/" kind="out" path=""/>
+<pathentry kind="mac" name="QT_GUI_LIB" path="" value=""/>
+<pathentry kind="mac" name="QT_CORE_LIB" path="" value=""/>
+<pathentry kind="mac" name="__STDC__" path="" value="1"/>
+<pathentry kind="mac" name="__STDC_HOSTED__" path="" value="1"/>
+<pathentry kind="mac" name="__GNUC__" path="" value="4"/>
+<pathentry kind="mac" name="__GNUC_MINOR__" path="" value="8"/>
+<pathentry kind="mac" name="__GNUC_PATCHLEVEL__" path="" value="2"/>
+<pathentry kind="mac" name="__VERSION__" path="" value="&quot;4.8.2&quot;"/>
+<pathentry kind="mac" name="__ATOMIC_RELAXED" path="" value=" "/>
+<pathentry kind="mac" name="__ATOMIC_SEQ_CST" path="" value="5"/>
+<pathentry kind="mac" name="__ATOMIC_ACQUIRE" path="" value="2"/>
+<pathentry kind="mac" name="__ATOMIC_RELEASE" path="" value="3"/>
+<pathentry kind="mac" name="__ATOMIC_ACQ_REL" path="" value="4"/>
+<pathentry kind="mac" name="__ATOMIC_CONSUME" path="" value="1"/>
+<pathentry kind="mac" name="__FINITE_MATH_ONLY__" path="" value=" "/>
+<pathentry kind="mac" name="_LP64" path="" value="1"/>
+<pathentry kind="mac" name="__LP64__" path="" value="1"/>
+<pathentry kind="mac" name="__SIZEOF_INT__" path="" value="4"/>
+<pathentry kind="mac" name="__SIZEOF_LONG__" path="" value="8"/>
+<pathentry kind="mac" name="__SIZEOF_LONG_LONG__" path="" value="8"/>
+<pathentry kind="mac" name="__SIZEOF_SHORT__" path="" value="2"/>
+<pathentry kind="mac" name="__SIZEOF_FLOAT__" path="" value="4"/>
+<pathentry kind="mac" name="__SIZEOF_DOUBLE__" path="" value="8"/>
+<pathentry kind="mac" name="__SIZEOF_LONG_DOUBLE__" path="" value="16"/>
+<pathentry kind="mac" name="__SIZEOF_SIZE_T__" path="" value="8"/>
+<pathentry kind="mac" name="__CHAR_BIT__" path="" value="8"/>
+<pathentry kind="mac" name="__BIGGEST_ALIGNMENT__" path="" value="16"/>
+<pathentry kind="mac" name="__ORDER_LITTLE_ENDIAN__" path="" value="1234"/>
+<pathentry kind="mac" name="__ORDER_BIG_ENDIAN__" path="" value="4321"/>
+<pathentry kind="mac" name="__ORDER_PDP_ENDIAN__" path="" value="3412"/>
+<pathentry kind="mac" name="__BYTE_ORDER__" path="" value="__ORDER_LITTLE_ENDIAN__"/>
+<pathentry kind="mac" name="__FLOAT_WORD_ORDER__" path="" value="__ORDER_LITTLE_ENDIAN__"/>
+<pathentry kind="mac" name="__SIZEOF_POINTER__" path="" value="8"/>
+<pathentry kind="mac" name="__SIZE_TYPE__" path="" value="long unsigned int"/>
+<pathentry kind="mac" name="__PTRDIFF_TYPE__" path="" value="long int"/>
+<pathentry kind="mac" name="__WCHAR_TYPE__" path="" value="int"/>
+<pathentry kind="mac" name="__WINT_TYPE__" path="" value="unsigned int"/>
+<pathentry kind="mac" name="__INTMAX_TYPE__" path="" value="long int"/>
+<pathentry kind="mac" name="__UINTMAX_TYPE__" path="" value="long unsigned int"/>
+<pathentry kind="mac" name="__CHAR16_TYPE__" path="" value="short unsigned int"/>
+<pathentry kind="mac" name="__CHAR32_TYPE__" path="" value="unsigned int"/>
+<pathentry kind="mac" name="__SIG_ATOMIC_TYPE__" path="" value="int"/>
+<pathentry kind="mac" name="__INT8_TYPE__" path="" value="signed char"/>
+<pathentry kind="mac" name="__INT16_TYPE__" path="" value="short int"/>
+<pathentry kind="mac" name="__INT32_TYPE__" path="" value="int"/>
+<pathentry kind="mac" name="__INT64_TYPE__" path="" value="long int"/>
+<pathentry kind="mac" name="__UINT8_TYPE__" path="" value="unsigned char"/>
+<pathentry kind="mac" name="__UINT16_TYPE__" path="" value="short unsigned int"/>
+<pathentry kind="mac" name="__UINT32_TYPE__" path="" value="unsigned int"/>
+<pathentry kind="mac" name="__UINT64_TYPE__" path="" value="long unsigned int"/>
+<pathentry kind="mac" name="__INT_LEAST8_TYPE__" path="" value="signed char"/>
+<pathentry kind="mac" name="__INT_LEAST16_TYPE__" path="" value="short int"/>
+<pathentry kind="mac" name="__INT_LEAST32_TYPE__" path="" value="int"/>
+<pathentry kind="mac" name="__INT_LEAST64_TYPE__" path="" value="long int"/>
+<pathentry kind="mac" name="__UINT_LEAST8_TYPE__" path="" value="unsigned char"/>
+<pathentry kind="mac" name="__UINT_LEAST16_TYPE__" path="" value="short unsigned int"/>
+<pathentry kind="mac" name="__UINT_LEAST32_TYPE__" path="" value="unsigned int"/>
+<pathentry kind="mac" name="__UINT_LEAST64_TYPE__" path="" value="long unsigned int"/>
+<pathentry kind="mac" name="__INT_FAST8_TYPE__" path="" value="signed char"/>
+<pathentry kind="mac" name="__INT_FAST16_TYPE__" path="" value="long int"/>
+<pathentry kind="mac" name="__INT_FAST32_TYPE__" path="" value="long int"/>
+<pathentry kind="mac" name="__INT_FAST64_TYPE__" path="" value="long int"/>
+<pathentry kind="mac" name="__UINT_FAST8_TYPE__" path="" value="unsigned char"/>
+<pathentry kind="mac" name="__UINT_FAST16_TYPE__" path="" value="long unsigned int"/>
+<pathentry kind="mac" name="__UINT_FAST32_TYPE__" path="" value="long unsigned int"/>
+<pathentry kind="mac" name="__UINT_FAST64_TYPE__" path="" value="long unsigned int"/>
+<pathentry kind="mac" name="__INTPTR_TYPE__" path="" value="long int"/>
+<pathentry kind="mac" name="__UINTPTR_TYPE__" path="" value="long unsigned int"/>
+<pathentry kind="mac" name="__GXX_ABI_VERSION" path="" value="1002"/>
+<pathentry kind="mac" name="__SCHAR_MAX__" path="" value="127"/>
+<pathentry kind="mac" name="__SHRT_MAX__" path="" value="32767"/>
+<pathentry kind="mac" name="__INT_MAX__" path="" value="2147483647"/>
+<pathentry kind="mac" name="__LONG_MAX__" path="" value="9223372036854775807L"/>
+<pathentry kind="mac" name="__LONG_LONG_MAX__" path="" value="9223372036854775807LL"/>
+<pathentry kind="mac" name="__WCHAR_MAX__" path="" value="2147483647"/>
+<pathentry kind="mac" name="__WCHAR_MIN__" path="" value="(-__WCHAR_MAX__ - 1)"/>
+<pathentry kind="mac" name="__WINT_MAX__" path="" value="4294967295U"/>
+<pathentry kind="mac" name="__WINT_MIN__" path="" value="0U"/>
+<pathentry kind="mac" name="__PTRDIFF_MAX__" path="" value="9223372036854775807L"/>
+<pathentry kind="mac" name="__SIZE_MAX__" path="" value="18446744073709551615UL"/>
+<pathentry kind="mac" name="__INTMAX_MAX__" path="" value="9223372036854775807L"/>
+<pathentry kind="mac" name="__INTMAX_C(c)" path="" value="c ## L"/>
+<pathentry kind="mac" name="__UINTMAX_MAX__" path="" value="18446744073709551615UL"/>
+<pathentry kind="mac" name="__UINTMAX_C(c)" path="" value="c ## UL"/>
+<pathentry kind="mac" name="__SIG_ATOMIC_MAX__" path="" value="2147483647"/>
+<pathentry kind="mac" name="__SIG_ATOMIC_MIN__" path="" value="(-__SIG_ATOMIC_MAX__ - 1)"/>
+<pathentry kind="mac" name="__INT8_MAX__" path="" value="127"/>
+<pathentry kind="mac" name="__INT16_MAX__" path="" value="32767"/>
+<pathentry kind="mac" name="__INT32_MAX__" path="" value="2147483647"/>
+<pathentry kind="mac" name="__INT64_MAX__" path="" value="9223372036854775807L"/>
+<pathentry kind="mac" name="__UINT8_MAX__" path="" value="255"/>
+<pathentry kind="mac" name="__UINT16_MAX__" path="" value="65535"/>
+<pathentry kind="mac" name="__UINT32_MAX__" path="" value="4294967295U"/>
+<pathentry kind="mac" name="__UINT64_MAX__" path="" value="18446744073709551615UL"/>
+<pathentry kind="mac" name="__INT_LEAST8_MAX__" path="" value="127"/>
+<pathentry kind="mac" name="__INT8_C(c)" path="" value="c"/>
+<pathentry kind="mac" name="__INT_LEAST16_MAX__" path="" value="32767"/>
+<pathentry kind="mac" name="__INT16_C(c)" path="" value="c"/>
+<pathentry kind="mac" name="__INT_LEAST32_MAX__" path="" value="2147483647"/>
+<pathentry kind="mac" name="__INT32_C(c)" path="" value="c"/>
+<pathentry kind="mac" name="__INT_LEAST64_MAX__" path="" value="9223372036854775807L"/>
+<pathentry kind="mac" name="__INT64_C(c)" path="" value="c ## L"/>
+<pathentry kind="mac" name="__UINT_LEAST8_MAX__" path="" value="255"/>
+<pathentry kind="mac" name="__UINT8_C(c)" path="" value="c"/>
+<pathentry kind="mac" name="__UINT_LEAST16_MAX__" path="" value="65535"/>
+<pathentry kind="mac" name="__UINT16_C(c)" path="" value="c"/>
+<pathentry kind="mac" name="__UINT_LEAST32_MAX__" path="" value="4294967295U"/>
+<pathentry kind="mac" name="__UINT32_C(c)" path="" value="c ## U"/>
+<pathentry kind="mac" name="__UINT_LEAST64_MAX__" path="" value="18446744073709551615UL"/>
+<pathentry kind="mac" name="__UINT64_C(c)" path="" value="c ## UL"/>
+<pathentry kind="mac" name="__INT_FAST8_MAX__" path="" value="127"/>
+<pathentry kind="mac" name="__INT_FAST16_MAX__" path="" value="9223372036854775807L"/>
+<pathentry kind="mac" name="__INT_FAST32_MAX__" path="" value="9223372036854775807L"/>
+<pathentry kind="mac" name="__INT_FAST64_MAX__" path="" value="9223372036854775807L"/>
+<pathentry kind="mac" name="__UINT_FAST8_MAX__" path="" value="255"/>
+<pathentry kind="mac" name="__UINT_FAST16_MAX__" path="" value="18446744073709551615UL"/>
+<pathentry kind="mac" name="__UINT_FAST32_MAX__" path="" value="18446744073709551615UL"/>
+<pathentry kind="mac" name="__UINT_FAST64_MAX__" path="" value="18446744073709551615UL"/>
+<pathentry kind="mac" name="__INTPTR_MAX__" path="" value="9223372036854775807L"/>
+<pathentry kind="mac" name="__UINTPTR_MAX__" path="" value="18446744073709551615UL"/>
+<pathentry kind="mac" name="__FLT_EVAL_METHOD__" path="" value=" "/>
+<pathentry kind="mac" name="__DEC_EVAL_METHOD__" path="" value="2"/>
+<pathentry kind="mac" name="__FLT_RADIX__" path="" value="2"/>
+<pathentry kind="mac" name="__FLT_MANT_DIG__" path="" value="24"/>
+<pathentry kind="mac" name="__FLT_DIG__" path="" value="6"/>
+<pathentry kind="mac" name="__FLT_MIN_EXP__" path="" value="(-125)"/>
+<pathentry kind="mac" name="__FLT_MIN_10_EXP__" path="" value="(-37)"/>
+<pathentry kind="mac" name="__FLT_MAX_EXP__" path="" value="128"/>
+<pathentry kind="mac" name="__FLT_MAX_10_EXP__" path="" value="38"/>
+<pathentry kind="mac" name="__FLT_DECIMAL_DIG__" path="" value="9"/>
+<pathentry kind="mac" name="__FLT_MAX__" path="" value="3.40282346638528859812e+38F"/>
+<pathentry kind="mac" name="__FLT_MIN__" path="" value="1.17549435082228750797e-38F"/>
+<pathentry kind="mac" name="__FLT_EPSILON__" path="" value="1.19209289550781250000e-7F"/>
+<pathentry kind="mac" name="__FLT_DENORM_MIN__" path="" value="1.40129846432481707092e-45F"/>
+<pathentry kind="mac" name="__FLT_HAS_DENORM__" path="" value="1"/>
+<pathentry kind="mac" name="__FLT_HAS_INFINITY__" path="" value="1"/>
+<pathentry kind="mac" name="__FLT_HAS_QUIET_NAN__" path="" value="1"/>
+<pathentry kind="mac" name="__DBL_MANT_DIG__" path="" value="53"/>
+<pathentry kind="mac" name="__DBL_DIG__" path="" value="15"/>
+<pathentry kind="mac" name="__DBL_MIN_EXP__" path="" value="(-1021)"/>
+<pathentry kind="mac" name="__DBL_MIN_10_EXP__" path="" value="(-307)"/>
+<pathentry kind="mac" name="__DBL_MAX_EXP__" path="" value="1024"/>
+<pathentry kind="mac" name="__DBL_MAX_10_EXP__" path="" value="308"/>
+<pathentry kind="mac" name="__DBL_DECIMAL_DIG__" path="" value="17"/>
+<pathentry kind="mac" name="__DBL_MAX__" path="" value="((double)1.79769313486231570815e+308L)"/>
+<pathentry kind="mac" name="__DBL_MIN__" path="" value="((double)2.22507385850720138309e-308L)"/>
+<pathentry kind="mac" name="__DBL_EPSILON__" path="" value="((double)2.22044604925031308085e-16L)"/>
+<pathentry kind="mac" name="__DBL_DENORM_MIN__" path="" value="((double)4.94065645841246544177e-324L)"/>
+<pathentry kind="mac" name="__DBL_HAS_DENORM__" path="" value="1"/>
+<pathentry kind="mac" name="__DBL_HAS_INFINITY__" path="" value="1"/>
+<pathentry kind="mac" name="__DBL_HAS_QUIET_NAN__" path="" value="1"/>
+<pathentry kind="mac" name="__LDBL_MANT_DIG__" path="" value="64"/>
+<pathentry kind="mac" name="__LDBL_DIG__" path="" value="18"/>
+<pathentry kind="mac" name="__LDBL_MIN_EXP__" path="" value="(-16381)"/>
+<pathentry kind="mac" name="__LDBL_MIN_10_EXP__" path="" value="(-4931)"/>
+<pathentry kind="mac" name="__LDBL_MAX_EXP__" path="" value="16384"/>
+<pathentry kind="mac" name="__LDBL_MAX_10_EXP__" path="" value="4932"/>
+<pathentry kind="mac" name="__DECIMAL_DIG__" path="" value="21"/>
+<pathentry kind="mac" name="__LDBL_MAX__" path="" value="1.18973149535723176502e+4932L"/>
+<pathentry kind="mac" name="__LDBL_MIN__" path="" value="3.36210314311209350626e-4932L"/>
+<pathentry kind="mac" name="__LDBL_EPSILON__" path="" value="1.08420217248550443401e-19L"/>
+<pathentry kind="mac" name="__LDBL_DENORM_MIN__" path="" value="3.64519953188247460253e-4951L"/>
+<pathentry kind="mac" name="__LDBL_HAS_DENORM__" path="" value="1"/>
+<pathentry kind="mac" name="__LDBL_HAS_INFINITY__" path="" value="1"/>
+<pathentry kind="mac" name="__LDBL_HAS_QUIET_NAN__" path="" value="1"/>
+<pathentry kind="mac" name="__DEC32_MANT_DIG__" path="" value="7"/>
+<pathentry kind="mac" name="__DEC32_MIN_EXP__" path="" value="(-94)"/>
+<pathentry kind="mac" name="__DEC32_MAX_EXP__" path="" value="97"/>
+<pathentry kind="mac" name="__DEC32_MIN__" path="" value="1E-95DF"/>
+<pathentry kind="mac" name="__DEC32_MAX__" path="" value="9.999999E96DF"/>
+<pathentry kind="mac" name="__DEC32_EPSILON__" path="" value="1E-6DF"/>
+<pathentry kind="mac" name="__DEC32_SUBNORMAL_MIN__" path="" value="0.000001E-95DF"/>
+<pathentry kind="mac" name="__DEC64_MANT_DIG__" path="" value="16"/>
+<pathentry kind="mac" name="__DEC64_MIN_EXP__" path="" value="(-382)"/>
+<pathentry kind="mac" name="__DEC64_MAX_EXP__" path="" value="385"/>
+<pathentry kind="mac" name="__DEC64_MIN__" path="" value="1E-383DD"/>
+<pathentry kind="mac" name="__DEC64_MAX__" path="" value="9.999999999999999E384DD"/>
+<pathentry kind="mac" name="__DEC64_EPSILON__" path="" value="1E-15DD"/>
+<pathentry kind="mac" name="__DEC64_SUBNORMAL_MIN__" path="" value="0.000000000000001E-383DD"/>
+<pathentry kind="mac" name="__DEC128_MANT_DIG__" path="" value="34"/>
+<pathentry kind="mac" name="__DEC128_MIN_EXP__" path="" value="(-6142)"/>
+<pathentry kind="mac" name="__DEC128_MAX_EXP__" path="" value="6145"/>
+<pathentry kind="mac" name="__DEC128_MIN__" path="" value="1E-6143DL"/>
+<pathentry kind="mac" name="__DEC128_MAX__" path="" value="9.999999999999999999999999999999999E6144DL"/>
+<pathentry kind="mac" name="__DEC128_EPSILON__" path="" value="1E-33DL"/>
+<pathentry kind="mac" name="__DEC128_SUBNORMAL_MIN__" path="" value="0.000000000000000000000000000000001E-6143DL"/>
+<pathentry kind="mac" name="__REGISTER_PREFIX__" path="" value=" "/>
+<pathentry kind="mac" name="__USER_LABEL_PREFIX__" path="" value=" "/>
+<pathentry kind="mac" name="__GNUC_GNU_INLINE__" path="" value="1"/>
+<pathentry kind="mac" name="__NO_INLINE__" path="" value="1"/>
+<pathentry kind="mac" name="__GCC_HAVE_SYNC_COMPARE_AND_SWAP_1" path="" value="1"/>
+<pathentry kind="mac" name="__GCC_HAVE_SYNC_COMPARE_AND_SWAP_2" path="" value="1"/>
+<pathentry kind="mac" name="__GCC_HAVE_SYNC_COMPARE_AND_SWAP_4" path="" value="1"/>
+<pathentry kind="mac" name="__GCC_HAVE_SYNC_COMPARE_AND_SWAP_8" path="" value="1"/>
+<pathentry kind="mac" name="__GCC_ATOMIC_BOOL_LOCK_FREE" path="" value="2"/>
+<pathentry kind="mac" name="__GCC_ATOMIC_CHAR_LOCK_FREE" path="" value="2"/>
+<pathentry kind="mac" name="__GCC_ATOMIC_CHAR16_T_LOCK_FREE" path="" value="2"/>
+<pathentry kind="mac" name="__GCC_ATOMIC_CHAR32_T_LOCK_FREE" path="" value="2"/>
+<pathentry kind="mac" name="__GCC_ATOMIC_WCHAR_T_LOCK_FREE" path="" value="2"/>
+<pathentry kind="mac" name="__GCC_ATOMIC_SHORT_LOCK_FREE" path="" value="2"/>
+<pathentry kind="mac" name="__GCC_ATOMIC_INT_LOCK_FREE" path="" value="2"/>
+<pathentry kind="mac" name="__GCC_ATOMIC_LONG_LOCK_FREE" path="" value="2"/>
+<pathentry kind="mac" name="__GCC_ATOMIC_LLONG_LOCK_FREE" path="" value="2"/>
+<pathentry kind="mac" name="__GCC_ATOMIC_TEST_AND_SET_TRUEVAL" path="" value="1"/>
+<pathentry kind="mac" name="__GCC_ATOMIC_POINTER_LOCK_FREE" path="" value="2"/>
+<pathentry kind="mac" name="__GCC_HAVE_DWARF2_CFI_ASM" path="" value="1"/>
+<pathentry kind="mac" name="__PRAGMA_REDEFINE_EXTNAME" path="" value="1"/>
+<pathentry kind="mac" name="__SSP__" path="" value="1"/>
+<pathentry kind="mac" name="__SIZEOF_INT128__" path="" value="16"/>
+<pathentry kind="mac" name="__SIZEOF_WCHAR_T__" path="" value="4"/>
+<pathentry kind="mac" name="__SIZEOF_WINT_T__" path="" value="4"/>
+<pathentry kind="mac" name="__SIZEOF_PTRDIFF_T__" path="" value="8"/>
+<pathentry kind="mac" name="__amd64" path="" value="1"/>
+<pathentry kind="mac" name="__amd64__" path="" value="1"/>
+<pathentry kind="mac" name="__x86_64" path="" value="1"/>
+<pathentry kind="mac" name="__x86_64__" path="" value="1"/>
+<pathentry kind="mac" name="__ATOMIC_HLE_ACQUIRE" path="" value="65536"/>
+<pathentry kind="mac" name="__ATOMIC_HLE_RELEASE" path="" value="131072"/>
+<pathentry kind="mac" name="__k8" path="" value="1"/>
+<pathentry kind="mac" name="__k8__" path="" value="1"/>
+<pathentry kind="mac" name="__code_model_small__" path="" value="1"/>
+<pathentry kind="mac" name="__MMX__" path="" value="1"/>
+<pathentry kind="mac" name="__SSE__" path="" value="1"/>
+<pathentry kind="mac" name="__SSE2__" path="" value="1"/>
+<pathentry kind="mac" name="__FXSR__" path="" value="1"/>
+<pathentry kind="mac" name="__SSE_MATH__" path="" value="1"/>
+<pathentry kind="mac" name="__SSE2_MATH__" path="" value="1"/>
+<pathentry kind="mac" name="__gnu_linux__" path="" value="1"/>
+<pathentry kind="mac" name="__linux" path="" value="1"/>
+<pathentry kind="mac" name="__linux__" path="" value="1"/>
+<pathentry kind="mac" name="linux" path="" value="1"/>
+<pathentry kind="mac" name="__unix" path="" value="1"/>
+<pathentry kind="mac" name="__unix__" path="" value="1"/>
+<pathentry kind="mac" name="unix" path="" value="1"/>
+<pathentry kind="mac" name="__ELF__" path="" value="1"/>
+<pathentry kind="mac" name="__DECIMAL_BID_FORMAT__" path="" value="1"/>
+<pathentry kind="mac" name="_STDC_PREDEF_H" path="" value="1"/>
+<pathentry kind="mac" name="__STDC_IEC_559__" path="" value="1"/>
+<pathentry kind="mac" name="__STDC_IEC_559_COMPLEX__" path="" value="1"/>
+<pathentry kind="mac" name="__STDC_ISO_10646__" path="" value="201103L"/>
+<pathentry kind="mac" name="__STDC_NO_THREADS__" path="" value="1"/>
+<pathentry kind="mac" name="__cplusplus" path="" value="199711L"/>
+<pathentry kind="mac" name="__GNUG__" path="" value="4"/>
+<pathentry kind="mac" name="__GXX_WEAK__" path="" value="1"/>
+<pathentry kind="mac" name="__DEPRECATED" path="" value="1"/>
+<pathentry kind="mac" name="__GXX_RTTI" path="" value="1"/>
+<pathentry kind="mac" name="__EXCEPTIONS" path="" value="1"/>
+<pathentry kind="mac" name="_GNU_SOURCE" path="" value="1"/>
+<pathentry include="/usr/local/include/opencv" kind="inc" path="" system="true"/>
+<pathentry include="/usr/local/include" kind="inc" path="" system="true"/>
+<pathentry include="/home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/libopentld/imacq" kind="inc" path="" system="true"/>
+<pathentry include="/home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/libopentld/mftracker" kind="inc" path="" system="true"/>
+<pathentry include="/home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/libopentld/tld" kind="inc" path="" system="true"/>
+<pathentry include="/home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/libopentld/tld/detector" kind="inc" path="" system="true"/>
+<pathentry include="/home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/3rdparty/cvblobs" kind="inc" path="" system="true"/>
+<pathentry include="/home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/main" kind="inc" path="" system="true"/>
+<pathentry include="/home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/3rdparty/libconfig" kind="inc" path="" system="true"/>
+<pathentry include="/home/slilylsu/Desktop/project-repo/OpenTLD_cuda_removed/src/opentld/qopentld" kind="inc" path="" system="true"/>
+<pathentry include="/home/slilylsu/Desktop/project-repo/build_cuda_removed/release/src/opentld" kind="inc" path="" system="true"/>
+<pathentry include="/usr/include/qt4" kind="inc" path="" system="true"/>
+<pathentry include="/usr/include/qt4/QtGui" kind="inc" path="" system="true"/>
+<pathentry include="/usr/include/qt4/QtCore" kind="inc" path="" system="true"/>
+<pathentry include="/usr/lib/gcc/x86_64-linux-gnu/4.8/include" kind="inc" path="" system="true"/>
+<pathentry include="/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed" kind="inc" path="" system="true"/>
+<pathentry include="/usr/include/x86_64-linux-gnu" kind="inc" path="" system="true"/>
+<pathentry include="/usr/include" kind="inc" path="" system="true"/>
+<pathentry include="/usr/include/c++/4.8" kind="inc" path="" system="true"/>
+<pathentry include="/usr/include/x86_64-linux-gnu/c++/4.8" kind="inc" path="" system="true"/>
+<pathentry include="/usr/include/c++/4.8/backward" kind="inc" path="" system="true"/>
+</storageModule>
+<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets">
+<buildTargets>
+<target name=": edit_cache" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>edit_cache</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name=": install" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>install</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name=": install/local" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>install/local</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name=": install/strip" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>install/strip</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name=": list_install_components" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>list_install_components</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name=": rebuild_cache" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>rebuild_cache</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name=": all" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>all</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name=": clean" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>clean</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[lib] cvblobs" path="src/3rdparty/cvblobs" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>cvblobs</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[lib] cvblobs/fast" path="src/3rdparty/cvblobs" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>cvblobs/fast</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Build" path="[Targets]/[lib] cvblobs" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-C "/home/slilylsu/Desktop/project-repo/build_cuda_removed/release" -j4</buildArguments>
+<buildTarget>cvblobs</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Clean" path="[Targets]/[lib] cvblobs" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/cmake</buildCommand>
+<buildArguments>-E chdir "/home/slilylsu/Desktop/project-repo/build_cuda_removed/release/src/3rdparty/cvblobs" "/usr/bin/cmake" -P "CMakeFiles/cvblobs.dir/cmake_clean.cmake"</buildArguments>
+<buildTarget></buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name=": all" path="src/3rdparty/cvblobs" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>all</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name=": clean" path="src/3rdparty/cvblobs" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>clean</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] BlobContour.cpp.o" path="src/3rdparty/cvblobs" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>BlobContour.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] BlobContour.cpp.i" path="src/3rdparty/cvblobs" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>BlobContour.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] BlobContour.cpp.s" path="src/3rdparty/cvblobs" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>BlobContour.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] BlobOperators.cpp.o" path="src/3rdparty/cvblobs" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>BlobOperators.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] BlobOperators.cpp.i" path="src/3rdparty/cvblobs" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>BlobOperators.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] BlobOperators.cpp.s" path="src/3rdparty/cvblobs" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>BlobOperators.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] BlobProperties.cpp.o" path="src/3rdparty/cvblobs" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>BlobProperties.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] BlobProperties.cpp.i" path="src/3rdparty/cvblobs" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>BlobProperties.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] BlobProperties.cpp.s" path="src/3rdparty/cvblobs" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>BlobProperties.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] BlobResult.cpp.o" path="src/3rdparty/cvblobs" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>BlobResult.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] BlobResult.cpp.i" path="src/3rdparty/cvblobs" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>BlobResult.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] BlobResult.cpp.s" path="src/3rdparty/cvblobs" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>BlobResult.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] ComponentLabeling.cpp.o" path="src/3rdparty/cvblobs" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>ComponentLabeling.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] ComponentLabeling.cpp.i" path="src/3rdparty/cvblobs" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>ComponentLabeling.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] ComponentLabeling.cpp.s" path="src/3rdparty/cvblobs" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>ComponentLabeling.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] blob.cpp.o" path="src/3rdparty/cvblobs" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>blob.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] blob.cpp.i" path="src/3rdparty/cvblobs" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>blob.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] blob.cpp.s" path="src/3rdparty/cvblobs" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>blob.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[lib] config++" path="src/3rdparty/libconfig" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>config++</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[lib] config++/fast" path="src/3rdparty/libconfig" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>config++/fast</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Build" path="[Targets]/[lib] config++" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-C "/home/slilylsu/Desktop/project-repo/build_cuda_removed/release" -j4</buildArguments>
+<buildTarget>config++</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Clean" path="[Targets]/[lib] config++" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/cmake</buildCommand>
+<buildArguments>-E chdir "/home/slilylsu/Desktop/project-repo/build_cuda_removed/release/src/3rdparty/libconfig" "/usr/bin/cmake" -P "CMakeFiles/config++.dir/cmake_clean.cmake"</buildArguments>
+<buildTarget></buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name=": all" path="src/3rdparty/libconfig" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>all</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name=": clean" path="src/3rdparty/libconfig" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>clean</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] grammar.c.o" path="src/3rdparty/libconfig" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>grammar.c.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] grammar.c.i" path="src/3rdparty/libconfig" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>grammar.c.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] grammar.c.s" path="src/3rdparty/libconfig" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>grammar.c.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] libconfig.c.o" path="src/3rdparty/libconfig" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>libconfig.c.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] libconfig.c.i" path="src/3rdparty/libconfig" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>libconfig.c.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] libconfig.c.s" path="src/3rdparty/libconfig" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>libconfig.c.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] libconfigcpp.cc.o" path="src/3rdparty/libconfig" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>libconfigcpp.cc.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] libconfigcpp.cc.i" path="src/3rdparty/libconfig" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>libconfigcpp.cc.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] libconfigcpp.cc.s" path="src/3rdparty/libconfig" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>libconfigcpp.cc.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] scanctx.c.o" path="src/3rdparty/libconfig" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>scanctx.c.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] scanctx.c.i" path="src/3rdparty/libconfig" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>scanctx.c.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] scanctx.c.s" path="src/3rdparty/libconfig" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>scanctx.c.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] scanner.c.o" path="src/3rdparty/libconfig" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>scanner.c.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] scanner.c.i" path="src/3rdparty/libconfig" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>scanner.c.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] scanner.c.s" path="src/3rdparty/libconfig" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>scanner.c.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] strbuf.c.o" path="src/3rdparty/libconfig" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>strbuf.c.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] strbuf.c.i" path="src/3rdparty/libconfig" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>strbuf.c.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] strbuf.c.s" path="src/3rdparty/libconfig" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>strbuf.c.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[lib] libopentld" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>libopentld</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[lib] libopentld/fast" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>libopentld/fast</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Build" path="[Targets]/[lib] libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-C "/home/slilylsu/Desktop/project-repo/build_cuda_removed/release" -j4</buildArguments>
+<buildTarget>libopentld</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Clean" path="[Targets]/[lib] libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/cmake</buildCommand>
+<buildArguments>-E chdir "/home/slilylsu/Desktop/project-repo/build_cuda_removed/release/src/libopentld" "/usr/bin/cmake" -P "CMakeFiles/libopentld.dir/cmake_clean.cmake"</buildArguments>
+<buildTarget></buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name=": all" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>all</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name=": clean" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>clean</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] imacq/ImAcq.cpp.o" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>imacq/ImAcq.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] imacq/ImAcq.cpp.i" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>imacq/ImAcq.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] imacq/ImAcq.cpp.s" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>imacq/ImAcq.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] mftracker/BB.cpp.o" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>mftracker/BB.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] mftracker/BB.cpp.i" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>mftracker/BB.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] mftracker/BB.cpp.s" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>mftracker/BB.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] mftracker/BBPredict.cpp.o" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>mftracker/BBPredict.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] mftracker/BBPredict.cpp.i" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>mftracker/BBPredict.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] mftracker/BBPredict.cpp.s" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>mftracker/BBPredict.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] mftracker/FBTrack.cpp.o" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>mftracker/FBTrack.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] mftracker/FBTrack.cpp.i" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>mftracker/FBTrack.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] mftracker/FBTrack.cpp.s" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>mftracker/FBTrack.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] mftracker/Lk.cpp.o" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>mftracker/Lk.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] mftracker/Lk.cpp.i" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>mftracker/Lk.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] mftracker/Lk.cpp.s" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>mftracker/Lk.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] mftracker/Median.cpp.o" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>mftracker/Median.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] mftracker/Median.cpp.i" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>mftracker/Median.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] mftracker/Median.cpp.s" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>mftracker/Median.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] tld/Clustering.cpp.o" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>tld/Clustering.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] tld/Clustering.cpp.i" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>tld/Clustering.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] tld/Clustering.cpp.s" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>tld/Clustering.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] tld/DetectionResult.cpp.o" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>tld/DetectionResult.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] tld/DetectionResult.cpp.i" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>tld/DetectionResult.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] tld/DetectionResult.cpp.s" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>tld/DetectionResult.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] tld/MedianFlowTracker.cpp.o" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>tld/MedianFlowTracker.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] tld/MedianFlowTracker.cpp.i" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>tld/MedianFlowTracker.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] tld/MedianFlowTracker.cpp.s" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>tld/MedianFlowTracker.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] tld/TLD.cpp.o" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>tld/TLD.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] tld/TLD.cpp.i" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>tld/TLD.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] tld/TLD.cpp.s" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>tld/TLD.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] tld/TLDUtil.cpp.o" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>tld/TLDUtil.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] tld/TLDUtil.cpp.i" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>tld/TLDUtil.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] tld/TLDUtil.cpp.s" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>tld/TLDUtil.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] tld/detector/DetectorCascade.cpp.o" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>tld/detector/DetectorCascade.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] tld/detector/DetectorCascade.cpp.i" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>tld/detector/DetectorCascade.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] tld/detector/DetectorCascade.cpp.s" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>tld/detector/DetectorCascade.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] tld/detector/EnsembleClassifier.cpp.o" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>tld/detector/EnsembleClassifier.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] tld/detector/EnsembleClassifier.cpp.i" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>tld/detector/EnsembleClassifier.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] tld/detector/EnsembleClassifier.cpp.s" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>tld/detector/EnsembleClassifier.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] tld/detector/ForegroundDetector.cpp.o" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>tld/detector/ForegroundDetector.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] tld/detector/ForegroundDetector.cpp.i" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>tld/detector/ForegroundDetector.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] tld/detector/ForegroundDetector.cpp.s" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>tld/detector/ForegroundDetector.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] tld/detector/NNClassifier.cpp.o" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>tld/detector/NNClassifier.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] tld/detector/NNClassifier.cpp.i" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>tld/detector/NNClassifier.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] tld/detector/NNClassifier.cpp.s" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>tld/detector/NNClassifier.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] tld/detector/VarianceFilter.cpp.o" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>tld/detector/VarianceFilter.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] tld/detector/VarianceFilter.cpp.i" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>tld/detector/VarianceFilter.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] tld/detector/VarianceFilter.cpp.s" path="src/libopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>tld/detector/VarianceFilter.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[lib] main" path="src/opentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>main</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[lib] main/fast" path="src/opentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>main/fast</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Build" path="[Targets]/[lib] main" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-C "/home/slilylsu/Desktop/project-repo/build_cuda_removed/release" -j4</buildArguments>
+<buildTarget>main</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Clean" path="[Targets]/[lib] main" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/cmake</buildCommand>
+<buildArguments>-E chdir "/home/slilylsu/Desktop/project-repo/build_cuda_removed/release/src/opentld" "/usr/bin/cmake" -P "CMakeFiles/main.dir/cmake_clean.cmake"</buildArguments>
+<buildTarget></buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[exe] opentld" path="src/opentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>opentld</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[exe] opentld/fast" path="src/opentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>opentld/fast</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Build" path="[Targets]/[exe] opentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-C "/home/slilylsu/Desktop/project-repo/build_cuda_removed/release" -j4</buildArguments>
+<buildTarget>opentld</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Clean" path="[Targets]/[exe] opentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/cmake</buildCommand>
+<buildArguments>-E chdir "/home/slilylsu/Desktop/project-repo/build_cuda_removed/release/src/opentld" "/usr/bin/cmake" -P "CMakeFiles/opentld.dir/cmake_clean.cmake"</buildArguments>
+<buildTarget></buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[exe] qopentld" path="src/opentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>qopentld</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[exe] qopentld/fast" path="src/opentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>qopentld/fast</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Build" path="[Targets]/[exe] qopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-C "/home/slilylsu/Desktop/project-repo/build_cuda_removed/release" -j4</buildArguments>
+<buildTarget>qopentld</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Clean" path="[Targets]/[exe] qopentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/cmake</buildCommand>
+<buildArguments>-E chdir "/home/slilylsu/Desktop/project-repo/build_cuda_removed/release/src/opentld" "/usr/bin/cmake" -P "CMakeFiles/qopentld.dir/cmake_clean.cmake"</buildArguments>
+<buildTarget></buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name=": all" path="src/opentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>all</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name=": clean" path="src/opentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>clean</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] OpenTLD.cpp.o" path="src/opentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>OpenTLD.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] OpenTLD.cpp.i" path="src/opentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>OpenTLD.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] OpenTLD.cpp.s" path="src/opentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>OpenTLD.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] QOpenTLD.cpp.o" path="src/opentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>QOpenTLD.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] QOpenTLD.cpp.i" path="src/opentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>QOpenTLD.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] QOpenTLD.cpp.s" path="src/opentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>QOpenTLD.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] main/Config.cpp.o" path="src/opentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>main/Config.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] main/Config.cpp.i" path="src/opentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>main/Config.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] main/Config.cpp.s" path="src/opentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>main/Config.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] main/Gui.cpp.o" path="src/opentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>main/Gui.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] main/Gui.cpp.i" path="src/opentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>main/Gui.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] main/Gui.cpp.s" path="src/opentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>main/Gui.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] main/Main.cpp.o" path="src/opentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>main/Main.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] main/Main.cpp.i" path="src/opentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>main/Main.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] main/Main.cpp.s" path="src/opentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>main/Main.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] main/Settings.cpp.o" path="src/opentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>main/Settings.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] main/Settings.cpp.i" path="src/opentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>main/Settings.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] main/Settings.cpp.s" path="src/opentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>main/Settings.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] main/Trajectory.cpp.o" path="src/opentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>main/Trajectory.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] main/Trajectory.cpp.i" path="src/opentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>main/Trajectory.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] main/Trajectory.cpp.s" path="src/opentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>main/Trajectory.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] qopentld/ConfigDialog.cpp.o" path="src/opentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>qopentld/ConfigDialog.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] qopentld/ConfigDialog.cpp.i" path="src/opentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>qopentld/ConfigDialog.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] qopentld/ConfigDialog.cpp.s" path="src/opentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>qopentld/ConfigDialog.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] qopentld/moc_ConfigDialog.cxx.o" path="src/opentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>qopentld/moc_ConfigDialog.cxx.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] qopentld/moc_ConfigDialog.cxx.i" path="src/opentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>qopentld/moc_ConfigDialog.cxx.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] qopentld/moc_ConfigDialog.cxx.s" path="src/opentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>qopentld/moc_ConfigDialog.cxx.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] qrc_rcs.cxx.o" path="src/opentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>qrc_rcs.cxx.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] qrc_rcs.cxx.i" path="src/opentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>qrc_rcs.cxx.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] qrc_rcs.cxx.s" path="src/opentld" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>qrc_rcs.cxx.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+</buildTargets>
+</storageModule>
+<storageModule moduleId="scannerConfiguration">
+<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.make.core.GCCStandardMakePerProjectProfile"/>
+<profile id="org.eclipse.cdt.make.core.GCCStandardMakePerProjectProfile">
+<buildOutputProvider>
+<openAction enabled="true" filePath=""/>
+<parser enabled="true"/>
+</buildOutputProvider>
+<scannerInfoProvider id="specsFile">
+<runAction arguments="-E -P -v -dD ${plugin_state_location}/${specs_file}" command="/usr/bin/cc" useDefault="true"/>
+<parser enabled="true"/>
+</scannerInfoProvider>
+</profile>
+<profile id="org.eclipse.cdt.make.core.GCCStandardMakePerFileProfile">
+<buildOutputProvider>
+<openAction enabled="true" filePath=""/>
+<parser enabled="true"/>
+</buildOutputProvider>
+<scannerInfoProvider id="makefileGenerator">
+<runAction arguments="-f ${project_name}_scd.mk" command="/usr/bin/make" useDefault="true"/>
+<parser enabled="true"/>
+</scannerInfoProvider>
+</profile>
+</storageModule>
+</cconfiguration>
+</storageModule>
+<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+<project id="OpenTLD.null.1" name="OpenTLD"/>
+</storageModule>
+</cproject>

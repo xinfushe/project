@@ -41,11 +41,14 @@ public:
     Gui();
     ~Gui();
     void init(ImAcq* imAcq);
+    void showImage(IplImage *image);
     void showImage(IplImage *image, IplImage *data);
     char getKey();
     int getFocus(void);
     int getExposure(void);
     bool getManualExposure(void);
+    int getZoom(void);
+    bool getShowData(void);
     //void Button1Handler(int state, void* userdata);
     //void Button2Handler(int state, void* userdata);
     //void Button3Handler(int state, void* userdata);

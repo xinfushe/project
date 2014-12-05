@@ -40,6 +40,8 @@ bool gui_manualfocus;
 int gui_exposure;
 bool gui_manualexposure;
 bool gui_manualexposure_prev;
+int gui_zoom;
+bool gui_showdata;
 static int image_size [2] = {0, 0};
 
 namespace tld
@@ -161,17 +163,36 @@ void Button6Handler(int state, void* userdata)
 	{
 		*(bool*) userdata = true;
 	}
+}
 
+//Zoom
+void Trackbar3Handler (int pos, void* userdata)
+{
+	const double max = 500.0;
+	const double min = 0.0;
 
+	*(int*) userdata = (int)(((double) pos/ 1000.0) * (max - min) + min);
+
+	gui_key = 'z';
+}
+
+//Show Data Diagrams
+void Button7Handler(int state, void* userdata)
+{
+	if(*(bool*)userdata == false)
+	{
+		*(bool*)userdata = true;
+	}
+	else
+	{
+		*(bool*)userdata = false;
+	}
 }
 
 //Reset
-void Button7Handler(int state, void* userdata)
+void Button8Handler(int state, void* userdata)
 {
-	if (state == 0)
-	{
-		*(char*) userdata = 'y';
-	}
+	gui_key = 'c';
 }
 
 static string window_name_1;
@@ -243,11 +264,11 @@ int getPointFromUser(IplImage *img, CvRect &rect, Gui *gui)
     rect = cvRect(-1, -1, -1, -1);
     bb_1 = &rect;
     bool correctBB = false;
-    cvInitFont(&font_1, CV_FONT_HERSHEY_SIMPLEX, 0.5, 0.5, 0, 1, 8);
+    cvInitFont(&font_1, CV_FONT_HERSHEY_SIMPLEX, 0.8, 0.8, 15, 2, 8);
 
     cvSetMouseCallback(window_name_1.c_str(), mouseHandler1, NULL);
-    cvPutText(img0_1, "Click on a point and press Enter", cvPoint(0, 60),
-              &font_1, cvScalar(255, 255, 0));
+    cvPutText(img0_1, "Click on a point and press Enter", cvPoint(20, 80),
+              &font_1, cvScalar(0, 0, 255));
     cvShowImage(window_name_1.c_str(), img0_1);
 
     while(!correctBB)
@@ -302,6 +323,16 @@ bool Gui::getManualExposure(void)
 	return gui_manualexposure;
 }
 
+int Gui::getZoom(void)
+{
+	return gui_zoom;
+}
+
+bool Gui::getShowData(void)
+{
+	return gui_showdata;
+}
+
 void Gui::init(ImAcq* imAcq)
 {
 	gui_key = '0';
@@ -310,6 +341,8 @@ void Gui::init(ImAcq* imAcq)
 	gui_exposure = 500;
 	gui_manualexposure = false;
 	gui_manualexposure_prev = true;
+	gui_zoom = 20;
+	gui_showdata = false;
 
     cvNamedWindow(m_window_name.c_str(), CV_WINDOW_AUTOSIZE);
     cvMoveWindow(m_window_name.c_str(), 0, 0);
@@ -347,8 +380,14 @@ void Gui::init(ImAcq* imAcq)
     const char* button6 = "Manual Exposure";
     cvCreateButton(button6, Button6Handler, &gui_manualexposure, CV_CHECKBOX, 0);
 
-    const char* button7 = "Reset";
-    cvCreateButton(button7, Button7Handler, &gui_key, CV_PUSH_BUTTON, 1);
+    int zoom_value = 0;
+    cvCreateTrackbar2("Zoom", NULL, &zoom_value, 1000,  Trackbar3Handler, &gui_zoom);
+
+    const char* button7 = "Show Data Diagrams";
+    cvCreateButton(button7, Button7Handler, &gui_showdata, CV_PUSH_BUTTON, 1);
+
+    const char* button8 = "Reset";
+    cvCreateButton(button8, Button8Handler, &gui_key, CV_PUSH_BUTTON, 1);
 
 }
 
@@ -359,13 +398,15 @@ void GetImageSize(IplImage* img)
 	std::cout << "width is " << image_size[0] << " and height is " << image_size[1] << std::endl;
 }
 
+void Gui::showImage(IplImage *image)
+{
+    cvShowImage(m_window_name.c_str(), image);
+    cvDestroyWindow(data_window_name.c_str());
+}
+
 void Gui::showImage(IplImage *image, IplImage *data)
 {
     cvShowImage(m_window_name.c_str(), image);
-    /*
-    float a[8] = {1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0};
-    showFloatGraph("123", a, 8);
-    */
     cvShowImage(data_window_name.c_str(), data);
 
 }
@@ -436,11 +477,11 @@ int getBBFromUser(IplImage *img, CvRect &rect, Gui *gui)
     rect = cvRect(-1, -1, -1, -1);
     bb = &rect;
     bool correctBB = false;
-    cvInitFont(&font, CV_FONT_HERSHEY_SIMPLEX, 0.5, 0.5, 0, 1, 8);
+    cvInitFont(&font, CV_FONT_HERSHEY_SIMPLEX, 0.8, 0.8, 15, 2, 8);
 
     cvSetMouseCallback(window_name.c_str(), mouseHandler, NULL);
-    cvPutText(img0, "Draw a bounding box and press Enter", cvPoint(0, 60),
-              &font, cvScalar(255, 255, 0));
+    cvPutText(img0, "Draw a bounding box and press Enter", cvPoint(20, 80),
+              &font, cvScalar(0, 0, 255));
     cvShowImage(window_name.c_str(), img0);
 
     while(!correctBB)

@@ -20,6 +20,8 @@ sudo apt-get install git git-core gitk git-gui
 
 sudo apt-get install libqt4-dev
 
+sudo apt-get install libva-dev
+
 sudo apt-get install eclipse eclipse-cdt
 
 sudo apt-get upgrade

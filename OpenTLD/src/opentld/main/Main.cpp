@@ -152,7 +152,7 @@ void enableAutoExposure(int fh, bool &auto_exposure)
     CLEAR(ext_ctrls);
     CLEAR(ext_ctrl);
     ext_ctrl.id = V4L2_CID_EXPOSURE_AUTO;
-    ext_ctrl.value = 0;
+    ext_ctrl.value = 3;
     ext_ctrls.ctrl_class = V4L2_CTRL_ID2CLASS(ext_ctrl.id);
     ext_ctrls.count = 1;
     ext_ctrls.controls = &ext_ctrl;
@@ -191,6 +191,26 @@ static void setExposure(int fh, int exposure)
     else printf("Set exposure to %d successfully\n",exposure);
 }
 
+static void setZoom(int fh, int zoom)
+{
+    struct v4l2_ext_controls ext_ctrls;
+    struct v4l2_ext_control ext_ctrl;
+    CLEAR(ext_ctrls);
+    CLEAR(ext_ctrl);
+
+    ext_ctrl.id = V4L2_CID_ZOOM_ABSOLUTE;
+    ext_ctrl.value = zoom;
+    ext_ctrls.ctrl_class = V4L2_CTRL_ID2CLASS(ext_ctrl.id);
+    ext_ctrls.count = 1;
+    ext_ctrls.controls = &ext_ctrl;
+    if (-1 == xioctl (fh,VIDIOC_S_EXT_CTRLS, &ext_ctrls))
+    {
+        perror ("VIDIOC_S_EXT_CTRLS");
+        printf("Failed set V4L2_CID_ZOOM_ABSOLUTE \n");
+        exit (EXIT_FAILURE);
+    }
+    else printf("Set zoom to %d successfully\n",zoom);
+}
 
 static int getFocus(int currsize,int lastsize,int bestfocus)
 {
@@ -303,7 +323,6 @@ void Main::doWork()
     bool init = false,changing = false;
     setFocus(fh,focus);
 
-
     //Exposure init
     bool auto_exposure = true;
     //disableAutoExposure(fh, auto_exposure);
@@ -412,18 +431,16 @@ void Main::doWork()
 
         if(showOutput || saveDir != NULL)
         {
+        	/*
             char string[128];
-
             char learningString[10] = "";
-
             if(tld->learning)
             {
                 strcpy(learningString, "Learning");
             }
-
-            //
-            sprintf(string, "#%d,Posterior %.2f; fps: %.2f, #numwindows:%d, %s", imAcq->currentFrame - 1, tld->currConf, fps, tld->detectorCascade->numWindows, learningString);
-
+            //sprintf(string, "#%d,Posterior %.2f; fps: %.2f, #numwindows:%d, %s", imAcq->currentFrame - 1, tld->currConf, fps, tld->detectorCascade->numWindows, learningString);
+            sprintf(string, "Frame: %d, Confidence %.2f; Frame Process Time: %.2f ms, Number of Windows: %d, %s", imAcq->currentFrame - 1, tld->currConf, toc, tld->detectorCascade->numWindows, learningString);
+            */
             CvScalar yellow = CV_RGB(255, 255, 0);
             CvScalar blue = CV_RGB(0, 0, 255);  
             CvScalar black = CV_RGB(0, 0, 0);
@@ -557,10 +574,12 @@ void Main::doWork()
 			{
 				trajectory.drawTrajectory(img);
 			}
+			/*
             CvFont font;
             cvInitFont(&font, CV_FONT_HERSHEY_SIMPLEX, .5, .5, 0, 1, 8);
             cvRectangle(img, cvPoint(0, 0), cvPoint(img->width, 50), black, CV_FILLED, 8, 0);
             cvPutText(img, string, cvPoint(25, 25), &font, white);
+            */
 
             if(showForeground)
             {
@@ -577,7 +596,27 @@ void Main::doWork()
             if(showOutput)
             {
             	//
-                gui->showImage(img, data);
+            	CvFont font;
+            	cvInitFont(&font, CV_FONT_HERSHEY_SIMPLEX, 0.5, 0.5, 0, 1, 8);
+            	//
+                //gui->showImage(img, data);
+            	if(gui->getShowData() == true)
+            	{
+            		char string[128];
+            		char learningString[10] = "";
+            		if(tld->learning)
+            		{
+            			strcpy(learningString, "Learning");
+            		}
+            		sprintf(string, "Frame: %d, Confidence %.2f; Frame Process Time: %.2f ms, Number of Windows: %d, %s", imAcq->currentFrame - 1, tld->currConf, toc*1000, tld->detectorCascade->numWindows, learningString);
+            		cvRectangle(img, cvPoint(0, 0), cvPoint(img->width, 40), black, CV_FILLED, 8, 0);
+            		cvPutText(img, string, cvPoint(25, 25), &font, white);
+            		gui->showImage(img,data);
+            	}
+            	else
+            	{
+                	gui->showImage(img);
+            	}
                 //
                 char key = gui->getKey();
 
@@ -610,9 +649,10 @@ void Main::doWork()
                 	}
                 }
 
-                if(key == 'y')
+                if(key == 'z')
                 {
-                	tld->selectObject(grey, NULL);
+                	//std::cout << "Focus is " << focus << "!!!!!!!!!!!!!!!!!!" << std::endl;
+                    setZoom(fh, gui->getZoom());
                 }
 
                 if(key == 'o')

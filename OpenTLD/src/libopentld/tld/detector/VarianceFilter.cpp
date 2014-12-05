@@ -195,7 +195,7 @@ void VarianceFilter::nextIteration(const cv::Mat &img, const ocl::oclMat &img_oc
     getCPUTick(&procFinal);
     PRINT_TIMING("Variance Calculation Time: ", procInit, procFinal, "\n");
 
-    std::cout << "Non ocl value is " << img_integral.at<double>(1,1) << std::endl;
+    std::cout << "Non ocl value is " << img_integral.at<int>(1,1) << std::endl;
     std::cout << "Ocl value is " << img_integral_squared.at<double>(1,1) << std::endl;
 
     //tick_t procInit, procFinal;

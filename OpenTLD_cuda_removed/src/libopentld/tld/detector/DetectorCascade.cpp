@@ -293,7 +293,7 @@ void DetectorCascade::detect(const Mat &img)
     _varianceFilter->nextIteration(img); //Calculates integral images
     _ensembleClassifier->nextIteration(img);
     getCPUTick(&procFinal);
-    PRINT_TIMING("ClsfyTime", procInit, procFinal, ", ");
+    PRINT_TIMING("Next Iteration Time: ", procInit, procFinal, ", ");
     getCPUTick(&procInit);
 
     int j = 0, k = 0;
@@ -354,7 +354,7 @@ void DetectorCascade::detect(const Mat &img)
     }
     std::cout << numWindows << " - " << j << " - " << k << " ";
     getCPUTick(&procFinal);
-//     PRINT_TIMING("ClsfyTime", procInit, procFinal, ", ");
+    PRINT_TIMING("ClsfyTime", procInit, procFinal, ", ");
 
     //Cluster
     clustering->clusterConfidentIndices();

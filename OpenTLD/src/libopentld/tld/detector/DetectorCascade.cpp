@@ -302,6 +302,7 @@ void DetectorCascade::detect(const Mat &img)
     int j = 0, k = 0;
     #pragma omp parallel for
 
+
     for(int i = 0; i < numWindows; i++)
     {
         /*
@@ -333,9 +334,12 @@ void DetectorCascade::detect(const Mat &img)
         }
         */
 
+
         if(!_varianceFilter->filter(i))
         {
+
             detectionResult->posteriors[i] = 0;
+
             continue;
         }
         j++;
@@ -346,12 +350,15 @@ void DetectorCascade::detect(const Mat &img)
         }
         k++;
 
+
         if(!_nnClassifier->filter(img, i))
         {
             continue;
         }
 
+
         detectionResult->confidentIndices->push_back(i);
+
 
 
     }
@@ -399,8 +406,9 @@ void DetectorCascade::detect(const Mat &img, const ocl::oclMat &img_ocl)
     int j = 0, k = 0;
     #pragma omp parallel for
 
+
     for(int i = 0; i < numWindows; i++)
-    {        
+    {
         /*
          * Foreground detection disabled
          *
@@ -430,9 +438,12 @@ void DetectorCascade::detect(const Mat &img, const ocl::oclMat &img_ocl)
         }
         */
 
+
         if(!_varianceFilter->filter(i))
         {
+
             detectionResult->posteriors[i] = 0;
+
             continue;
         }
         j++;
@@ -443,12 +454,15 @@ void DetectorCascade::detect(const Mat &img, const ocl::oclMat &img_ocl)
         }
         k++;
 
+
         if(!_nnClassifier->filter(img, i))
         {
             continue;
         }
 
+
         detectionResult->confidentIndices->push_back(i);
+
 
 
     }

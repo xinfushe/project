@@ -105,14 +105,14 @@ void TLD::selectObject(const Mat &img, Rect *bb)
     initialLearning();
 
 }
-
+/*
 void TLD::processImage(const Mat &img)
 {
     tick_t procInit, procFinal;
     storeCurrentData();
     Mat grey_frame;
     cvtColor(img, grey_frame, CV_RGB2GRAY);
-    currImg = grey_frame; // Store new image , right after storeCurrentData();*/
+    currImg = grey_frame; // Store new image , right after storeCurrentData();
 
 
     if(trackerEnabled)
@@ -126,7 +126,6 @@ void TLD::processImage(const Mat &img)
     if(detectorEnabled && (!alternating || medianFlowTracker->trackerBB == NULL))
     {
         getCPUTick(&procInit);
-        //detectorCascade->detect(grey_frame);
         detectorCascade->detect(grey_frame);
         getCPUTick(&procFinal);
         PRINT_TIMING("DetecTime", procInit, procFinal, ", ");
@@ -138,17 +137,17 @@ void TLD::processImage(const Mat &img)
     learn();
 
 }
+*/
 
-void TLD::processImage(const Mat &img, const ocl::oclMat &img_ocl, const Mat &grey, const ocl::oclMat &grey_ocl)
+
+void TLD::processImage(const Mat &img)
 {
     tick_t procInit, procFinal;
     storeCurrentData();
-    /*
-    Mat grey_frame;
-    cvtColor(img, grey_frame, CV_RGB2GRAY);
-    currImg = grey_frame; // Store new image , right after storeCurrentData();*/
-    currImg = grey;
-    //currImg = grey;
+    //Mat grey_frame;
+    //cvtColor(img, grey_frame, CV_RGB2GRAY);
+    currImg = img; // Store new image , right after storeCurrentData();
+
 
     if(trackerEnabled)
     {
@@ -162,7 +161,37 @@ void TLD::processImage(const Mat &img, const ocl::oclMat &img_ocl, const Mat &gr
     {
         getCPUTick(&procInit);
         //detectorCascade->detect(grey_frame);
-        detectorCascade->detect(grey, grey_ocl);
+        detectorCascade->detect(img);
+        getCPUTick(&procFinal);
+        PRINT_TIMING("DetecTime", procInit, procFinal, ", ");
+    }
+
+
+    fuseHypotheses();
+
+    learn();
+
+}
+
+void TLD::processImage(const Mat &img, const ocl::oclMat &img_ocl)
+{
+    tick_t procInit, procFinal;
+    storeCurrentData();
+    currImg = img; // Store new image , right after storeCurrentData();
+
+
+    if(trackerEnabled)
+    {
+        getCPUTick(&procInit);
+        medianFlowTracker->track(prevImg, currImg, prevBB);
+        getCPUTick(&procFinal);
+        PRINT_TIMING("TrackTime", procInit, procFinal, ", ");
+    }
+
+    if(detectorEnabled && (!alternating || medianFlowTracker->trackerBB == NULL))
+    {
+        getCPUTick(&procInit);
+        detectorCascade->detect(img, img_ocl);
         getCPUTick(&procFinal);
         PRINT_TIMING("DetecTime", procInit, procFinal, ", ");
     }

@@ -61,8 +61,8 @@ Settings::Settings() :
     m_camNo(1),
     m_fps(30),
     //
-    m_width(1920),
-    m_height(1080),
+    m_width(1280),
+    m_height(720),
     m_seed(0),
     m_threshold(0.7),
     m_proportionalShift(0.1),

@@ -80,6 +80,15 @@ void Button2Handler(int state, void* userdata)
 	}
 }
 
+//Orange Detection
+void Button9Handler(int state, void* userdata)
+{
+	if (state == 0)
+	{
+		*(char*) userdata = 'g';
+	}
+}
+
 //Select Object to Detect
 void Button3Handler(int state, void* userdata)
 {
@@ -88,6 +97,8 @@ void Button3Handler(int state, void* userdata)
 		*(char*) userdata = 'r';
 	}
 }
+
+
 
 //Select Point to Detect
 void Button4Handler(int state, void* userdata)
@@ -101,8 +112,8 @@ void Button4Handler(int state, void* userdata)
 //Focus
 void Trackbar1Handler (int pos, void* userdata)
 {
-	const double max = 100.0;
-	const double min = -10.0;
+	const double max = 200.0;
+	const double min = 0.0;
 
 	*(int*) userdata = (int)(((double) pos/ 1000.0) * (max - min) + min);
 
@@ -361,6 +372,9 @@ void Gui::init(ImAcq* imAcq)
 
     const char* button2 = "Apple Detection";
     cvCreateButton(button2, Button2Handler,&gui_key,CV_PUSH_BUTTON,1);
+
+    const char* button9 = "Orange Detection";
+    cvCreateButton(button9, Button9Handler,&gui_key,CV_PUSH_BUTTON,1);
 
     const char* button3 = "Select Object To Detect";
     cvCreateButton(button3, Button3Handler, &gui_key, CV_PUSH_BUTTON, 1);

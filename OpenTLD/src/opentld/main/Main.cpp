@@ -222,12 +222,13 @@ static int getFocus(int currsize,int lastsize,int bestfocus)
 }
 void Main::doWork()
 {
+	gpu_init();
 
 	Trajectory trajectory;
     IplImage *img = imAcqGetImg(imAcq);
 
     //Get the image size
-    GetImageSize(img);
+    //GetImageSize(img);
 
     //Initialize OpenCL
 //    ocl::getOpenCLDevices()
@@ -238,14 +239,14 @@ void Main::doWork()
     cv::ocl::oclMat grey_ocl;
 
     //Initialize the matirces
-    color = Mat(img, true);
+    color = Mat(img, false);
     color_ocl.upload(color);
-    grey = Mat(img->height, img->width, CV_8UC1);
-    cvtColor(color , grey, CV_BGR2GRAY);
-    grey_ocl.upload(grey);
+   //ocl::cvtColor(color_ocl , grey_ocl, CV_BGR2GRAY);
+    ocl::cvtColor(color_ocl , grey_ocl, CV_RGB2GRAY);
+    grey_ocl.download(grey);
 
     //
-    const int fps_size = 166;
+    const int fps_size = 150;
     float fps_array[fps_size] = {0.0};
     IplImage* data;
     //
@@ -317,10 +318,18 @@ void Main::doWork()
     int fh = open(dev_name, O_RDWR /* required */ | O_NONBLOCK, 0);
     disableAutoFocus(fh);
     int focus = 0;
-
-    double bestsharpness=0,lastsharpness=0;
-    int bestfocus=0,initsize,lastsize,focusCount=0,focusChange = 5,initfocus = 0,errorcount=0,focusend=200;
-    bool init = false,changing = false;
+    double bestsharpness = 0;
+    double lastsharpness = 0;
+    int bestfocus = 0;
+    int initsize;
+    int lastsize;
+    int focusCount = 0;
+    int focusChange = 1;
+    int initfocus = 0;
+    int errorCount = 0;
+    int focusend = 200;
+    bool init = false;
+    bool changing = false;
     setFocus(fh,focus);
 
     //Exposure init
@@ -332,8 +341,10 @@ void Main::doWork()
     while(imAcqHasMoreFrames(imAcq))
     {
 
+        std::cout << "Focus value is " << focus << std::endl;
+
         tick_t procInit, procFinal;
-//        double tic = cvGetTickCount();
+        double tic = cvGetTickCount();
 
         double freq = cvGetTickFrequency()*1000.0;
 
@@ -342,23 +353,19 @@ void Main::doWork()
         getCPUTick(&procFinal);
         PRINT_TIMING("Update Time", procInit, procFinal, "\n");
 
-        //update the image matrices
 
-        //Mat temp = Mat(img, true);
-        //color = Mat(img->height, img->width, CV_8UC1, (unsigned char*)img->imageData);
-        //temp.convertTo(color, CV_8UC1);
+        //update the image matrices
+        getCPUTick(&procInit);
         color = Mat(img, false);
         color_ocl.upload(color);
-        //cvtColor(color, grey, CV_BGR2GRAY);
+        ocl::oclMat grey_rgb_ocl;
+        Mat grey_rgb;
+        ocl::cvtColor(color_ocl, grey_rgb_ocl, CV_RGB2GRAY);
         ocl::cvtColor(color_ocl, grey_ocl, CV_BGR2GRAY);
-
-        //grey_ocl.upload(grey);
+        grey_rgb_ocl.download(grey_rgb);
         grey_ocl.download(grey);
-
-        //Alternative
-        //
-        //cv::ocl::cvtColor(color_ocl, grey_ocl, CV_BGR2GRAY);
-        //
+        getCPUTick(&procFinal);
+        PRINT_TIMING("Upload/Download Time", procInit, procFinal, "\n");
 
 
 
@@ -373,18 +380,18 @@ void Main::doWork()
             }
 
             //
-            cvtColor(cv::Mat(img), grey, CV_BGR2GRAY);
+            //cvtColor(cv::Mat(img), grey, CV_BGR2GRAY);
         }
 
 
-        double tic = cvGetTickCount();
+
         if(!skipProcessingOnce)
         {
 
             //getCPUTick(&procInit);
             //tld->processImage(img);
-        	tld->processImage(color, color_ocl, grey, grey_ocl);
-            //tld->processImage(img, color, grey, color_ocl, grey_ocl);
+            tld->processImage(grey_rgb, grey_rgb_ocl);
+        	//tld->processImage(color, color_ocl, grey, grey_ocl);
             //getCPUTick(&procFinal);
             //PRINT_TIMING("FrameProcTime", procInit, procFinal, "\n");
 
@@ -393,8 +400,7 @@ void Main::doWork()
         {
             skipProcessingOnce = false;
         }
-        double toc = (cvGetTickCount() - tic) / cvGetTickFrequency();
-        toc = toc / 1000000;
+
 
         if(printResults != NULL)
         {
@@ -407,25 +413,22 @@ void Main::doWork()
                 fprintf(resultsFile, "%d NaN NaN NaN NaN NaN\n", imAcq->currentFrame - 1);
             }
         }
-
-//        double toc = (cvGetTickCount() - tic) / cvGetTickFrequency();
-//
-//        toc = toc / 1000000;
-
+        double toc = (cvGetTickCount() - tic) / cvGetTickFrequency();
+        toc = toc / 1000000;
 
 
         cout << "toc is " << toc*1000.0 << endl;
 
         float fps = 1 / toc;
 
-        //
+        /*
         for(int i = 0; i < fps_size - 1; i ++)
         {
         	fps_array[i] = fps_array[i+1];
         	fps_array[fps_size - 1] = fps;
         }
         data = drawFloatGraph(fps_array, fps_size, 0, 0.0, 50.0);
-        //
+        */
 
         int confident = (tld->currConf >= threshold) ? 1 : 0;
 
@@ -455,6 +458,8 @@ void Main::doWork()
                 
                 currRect = *(tld->currBB);
 
+                //Focus procedure
+
                 getCPUTick(&procInit);
                 //double sharpness = contrast_measure(imgt (currRect));//TODO
                 double sharpness = contrast_measure(color_ocl (currRect));
@@ -462,10 +467,10 @@ void Main::doWork()
                 PRINT_TIMING("Contrast Measure Time", procInit, procFinal, ",");
 
                 printf("sharpness is %lf\n",sharpness);
-                //if init == false
+
                 if(!init)
                 {
-//                    if(lastsharpness < sharpness)
+//
                 	if(sharpness > lastsharpness)
                     {   
                         //printf("sharpness is %lf,lastsharpness is %lf,focus is %d,bestfocus is %d\n",sharpness,lastsharpness,focus,bestfocus);
@@ -477,9 +482,10 @@ void Main::doWork()
                         lastsharpness = sharpness;
                     }
                     focusCount++;
-                    if(focusCount % 3 == 0){
-                    focus+=focusChange;
-                    focusCount = 0;
+                    if(focusCount % 3 == 0)
+                    {
+                    	focus+=focusChange;
+                    	focusCount = 0;
                     }
 
                     if(focus == focusend || sharpness < bestsharpness -4){
@@ -496,12 +502,12 @@ void Main::doWork()
                 {
                     printf("autofocus is %d,size is %d\n",focus,lastsize);
                     focusCount++;
-                    errorcount+= abs(currRect.height-lastsize);
+                    errorCount+= abs(currRect.height-lastsize);
                     lastsize = currRect.height;
                     if(focusCount%10 == 0)
                     {
 //                         printf("distense is %d,errorcount is %d\n",lastsize-initsize,errorcount);
-                        if(errorcount < 5 && abs(lastsize-initsize)>5)
+                        if(errorCount < 5 && abs(lastsize - initsize) > 5)
                         {
                             init = false;
                             bestsharpness = 0;
@@ -522,7 +528,7 @@ void Main::doWork()
                             }
 
                         }
-                        errorcount=0;
+                        errorCount=0;
                         focusCount=0;
                     }                    
                 }
@@ -608,9 +614,17 @@ void Main::doWork()
             		{
             			strcpy(learningString, "Learning");
             		}
-            		sprintf(string, "Frame: %d, Confidence %.2f; Frame Process Time: %.2f ms, Number of Windows: %d, %s", imAcq->currentFrame - 1, tld->currConf, toc*1000, tld->detectorCascade->numWindows, learningString);
+            		sprintf(string, "Frame: %d, Confidence %.2f; Frame Process Time: %.2f ms, FPS: %.2f, Number of Windows: %d, %s", imAcq->currentFrame - 1, tld->currConf, toc*1000, fps, tld->detectorCascade->numWindows, learningString);
             		cvRectangle(img, cvPoint(0, 0), cvPoint(img->width, 40), black, CV_FILLED, 8, 0);
             		cvPutText(img, string, cvPoint(25, 25), &font, white);
+
+            		for(int i = 0; i < fps_size - 1; i ++)
+            		{
+            			fps_array[i] = fps_array[i+1];
+            		    fps_array[fps_size - 1] = fps;
+            		}
+            		data = drawFloatGraph(fps_array, fps_size, 0, 0.0, 50.0);
+
             		gui->showImage(img,data);
             	}
             	else
@@ -797,18 +811,40 @@ void Main::doWork()
                 if(key == 'd')
                 {
                 	CvRect box;
-                	const char* cascadeName = "/home/slilylsu/Desktop/project-repo/apple_23_1.xml";
-                	//CascadeClassifier  cascade;q
+                	const char* cascadeName = "/home/slilylsu/Desktop/project-repo/apple.xml";
                 	ocl::OclCascadeClassifier cascade;
                 	vector<Rect> faces;
                 	if( !cascade.load( cascadeName )  )
                 	{
                 		printf("ERROR: Could not load classifier cascade: %s\n",cascadeName);
                 	}
+                	cascade.detectMultiScale(grey_ocl, faces, 1.1,
+                                             3,0,
+                                             Size(30, 30), Size(0, 0));
+                	if(!faces.empty())
+                	{
+                		Rect r = faces[0];
+                		currRect=r;
+                		initsize = r.height;
+                		init = false;
+                		bestsharpness = 0;
+                		lastsharpness = 0;
+                		focus = 0;
+                		//
+                		tld->selectObject(grey, &r);
 
-//                    cascade.detectMultiScale(grey, faces, 1.1,
-//                             3, 0 | CV_HAAR_SCALE_IMAGE,
-//                             Size(30, 30), Size(0, 0));
+                	}
+                }
+                if(key == 'g')
+                {
+                	CvRect box;
+                	const char* cascadeName = "/home/slilylsu/Desktop/project-repo/orange.xml";
+                	ocl::OclCascadeClassifier cascade;
+                	vector<Rect> faces;
+                	if( !cascade.load( cascadeName )  )
+                	{
+                		printf("ERROR: Could not load classifier cascade: %s\n",cascadeName);
+                	}
                 	cascade.detectMultiScale(grey_ocl, faces, 1.1,
                                              3,0,
                                              Size(30, 30), Size(0, 0));

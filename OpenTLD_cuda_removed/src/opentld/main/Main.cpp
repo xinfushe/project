@@ -203,15 +203,8 @@ void Main::doWork()
     while(imAcqHasMoreFrames(imAcq))
     {
         tick_t procInit, procFinal;
-        //double tic = cvGetTickCount();
-
-        //
+        double tic = cvGetTickCount();
         img = imAcqGetImg(imAcq);
-        // modify at 10.09 delete the following two lines
-        //img_m = img;
-        //img_oclm.upload(img_m);
-
-        //cv::ocl::cvtColor(img_oclm, grey_oclm, CV_BGR2GRAY);
 
         if(!reuseFrameOnce)
         {
@@ -228,7 +221,7 @@ void Main::doWork()
             cvtColor(cv::Mat(img), grey, CV_BGR2GRAY);
         }
 
-        double tic = cvGetTickCount();
+        
         if(!skipProcessingOnce)
         {
         	//
@@ -242,9 +235,7 @@ void Main::doWork()
         {
             skipProcessingOnce = false;
         }
-        double toc = (cvGetTickCount() - tic) / cvGetTickFrequency();
 
-        toc = toc / 1000000;
 
         if(printResults != NULL)
         {
@@ -258,9 +249,9 @@ void Main::doWork()
             }
         }
 
-        // double toc = (cvGetTickCount() - tic) / cvGetTickFrequency();
+        double toc = (cvGetTickCount() - tic) / cvGetTickFrequency();
 
-        // toc = toc / 1000000;
+        toc = toc / 1000000;
         std::cout << "toc is " << toc*1000.0 << std::endl;
 
         float fps = 1 / toc;

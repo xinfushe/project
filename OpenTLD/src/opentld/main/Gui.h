@@ -45,6 +45,7 @@ public:
     void showImage(IplImage *image, IplImage *data);
     char getKey();
     int getFocus(void);
+    int getFocusAccuracy(void);
     int getExposure(void);
     bool getManualExposure(void);
     int getZoom(void);

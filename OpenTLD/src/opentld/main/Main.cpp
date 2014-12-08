@@ -324,7 +324,8 @@ void Main::doWork()
     int initsize;
     int lastsize;
     int focusCount = 0;
-    int focusChange = 1;
+    int focusThreshold = 5;
+    int focusChange = 5;
     int initfocus = 0;
     int errorCount = 0;
     int focusend = 200;
@@ -518,12 +519,12 @@ void Main::doWork()
 //                               focus = getFocus(currRect.height,initsize,focus)-20;
 //                               focusend = getFocus(currRect.height,initsize,focus)+20;
 //                                 printf("XXXXXXXXx!focusend is %d\n",focusend);
-                                focusChange = 5;
+                                focusChange = focusThreshold;
                                 focusend = 200;
                             }
                             else
                             {
-                                focusChange = -5;
+                                focusChange = -focusThreshold;
                                 focusend = 0;
                             }
 
@@ -601,6 +602,7 @@ void Main::doWork()
 
             if(showOutput)
             {
+
             	//
             	CvFont font;
             	cvInitFont(&font, CV_FONT_HERSHEY_SIMPLEX, 0.5, 0.5, 0, 1, 8);
@@ -629,7 +631,22 @@ void Main::doWork()
             	}
             	else
             	{
-                	gui->showImage(img);
+
+//            		if(currRect.width != 0 && currRect.height != 0)
+//            		{
+//                		Size br = Size(100,100);
+//                		cv::blur(Mat(img)(Range(0, currRect.y), Range::all()), Mat(img)(Range(0, currRect.y), Range::all()), br);
+//                		cv::blur(Mat(img)(Range(currRect.y+currRect.height, img->height-1), Range::all()), Mat(img)(Range(currRect.y+currRect.height, img->height-1), Range::all()), br);
+//                		cv::blur(Mat(img)(Range(currRect.y, currRect.y+currRect.height), Range(0, currRect.x)), Mat(img)(Range(currRect.y, currRect.y+currRect.height), Range(0, currRect.x)), br);
+//                		cv::blur(Mat(img)(Range(currRect.y, currRect.y+currRect.height), Range(currRect.x+currRect.width, img->width-1)), Mat(img)(Range(currRect.y, currRect.y+currRect.height), Range(currRect.x+currRect.width, img->width-1)), br);
+//                		gui->showImage(img);
+//                    	//gui->showImage(img);
+//            		}
+//            		else
+//            		{
+            			gui->showImage(img);
+            		//}
+
             	}
                 //
                 char key = gui->getKey();
@@ -640,6 +657,12 @@ void Main::doWork()
                 	//std::cout << "Focus is " << focus << "!!!!!!!!!!!!!!!!!!" << std::endl;
                 	focus = gui->getFocus();
                 	setFocus(fh,focus);
+                }
+
+                if(key == 'y')
+                {
+                	focusThreshold = gui->getFocusAccuracy();
+                	std::cout << "Focus accuracy is " << focusThreshold << "!!!!!!!!!!!!!!!!!!" << std::endl;
                 }
 
                 if(key == 'u')
@@ -776,6 +799,7 @@ void Main::doWork()
                     //
                     tld->selectObject(grey, &r);
                 }
+
                 if(key == 'f')
                 {
                     CvRect box;

@@ -36,6 +36,7 @@ using std::string;
 
 char gui_key;
 int gui_focus;
+int gui_focus_accuracy;
 bool gui_manualfocus;
 int gui_exposure;
 bool gui_manualexposure;
@@ -121,6 +122,17 @@ void Trackbar1Handler (int pos, void* userdata)
 	{
 		gui_key = 'p';
 	}
+
+}
+
+//Focus Accuracy
+void Trackbar4Handler (int pos, void* userdata)
+{
+	const double max = 20.0;
+	const double min = 1.0;
+
+	*(int*) userdata = (int)(((double) pos/ 100.0) * (max - min) + min);
+	gui_key = 'y';
 
 }
 
@@ -323,6 +335,11 @@ int Gui::getFocus(void)
 	return gui_focus;
 }
 
+int Gui::getFocusAccuracy(void)
+{
+	return gui_focus_accuracy;
+}
+
 int Gui::getExposure(void)
 {
 	//std::cout << gui_exposure << std::endl;
@@ -348,6 +365,7 @@ void Gui::init(ImAcq* imAcq)
 {
 	gui_key = '0';
 	gui_focus = 0;
+	gui_focus_accuracy = 5;
 	gui_manualfocus = false;
 	gui_exposure = 500;
 	gui_manualexposure = false;
@@ -384,6 +402,9 @@ void Gui::init(ImAcq* imAcq)
 
     int focus_value = 500;
     cvCreateTrackbar2("Focus", NULL, &focus_value, 1000,  Trackbar1Handler, &gui_focus);
+
+    int focus_accuracy = 5;
+    cvCreateTrackbar2("Focus Accuracy", NULL, &focus_accuracy, 100,  Trackbar4Handler, &gui_focus_accuracy);
 
     const char* button5 = "Manual Focus";
     cvCreateButton(button5, Button5Handler, &gui_manualfocus, CV_CHECKBOX, 0);

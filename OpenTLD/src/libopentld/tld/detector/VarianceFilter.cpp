@@ -70,25 +70,26 @@ void VarianceFilter::release()
 float VarianceFilter::calcVariance(int *off)
 {
 //    double* ii1 = (double*)img_integral.data;
-//    double* ii2 = (double*)img_integral_squared.data;
 //	int* ii1 = (int*)img_integral.data;
 //	int* ii2 = (int*)img_integral_squared.data;
 
-//    double mX2  = (ii2[cols + 1 + off[3]/(cols-1) + off[3]]
-//                 - ii2[cols + 1 + off[2]/(cols-1) + off[2]]
-//                 - ii2[cols + 1 + off[1]/(cols-1) + off[1]]
-//                 + ii2[cols + 1 + off[0]/(cols-1) + off[0]]) / (double) off[5];
+
 //    return (float)((mX2 - mX * mX)*100.0);
 //
     //int *ii1 = integralImg->data;
     long long *ii2 = integralImg_squared->data;
     int* ii1 = (int*)img_integral.data;
-    int cols = img_integral.cols;
-    double mX  = (ii1[cols + 1 + off[3]/(cols-1) + off[3]]
-                - ii1[cols + 1 + off[2]/(cols-1) + off[2]]
-                - ii1[cols + 1 + off[1]/(cols-1) + off[1]]
-                + ii1[cols + 1 + off[0]/(cols-1) + off[0]]) / (double) off[5];
-    //float mX  = (ii1[off[3]] - ii1[off[2]] - ii1[off[1]] + ii1[off[0]]) / (float) off[5]; //Sum of Area divided by area
+    //float* ii2 = (float*)img_integral_squared.data;
+    //int cols = img_integral.cols;
+//    float mX  = (ii1[cols + 1 + off[3]/(cols-1) + off[3]]
+//                - ii1[cols + 1 + off[2]/(cols-1) + off[2]]
+//                - ii1[cols + 1 + off[1]/(cols-1) + off[1]]
+//                + ii1[cols + 1 + off[0]/(cols-1) + off[0]]) / (float) off[5];
+//    double mX2  = (ii2[cols + 1 + off[3]/(cols-1) + off[3]]
+//                 - ii2[cols + 1 + off[2]/(cols-1) + off[2]]
+//                 - ii2[cols + 1 + off[1]/(cols-1) + off[1]]
+//                 + ii2[cols + 1 + off[0]/(cols-1) + off[0]]) / (double) off[5];
+    float mX  = (ii1[off[3]] - ii1[off[2]] - ii1[off[1]] + ii1[off[0]]) / (float) off[5]; //Sum of Area divided by area
     float mX2 = (ii2[off[3]] - ii2[off[2]] - ii2[off[1]] + ii2[off[0]]) / (float) off[5];
     return mX2 - mX * mX;
     //return (float)((mX2 - mX * mX)*100.0);
@@ -157,37 +158,50 @@ void VarianceFilter::nextIteration(const cv::Mat &img, const ocl::oclMat &img_oc
     tick_t procInit, procFinal;
 
     getCPUTick(&procInit);
+    //std::cout << "Support!!!!!!!" << ocl::Context::getContext()->supportsFeature(ocl::FEATURE_CL_DOUBLE) << std::endl;
 
-    ocl::oclMat img_integral_ocl;
+    //img_integral_ocl.create(Size(img.cols+1, img.rows+1), CV_32S);
+    //img_integral_squared_ocl.create(Size(img.cols+1, img.rows+1), CV_32F);
+
+    //ocl::integral(img_ocl, img_integral_ocl,img_integral_squared_ocl);
     ocl::integral(img_ocl, img_integral_ocl);
+    img_integral_ocl = img_integral_ocl.rowRange(Range(1, 721));
+    img_integral_ocl = img_integral_ocl.t();
+    img_integral_ocl = img_integral_ocl.rowRange(Range(1, 1281));
+    img_integral_ocl = img_integral_ocl.t();
+//    img_integral_squared_ocl = img_integral_squared_ocl.rowRange(Range(1, 721));
+//    img_integral_squared_ocl = img_integral_squared_ocl.t();
+//    img_integral_squared_ocl = img_integral_squared_ocl.rowRange(Range(1, 1281));
+//    img_integral_squared_ocl = img_integral_squared_ocl.t();
+
     img_integral_ocl.download(img_integral);
+    //img_integral_squared_ocl.download(img_integral_squared);
+
+    getCPUTick(&procFinal);
+    PRINT_TIMING("Ocl Variance Calculation Time: ", procInit, procFinal, "\n");
+
+    getCPUTick(&procInit);
     //integralImg = new IntegralImage<int> (img.size());
     //integralImg->calcIntImg(img, false);
     integralImg_squared = new IntegralImage<long long> (img.size());
     integralImg_squared->calcIntImg(img, true);
-
-//    img_integral = img_integral.rowRange(Range(1, 721));
-//    img_integral = img_integral.t();
-//    img_integral = img_integral.rowRange(Range(1, 1281));
-//    img_integral = img_integral.t();
-//    img_integral_squared = img_integral_squared.rowRange(Range(1, 721));
-//    img_integral_squared = img_integral_squared.t();
-//    img_integral_squared = img_integral_squared.rowRange(Range(1, 1281));
-//    img_integral_squared = img_integral_squared.t();
-
-
-//    for(int i = 0; i < img.cols * img.rows - 1; i ++)
-//    {
-//    	integralImg->data[i] = (int)((int*)(img_integral.data))[i]*8;
-//    	integralImg_squared->data[i] = (long long)((int*)(img_integral_squared.data))[i]*64;
-//    }
-
-
     getCPUTick(&procFinal);
     PRINT_TIMING("Variance Calculation Time: ", procInit, procFinal, "\n");
+
+//    getCPUTick(&procInit);
+//    for(int i = 0; i < img.rows * img.cols; i ++)
+//    {
+//    	integralImg_squared->data[i] = (long long)((float*)img_integral_squared.data)[i];
+//    }
+//    getCPUTick(&procFinal);
+//    PRINT_TIMING("Copy Time: ", procInit, procFinal, "\n");
+
 //    int r = 719;
 //    int l = 1279;
-//    printf("111111111: %lli, 222222222: %lli\n", 64*((int*)img_integral_squared.data)[(0+r)*1280+(0+l)], integralImg_squared->data[r*1280+l]);
+//    float* t = (float*)img_integral_squared.data;
+//    std::cout << (long long)t[(1+r)*(1280+1)+(1+l)] << std::endl;
+//    std::cout << integralImg_squared->data[r*1280+l] << std::endl;
+    //printf("222222222: %lli\n", integralImg->data[r*1280+l]);
 
     //std::cout <<img_integral_squared.rows << std::endl;
 

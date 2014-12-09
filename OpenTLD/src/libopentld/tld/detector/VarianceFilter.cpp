@@ -33,15 +33,14 @@
 #include "Timing.h"
 #include <string.h>
 
+
+
 using namespace cv;
 
 namespace tld
 {
 
-Mat img_integral;
-ocl::oclMat img_integral_ocl;
-Mat img_integral_squared;
-ocl::oclMat img_integral_squared_ocl;
+
 
 VarianceFilter::VarianceFilter()
 {
@@ -49,6 +48,8 @@ VarianceFilter::VarianceFilter()
     minVar = 0;
     integralImg = NULL;
     integralImg_squared = NULL;
+    gpu = new opencl();
+    gpu->gpu_init();
 }
 
 VarianceFilter::~VarianceFilter()
@@ -158,6 +159,20 @@ void VarianceFilter::nextIteration(const cv::Mat &img, const ocl::oclMat &img_oc
     tick_t procInit, procFinal;
 
     getCPUTick(&procInit);
+
+//    getCPUTick(&procInit);
+//    const int size = 100;
+//    float* a = new float(size);
+//    float* b = new float(size);
+//    float* c = new float(size);
+//    for(int i = 0; i < size; i ++)
+//    {
+//    	a[i] = b[i] = (float)i;
+//    }
+//    gpu->vector_add_gpu(a,b,c,size);
+//    gpu->gpu_release();
+//    getCPUTick(&procFinal);
+//    PRINT_TIMING("Ocl Vector Addition Calculation Time: ", procInit, procFinal, "\n");
     //std::cout << "Support!!!!!!!" << ocl::Context::getContext()->supportsFeature(ocl::FEATURE_CL_DOUBLE) << std::endl;
 
     //img_integral_ocl.create(Size(img.cols+1, img.rows+1), CV_32S);
@@ -222,6 +237,40 @@ bool VarianceFilter::filter(int i)
     }
 
     return true;
+}
+
+void VarianceFilter::oclfilter(int num, bool* state, int& j, float* p)
+{
+	//gpu->gpu_init();
+	for(int i = 0; i < num; i ++)
+	{
+		if(enabled == false)
+		{
+			state[i] = true;
+			j ++;
+		}
+		else
+		{
+			int* off = windowOffsets + TLD_WINDOW_OFFSET_SIZE * i;
+		    long long *ii2 = integralImg_squared->data;
+		    int* ii1 = (int*)img_integral.data;
+		    float mX  = (ii1[off[3]] - ii1[off[2]] - ii1[off[1]] + ii1[off[0]]) / (float) off[5]; //Sum of Area divided by area
+		    float mX2 = (ii2[off[3]] - ii2[off[2]] - ii2[off[1]] + ii2[off[0]]) / (float) off[5];
+			float bboxvar = mX2 - mX * mX;
+			detectionResult->variances[i] = bboxvar;
+
+			if(bboxvar < minVar)
+			{
+				p[i] = 0;
+				state[i] = false;
+			}
+			else
+			{
+				state[i] = true;
+				j ++;
+			}
+		}
+	}
 }
 
 } /* namespace tld */

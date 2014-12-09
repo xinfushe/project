@@ -23,6 +23,7 @@ set(SRC_FILES
 	tld/detector/ForegroundDetector.cpp
 	tld/detector/NNClassifier.cpp
 	tld/detector/VarianceFilter.cpp
+	tld/detector/ocl.cpp
 	imacq/ImAcq.h
 	mftracker/BB.h
 	mftracker/BBPredict.h
@@ -45,7 +46,8 @@ set(SRC_FILES
 	tld/detector/IntegralImage.h
 	tld/detector/NNClassifier.h
 	tld/detector/NormalizedPatch.h
-	tld/detector/VarianceFilter.h)
+	tld/detector/VarianceFilter.h
+	tld/detector/ocl.h)
 
 add_library(libopentld ${SRC_FILES})
 link_directories(${OpenCV_LIB_DIR})

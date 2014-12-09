@@ -43,7 +43,7 @@
 #include "opencv2/features2d/features2d.hpp"
 
 //
-#include "ocl.cpp"
+#include "ocl.h"
 #include "./GraphUtils.cpp"
 //
 
@@ -222,7 +222,8 @@ static int getFocus(int currsize,int lastsize,int bestfocus)
 }
 void Main::doWork()
 {
-	gpu_init();
+//	opencl* gpu = new opencl();
+//	gpu->gpu_init();
 
 	Trajectory trajectory;
     IplImage *img = imAcqGetImg(imAcq);
@@ -241,8 +242,8 @@ void Main::doWork()
     //Initialize the matirces
     color = Mat(img, false);
     color_ocl.upload(color);
-   //ocl::cvtColor(color_ocl , grey_ocl, CV_BGR2GRAY);
-    ocl::cvtColor(color_ocl , grey_ocl, CV_RGB2GRAY);
+    ocl::cvtColor(color_ocl , grey_ocl, CV_BGR2GRAY);
+    //ocl::cvtColor(color_ocl , grey_ocl, CV_RGB2GRAY);
     grey_ocl.download(grey);
 
     //
@@ -418,7 +419,7 @@ void Main::doWork()
         toc = toc / 1000000;
 
 
-        cout << "toc is " << toc*1000.0 << endl;
+        std::cout << "toc is " << toc*1000.0 << std::endl;
 
         float fps = 1 / toc;
 
@@ -803,7 +804,8 @@ void Main::doWork()
                 if(key == 'f')
                 {
                     CvRect box;
-                    const char* cascadeName = "/home/slilylsu/Desktop/project-repo/haarcascade_frontalface_alt.xml";
+                    const char* cascadeName = "/home/slilylsu/Desktop/project-repo/haarcascade_frontalface_alt2.xml";
+                    //const char* cascadeName = "/home/slilylsu/Desktop/project-repo/haarcascade_smile.xml";
                     //CascadeClassifier  cascade;
                     ocl::OclCascadeClassifier cascade;
                     vector<Rect> faces;
@@ -816,7 +818,7 @@ void Main::doWork()
 //                             3, 0 | CV_HAAR_SCALE_IMAGE,
 //                             Size(30, 30), Size(0, 0));
                     cascade.detectMultiScale(grey_ocl, faces, 1.1,
-                                                 3, 0 | CV_HAAR_SCALE_IMAGE,
+                                                 3, 0 /*| CV_HAAR_SCALE_IMAGE*/,
                                                  Size(30, 30), Size(0, 0));
                     if(!faces.empty())
                     {
@@ -835,7 +837,7 @@ void Main::doWork()
                 if(key == 'd')
                 {
                 	CvRect box;
-                	const char* cascadeName = "/home/slilylsu/Desktop/project-repo/apple.xml";
+                	const char* cascadeName = "/home/slilylsu/Desktop/project-repo/apple_23_1.xml";
                 	ocl::OclCascadeClassifier cascade;
                 	vector<Rect> faces;
                 	if( !cascade.load( cascadeName )  )

@@ -1,57 +1,40 @@
 #include <iostream>
 #include <cassert>
 #include <stdio.h>
-#include <CL/cl.h>
 #include <opencv/cv.h>
+#include "ocl.h"
 using std::cout;
 using std::endl;
 
-//
-// OpenCL Environment variables
-cl_uint num_entries = 1;
-cl_platform_id platform_id;
-cl_uint num_platforms;
+//opencl::opencl()
+//{
+//	gpu_init();
+//}
 
-cl_device_type device_type = CL_DEVICE_TYPE_GPU;
-cl_device_id device_id;
-cl_uint num_devices;
+//opencl::~opencl()
+//{
+//	gpu_release();
+//}
 
-cl_context context;
-cl_context_properties context_properties;
-//void* pfn_notify = NULL;
-//void* user_data = NULL;
-cl_command_queue queue;
-cl_command_queue_properties command_queue_properties = 0;
-cl_int error = CL_SUCCESS;
-
-void gpu_init(void);
-
-void vector_add_gpu(float* const src_a_h,
-					float* const src_b_h,
-					float* const res_h,
-					const int size);
-
-void gpu_release(void);
-
-void vector_add_cpu(const float* const src_a,
-					const float* const src_b,
-					float* const res,
-					const int size);
-//
-
-
-void vector_add_cpu(const float* const src_a,
-					const float* const src_b,
-					float* const res,
-					const int size)
+void opencl::gpu_init(void)
 {
-	for (int i = 0; i < size; i++) {
-		res[i] = src_a[i] + src_b[i];
-	}
-}
+	// OpenCL Environment variables
+	num_entries = 1;
+	//platform_id;
+	//num_platforms;
 
-void gpu_init(void)
-{
+	device_type = CL_DEVICE_TYPE_GPU;
+	//device_id;
+	//num_devices;
+
+	//context;
+	//context_properties;
+	//void* pfn_notify = NULL;
+	//void* user_data = NULL;
+	//queue;
+	command_queue_properties = 0;
+	error = CL_SUCCESS;
+
 	// Initializing the basic OpenCL environment
 	error = clGetPlatformIDs(num_entries, &platform_id, &num_platforms);
 	assert(error == CL_SUCCESS);
@@ -140,7 +123,7 @@ void gpu_init(void)
 	assert(error == CL_SUCCESS);
 }
 
-void vector_add_gpu(float* const src_a_h,
+void opencl::vector_add_gpu(float* const src_a_h,
 					float* const src_b_h,
 					float* const res_h,
 					const int size)
@@ -168,12 +151,12 @@ void vector_add_gpu(float* const src_a_h,
 
 
 	// Creates the program
-	const char* path = "/home/slilylsu/Desktop/project-repo/OpenTLD/src/opentld/main/kernels/vector_add_kernel.cl";
+	const char* path = "/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/detector/kernels/vector_add_kernel.cl";
 	FILE* fp;
 	fp = fopen(path, "r");
 	if (!fp)
 	{
-		fprintf(stderr, "Failed to load kernel.\n");
+		fprintf(stderr, "Failed to load kernel: 'vector_add_kernel.cl'.\n");
 		exit(1);
 	}
 	const size_t MAX_SOURCE_SIZE = 0x1000000;
@@ -266,7 +249,17 @@ void vector_add_gpu(float* const src_a_h,
 
 }
 
-void gpu_release(void)
+void opencl::vector_add_cpu(const float* const src_a,
+					const float* const src_b,
+					float* const res,
+					const int size)
+{
+	for (int i = 0; i < size; i++) {
+		res[i] = src_a[i] + src_b[i];
+	}
+}
+
+void opencl::gpu_release(void)
 {
 	clReleaseCommandQueue(queue);
 	clReleaseContext(context);

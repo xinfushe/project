@@ -38,6 +38,7 @@
 //
 #include <opencv2/ocl/ocl.hpp>
 #include <opencv2/ocl/matrix_operations.hpp>
+#include "ocl.h"
 //
 
 namespace tld
@@ -47,6 +48,11 @@ class VarianceFilter : public IVarianceFilter
 {
     IntegralImage<int>* integralImg;
     IntegralImage<long long>* integralImg_squared;
+    cv::Mat img_integral;
+    cv::ocl::oclMat img_integral_ocl;
+    cv::Mat img_integral_squared;
+    cv::ocl::oclMat img_integral_squared_ocl;
+    opencl* gpu;
 
 public:
     VarianceFilter();
@@ -56,6 +62,7 @@ public:
     void nextIteration(const cv::Mat &img);
     void nextIteration(const cv::Mat &img, const cv::ocl::oclMat &img_ocl);
     bool filter(int idx);
+    void oclfilter(int num, bool* state, int& j, float* p);
     float calcVariance(int *off);
 };
 

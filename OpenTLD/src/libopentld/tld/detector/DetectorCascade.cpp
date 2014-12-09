@@ -406,68 +406,91 @@ void DetectorCascade::detect(const Mat &img, const ocl::oclMat &img_ocl)
     getCPUTick(&procInit);
 
     int j = 0, k = 0;
+    bool state[numWindows+1];
+    memset(state, false, sizeof(bool)*(numWindows+1));
+    float *p = detectionResult->posteriors;
+    _varianceFilter->oclfilter(numWindows, state, j, p);
+
     #pragma omp parallel for
-
-
     for(int i = 0; i < numWindows; i++)
     {
-        /*
-         * Foreground detection disabled
-         *
-        int *window = &windows[TLD_WINDOW_SIZE * i];
-
-        if(foregroundDetector->isActive())
-        {
-            bool isInside = false;
-
-            for(size_t j = 0; j < detectionResult->fgList->size(); j++)
+    	if(state[i] == true)
+    	{
+            if(!_ensembleClassifier->filter(i))
             {
-
-                int bgBox[4];
-                tldRectToArray(detectionResult->fgList->at(j), bgBox);
-
-                if(tldIsInside(window, bgBox))  //TODO: This is inefficient and should be replaced by a quadtree
-                {
-                    isInside = true;
-                }
-            }
-
-            if(!isInside)
-            {
-                detectionResult->posteriors[i] = 0;
                 continue;
             }
-        }
-        */
+            k++;
 
 
-        if(!_varianceFilter->filter(i))
-        {
+            if(!_nnClassifier->filter(img, i))
+            {
+                continue;
+            }
 
-            detectionResult->posteriors[i] = 0;
-
-            continue;
-        }
-        j++;
-
-        if(!_ensembleClassifier->filter(i))
-        {
-            continue;
-        }
-        k++;
-
-
-        if(!_nnClassifier->filter(img, i))
-        {
-            continue;
-        }
-
-
-        detectionResult->confidentIndices->push_back(i);
-
-
-
+            detectionResult->confidentIndices->push_back(i);
+    	}
+    	else
+    	{
+    		continue;
+    	}
     }
+
+//    for(int i = 0; i < numWindows; i++)
+//    {
+//        /*
+//         * Foreground detection disabled
+//         *
+//        int *window = &windows[TLD_WINDOW_SIZE * i];
+//
+//        if(foregroundDetector->isActive())
+//        {
+//            bool isInside = false;
+//
+//            for(size_t j = 0; j < detectionResult->fgList->size(); j++)
+//            {
+//
+//                int bgBox[4];
+//                tldRectToArray(detectionResult->fgList->at(j), bgBox);
+//
+//                if(tldIsInside(window, bgBox))  //TODO: This is inefficient and should be replaced by a quadtree
+//                {
+//                    isInside = true;
+//                }
+//            }
+//
+//            if(!isInside)
+//            {
+//                detectionResult->posteriors[i] = 0;
+//                continue;
+//            }
+//        }
+//        */
+//
+//
+//        if(!_varianceFilter->filter(i))
+//        {
+//
+//            detectionResult->posteriors[i] = 0;
+//
+//            continue;
+//        }
+//        j++;
+//
+//        if(!_ensembleClassifier->filter(i))
+//        {
+//            continue;
+//        }
+//        k++;
+//
+//
+//        if(!_nnClassifier->filter(img, i))
+//        {
+//            continue;
+//        }
+//
+//        detectionResult->confidentIndices->push_back(i);
+//    }
     std::cout << numWindows << " - " << j << " - " << k << " ";
     getCPUTick(&procFinal);
     PRINT_TIMING("Classify Time", procInit, procFinal, ", ");

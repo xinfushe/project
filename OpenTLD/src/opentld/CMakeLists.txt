@@ -27,7 +27,8 @@ add_library(main
     main/Main.h
 	main/Settings.h
 	main/Trajectory.h
-	main/ocl.cpp
+	#main/ocl.cpp
+	#main/ocl.h
 	)
 
 target_link_libraries(main libopentld cvblobs config++ ${OpenCV_LIBS})

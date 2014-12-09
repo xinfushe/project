@@ -325,7 +325,6 @@ void opencl::oclfilter_device(bool* enabled,
 
 
 //Check if the kernel is ready
-	cl_kernel oclfilter_kernel;
 	if(oclfilter_state == false)
 	{
 		// Creates the program

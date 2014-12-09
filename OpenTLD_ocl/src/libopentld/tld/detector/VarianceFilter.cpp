@@ -241,7 +241,6 @@ bool VarianceFilter::filter(int i)
 
 void VarianceFilter::oclfilter(int num, bool* state, int* j, float* p, int img_size)
 {
-	//gpu->gpu_init();
 	float* v = detectionResult->variances;
 	int* off = new int[6];
 	float* mX = new float();

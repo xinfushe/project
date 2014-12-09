@@ -11,5 +11,5 @@ __kernel void vector_add_kernel (__global const float* src_a,
     /* Now each work-item asks itself: "is my ID inside the vector's range?"
     If the answer is YES, the work-item performs the corresponding computation*/
     if (idx < num)
-        res[idx] = src_a[idx] + src_b[idx];
+            res[idx] = src_a[idx] + src_b[idx];
 }

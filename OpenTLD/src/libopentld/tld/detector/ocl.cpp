@@ -6,15 +6,15 @@
 using std::cout;
 using std::endl;
 
-//opencl::opencl()
-//{
-//	gpu_init();
-//}
+opencl::opencl()
+{
+	gpu_init();
+}
 
-//opencl::~opencl()
-//{
-//	gpu_release();
-//}
+opencl::~opencl()
+{
+	gpu_release();
+}
 
 void opencl::gpu_init(void)
 {
@@ -257,6 +257,197 @@ void opencl::vector_add_cpu(const float* const src_a,
 	for (int i = 0; i < size; i++) {
 		res[i] = src_a[i] + src_b[i];
 	}
+}
+
+void opencl::oclfilter_device(bool* enabled, bool* state, float* p, float* v, float* minVar,
+							  int* j, int* off, int* window_offsets, int* tld_size, int* ii1,
+							  long long* ii2, float* mX, float* mX2, float* bboxvar, int* img_size, int* window_size)
+{
+	double freq = cvGetTickFrequency()*1000.0; //kHz
+	double tic = 0.0;
+	double toc = 0.0;
+	double time_io = 0.0;
+	double time_calc = 0.0;
+
+	//
+	tic = cvGetTickCount();
+	//
+	// Initializing device memory
+	cl_mem enabled_d = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, sizeof(bool), enabled, &error);
+	assert(error == CL_SUCCESS);
+	cl_mem state_d = clCreateBuffer(context, CL_MEM_WRITE_ONLY | CL_MEM_COPY_HOST_PTR, sizeof(bool)*(*window_size), state, &error);
+	assert(error == CL_SUCCESS);
+	cl_mem p_d = clCreateBuffer(context, CL_MEM_WRITE_ONLY | CL_MEM_COPY_HOST_PTR, sizeof(float)*(*window_size), p, &error);
+	assert(error == CL_SUCCESS);
+	cl_mem v_d = clCreateBuffer(context, CL_MEM_WRITE_ONLY | CL_MEM_COPY_HOST_PTR, sizeof(float)*(*window_size), v, &error);
+	assert(error == CL_SUCCESS);
+	cl_mem minVar_d = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, sizeof(float), minVar, &error);
+	assert(error == CL_SUCCESS);
+	cl_mem j_d = clCreateBuffer(context, CL_MEM_WRITE_ONLY | CL_MEM_COPY_HOST_PTR, sizeof(int), j, &error);
+	assert(error == CL_SUCCESS);
+	cl_mem off_d = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(int), off, &error);
+	assert(error == CL_SUCCESS);
+	cl_mem window_offsets_d = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, sizeof(int), window_offsets, &error);
+	assert(error == CL_SUCCESS);
+	cl_mem tld_size_d = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, sizeof(int), tld_size, &error);
+	assert(error == CL_SUCCESS);
+	cl_mem ii1_d = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, sizeof(int)*(*img_size), ii1, &error);
+	assert(error == CL_SUCCESS);
+	cl_mem ii2_d = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, sizeof(long long)*(*img_size), ii2, &error);
+	assert(error == CL_SUCCESS);
+	cl_mem mX_d = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(float), mX, &error);
+	assert(error == CL_SUCCESS);
+	cl_mem mX2_d = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(float), mX2, &error);
+	assert(error == CL_SUCCESS);
+	cl_mem bboxvar_d = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(float), bboxvar, &error);
+	assert(error == CL_SUCCESS);
+	cl_mem img_size_d = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, sizeof(int), img_size, &error);
+	assert(error == CL_SUCCESS);
+	cl_mem window_size_d = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, sizeof(int), window_size, &error);
+	assert(error == CL_SUCCESS);
+	toc = cvGetTickCount();
+	time_io += toc - tic;
+
+
+
+	// Creates the program
+	const char* path = "/home/slilylsu/Desktop/project-repo/OpenTLD/src/libopentld/tld/detector/kernels/oclfilter_kernel.cl";
+	FILE* fp;
+	fp = fopen(path, "r");
+	if (!fp)
+	{
+		fprintf(stderr, "Failed to load kernel: 'vector_add_kernel.cl'.\n");
+		exit(1);
+	}
+	const size_t MAX_SOURCE_SIZE = 0x1000000;
+	char* source_temp = new char[MAX_SOURCE_SIZE];
+	size_t source_size = 0;
+	source_size = fread(source_temp, 1, MAX_SOURCE_SIZE, fp);
+	const char* source;
+	source = source_temp;
+	fclose(fp);
+
+	cl_uint program_count = 1;
+	cl_program program = clCreateProgramWithSource(context, program_count, &source, &source_size, &error);
+	assert(error == CL_SUCCESS);
+
+	// Builds the program
+	error = clBuildProgram(program, num_devices, &device_id, NULL, NULL, NULL);
+	assert(error == CL_SUCCESS);
+/*
+	// Shows the log
+	char* build_log;
+	size_t log_size = 0;
+
+	// First call to know the proper size
+	size_t param_value_size = 0;
+	char* param_value = NULL;
+	clGetProgramBuildInfo(program, device_id, CL_PROGRAM_BUILD_LOG, param_value_size, &param_value, &log_size);
+	build_log = new char[log_size + 1];
+
+	// Second call to get the log
+	clGetProgramBuildInfo(program, device_id, CL_PROGRAM_BUILD_LOG, log_size + 1, build_log, NULL);
+	build_log[log_size] = '\0';
+	//cout << build_log << endl;
+	delete[] build_log;
+*/
+	// 'Extracting' the kernel
+	cl_kernel oclfilter_kernel = clCreateKernel(program, "oclfilter_kernel", &error);
+	assert(error == CL_SUCCESS);
+
+	//
+	tic = cvGetTickCount();
+
+	//Enqueuing parameters_work
+	error = clSetKernelArg(oclfilter_kernel, 0, sizeof(enabled_d), &enabled_d);
+	assert(error == CL_SUCCESS);
+	error = clSetKernelArg(oclfilter_kernel, 1, sizeof(state_d), &state_d);
+	assert(error == CL_SUCCESS);
+	error = clSetKernelArg(oclfilter_kernel, 2, sizeof(p_d), &p_d);
+	assert(error == CL_SUCCESS);
+	error = clSetKernelArg(oclfilter_kernel, 3, sizeof(v_d), &v_d);
+	assert(error == CL_SUCCESS);
+	error = clSetKernelArg(oclfilter_kernel, 4, sizeof(minVar_d), &minVar_d);
+	assert(error == CL_SUCCESS);
+	error = clSetKernelArg(oclfilter_kernel, 5, sizeof(j_d), &j_d);
+	assert(error == CL_SUCCESS);
+	error = clSetKernelArg(oclfilter_kernel, 6, sizeof(off_d), &off_d);
+	assert(error == CL_SUCCESS);
+	error = clSetKernelArg(oclfilter_kernel, 7, sizeof(window_offsets_d), &window_offsets_d);
+	assert(error == CL_SUCCESS);
+	error = clSetKernelArg(oclfilter_kernel, 8, sizeof(tld_size_d), &tld_size_d);
+	assert(error == CL_SUCCESS);
+	error = clSetKernelArg(oclfilter_kernel, 9, sizeof(ii1_d), &ii2_d);
+	assert(error == CL_SUCCESS);
+	error = clSetKernelArg(oclfilter_kernel, 10, sizeof(ii2_d), &ii2_d);
+	assert(error == CL_SUCCESS);
+	error = clSetKernelArg(oclfilter_kernel, 11, sizeof(mX_d), &mX_d);
+	assert(error == CL_SUCCESS);
+	error = clSetKernelArg(oclfilter_kernel, 12, sizeof(mX2_d), &mX2_d);
+	assert(error == CL_SUCCESS);
+	error = clSetKernelArg(oclfilter_kernel, 13, sizeof(bboxvar_d), &bboxvar_d);
+	assert(error == CL_SUCCESS);
+	error = clSetKernelArg(oclfilter_kernel, 14, sizeof(img_size_d), &img_size_d);
+	assert(error == CL_SUCCESS);
+	error = clSetKernelArg(oclfilter_kernel, 15, sizeof(window_size_d), &window_size_d);
+	assert(error == CL_SUCCESS);
+
+	// Launching kernel
+	const size_t local_worksize = 1024;	// Number of work-items per work-group
+	// The smallest multiple of local_ws bigger than size
+	const size_t global_worksize = (((*window_size) / local_worksize) + 1) * local_worksize;
+	cl_uint work_dim = 1;
+	//const size_t global_workoffset = 0;
+	cl_uint num_events_in_wait_list = 0;
+	//const cl_event* event_wait_list;
+	//cl_event* event;
+	error = clEnqueueNDRangeKernel(queue, oclfilter_kernel, work_dim, NULL, &global_worksize, &local_worksize, num_events_in_wait_list, NULL, NULL);
+	assert(error == CL_SUCCESS);
+	toc = cvGetTickCount();
+	time_calc += toc - tic;
+
+	// Reading back
+//	float* check = new float[size];
+//	clEnqueueReadBuffer(queue, res_d, CL_TRUE, 0, mem_size, check, num_events_in_wait_list, NULL, NULL);
+//
+//	// Checking with the CPU results;
+//	vector_add_cpu(src_a_h, src_b_h, res_h, size);
+//	for (int i = 0; i < size; i++)
+//		assert(check[i] == res_h[i]);
+//	cout << "Congratulations, it's working!" << endl;
+//	delete[] check;
+
+	tic = cvGetTickCount();
+	clEnqueueReadBuffer(queue, state_d, CL_TRUE, 0, sizeof(state_d), state, num_events_in_wait_list, NULL, NULL);
+	clEnqueueReadBuffer(queue, p_d, CL_TRUE, 0, sizeof(p_d), p, num_events_in_wait_list, NULL, NULL);
+	clEnqueueReadBuffer(queue, v_d, CL_TRUE, 0, sizeof(v_d), v, num_events_in_wait_list, NULL, NULL);
+	clEnqueueReadBuffer(queue, j_d, CL_TRUE, 0, sizeof(j_d), j, num_events_in_wait_list, NULL, NULL);
+
+	//Release
+	clReleaseMemObject(enabled_d);
+	clReleaseMemObject(state_d);
+	clReleaseMemObject(p_d);
+	clReleaseMemObject(v_d);
+	clReleaseMemObject(minVar_d);
+	clReleaseMemObject(j_d);
+	clReleaseMemObject(off_d);
+	clReleaseMemObject(window_offsets_d);
+	clReleaseMemObject(tld_size_d);
+	clReleaseMemObject(ii1_d);
+	clReleaseMemObject(ii2_d);
+	clReleaseMemObject(mX_d);
+	clReleaseMemObject(mX2_d);
+	clReleaseMemObject(bboxvar_d);
+	clReleaseMemObject(img_size_d);
+	clReleaseMemObject(window_size_d);
+	clReleaseKernel(oclfilter_kernel);
+
+	toc = cvGetTickCount();
+	time_io += toc - tic;
+
+	cout << "GPU IO Time: " << time_io/(double)freq << " ms" << endl;
+	cout << "GPU Calculation Time: " << time_calc/(double)freq << " ms" << endl;
+
 }
 
 void opencl::gpu_release(void)

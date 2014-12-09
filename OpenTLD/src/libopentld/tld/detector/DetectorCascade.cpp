@@ -409,7 +409,7 @@ void DetectorCascade::detect(const Mat &img, const ocl::oclMat &img_ocl)
     bool state[numWindows+1];
     memset(state, false, sizeof(bool)*(numWindows+1));
     float *p = detectionResult->posteriors;
-    _varianceFilter->oclfilter(numWindows, state, j, p);
+    _varianceFilter->oclfilter(numWindows, state, &j, p, (img.rows)*(img.cols)-1);
 
     #pragma omp parallel for
     for(int i = 0; i < numWindows; i++)

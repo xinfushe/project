@@ -62,7 +62,7 @@ public:
     void nextIteration(const cv::Mat &img);
     void nextIteration(const cv::Mat &img, const cv::ocl::oclMat &img_ocl);
     bool filter(int idx);
-    void oclfilter(int num, bool* state, int& j, float* p);
+    void oclfilter(int num, bool* state, int* j, float* p, int img_size);
     float calcVariance(int *off);
 };
 

@@ -239,15 +239,15 @@ bool VarianceFilter::filter(int i)
     return true;
 }
 
-void VarianceFilter::oclfilter(int num, bool* state, int& j, float* p)
+void VarianceFilter::oclfilter(int num, bool* state, int* j, float* p, int img_size)
 {
-	//gpu->gpu_init();
+	gpu->gpu_init();
 	for(int i = 0; i < num; i ++)
 	{
 		if(enabled == false)
 		{
 			state[i] = true;
-			j ++;
+			*j = *j + 1;
 		}
 		else
 		{
@@ -267,7 +267,7 @@ void VarianceFilter::oclfilter(int num, bool* state, int& j, float* p)
 			else
 			{
 				state[i] = true;
-				j ++;
+				*j = *j + 1;
 			}
 		}
 	}

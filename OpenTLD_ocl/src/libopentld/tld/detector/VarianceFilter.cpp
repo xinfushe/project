@@ -241,15 +241,21 @@ bool VarianceFilter::filter(int i)
 
 void VarianceFilter::oclfilter(int num, bool* state, int* j, float* p, int img_size)
 {
-	float* v = detectionResult->variances;
+	//float* v = detectionResult->variances;
 	int* off = new int[6];
 	float* mX = new float();
 	float* mX2 = new float();
 	float* bboxvar = new float();
 	int* tld_size = new int(TLD_WINDOW_OFFSET_SIZE);
-	int* ii1 = (int*)img_integral.data;
-	long long *ii2 = integralImg_squared->data;
-	gpu->oclfilter_device(&enabled, state, p, v, &minVar, j, off, windowOffsets, tld_size, ii1, ii2, mX, mX2, bboxvar, &img_size, &num);
+	//int* ii1 = (int*)img_integral.data;
+	//long long *ii2 = integralImg_squared->data;
+	gpu->oclfilter_device(&enabled, state, p, detectionResult->variances, &minVar, j, off, windowOffsets, tld_size, (int*)img_integral.data, integralImg_squared->data, mX, mX2, bboxvar, &img_size, &num);
+	delete[] off;
+	delete mX;
+	delete mX2;
+	delete bboxvar;
+	delete tld_size;
+
 //	for(int i = 0; i < num; i ++)
 //	{
 //		if(enabled == false)

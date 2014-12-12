@@ -405,13 +405,14 @@ void DetectorCascade::detect(const Mat &img, const ocl::oclMat &img_ocl)
 
     getCPUTick(&procInit);
 
-    int j = 0, k = 0;
-    bool state[numWindows+1];
-    memset(state, false, sizeof(bool)*(numWindows+1));
-    float *p = detectionResult->posteriors;
-    _varianceFilter->oclfilter(numWindows, state, &j, p, (img.rows)*(img.cols)-1);
+    int* j = new int(0);
+    int k = 0;
+    bool state[numWindows];
+    memset(state, false, sizeof(bool)*(numWindows));
+    //float *p = detectionResult->posteriors;
+    _varianceFilter->oclfilter(numWindows, state, j, detectionResult->posteriors, (img.rows)*(img.cols)-1);
 
-    #pragma omp parallel for
+    //#pragma omp parallel for
     for(int i = 0; i < numWindows; i++)
     {
     	if(state[i] == true)

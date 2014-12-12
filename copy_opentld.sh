@@ -6,7 +6,7 @@ sudo rm -rf ./compare
 mkdir compare
 
 cd ~/Desktop/project-repo/
-sh OpenTLD.sh
+sh OpenTLD_ocl.sh
 cd ./build/release/
 make -j4 all
 cp -rf ./bin/* ~/Desktop/compare

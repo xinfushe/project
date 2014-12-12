@@ -1,0 +1,9 @@
+1. smaller that 4 byte read
+2. workgroup size --- larger
+3. kernel self-written
+(1) less memory access
+(2) char/short slow int
+(3) less if else conditions
+(4) global, private, local memeory access
+	pointers less read
+	read pattern, to optimize the speed

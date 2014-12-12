@@ -403,8 +403,8 @@ void Gui::init(ImAcq* imAcq)
     int focus_value = 500;
     cvCreateTrackbar2("Focus", NULL, &focus_value, 1000,  Trackbar1Handler, &gui_focus);
 
-    int focus_accuracy = 5;
-    cvCreateTrackbar2("Focus Accuracy", NULL, &focus_accuracy, 100,  Trackbar4Handler, &gui_focus_accuracy);
+    int focus_accuracy = 50;
+    cvCreateTrackbar2("Accuracy", NULL, &focus_accuracy, 100,  Trackbar4Handler, &gui_focus_accuracy);
 
     const char* button5 = "Manual Focus";
     cvCreateButton(button5, Button5Handler, &gui_manualfocus, CV_CHECKBOX, 0);

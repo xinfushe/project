@@ -286,7 +286,7 @@ void opencl::oclfilter_device(bool* enabled,
 
 	//
 	tic = cvGetTickCount();
-	//
+
 	// Initializing device memory
 	cl_mem enabled_d = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, sizeof(bool), enabled, &error);
 	assert(error == CL_SUCCESS);
@@ -298,7 +298,7 @@ void opencl::oclfilter_device(bool* enabled,
 	assert(error == CL_SUCCESS);
 	cl_mem minVar_d = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, sizeof(float), minVar, &error);
 	assert(error == CL_SUCCESS);
-	cl_mem j_d = clCreateBuffer(context, CL_MEM_WRITE_ONLY | CL_MEM_COPY_HOST_PTR, sizeof(int), j, &error);
+	cl_mem j_d = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(int), j, &error);
 	assert(error == CL_SUCCESS);
 	cl_mem off_d = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(int)*6, off, &error);
 	assert(error == CL_SUCCESS);
@@ -308,7 +308,7 @@ void opencl::oclfilter_device(bool* enabled,
 	assert(error == CL_SUCCESS);
 	cl_mem ii1_d = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, sizeof(int)*(*img_size), ii1, &error);
 	assert(error == CL_SUCCESS);
-	cl_mem ii2_d = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, sizeof(ii2[0])*(*img_size), ii2, &error);
+	cl_mem ii2_d = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, sizeof(long long)*(*img_size), ii2, &error);
 	assert(error == CL_SUCCESS);
 	cl_mem mX_d = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(float), mX, &error);
 	assert(error == CL_SUCCESS);
@@ -426,7 +426,7 @@ void opencl::oclfilter_device(bool* enabled,
 	cl_uint num_events_in_wait_list = 0;
 	//const cl_event* event_wait_list;
 	//cl_event* event;
-	error = clEnqueueNDRangeKernel(queue, oclfilter_kernel, work_dim, NULL, &global_worksize, &local_worksize, num_events_in_wait_list, NULL, NULL);
+	error = clEnqueueNDRangeKernel(queue, oclfilter_kernel, work_dim, NULL, &global_worksize, NULL, num_events_in_wait_list, NULL, NULL);
 	assert(error == CL_SUCCESS);
 	toc = cvGetTickCount();
 	time_calc += toc - tic;

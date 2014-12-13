@@ -463,6 +463,7 @@ void Main::doWork()
                 //Focus procedure
 
                 //getCPUTick(&procInit);
+                //getCPUTick(&procInit);
                 //double sharpness = contrast_measure(imgt (currRect));//TODO
                 double sharpness = contrast_measure(color_ocl (currRect));
                 //getCPUTick(&procFinal);
@@ -534,6 +535,9 @@ void Main::doWork()
                         focusCount=0;
                     }                    
                 }
+
+                //getCPUTick(&procFinal);
+                //PRINT_TIMING("Auto Focusing Time", procInit, procFinal, "\n");
 
 
                 //setExposure(fh, exposure);

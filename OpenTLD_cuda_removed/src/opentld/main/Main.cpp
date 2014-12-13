@@ -526,7 +526,7 @@ void Main::doWork()
                 if(key == 'f')
                 {
                     CvRect box;
-                    const char* cascadeName = "/home/slilylsu/Desktop/project-repo/haarcascade_frontalface_alt.xml";
+                    const char* cascadeName = "/home/slilylsu/Desktop/project-repo/haarcascade_frontalface_default.xml";
                     CascadeClassifier  cascade;
                     vector<Rect> faces;
                     if( !cascade.load( cascadeName )  )

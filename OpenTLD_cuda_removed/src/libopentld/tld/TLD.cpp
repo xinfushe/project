@@ -127,7 +127,7 @@ void TLD::processImage(const Mat &img)
         getCPUTick(&procInit);
         detectorCascade->detect(grey_frame);
         getCPUTick(&procFinal);
-        PRINT_TIMING("DetecTime", procInit, procFinal, ", ");
+        PRINT_TIMING("Detection Time", procInit, procFinal, "\n ");
     }
 
 

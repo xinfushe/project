@@ -410,6 +410,7 @@ void DetectorCascade::detect(const Mat &img, const ocl::oclMat &img_ocl)
     bool *state = new bool[numWindows];
     //memset(state, true, sizeof(bool)*(numWindows));
     //float *p = detectionResult->posteriors;
+
     _varianceFilter->oclfilter(numWindows, state, j, detectionResult->posteriors, (img.rows)*(img.cols)-1);
     _ensembleClassifier->oclfilter(numWindows, state, k);
 

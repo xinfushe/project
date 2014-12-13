@@ -52,6 +52,9 @@ EnsembleClassifier::EnsembleClassifier()
     numTrees = 10;
     numFeatures = 13;
     enabled = true;
+
+    gpu = new opencl();
+    gpu->gpu_init();
 }
 
 EnsembleClassifier::~EnsembleClassifier()
@@ -146,7 +149,9 @@ void EnsembleClassifier::nextIteration(const cv::Mat &img)
 {
     if(!enabled) return;
 
-    this->img = (const unsigned char *)img.data;
+    //this->img = (const unsigned char *)img.data;
+    this->img = (unsigned char *)img.data;
+    img_size = img.cols*img.rows-1;
 }
 
 //Classical fern algorithm
@@ -217,7 +222,12 @@ bool EnsembleClassifier::filter(int i)
 
 bool EnsembleClassifier::oclfilter(int num, bool* state, int* m)
 {
-	for(int i = 0; i < num; i ++)
+	int* tld_size = new int(TLD_WINDOW_OFFSET_SIZE);
+	gpu->oclfilter_ensemble(&num, state, m, &enabled, detectionResult->featureVectors,
+							&numTrees, windowOffsets, tld_size, featureOffsets, &numFeatures,
+							img, &img_size, posteriors, &numIndices, detectionResult->posteriors, &numScales);
+
+	/*for(int i = 0; i < num; i ++)
 	{
 		if(state[i] == true)
 		{
@@ -279,7 +289,7 @@ bool EnsembleClassifier::oclfilter(int num, bool* state, int* m)
 			state[i] = false;
 		}
 
-	}
+	}*/
 	return true;
 
 }

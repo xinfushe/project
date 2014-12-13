@@ -1,4 +1,4 @@
-__kernel void oclfilter_kernel (__global bool* enabled_d,
+__kernel void oclfilter_variance_kernel (__global bool* enabled_d,
 							  	__global bool* state_d,
 							  	__global float* p_d,
 							  	__global float* v_d,

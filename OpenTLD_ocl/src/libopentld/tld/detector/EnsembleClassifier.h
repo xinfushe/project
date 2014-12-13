@@ -43,7 +43,10 @@ namespace tld
 
 class EnsembleClassifier : public IEnsembleClassifier
 {
-    const unsigned char *img;
+    //const unsigned char *img;
+	unsigned char *img;
+	int img_size;
+    opencl* gpu;
 
     float calcConfidence(int *featureVector);
     int calcFernFeature(int windowIdx, int treeIdx);

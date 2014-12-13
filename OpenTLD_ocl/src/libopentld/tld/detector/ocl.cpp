@@ -42,7 +42,8 @@ void opencl::gpu_init(void)
 	error = clGetDeviceIDs(platform_id, device_type, num_entries, &device_id, &num_devices);
 	assert(error == CL_SUCCESS);
 
-	oclfilter_state = false;
+	oclfilter_variance_state = false;
+	oclfilter_ensemble_state = false;
 
 	//Print device information
 	//Device Name
@@ -125,7 +126,7 @@ void opencl::gpu_init(void)
 	assert(error == CL_SUCCESS);
 }
 
-void opencl::vector_add_gpu(float* const src_a_h,
+/*void opencl::vector_add_gpu(float* const src_a_h,
 					float* const src_b_h,
 					float* const res_h,
 					const int size)
@@ -259,9 +260,9 @@ void opencl::vector_add_cpu(const float* const src_a,
 	for (int i = 0; i < size; i++) {
 		res[i] = src_a[i] + src_b[i];
 	}
-}
+}*/
 
-void opencl::oclfilter_device(bool* enabled,
+void opencl::oclfilter_variance(bool* enabled,
 							  bool* state,
 							  float* p,
 							  float* v,
@@ -325,10 +326,10 @@ void opencl::oclfilter_device(bool* enabled,
 
 
 //Check if the kernel is ready
-	if(oclfilter_state == false)
+	if(oclfilter_variance_state == false)
 	{
 		// Creates the program
-		const char* path = "/home/slilylsu/Desktop/project-repo/OpenTLD_ocl/src/libopentld/tld/detector/kernels/oclfilter_kernel.cl";
+		const char* path = "/home/slilylsu/Desktop/project-repo/OpenTLD_ocl/src/libopentld/tld/detector/kernels/oclfilter_variance_kernel.cl";
 		FILE* fp;
 		fp = fopen(path, "r");
 		if (!fp)
@@ -370,10 +371,10 @@ void opencl::oclfilter_device(bool* enabled,
 		assert(error == CL_SUCCESS);
 
 		// 'Extracting' the kernel
-		oclfilter_kernel = clCreateKernel(program, "oclfilter_kernel", &error);
+		oclfilter_variance_kernel = clCreateKernel(program, "oclfilter_variance_kernel", &error);
 		assert(error == CL_SUCCESS);
 
-		oclfilter_state = true;
+		oclfilter_variance_state = true;
 	}
 
 
@@ -384,27 +385,27 @@ void opencl::oclfilter_device(bool* enabled,
 	tic = cvGetTickCount();
 
 	//Enqueuing parameters_work
-	error = clSetKernelArg(oclfilter_kernel, 0, sizeof(enabled_d), &enabled_d);
+	error = clSetKernelArg(oclfilter_variance_kernel, 0, sizeof(enabled_d), &enabled_d);
 	assert(error == CL_SUCCESS);
-	error = clSetKernelArg(oclfilter_kernel, 1, sizeof(state_d), &state_d);
+	error = clSetKernelArg(oclfilter_variance_kernel, 1, sizeof(state_d), &state_d);
 	assert(error == CL_SUCCESS);
-	error = clSetKernelArg(oclfilter_kernel, 2, sizeof(p_d), &p_d);
+	error = clSetKernelArg(oclfilter_variance_kernel, 2, sizeof(p_d), &p_d);
 	assert(error == CL_SUCCESS);
-	error = clSetKernelArg(oclfilter_kernel, 3, sizeof(v_d), &v_d);
+	error = clSetKernelArg(oclfilter_variance_kernel, 3, sizeof(v_d), &v_d);
 	assert(error == CL_SUCCESS);
-	error = clSetKernelArg(oclfilter_kernel, 4, sizeof(minVar_d), &minVar_d);
+	error = clSetKernelArg(oclfilter_variance_kernel, 4, sizeof(minVar_d), &minVar_d);
 	assert(error == CL_SUCCESS);
-	error = clSetKernelArg(oclfilter_kernel, 5, sizeof(j_d), &j_d);
+	error = clSetKernelArg(oclfilter_variance_kernel, 5, sizeof(j_d), &j_d);
 	assert(error == CL_SUCCESS);
 	//error = clSetKernelArg(oclfilter_kernel, 6, sizeof(off_d), &off_d);
 	//assert(error == CL_SUCCESS);
-	error = clSetKernelArg(oclfilter_kernel, 6, sizeof(window_offsets_d), &window_offsets_d);
+	error = clSetKernelArg(oclfilter_variance_kernel, 6, sizeof(window_offsets_d), &window_offsets_d);
 	assert(error == CL_SUCCESS);
-	error = clSetKernelArg(oclfilter_kernel, 7, sizeof(tld_size_d), &tld_size_d);
+	error = clSetKernelArg(oclfilter_variance_kernel, 7, sizeof(tld_size_d), &tld_size_d);
 	assert(error == CL_SUCCESS);
-	error = clSetKernelArg(oclfilter_kernel, 8, sizeof(ii1_d), &ii2_d);
+	error = clSetKernelArg(oclfilter_variance_kernel, 8, sizeof(ii1_d), &ii2_d);
 	assert(error == CL_SUCCESS);
-	error = clSetKernelArg(oclfilter_kernel, 9, sizeof(ii2_d), &ii2_d);
+	error = clSetKernelArg(oclfilter_variance_kernel, 9, sizeof(ii2_d), &ii2_d);
 	assert(error == CL_SUCCESS);
 	//error = clSetKernelArg(oclfilter_kernel, 11, sizeof(mX_d), &mX_d);
 	//assert(error == CL_SUCCESS);
@@ -414,7 +415,7 @@ void opencl::oclfilter_device(bool* enabled,
 	//assert(error == CL_SUCCESS);
 	//error = clSetKernelArg(oclfilter_kernel, 14, sizeof(img_size_d), &img_size_d);
 	//assert(error == CL_SUCCESS);
-	error = clSetKernelArg(oclfilter_kernel, 10, sizeof(window_size_d), &window_size_d);
+	error = clSetKernelArg(oclfilter_variance_kernel, 10, sizeof(window_size_d), &window_size_d);
 	assert(error == CL_SUCCESS);
 
 	// Launching kernel
@@ -426,7 +427,7 @@ void opencl::oclfilter_device(bool* enabled,
 	cl_uint num_events_in_wait_list = 0;
 	//const cl_event* event_wait_list;
 	//cl_event* event;
-	error = clEnqueueNDRangeKernel(queue, oclfilter_kernel, work_dim, NULL, &global_worksize, NULL, num_events_in_wait_list, NULL, NULL);
+	error = clEnqueueNDRangeKernel(queue, oclfilter_variance_kernel, work_dim, NULL, &global_worksize, NULL, num_events_in_wait_list, NULL, NULL);
 	assert(error == CL_SUCCESS);
 	toc = cvGetTickCount();
 	time_calc += toc - tic;
@@ -467,6 +468,208 @@ void opencl::oclfilter_device(bool* enabled,
 	//clReleaseMemObject(bboxvar_d);
 	//clReleaseMemObject(img_size_d);
 	clReleaseMemObject(window_size_d);
+	//clReleaseKernel(oclfilter_variance_kernel);
+
+	toc = cvGetTickCount();
+	time_io += toc - tic;
+
+	cout << "GPU IO Time: " << time_io/(double)freq << " ms" << endl;
+	cout << "GPU Calculation Time: " << time_calc/(double)freq << " ms" << endl;
+
+}
+
+void opencl::oclfilter_ensemble(int* num,
+								bool* state,
+								int* k,
+								bool* enabled,
+								int* detectfeatureVector,
+								int* numTrees,
+								int* windowOffsets,
+								int* tld_size,
+								int* featureOffsets,
+								int* numFeatures,
+								unsigned char* img,
+								int* img_size,
+								float* posteriors,
+								int* numIndices,
+								float* detectposteriors,
+								int* numScales)
+{
+	double freq = cvGetTickFrequency()*1000.0; //kHz
+	double tic = 0.0;
+	double toc = 0.0;
+	double time_io = 0.0;
+	double time_calc = 0.0;
+
+	//
+	tic = cvGetTickCount();
+
+	// Initializing device memory
+	cl_mem num_d = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(int), num, &error);
+	assert(error == CL_SUCCESS);
+	cl_mem state_d = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(bool)*(*num), state, &error);
+	assert(error == CL_SUCCESS);
+	cl_mem k_d = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(int), k, &error);
+	assert(error == CL_SUCCESS);
+	cl_mem enabled_d = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(bool), enabled, &error);
+	assert(error == CL_SUCCESS);
+	cl_mem detectfeatureVector_d = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(int)*((*num)*(*numTrees)), detectfeatureVector, &error);
+	assert(error == CL_SUCCESS);
+	cl_mem numTrees_d = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(int), numTrees, &error);
+	assert(error == CL_SUCCESS);
+	cl_mem windowOffsets_d = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(int)*((*num)*(*tld_size)), windowOffsets, &error);
+	assert(error == CL_SUCCESS);
+	cl_mem tld_size_d = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(int), tld_size, &error);
+	assert(error == CL_SUCCESS);
+	cl_mem featureOffsets_d = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(int)*((*numScales) * (*numTrees) * (*numFeatures) * 2), featureOffsets, &error);
+	assert(error == CL_SUCCESS);
+	cl_mem numFeatures_d = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(int), numFeatures, &error);
+	assert(error == CL_SUCCESS);
+	cl_mem img_d = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(unsigned char)*(*img_size), img, &error);
+	assert(error == CL_SUCCESS);
+	cl_mem posteriors_d = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(float)*((*numTrees)*(*numIndices)), posteriors, &error);
+	assert(error == CL_SUCCESS);
+	cl_mem numIndices_d = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(int), numIndices, &error);
+	assert(error == CL_SUCCESS);
+	cl_mem detectposteriors_d = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(float)*(*num), posteriors, &error);
+	assert(error == CL_SUCCESS);
+	cl_mem numScales_d = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(int), numScales, &error);
+	assert(error == CL_SUCCESS);
+	toc = cvGetTickCount();
+	time_io += toc - tic;
+
+
+//Check if the kernel is ready
+	if(oclfilter_ensemble_state == false)
+	{
+		// Creates the program
+		const char* path = "/home/slilylsu/Desktop/project-repo/OpenTLD_ocl/src/libopentld/tld/detector/kernels/oclfilter_ensemble_kernel.cl";
+		FILE* fp;
+		fp = fopen(path, "r");
+		if (!fp)
+		{
+			fprintf(stderr, "Failed to load kernel: 'vector_add_kernel.cl'.\n");
+			exit(1);
+		}
+		const size_t MAX_SOURCE_SIZE = 0x1000000;
+		char* source_temp = new char[MAX_SOURCE_SIZE];
+		size_t source_size = 0;
+		source_size = fread(source_temp, 1, MAX_SOURCE_SIZE, fp);
+		const char* source;
+		source = source_temp;
+		fclose(fp);
+
+		cl_uint program_count = 1;
+		cl_program program = clCreateProgramWithSource(context, program_count, &source, &source_size, &error);
+		assert(error == CL_SUCCESS);
+
+		// Builds the program
+		error = clBuildProgram(program, num_devices, &device_id, NULL, NULL, NULL);
+		std::cout << "Build Error is: " << error << std::endl;
+
+
+		// Shows the log
+		char* build_log;
+		size_t log_size = 0;
+
+		// First call to know the proper size
+		clGetProgramBuildInfo(program, device_id, CL_PROGRAM_BUILD_LOG, 0, NULL, &log_size);
+		build_log = new char[log_size + 1];
+
+		// Second call to get the log
+		clGetProgramBuildInfo(program, device_id, CL_PROGRAM_BUILD_LOG, log_size + 1, build_log, NULL);
+		build_log[log_size] = '\0';
+		printf("%s", build_log);
+		delete[] build_log;
+
+		assert(error == CL_SUCCESS);
+
+		// 'Extracting' the kernel
+		oclfilter_ensemble_kernel = clCreateKernel(program, "oclfilter_ensemble_kernel", &error);
+		assert(error == CL_SUCCESS);
+
+		oclfilter_ensemble_state = true;
+	}
+
+
+
+
+
+	//
+	tic = cvGetTickCount();
+
+	//Enqueuing parameters_work
+	error = clSetKernelArg(oclfilter_ensemble_kernel, 0, sizeof(num_d), &num_d);
+	assert(error == CL_SUCCESS);
+	error = clSetKernelArg(oclfilter_ensemble_kernel, 1, sizeof(state_d), &state_d);
+	assert(error == CL_SUCCESS);
+	error = clSetKernelArg(oclfilter_ensemble_kernel, 2, sizeof(k_d), &k_d);
+	assert(error == CL_SUCCESS);
+	error = clSetKernelArg(oclfilter_ensemble_kernel, 3, sizeof(enabled_d), &enabled_d);
+	assert(error == CL_SUCCESS);
+	error = clSetKernelArg(oclfilter_ensemble_kernel, 4, sizeof(detectfeatureVector_d), &detectfeatureVector_d);
+	assert(error == CL_SUCCESS);
+	error = clSetKernelArg(oclfilter_ensemble_kernel, 5, sizeof(numTrees_d), &numTrees_d);
+	assert(error == CL_SUCCESS);
+	error = clSetKernelArg(oclfilter_ensemble_kernel, 6, sizeof(windowOffsets_d), &windowOffsets_d);
+	assert(error == CL_SUCCESS);
+	error = clSetKernelArg(oclfilter_ensemble_kernel, 7, sizeof(tld_size_d), &tld_size_d);
+	assert(error == CL_SUCCESS);
+	error = clSetKernelArg(oclfilter_ensemble_kernel, 8, sizeof(featureOffsets_d), &featureOffsets_d);
+	assert(error == CL_SUCCESS);
+	error = clSetKernelArg(oclfilter_ensemble_kernel, 9, sizeof(numFeatures_d), &numFeatures_d);
+	assert(error == CL_SUCCESS);
+	error = clSetKernelArg(oclfilter_ensemble_kernel, 10, sizeof(img_d), &img_d);
+	assert(error == CL_SUCCESS);
+	error = clSetKernelArg(oclfilter_ensemble_kernel, 11, sizeof(posteriors_d), &posteriors_d);
+	assert(error == CL_SUCCESS);
+	error = clSetKernelArg(oclfilter_ensemble_kernel, 12, sizeof(numIndices_d), &numIndices_d);
+	assert(error == CL_SUCCESS);
+	error = clSetKernelArg(oclfilter_ensemble_kernel, 13, sizeof(detectposteriors_d), &detectposteriors_d);
+	assert(error == CL_SUCCESS);
+	error = clSetKernelArg(oclfilter_ensemble_kernel, 14, sizeof(numScales_d), &numScales_d);
+	assert(error == CL_SUCCESS);
+
+	// Launching kernel
+	const size_t local_worksize = 1024;	// Number of work-items per work-group
+	// The smallest multiple of local_ws bigger than size
+	const size_t global_worksize = (((*num) / local_worksize) + 1) * local_worksize;
+	cl_uint work_dim = 1;
+	//const size_t global_workoffset = 0;
+	cl_uint num_events_in_wait_list = 0;
+	//const cl_event* event_wait_list;
+	//cl_event* event;
+	error = clEnqueueNDRangeKernel(queue, oclfilter_ensemble_kernel, work_dim, NULL, &global_worksize, NULL, num_events_in_wait_list, NULL, NULL);
+	assert(error == CL_SUCCESS);
+	toc = cvGetTickCount();
+	time_calc += toc - tic;
+
+	// Reading back
+
+	tic = cvGetTickCount();
+	clEnqueueReadBuffer(queue, state_d, CL_TRUE, 0, sizeof(bool)*(*num), state, num_events_in_wait_list, NULL, NULL);
+	clEnqueueReadBuffer(queue, detectfeatureVector_d, CL_TRUE, 0, sizeof(int)*((*num)*(*numTrees)), detectfeatureVector, num_events_in_wait_list, NULL, NULL);
+	clEnqueueReadBuffer(queue, detectposteriors_d, CL_TRUE, 0, sizeof(float)*(*num), detectposteriors, num_events_in_wait_list, NULL, NULL);
+	clEnqueueReadBuffer(queue, k_d, CL_TRUE, 0, sizeof(int), k, num_events_in_wait_list, NULL, NULL);
+	//clEnqueueReadBuffer(queue, ii2_d, CL_TRUE, 0, sizeof(ii2_d), ii2, num_events_in_wait_list, NULL, NULL);
+	//printf("bboxvar is %lli", ii2[0]);
+
+	//Release
+	clReleaseMemObject(num_d);
+	clReleaseMemObject(state_d);
+	clReleaseMemObject(k_d);
+	clReleaseMemObject(enabled_d);
+	clReleaseMemObject(detectfeatureVector_d);
+	clReleaseMemObject(numTrees_d);
+	clReleaseMemObject(windowOffsets_d);
+	clReleaseMemObject(tld_size_d);
+	clReleaseMemObject(featureOffsets_d);
+	clReleaseMemObject(numFeatures_d);
+	clReleaseMemObject(img_d);
+	clReleaseMemObject(posteriors_d);
+	clReleaseMemObject(numIndices_d);
+	clReleaseMemObject(detectposteriors_d);
+	clReleaseMemObject(numScales_d);
 	//clReleaseKernel(oclfilter_kernel);
 
 	toc = cvGetTickCount();

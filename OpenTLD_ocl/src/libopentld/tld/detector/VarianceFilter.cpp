@@ -180,9 +180,9 @@ void VarianceFilter::nextIteration(const cv::Mat &img, const ocl::oclMat &img_oc
 
     //ocl::integral(img_ocl, img_integral_ocl,img_integral_squared_ocl);
     ocl::integral(img_ocl, img_integral_ocl);
-    img_integral_ocl = img_integral_ocl.rowRange(Range(1, 721));
+    img_integral_ocl = img_integral_ocl.rowRange(Range(1, img.rows+1));
     img_integral_ocl = img_integral_ocl.t();
-    img_integral_ocl = img_integral_ocl.rowRange(Range(1, 1281));
+    img_integral_ocl = img_integral_ocl.rowRange(Range(1, img.cols+1));
     img_integral_ocl = img_integral_ocl.t();
 //    img_integral_squared_ocl = img_integral_squared_ocl.rowRange(Range(1, 721));
 //    img_integral_squared_ocl = img_integral_squared_ocl.t();
@@ -242,19 +242,20 @@ bool VarianceFilter::filter(int i)
 void VarianceFilter::oclfilter(int num, bool* state, int* j, float* p, int img_size)
 {
 	//float* v = detectionResult->variances;
-	int* off = new int[6];
+	/*int* off = new int[TLD_WINDOW_OFFSET_SIZE * num];
 	float* mX = new float();
 	float* mX2 = new float();
-	float* bboxvar = new float();
+	float* bboxvar = new float();*/
 	int* tld_size = new int(TLD_WINDOW_OFFSET_SIZE);
 	//int* ii1 = (int*)img_integral.data;
 	//long long *ii2 = integralImg_squared->data;
-	gpu->oclfilter_device(&enabled, state, p, detectionResult->variances, &minVar, j, off, windowOffsets, tld_size, (int*)img_integral.data, integralImg_squared->data, mX, mX2, bboxvar, &img_size, &num);
-	delete[] off;
+	gpu->oclfilter_device(&enabled, state, p, detectionResult->variances, &minVar, j, /*off,*/ windowOffsets, tld_size, (int*)img_integral.data, integralImg_squared->data, /*mX, mX2, bboxvar,*/ &img_size, &num);
+	/*delete[] off;
 	delete mX;
 	delete mX2;
 	delete bboxvar;
-	delete tld_size;
+	delete tld_size;*/
+//	printf("!!!!!!!!!! %f\n",detectionResult->variances[100]);
 
 //	for(int i = 0; i < num; i ++)
 //	{
@@ -271,20 +272,21 @@ void VarianceFilter::oclfilter(int num, bool* state, int* j, float* p, int img_s
 //		    float mX  = (ii1[off[3]] - ii1[off[2]] - ii1[off[1]] + ii1[off[0]]) / (float) off[5]; //Sum of Area divided by area
 //		    float mX2 = (ii2[off[3]] - ii2[off[2]] - ii2[off[1]] + ii2[off[0]]) / (float) off[5];
 //			float bboxvar = mX2 - mX * mX;
-//			detectionResult->variances[i] = bboxvar;
+//			//detectionResult->variances[i] = bboxvar;
 //
 //			if(bboxvar < minVar)
 //			{
-//				p[i] = 0;
-//				state[i] = false;
+//				//p[i] = 0;
+//				//state[i] = false;
 //			}
 //			else
 //			{
-//				state[i] = true;
+//				//state[i] = true;
 //				*j = *j + 1;
 //			}
 //		}
 //	}
+//	printf("11111111 %f\n",detectionResult->variances[100]);
 }
 
 } /* namespace tld */

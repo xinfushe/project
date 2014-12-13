@@ -209,9 +209,79 @@ bool EnsembleClassifier::filter(int i)
 
     classifyWindow(i);
 
+
     if(detectionResult->posteriors[i] < 0.5) return false;
 
     return true;
+}
+
+bool EnsembleClassifier::oclfilter(int num, bool* state, int* m)
+{
+	for(int i = 0; i < num; i ++)
+	{
+		if(state[i] == true)
+		{
+		    if(enabled == false)
+		    {
+		    	state[i] = true;
+		    	*m = *m +1;
+		    }
+		    else
+		    {
+			    int *featureVector = detectionResult->featureVectors + numTrees * i;
+			    for(int j = 0; j < numTrees; j++)
+			    {
+
+			        int index = 0;
+			        int *bbox = windowOffsets + i * TLD_WINDOW_OFFSET_SIZE;
+			        int *off = featureOffsets + bbox[4] + j * 2 * numFeatures; //bbox[4] is pointer to features for the current scale
+
+			        for(int k = 0; k < numFeatures; k++)
+			        {
+			            index <<= 1;
+
+			            int fp0 = img[bbox[0] + off[0]];
+			            int fp1 = img[bbox[0] + off[1]];
+
+			            if(fp0 > fp1)
+			            {
+			                index |= 1;
+			            }
+
+			            off += 2;
+			        }
+
+			        featureVector[j] = index;
+			    }
+
+			    float conf = 0.0;
+
+			    for(int l = 0; l < numTrees; l++)
+			    {
+			        conf += posteriors[l * numIndices + featureVector[l]];
+			    }
+
+			    detectionResult->posteriors[i] = conf;
+
+			    if(conf < 0.5)
+			    {
+			    	state[i] = false;
+			    }
+			    else
+			    {
+			    	state[i] = true;
+			    	*m = *m + 1;
+			    }
+		    }
+		}
+		else
+		{
+			state[i] = false;
+		}
+
+	}
+	return true;
+
 }
 
 void EnsembleClassifier::updatePosterior(int treeIdx, int idx, int positive, int amount)

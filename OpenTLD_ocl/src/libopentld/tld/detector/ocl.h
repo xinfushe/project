@@ -46,14 +46,14 @@ class opencl
 			  	  	  	  float* v,
 			  	  	  	  float* minVar,
 			  	  	  	  int* j,
-			  	  	  	  int* off,
+			  	  	  	  //int* off,
 			  	  	  	  int* window_offsets,
 			  	  	  	  int* tld_size,
 			  	  	  	  int* ii1,
 			  	  	  	  long long* ii2,
-			  	  	  	  float* mX,
-			  	  	  	  float* mX2,
-			  	  	  	  float* bboxvar,
+			  	  	  	  //float* mX,
+			  	  	  	  //float* mX2,
+			  	  	  	  //float* bboxvar,
 			  	  	  	  int* img_size,
 			  	  	  	  int* window_size);
 

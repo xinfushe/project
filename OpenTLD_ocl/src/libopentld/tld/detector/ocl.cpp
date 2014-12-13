@@ -267,14 +267,14 @@ void opencl::oclfilter_device(bool* enabled,
 							  float* v,
 							  float* minVar,
 							  int* j,
-							  int* off,
+							  //int* off,
 							  int* window_offsets,
 							  int* tld_size,
 							  int* ii1,
 							  long long* ii2,
-							  float* mX,
-							  float* mX2,
-							  float* bboxvar,
+							  //float* mX,
+							  //float* mX2,
+							  //float* bboxvar,
 							  int* img_size,
 							  int* window_size)
 {
@@ -288,37 +288,37 @@ void opencl::oclfilter_device(bool* enabled,
 	tic = cvGetTickCount();
 
 	// Initializing device memory
-	cl_mem enabled_d = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, sizeof(bool), enabled, &error);
+	cl_mem enabled_d = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(bool), enabled, &error);
 	assert(error == CL_SUCCESS);
-	cl_mem state_d = clCreateBuffer(context, CL_MEM_WRITE_ONLY | CL_MEM_COPY_HOST_PTR, sizeof(bool)*(*window_size), state, &error);
+	cl_mem state_d = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(bool)*(*window_size), state, &error);
 	assert(error == CL_SUCCESS);
-	cl_mem p_d = clCreateBuffer(context, CL_MEM_WRITE_ONLY | CL_MEM_COPY_HOST_PTR, sizeof(float)*(*window_size), p, &error);
+	cl_mem p_d = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(float)*(*window_size), p, &error);
 	assert(error == CL_SUCCESS);
-	cl_mem v_d = clCreateBuffer(context, CL_MEM_WRITE_ONLY | CL_MEM_COPY_HOST_PTR, sizeof(float)*(*window_size), v, &error);
+	cl_mem v_d = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(float)*(*window_size), v, &error);
 	assert(error == CL_SUCCESS);
-	cl_mem minVar_d = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, sizeof(float), minVar, &error);
+	cl_mem minVar_d = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(float), minVar, &error);
 	assert(error == CL_SUCCESS);
 	cl_mem j_d = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(int), j, &error);
 	assert(error == CL_SUCCESS);
-	cl_mem off_d = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(int)*6, off, &error);
+	//cl_mem off_d = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(int)*((*window_size)*(*tld_size)), off, &error);
+	//assert(error == CL_SUCCESS);
+	cl_mem window_offsets_d = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(int), window_offsets, &error);
 	assert(error == CL_SUCCESS);
-	cl_mem window_offsets_d = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, sizeof(int), window_offsets, &error);
+	cl_mem tld_size_d = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(int), tld_size, &error);
 	assert(error == CL_SUCCESS);
-	cl_mem tld_size_d = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, sizeof(int), tld_size, &error);
+	cl_mem ii1_d = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(int)*(*img_size), ii1, &error);
 	assert(error == CL_SUCCESS);
-	cl_mem ii1_d = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, sizeof(int)*(*img_size), ii1, &error);
+	cl_mem ii2_d = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(long long)*(*img_size), ii2, &error);
 	assert(error == CL_SUCCESS);
-	cl_mem ii2_d = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, sizeof(long long)*(*img_size), ii2, &error);
+	//cl_mem mX_d = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(float), mX, &error);
+	//assert(error == CL_SUCCESS);
+	//cl_mem mX2_d = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(float), mX2, &error);
+	//assert(error == CL_SUCCESS);
+	//cl_mem bboxvar_d = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(float), bboxvar, &error);
 	assert(error == CL_SUCCESS);
-	cl_mem mX_d = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(float), mX, &error);
-	assert(error == CL_SUCCESS);
-	cl_mem mX2_d = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(float), mX2, &error);
-	assert(error == CL_SUCCESS);
-	cl_mem bboxvar_d = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(float), bboxvar, &error);
-	assert(error == CL_SUCCESS);
-	cl_mem img_size_d = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, sizeof(int), img_size, &error);
-	assert(error == CL_SUCCESS);
-	cl_mem window_size_d = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, sizeof(int), window_size, &error);
+	//cl_mem img_size_d = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(int), img_size, &error);
+	//assert(error == CL_SUCCESS);
+	cl_mem window_size_d = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(int), window_size, &error);
 	assert(error == CL_SUCCESS);
 	toc = cvGetTickCount();
 	time_io += toc - tic;
@@ -396,25 +396,25 @@ void opencl::oclfilter_device(bool* enabled,
 	assert(error == CL_SUCCESS);
 	error = clSetKernelArg(oclfilter_kernel, 5, sizeof(j_d), &j_d);
 	assert(error == CL_SUCCESS);
-	error = clSetKernelArg(oclfilter_kernel, 6, sizeof(off_d), &off_d);
+	//error = clSetKernelArg(oclfilter_kernel, 6, sizeof(off_d), &off_d);
+	//assert(error == CL_SUCCESS);
+	error = clSetKernelArg(oclfilter_kernel, 6, sizeof(window_offsets_d), &window_offsets_d);
 	assert(error == CL_SUCCESS);
-	error = clSetKernelArg(oclfilter_kernel, 7, sizeof(window_offsets_d), &window_offsets_d);
+	error = clSetKernelArg(oclfilter_kernel, 7, sizeof(tld_size_d), &tld_size_d);
 	assert(error == CL_SUCCESS);
-	error = clSetKernelArg(oclfilter_kernel, 8, sizeof(tld_size_d), &tld_size_d);
+	error = clSetKernelArg(oclfilter_kernel, 8, sizeof(ii1_d), &ii2_d);
 	assert(error == CL_SUCCESS);
-	error = clSetKernelArg(oclfilter_kernel, 9, sizeof(ii1_d), &ii2_d);
+	error = clSetKernelArg(oclfilter_kernel, 9, sizeof(ii2_d), &ii2_d);
 	assert(error == CL_SUCCESS);
-	error = clSetKernelArg(oclfilter_kernel, 10, sizeof(ii2_d), &ii2_d);
-	assert(error == CL_SUCCESS);
-	error = clSetKernelArg(oclfilter_kernel, 11, sizeof(mX_d), &mX_d);
-	assert(error == CL_SUCCESS);
-	error = clSetKernelArg(oclfilter_kernel, 12, sizeof(mX2_d), &mX2_d);
-	assert(error == CL_SUCCESS);
-	error = clSetKernelArg(oclfilter_kernel, 13, sizeof(bboxvar_d), &bboxvar_d);
-	assert(error == CL_SUCCESS);
-	error = clSetKernelArg(oclfilter_kernel, 14, sizeof(img_size_d), &img_size_d);
-	assert(error == CL_SUCCESS);
-	error = clSetKernelArg(oclfilter_kernel, 15, sizeof(window_size_d), &window_size_d);
+	//error = clSetKernelArg(oclfilter_kernel, 11, sizeof(mX_d), &mX_d);
+	//assert(error == CL_SUCCESS);
+	//error = clSetKernelArg(oclfilter_kernel, 12, sizeof(mX2_d), &mX2_d);
+	//assert(error == CL_SUCCESS);
+	//error = clSetKernelArg(oclfilter_kernel, 13, sizeof(bboxvar_d), &bboxvar_d);
+	//assert(error == CL_SUCCESS);
+	//error = clSetKernelArg(oclfilter_kernel, 14, sizeof(img_size_d), &img_size_d);
+	//assert(error == CL_SUCCESS);
+	error = clSetKernelArg(oclfilter_kernel, 10, sizeof(window_size_d), &window_size_d);
 	assert(error == CL_SUCCESS);
 
 	// Launching kernel
@@ -443,10 +443,12 @@ void opencl::oclfilter_device(bool* enabled,
 //	delete[] check;
 
 	tic = cvGetTickCount();
-	clEnqueueReadBuffer(queue, state_d, CL_TRUE, 0, sizeof(state_d), state, num_events_in_wait_list, NULL, NULL);
-	clEnqueueReadBuffer(queue, p_d, CL_TRUE, 0, sizeof(p_d), p, num_events_in_wait_list, NULL, NULL);
-	clEnqueueReadBuffer(queue, v_d, CL_TRUE, 0, sizeof(v_d), v, num_events_in_wait_list, NULL, NULL);
-	clEnqueueReadBuffer(queue, j_d, CL_TRUE, 0, sizeof(j_d), j, num_events_in_wait_list, NULL, NULL);
+	clEnqueueReadBuffer(queue, state_d, CL_TRUE, 0, sizeof(bool)*(*window_size), state, num_events_in_wait_list, NULL, NULL);
+	clEnqueueReadBuffer(queue, p_d, CL_TRUE, 0, sizeof(float)*(*window_size), p, num_events_in_wait_list, NULL, NULL);
+	clEnqueueReadBuffer(queue, v_d, CL_TRUE, 0, sizeof(float)*(*window_size), v, num_events_in_wait_list, NULL, NULL);
+	clEnqueueReadBuffer(queue, j_d, CL_TRUE, 0, sizeof(int), j, num_events_in_wait_list, NULL, NULL);
+	//clEnqueueReadBuffer(queue, ii2_d, CL_TRUE, 0, sizeof(ii2_d), ii2, num_events_in_wait_list, NULL, NULL);
+	//printf("bboxvar is %lli", ii2[0]);
 
 	//Release
 	clReleaseMemObject(enabled_d);
@@ -455,15 +457,15 @@ void opencl::oclfilter_device(bool* enabled,
 	clReleaseMemObject(v_d);
 	clReleaseMemObject(minVar_d);
 	clReleaseMemObject(j_d);
-	clReleaseMemObject(off_d);
+	//clReleaseMemObject(off_d);
 	clReleaseMemObject(window_offsets_d);
 	clReleaseMemObject(tld_size_d);
 	clReleaseMemObject(ii1_d);
 	clReleaseMemObject(ii2_d);
-	clReleaseMemObject(mX_d);
-	clReleaseMemObject(mX2_d);
-	clReleaseMemObject(bboxvar_d);
-	clReleaseMemObject(img_size_d);
+	//clReleaseMemObject(mX_d);
+	//clReleaseMemObject(mX2_d);
+	//clReleaseMemObject(bboxvar_d);
+	//clReleaseMemObject(img_size_d);
 	clReleaseMemObject(window_size_d);
 	//clReleaseKernel(oclfilter_kernel);
 

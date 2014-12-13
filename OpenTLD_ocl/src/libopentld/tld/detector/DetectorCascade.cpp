@@ -406,22 +406,25 @@ void DetectorCascade::detect(const Mat &img, const ocl::oclMat &img_ocl)
     getCPUTick(&procInit);
 
     int* j = new int(0);
-    int k = 0;
-    bool state[numWindows];
-    memset(state, false, sizeof(bool)*(numWindows));
+    int* k = new int(0);
+    bool *state = new bool[numWindows];
+    //memset(state, true, sizeof(bool)*(numWindows));
     //float *p = detectionResult->posteriors;
     _varianceFilter->oclfilter(numWindows, state, j, detectionResult->posteriors, (img.rows)*(img.cols)-1);
+    _ensembleClassifier->oclfilter(numWindows, state, k);
 
-    //#pragma omp parallel for
+    getCPUTick(&procFinal);
+    PRINT_TIMING("VVVVV Classify Time", procInit, procFinal, ", ");
+    #pragma omp parallel for
     for(int i = 0; i < numWindows; i++)
     {
     	if(state[i] == true)
     	{
-            if(!_ensembleClassifier->filter(i))
-            {
-                continue;
-            }
-            k++;
+//            if(!_ensembleClassifier->oclfilter(i))
+//            {
+//                continue;
+//            }
+//            k++;
 
 
             if(!_nnClassifier->filter(img, i))
@@ -436,6 +439,7 @@ void DetectorCascade::detect(const Mat &img, const ocl::oclMat &img_ocl)
     		continue;
     	}
     }
+    delete[] state;
 
 //    for(int i = 0; i < numWindows; i++)
 //    {
@@ -492,7 +496,7 @@ void DetectorCascade::detect(const Mat &img, const ocl::oclMat &img_ocl)
 //
 //        detectionResult->confidentIndices->push_back(i);
 //    }
-    std::cout << numWindows << " - " << j << " - " << k << " ";
+    std::cout << numWindows << " - " << *j << " - " << *k << " ";
     getCPUTick(&procFinal);
     PRINT_TIMING("Classify Time", procInit, procFinal, ", ");
 

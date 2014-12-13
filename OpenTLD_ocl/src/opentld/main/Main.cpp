@@ -117,7 +117,7 @@ static void setFocus(int fh,int focus)
         printf("Failed set V4L2_CID_FOCUS_ABSOLUTE \n");
         exit (EXIT_FAILURE);
     }
-    else printf("Set focus to %d successfully\n",focus);
+    else /*printf("Set focus to %d successfully\n",focus)*/;
 }
 
 void disableAutoExposure(int fh, bool &auto_exposure)
@@ -343,21 +343,21 @@ void Main::doWork()
     while(imAcqHasMoreFrames(imAcq))
     {
 
-        std::cout << "Focus value is " << focus << std::endl;
+        //std::cout << "Focus value is " << focus << std::endl;
 
         tick_t procInit, procFinal;
         double tic = cvGetTickCount();
 
         double freq = cvGetTickFrequency()*1000.0;
 
-        getCPUTick(&procInit);
+        //getCPUTick(&procInit);
         img = imAcqGetImg(imAcq);
-        getCPUTick(&procFinal);
-        PRINT_TIMING("Update Time", procInit, procFinal, "\n");
+        //getCPUTick(&procFinal);
+        //PRINT_TIMING("Update Time", procInit, procFinal, "\n");
 
 
         //update the image matrices
-        getCPUTick(&procInit);
+        //getCPUTick(&procInit);
         color = Mat(img, false);
         color_ocl.upload(color);
         ocl::oclMat grey_rgb_ocl;
@@ -366,8 +366,8 @@ void Main::doWork()
         ocl::cvtColor(color_ocl, grey_ocl, CV_BGR2GRAY);
         grey_rgb_ocl.download(grey_rgb);
         grey_ocl.download(grey);
-        getCPUTick(&procFinal);
-        PRINT_TIMING("Upload/Download Time", procInit, procFinal, "\n");
+        //getCPUTick(&procFinal);
+        //PRINT_TIMING("Upload/Download Time", procInit, procFinal, "\n");
 
 
 
@@ -419,7 +419,7 @@ void Main::doWork()
         toc = toc / 1000000;
 
 
-        std::cout << "toc is " << toc*1000.0 << std::endl;
+        //std::cout << "toc is " << toc*1000.0 << std::endl;
 
         float fps = 1 / toc;
 
@@ -462,13 +462,13 @@ void Main::doWork()
 
                 //Focus procedure
 
-                getCPUTick(&procInit);
+                //getCPUTick(&procInit);
                 //double sharpness = contrast_measure(imgt (currRect));//TODO
                 double sharpness = contrast_measure(color_ocl (currRect));
-                getCPUTick(&procFinal);
-                PRINT_TIMING("Contrast Measure Time", procInit, procFinal, ",");
+                //getCPUTick(&procFinal);
+                //PRINT_TIMING("Contrast Measure Time", procInit, procFinal, ",");
 
-                printf("sharpness is %lf\n",sharpness);
+                //printf("sharpness is %lf\n",sharpness);
 
                 if(!init)
                 {
@@ -494,7 +494,7 @@ void Main::doWork()
                         init = true;
                         focus = bestfocus;
                         initfocus = bestfocus;
-                        printf("bestfocus is %d \n",bestfocus);
+                        //printf("bestfocus is %d \n",bestfocus);
                         initsize = currRect.height;
                         lastsize = initsize;
                     }
@@ -502,7 +502,7 @@ void Main::doWork()
                 }
                 else
                 {
-                    printf("autofocus is %d,size is %d\n",focus,lastsize);
+                    //printf("autofocus is %d,size is %d\n",focus,lastsize);
                     focusCount++;
                     errorCount+= abs(currRect.height-lastsize);
                     lastsize = currRect.height;
@@ -663,7 +663,7 @@ void Main::doWork()
                 if(key == 'y')
                 {
                 	focusThreshold = gui->getFocusAccuracy();
-                	std::cout << "Focus accuracy is " << focusThreshold << "!!!!!!!!!!!!!!!!!!" << std::endl;
+                	//std::cout << "Focus accuracy is " << focusThreshold << "!!!!!!!!!!!!!!!!!!" << std::endl;
                 }
 
                 if(key == 'u')
@@ -804,7 +804,7 @@ void Main::doWork()
                 if(key == 'f')
                 {
                     CvRect box;
-                    const char* cascadeName = "/home/slilylsu/Desktop/project-repo/haarcascade_frontalface_alt.xml";
+                    const char* cascadeName = "/home/slilylsu/Desktop/project-repo/haarcascade_frontalface_alt2.xml";
                     //const char* cascadeName = "/home/slilylsu/Desktop/project-repo/haarcascade_smile.xml";
                     //CascadeClassifier  cascade;
                     ocl::OclCascadeClassifier cascade;

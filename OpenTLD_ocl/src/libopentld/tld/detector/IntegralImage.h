@@ -61,7 +61,7 @@ public:
         const unsigned char *input = (const unsigned char *)(img.data);
         T *output = data;
 
-        std::cout << img.cols << "x" << img.rows << std::endl;
+        //std::cout << img.cols << "x" << img.rows << std::endl;
 
         for(int i = 0; i < img.cols; i++)
         {

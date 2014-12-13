@@ -48,8 +48,8 @@ VarianceFilter::VarianceFilter()
     minVar = 0;
     integralImg = NULL;
     integralImg_squared = NULL;
+
     gpu = new opencl();
-    gpu->gpu_init();
 }
 
 VarianceFilter::~VarianceFilter()
@@ -104,7 +104,7 @@ void VarianceFilter::nextIteration(const cv::Mat &img)
 
     tick_t procInit, procFinal;
 
-    getCPUTick(&procInit);
+    //getCPUTick(&procInit);
 
 //    Mat temp = img;
 //    printf("temp is: %d\n", temp.data[0]);
@@ -140,8 +140,8 @@ void VarianceFilter::nextIteration(const cv::Mat &img)
 //    }
 
 
-    getCPUTick(&procFinal);
-    PRINT_TIMING("Variance Calculation Time: ", procInit, procFinal, "\n");
+    //getCPUTick(&procFinal);
+    //PRINT_TIMING("Variance Calculation Time: ", procInit, procFinal, "\n");
 //    int r = 719;
 //    int l = 1279;
 //    printf("111111111: %lli, 222222222: %lli\n", 64*((int*)img_integral_squared.data)[(0+r)*1280+(0+l)], integralImg_squared->data[r*1280+l]);
@@ -158,7 +158,7 @@ void VarianceFilter::nextIteration(const cv::Mat &img, const ocl::oclMat &img_oc
 
     tick_t procInit, procFinal;
 
-    getCPUTick(&procInit);
+    //getCPUTick(&procInit);
 
 //    getCPUTick(&procInit);
 //    const int size = 100;
@@ -192,16 +192,16 @@ void VarianceFilter::nextIteration(const cv::Mat &img, const ocl::oclMat &img_oc
     img_integral_ocl.download(img_integral);
     //img_integral_squared_ocl.download(img_integral_squared);
 
-    getCPUTick(&procFinal);
-    PRINT_TIMING("Ocl Variance Calculation Time: ", procInit, procFinal, "\n");
+    //getCPUTick(&procFinal);
+    //PRINT_TIMING("Ocl Variance Calculation Time: ", procInit, procFinal, "\n");
 
-    getCPUTick(&procInit);
+    //getCPUTick(&procInit);
     //integralImg = new IntegralImage<int> (img.size());
     //integralImg->calcIntImg(img, false);
     integralImg_squared = new IntegralImage<long long> (img.size());
     integralImg_squared->calcIntImg(img, true);
-    getCPUTick(&procFinal);
-    PRINT_TIMING("Variance Calculation Time: ", procInit, procFinal, "\n");
+    //getCPUTick(&procFinal);
+    //PRINT_TIMING("Variance Calculation Time: ", procInit, procFinal, "\n");
 
 //    getCPUTick(&procInit);
 //    for(int i = 0; i < img.rows * img.cols; i ++)

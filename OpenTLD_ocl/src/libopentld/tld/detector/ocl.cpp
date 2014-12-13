@@ -279,14 +279,14 @@ void opencl::oclfilter_variance(bool* enabled,
 							  int* img_size,
 							  int* window_size)
 {
-	double freq = cvGetTickFrequency()*1000.0; //kHz
+	/*double freq = cvGetTickFrequency()*1000.0; //kHz
 	double tic = 0.0;
 	double toc = 0.0;
 	double time_io = 0.0;
 	double time_calc = 0.0;
 
 	//
-	tic = cvGetTickCount();
+	tic = cvGetTickCount();*/
 
 	// Initializing device memory
 	cl_mem enabled_d = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(bool), enabled, &error);
@@ -321,8 +321,9 @@ void opencl::oclfilter_variance(bool* enabled,
 	//assert(error == CL_SUCCESS);
 	cl_mem window_size_d = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(int), window_size, &error);
 	assert(error == CL_SUCCESS);
-	toc = cvGetTickCount();
-	time_io += toc - tic;
+
+	/*toc = cvGetTickCount();
+	time_io += toc - tic;*/
 
 
 //Check if the kernel is ready
@@ -382,7 +383,7 @@ void opencl::oclfilter_variance(bool* enabled,
 
 
 	//
-	tic = cvGetTickCount();
+	//tic = cvGetTickCount();
 
 	//Enqueuing parameters_work
 	error = clSetKernelArg(oclfilter_variance_kernel, 0, sizeof(enabled_d), &enabled_d);
@@ -427,10 +428,10 @@ void opencl::oclfilter_variance(bool* enabled,
 	cl_uint num_events_in_wait_list = 0;
 	//const cl_event* event_wait_list;
 	//cl_event* event;
-	error = clEnqueueNDRangeKernel(queue, oclfilter_variance_kernel, work_dim, NULL, &global_worksize, NULL, num_events_in_wait_list, NULL, NULL);
+	error = clEnqueueNDRangeKernel(queue, oclfilter_variance_kernel, work_dim, NULL, &global_worksize, &local_worksize, num_events_in_wait_list, NULL, NULL);
 	assert(error == CL_SUCCESS);
-	toc = cvGetTickCount();
-	time_calc += toc - tic;
+	/*toc = cvGetTickCount();
+	time_calc += toc - tic;*/
 
 	// Reading back
 //	float* check = new float[size];
@@ -443,7 +444,7 @@ void opencl::oclfilter_variance(bool* enabled,
 //	cout << "Congratulations, it's working!" << endl;
 //	delete[] check;
 
-	tic = cvGetTickCount();
+	//tic = cvGetTickCount();
 	clEnqueueReadBuffer(queue, state_d, CL_TRUE, 0, sizeof(bool)*(*window_size), state, num_events_in_wait_list, NULL, NULL);
 	clEnqueueReadBuffer(queue, p_d, CL_TRUE, 0, sizeof(float)*(*window_size), p, num_events_in_wait_list, NULL, NULL);
 	clEnqueueReadBuffer(queue, v_d, CL_TRUE, 0, sizeof(float)*(*window_size), v, num_events_in_wait_list, NULL, NULL);
@@ -470,11 +471,11 @@ void opencl::oclfilter_variance(bool* enabled,
 	clReleaseMemObject(window_size_d);
 	//clReleaseKernel(oclfilter_variance_kernel);
 
-	toc = cvGetTickCount();
+	/*toc = cvGetTickCount();
 	time_io += toc - tic;
 
 	cout << "GPU IO Time: " << time_io/(double)freq << " ms" << endl;
-	cout << "GPU Calculation Time: " << time_calc/(double)freq << " ms" << endl;
+	cout << "GPU Calculation Time: " << time_calc/(double)freq << " ms" << endl;*/
 
 }
 
@@ -495,14 +496,14 @@ void opencl::oclfilter_ensemble(int* num,
 								float* detectposteriors,
 								int* numScales)
 {
-	double freq = cvGetTickFrequency()*1000.0; //kHz
+	/*double freq = cvGetTickFrequency()*1000.0; //kHz
 	double tic = 0.0;
 	double toc = 0.0;
 	double time_io = 0.0;
 	double time_calc = 0.0;
 
 	//
-	tic = cvGetTickCount();
+	tic = cvGetTickCount();*/
 
 	// Initializing device memory
 	cl_mem num_d = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(int), num, &error);
@@ -535,8 +536,9 @@ void opencl::oclfilter_ensemble(int* num,
 	assert(error == CL_SUCCESS);
 	cl_mem numScales_d = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(int), numScales, &error);
 	assert(error == CL_SUCCESS);
-	toc = cvGetTickCount();
-	time_io += toc - tic;
+
+	/*toc = cvGetTickCount();
+	time_io += toc - tic;*/
 
 
 //Check if the kernel is ready
@@ -596,7 +598,7 @@ void opencl::oclfilter_ensemble(int* num,
 
 
 	//
-	tic = cvGetTickCount();
+	//tic = cvGetTickCount();
 
 	//Enqueuing parameters_work
 	error = clSetKernelArg(oclfilter_ensemble_kernel, 0, sizeof(num_d), &num_d);
@@ -639,14 +641,15 @@ void opencl::oclfilter_ensemble(int* num,
 	cl_uint num_events_in_wait_list = 0;
 	//const cl_event* event_wait_list;
 	//cl_event* event;
-	error = clEnqueueNDRangeKernel(queue, oclfilter_ensemble_kernel, work_dim, NULL, &global_worksize, NULL, num_events_in_wait_list, NULL, NULL);
+	error = clEnqueueNDRangeKernel(queue, oclfilter_ensemble_kernel, work_dim, NULL, &global_worksize, &local_worksize, num_events_in_wait_list, NULL, NULL);
 	assert(error == CL_SUCCESS);
-	toc = cvGetTickCount();
-	time_calc += toc - tic;
+
+	/*toc = cvGetTickCount();
+	time_calc += toc - tic;*/
 
 	// Reading back
 
-	tic = cvGetTickCount();
+	//tic = cvGetTickCount();
 	clEnqueueReadBuffer(queue, state_d, CL_TRUE, 0, sizeof(bool)*(*num), state, num_events_in_wait_list, NULL, NULL);
 	clEnqueueReadBuffer(queue, detectfeatureVector_d, CL_TRUE, 0, sizeof(int)*((*num)*(*numTrees)), detectfeatureVector, num_events_in_wait_list, NULL, NULL);
 	clEnqueueReadBuffer(queue, detectposteriors_d, CL_TRUE, 0, sizeof(float)*(*num), detectposteriors, num_events_in_wait_list, NULL, NULL);
@@ -672,11 +675,11 @@ void opencl::oclfilter_ensemble(int* num,
 	clReleaseMemObject(numScales_d);
 	//clReleaseKernel(oclfilter_kernel);
 
-	toc = cvGetTickCount();
+	/*toc = cvGetTickCount();
 	time_io += toc - tic;
 
 	cout << "GPU IO Time: " << time_io/(double)freq << " ms" << endl;
-	cout << "GPU Calculation Time: " << time_calc/(double)freq << " ms" << endl;
+	cout << "GPU Calculation Time: " << time_calc/(double)freq << " ms" << endl;*/
 
 }
 

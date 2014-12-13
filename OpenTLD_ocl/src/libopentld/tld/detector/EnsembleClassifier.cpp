@@ -54,7 +54,6 @@ EnsembleClassifier::EnsembleClassifier()
     enabled = true;
 
     gpu = new opencl();
-    gpu->gpu_init();
 }
 
 EnsembleClassifier::~EnsembleClassifier()

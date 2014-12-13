@@ -292,14 +292,14 @@ void DetectorCascade::detect(const Mat &img)
     //Prepare components
     //foregroundDetector->nextIteration(img); //Calculates foreground (DISABLED)
 
-    getCPUTick(&procInit);
+    //getCPUTick(&procInit);
     _varianceFilter->nextIteration(img); //Calculates integral images
 
     _ensembleClassifier->nextIteration(img);
-    getCPUTick(&procFinal);
-    PRINT_TIMING("Next Iteration Time: ", procInit, procFinal, ", ");
+    //getCPUTick(&procFinal);
+    //PRINT_TIMING("Next Iteration Time: ", procInit, procFinal, ", ");
 
-    getCPUTick(&procInit);
+    //getCPUTick(&procInit);
 
     int j = 0, k = 0;
     #pragma omp parallel for
@@ -364,15 +364,15 @@ void DetectorCascade::detect(const Mat &img)
 
 
     }
-    std::cout << numWindows << " - " << j << " - " << k << " ";
-    getCPUTick(&procFinal);
-    PRINT_TIMING("Classify Time", procInit, procFinal, ", ");
+    //std::cout << numWindows << " - " << j << " - " << k << " ";
+    //getCPUTick(&procFinal);
+    //PRINT_TIMING("Classify Time", procInit, procFinal, ", ");
 
     //Cluster
-    getCPUTick(&procInit);
+    //getCPUTick(&procInit);
     clustering->clusterConfidentIndices();
-    getCPUTick(&procFinal);
-    PRINT_TIMING("Cluster Time", procInit, procFinal, ", ");
+    //getCPUTick(&procFinal);
+    //PRINT_TIMING("Cluster Time", procInit, procFinal, ", ");
 
     detectionResult->containsValidData = true;
 }
@@ -396,14 +396,14 @@ void DetectorCascade::detect(const Mat &img, const ocl::oclMat &img_ocl)
     //Prepare components
     //foregroundDetector->nextIteration(img); //Calculates foreground (DISABLED)
 
-    getCPUTick(&procInit);
+    //getCPUTick(&procInit);
     _varianceFilter->nextIteration(img, img_ocl); //Calculates integral images
 
     _ensembleClassifier->nextIteration(img);
-    getCPUTick(&procFinal);
-    PRINT_TIMING("Next Iteration Time: ", procInit, procFinal, ", ");
+    //getCPUTick(&procFinal);
+    //PRINT_TIMING("Next Iteration Time: ", procInit, procFinal, ", ");
 
-    getCPUTick(&procInit);
+    //getCPUTick(&procInit);
 
     int* j = new int(0);
     int* k = new int(0);
@@ -414,20 +414,13 @@ void DetectorCascade::detect(const Mat &img, const ocl::oclMat &img_ocl)
     _varianceFilter->oclfilter(numWindows, state, j, detectionResult->posteriors, (img.rows)*(img.cols)-1);
     _ensembleClassifier->oclfilter(numWindows, state, k);
 
-    getCPUTick(&procFinal);
-    PRINT_TIMING("VVVVV Classify Time", procInit, procFinal, ", ");
+    //getCPUTick(&procFinal);
+    //PRINT_TIMING("VVVVV Classify Time", procInit, procFinal, ", ");
     #pragma omp parallel for
     for(int i = 0; i < numWindows; i++)
     {
     	if(state[i] == true)
     	{
-//            if(!_ensembleClassifier->oclfilter(i))
-//            {
-//                continue;
-//            }
-//            k++;
-
-
             if(!_nnClassifier->filter(img, i))
             {
                 continue;
@@ -497,15 +490,15 @@ void DetectorCascade::detect(const Mat &img, const ocl::oclMat &img_ocl)
 //
 //        detectionResult->confidentIndices->push_back(i);
 //    }
-    std::cout << numWindows << " - " << *j << " - " << *k << " ";
-    getCPUTick(&procFinal);
-    PRINT_TIMING("Classify Time", procInit, procFinal, ", ");
+    //std::cout << numWindows << " - " << *j << " - " << *k << " ";
+    //getCPUTick(&procFinal);
+    //PRINT_TIMING("Classify Time", procInit, procFinal, ", ");
 
     //Cluster
-    getCPUTick(&procInit);
+    //getCPUTick(&procInit);
     clustering->clusterConfidentIndices();
-    getCPUTick(&procFinal);
-    PRINT_TIMING("Cluster Time", procInit, procFinal, ", ");
+    //getCPUTick(&procFinal);
+    //PRINT_TIMING("Cluster Time", procInit, procFinal, ", ");
 
     detectionResult->containsValidData = true;
 }

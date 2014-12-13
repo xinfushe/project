@@ -151,19 +151,19 @@ void TLD::processImage(const Mat &img)
 
     if(trackerEnabled)
     {
-        getCPUTick(&procInit);
+        //getCPUTick(&procInit);
         medianFlowTracker->track(prevImg, currImg, prevBB);
-        getCPUTick(&procFinal);
-        PRINT_TIMING("TrackTime", procInit, procFinal, ", ");
+        //getCPUTick(&procFinal);
+        //PRINT_TIMING("TrackTime", procInit, procFinal, ", ");
     }
 
     if(detectorEnabled && (!alternating || medianFlowTracker->trackerBB == NULL))
     {
-        getCPUTick(&procInit);
+        //getCPUTick(&procInit);
         //detectorCascade->detect(grey_frame);
         detectorCascade->detect(img);
-        getCPUTick(&procFinal);
-        PRINT_TIMING("DetecTime", procInit, procFinal, ", ");
+        //getCPUTick(&procFinal);
+        //PRINT_TIMING("DetecTime", procInit, procFinal, ", ");
     }
 
 
@@ -182,18 +182,18 @@ void TLD::processImage(const Mat &img, const ocl::oclMat &img_ocl)
 
     if(trackerEnabled)
     {
-        getCPUTick(&procInit);
+        //getCPUTick(&procInit);
         medianFlowTracker->track(prevImg, currImg, prevBB);
-        getCPUTick(&procFinal);
-        PRINT_TIMING("TrackTime", procInit, procFinal, ", ");
+        //getCPUTick(&procFinal);
+        //PRINT_TIMING("TrackTime", procInit, procFinal, ", ");
     }
 
     if(detectorEnabled && (!alternating || medianFlowTracker->trackerBB == NULL))
     {
-        getCPUTick(&procInit);
+        //getCPUTick(&procInit);
         detectorCascade->detect(img, img_ocl);
-        getCPUTick(&procFinal);
-        PRINT_TIMING("DetecTime", procInit, procFinal, ", ");
+        //getCPUTick(&procFinal);
+        //PRINT_TIMING("DetecTime", procInit, procFinal, ", ");
     }
 
 

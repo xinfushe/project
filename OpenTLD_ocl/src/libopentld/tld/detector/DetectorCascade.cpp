@@ -64,6 +64,8 @@ DetectorCascade::DetectorCascade()
     clustering = new Clustering();
 
     detectionResult = new DetectionResult();
+
+    gpu = new opencl();
 }
 
 DetectorCascade::~DetectorCascade()
@@ -411,8 +413,8 @@ void DetectorCascade::detect(const Mat &img, const ocl::oclMat &img_ocl)
     //memset(state, true, sizeof(bool)*(numWindows));
     //float *p = detectionResult->posteriors;
 
-    _varianceFilter->oclfilter(numWindows, state, j, detectionResult->posteriors, (img.rows)*(img.cols)-1);
-    _ensembleClassifier->oclfilter(numWindows, state, k);
+    _varianceFilter->oclfilter(gpu, numWindows, state, j, detectionResult->posteriors, (img.rows)*(img.cols)-1);
+    _ensembleClassifier->oclfilter(gpu, numWindows, state, k);
 
     //getCPUTick(&procFinal);
     //PRINT_TIMING("VVVVV Classify Time", procInit, procFinal, ", ");

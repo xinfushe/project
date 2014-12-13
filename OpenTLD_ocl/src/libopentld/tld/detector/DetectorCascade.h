@@ -36,7 +36,7 @@
 #include "EnsembleClassifier.h"
 #include "Clustering.h"
 #include "NNClassifier.h"
-//#include "../../../opentld/main/ocl.h"
+//#include "ocl.h"
 
 
 //
@@ -50,6 +50,7 @@ namespace tld
 
 class DetectorCascade : public IDetectorCascade
 {
+	opencl* gpu;
 public:
 
     DetectorCascade();

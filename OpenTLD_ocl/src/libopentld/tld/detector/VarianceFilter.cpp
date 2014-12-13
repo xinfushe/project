@@ -49,7 +49,7 @@ VarianceFilter::VarianceFilter()
     integralImg = NULL;
     integralImg_squared = NULL;
 
-    gpu = new opencl();
+    //gpu = new opencl();
 }
 
 VarianceFilter::~VarianceFilter()
@@ -239,7 +239,7 @@ bool VarianceFilter::filter(int i)
     return true;
 }
 
-void VarianceFilter::oclfilter(int num, bool* state, int* j, float* p, int img_size)
+void VarianceFilter::oclfilter(opencl* gpu, int num, bool* state, int* j, float* p, int img_size)
 {
 	//float* v = detectionResult->variances;
 	/*int* off = new int[TLD_WINDOW_OFFSET_SIZE * num];

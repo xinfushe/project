@@ -53,7 +53,7 @@ EnsembleClassifier::EnsembleClassifier()
     numFeatures = 13;
     enabled = true;
 
-    gpu = new opencl();
+    //gpu = new opencl();
 }
 
 EnsembleClassifier::~EnsembleClassifier()
@@ -219,7 +219,7 @@ bool EnsembleClassifier::filter(int i)
     return true;
 }
 
-bool EnsembleClassifier::oclfilter(int num, bool* state, int* m)
+bool EnsembleClassifier::oclfilter(opencl* gpu, int num, bool* state, int* m)
 {
 	int* tld_size = new int(TLD_WINDOW_OFFSET_SIZE);
 	gpu->oclfilter_ensemble(&num, state, m, &enabled, detectionResult->featureVectors,

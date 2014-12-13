@@ -46,7 +46,7 @@ class EnsembleClassifier : public IEnsembleClassifier
     //const unsigned char *img;
 	unsigned char *img;
 	int img_size;
-    opencl* gpu;
+    //opencl* gpu;
 
     float calcConfidence(int *featureVector);
     int calcFernFeature(int windowIdx, int treeIdx);
@@ -65,7 +65,7 @@ public:
     void updatePosterior(int treeIdx, int idx, int positive, int amount);
     void learn(int *boundary, int positive, int *featureVector);
     bool filter(int i);
-    bool oclfilter(int num, bool* state, int* k);
+    bool oclfilter(opencl* gpu, int num, bool* state, int* k);
 };
 
 } /* namespace tld */

@@ -24,8 +24,3 @@ cd ../../compare
 mv -f opentld opentld_cpu
 mv -f qopentld qopentld_cpu
 
-cd ../
-sudo rm -rf build
-sudo rm -rf build_cuda_removed
-sh OpenTLD_ocl.sh
-

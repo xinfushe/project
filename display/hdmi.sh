@@ -1,0 +1,26 @@
+#!/bin/sh
+#xrandr --newmode "M250G+"   138.65  1920 1968 2000 2080  1080 1083 1088 1111 +hsync -vsync
+#xrandr --addmode HDMI1 "M250G+"
+
+#xrandr --output HDMI1 --mode M250G+ --rate 60
+#xrandr --output LVDS1 --mode 1366x768 --rate 60.1
+
+#Laptop right extra Monitor Left
+
+xrandr --output HDMI1 --primary --mode M250G+ --rate 60 --left-of LVDS1 --gamma 0.95:1.0:1.1
+
+#xrandr --output LVDS1 --off
+
+#Laptop left extra Monitor right
+#xrandr --output LVDS1 --left-of VGA1
+
+#This is to set your primary monitor.
+
+#This sets your laptop monitor as your primary monitor. 
+#xrandr --output LVDS1 --primary
+
+#This sets your VGA monitor as your primary monitor. 
+#xrandr --output HDMI1 --primary
+
+
+#xrandr --output LVDS1 --off

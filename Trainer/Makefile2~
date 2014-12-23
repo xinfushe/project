@@ -1,0 +1,5 @@
+all:
+	g++ Trainer.cpp `pkg-config --cflags --libs opencv` -o TrainApple
+	./TrainApple
+	./opencv_creatsamples -vec pos.vec -info pos.dat -num 10 -w 32 -h 32
+

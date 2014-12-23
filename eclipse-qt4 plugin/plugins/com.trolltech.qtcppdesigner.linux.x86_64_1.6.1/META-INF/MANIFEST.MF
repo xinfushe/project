@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Qt Designer Fragment (Linux,x86_64)
+Bundle-SymbolicName: com.trolltech.qtcppdesigner.linux.x86_64;singleton:=true
+Bundle-Version: 1.6.1
+Bundle-Vendor: Nokia Corporation
+Bundle-Localization: plugin
+Bundle-ClassPath: bin/
+Export-Package: com.trolltech.qtcppdesigner.views.embedded
+Eclipse-PlatformFilter: (& (osgi.ws=gtk) (osgi.os=linux) (osgi.arch=x86_64))
+Require-Bundle: org.eclipse.core.resources,
+ org.eclipse.core.runtime.compatibility,
+ org.eclipse.ui.editors,
+ org.eclipse.ui.views.properties.tabbed,
+ org.eclipse.ui.ide,
+ com.trolltech.qtcpp

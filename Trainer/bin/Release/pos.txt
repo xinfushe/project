@@ -1,0 +1,10 @@
+pos/apple5.jpg  2  12 62 62 119
+pos/apple6.jpg  3  41 12 126 85
+pos/apple1.jpg  4  8 10 194 214
+pos/apple10.jpg  5  57 26 214 158
+pos/apple2.jpg  6  31 54 200 203
+pos/apple9.jpg  7  41 92 169 205
+pos/apple8.jpg  8  44 29 216 163
+pos/apple7.jpg  9  38 23 211 179
+pos/apple4.jpg  10  9 13 77 102
+pos/apple3.jpg  11  78 33 194 146

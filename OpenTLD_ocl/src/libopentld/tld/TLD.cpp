@@ -193,7 +193,7 @@ void TLD::processImage(const Mat &img, const ocl::oclMat &img_ocl)
         getCPUTick(&procInit);
         detectorCascade->detect(img, img_ocl);
         getCPUTick(&procFinal);
-        PRINT_TIMING("Detection Time", procInit, procFinal, "\n ");
+        //PRINT_TIMING("Detection Time", procInit, procFinal, "\n ");
     }
 
 

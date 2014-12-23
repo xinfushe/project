@@ -456,7 +456,7 @@ void Main::doWork()
             {
                 CvScalar rectangleColor = (confident) ? blue : yellow;
                 //define the rectangle of the detected object
-                cvRectangle(img, CvPoint(tld->currBB->tl()), CvPoint(tld->currBB->br()), rectangleColor, 4, 8, 0);
+                cvRectangle(img, CvPoint(tld->currBB->tl()), CvPoint(tld->currBB->br()), rectangleColor, 2, 8, 0);
                 
                 currRect = *(tld->currBB);
 
@@ -805,6 +805,22 @@ void Main::doWork()
                     tld->selectObject(grey, &r);
                 }
 
+                if(key == 's')
+                {
+                    const char* smileName = "/home/slilylsu/Desktop/project-repo/haarcascade_smile.xml";
+                    ocl::OclCascadeClassifier smile;
+                    ocl::oclMat smile_face = grey_ocl(currRect);
+                    vector<Rect> ratio;
+                    if( !smile.load( smileName )  )
+                    {
+                        printf("ERROR: Could not load classifier smile: %s\n",smileName);
+                    }
+
+                    smile.detectMultiScale(smile_face, ratio, 1.1,
+                                                 0, 0 /*| CV_HAAR_SCALE_IMAGE*/,
+                                                 Size(30, 30), Size(0, 0));
+                    printf("Smile ratio is %i\n", (int)ratio.size());
+                }
                 if(key == 'f')
                 {
                     CvRect box;
@@ -817,6 +833,8 @@ void Main::doWork()
                     {
                         printf("ERROR: Could not load classifier cascade: %s\n",cascadeName);
                     }
+
+
                     
 //                    cascade.detectMultiScale(grey, faces, 1.1,
 //                             3, 0 | CV_HAAR_SCALE_IMAGE,
@@ -824,6 +842,7 @@ void Main::doWork()
                     cascade.detectMultiScale(grey_ocl, faces, 1.1,
                                                  3, 0 /*| CV_HAAR_SCALE_IMAGE*/,
                                                  Size(30, 30), Size(0, 0));
+
                     if(!faces.empty())
                     {
                         Rect r = faces[0];
